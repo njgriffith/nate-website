@@ -1,0 +1,32 @@
+html{
+    background: #222;
+    color: #ddd;
+}
+table{
+    border-collapse: collapse;
+}
+tr{
+    /* max-height: 200px; */
+    border: 1px solid #0000ff;
+}
+td{
+    /* border: 1px solid white; */
+    text-align: center;
+    border: 1px solid red;
+    /* max-height: 200px; */
+    /* overflow-y: hidden; */
+}
+tr:hover{
+    background-color: #555;
+}
+img{
+    width: 200px;
+    height: 200px;
+}
+/* span{
+    max-height: 200px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50%;
+    transform: translate(0, -50%);
+} */

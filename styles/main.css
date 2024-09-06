@@ -8,12 +8,12 @@ html{
 
 .main-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     height: 80%;
     align-items: center;
     margin: auto;
     flex-wrap: wrap;
-    gap: 2em;
+    gap: 5em;
 }
 .container{
     width: 15%;
