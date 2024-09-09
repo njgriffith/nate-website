@@ -1,0 +1,32 @@
+html{
+    background: #111;
+    color: #ddd;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+#album-title{
+    text-align: center;
+}
+.grid-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+img{
+    width: 300px;
+    height: 300px;
+    margin: 1em;
+}
+#review{
+    font-size: 1.3em;
+    width: 70%;
+    word-wrap: break-word;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+    border: 1px solid #ccc; /* Optional border around content */
+    padding: 10px; /* Optional padding */
+    max-width: 80%; /* Set maximum width to 80% of the container */
+    margin: 0 auto; /* Center align the content horizontally */
+    overflow-wrap: break-word; /* Allow long words to break and wrap */
+}

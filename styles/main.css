@@ -49,7 +49,7 @@ html{
     position: relative;
     margin: 1em;
 }
-.grid-item:hover{
+.grid-item img:hover{
     opacity: 20%;
     transition-duration: 0.8s;
     cursor: pointer;
@@ -69,6 +69,16 @@ html{
     font-size: 5em; 
     text-align: center;
     font-weight: 400;
-    z-index: 1 !important;
+}
+.image-overlay-readable {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: white;
+    font-size: 5em; 
+    text-align: center;
+    font-weight: 400;
+    background-color: black;
 }
 
