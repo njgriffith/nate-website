@@ -27,6 +27,10 @@ img{
     grid-column-end: 2;
     place-self: center;
 }
+.cover:hover{
+    transform: scale(1.25);
+    transition-duration: 0.8s;
+}
 .title{
     grid-column-start: 2;
     grid-column-end: 3;
@@ -43,7 +47,7 @@ img{
     grid-column-start: 4;
     grid-column-end: 5;
     place-self: center;
-    font-size: 1.5em;
+    font-size: 11.5em;
     font-weight: bold;
 }
 .review{
