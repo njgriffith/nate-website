@@ -1,32 +1,58 @@
 html{
-    background: #222;
+    background: #111;
     color: #ddd;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
 }
-table{
-    border-collapse: collapse;
+.grid-container{
+    display: grid;
+    grid-template-columns: [start] 20% [title-start] 20% [artist-start] 20% [score-start] 5% [review-start] 35% [end];
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 2em;
 }
-tr{
-    /* max-height: 200px; */
-    border: 1px solid #0000ff;
-}
-td{
-    /* border: 1px solid white; */
+.grid-item{
+    place-self: center;
     text-align: center;
-    border: 1px solid red;
-    /* max-height: 200px; */
-    /* overflow-y: hidden; */
-}
-tr:hover{
-    background-color: #555;
+    padding: 2em;
+    font-size: 2em;
 }
 img{
     width: 200px;
     height: 200px;
 }
-/* span{
-    max-height: 200px;
-    align-items: center;
-    justify-content: center;
-    margin-top: 50%;
-    transform: translate(0, -50%);
-} */
+.cover{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    place-self: center;
+}
+.title{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    place-self: center;
+    font-size: 1.5em;
+}
+.artist{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    place-self: center;
+    font-size: 1.5em;
+}
+.score{
+    grid-column-start: 4;
+    grid-column-end: 5;
+    place-self: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.review{
+    grid-column-start: 5;
+    grid-column-end: 6;
+    place-self: center;
+    font-weight: bold;
+}
+a{
+    color: white;
+    text-decoration: none;
+}

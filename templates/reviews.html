@@ -1,42 +1,12 @@
 <html>
     <head>
         <link rel="stylesheet" href="/styles/reviews.css">
-        <script src="/scripts/reviews.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div id="reviews"></div>
-
-        <table id="data-table" width="90%">
-            <thead>
-                <tr>
-                    <th width="25%"></th>
-                    <th width="15%">Album</th>
-                    <th width="15%">Artist</th>   
-                    <th width="5%">Score</th>
-                    <th width="40%">Review</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="display: flex; justify-content: center;">
-                        <span><img src="/resources/albums/covers/ants_from_up_there.jpg"></span>
-                    </td>
-                    <td>
-                        <span>Ants From Up There</span>
-                    </td>
-                    <td>
-                        <span>Black Country, New Road</div>
-                    </td>
-                    <td style="text-align: center;">
-                        <span>10</span>
-                    </td>
-                    <td style="text-align: left; white-space: pre-wrap; vertical-align: top;" class="content-wrapper-flex">
-                        <span id="ants_from_up_there"></span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div width="90%" class="grid-container" id="grid-container">
+        </div>
+        <script src="/scripts/reviews.js"></script>
     </body>
