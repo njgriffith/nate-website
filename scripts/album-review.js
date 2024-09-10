@@ -11,7 +11,7 @@ const cover = document.getElementById('album-cover');
 fetch(`/resources/albums/reviews/${title}.txt`)
     .then(response => response.text())
     .then(data => {
-        document.getElementById('review').textContent = data;
+        document.getElementById('review').innerHTML = data;
     })
     .catch(error => console.error('Error loading text file:', error));
 

@@ -1,0 +1,23 @@
+This is sort of <strong><em>THE</em></strong> protogenitor for all indie music that will come in the following decades. How ahead of its time the sound in the record is has caused it to age like wine. Heroin is simply one of the greatest songs ever written and it totally immerses you in the body of someone detaching themselves from reality at the hands of addiction. The song becomes more hectic as the main character slips further and further down and turns into one of the extremely rare cases where a song has a justified breakdown. The whole album is also serves as a great reflection of the art movement at the time, much of that I’d imagine is thanks to Andy Worhol’s contribution.
+
+<div>
+    <style>
+        .banana{
+            margin-top: -3em;
+            width: 30%;
+            background: yellow;
+            position: relative;
+        }
+        .banana:hover{
+            background: transparent;
+            transition-duration: 1s;
+            content: "10";
+        }
+        .banana:hover:before{
+            content: "10";
+        }
+    </style>
+    <div class="banana">
+        <span style="align-self: center; color: #111;">PEEL SLOWLY AND SEE</span>      
+    </div>
+</div>

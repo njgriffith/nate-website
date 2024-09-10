@@ -21,7 +21,7 @@ img{
 }
 #review{
     font-size: 1.3em;
-    width: 70%;
+    width: 60%;
     word-wrap: break-word;
     white-space: pre-wrap; /* Preserve whitespace and line breaks */
     border: 1px solid #ccc; /* Optional border around content */
