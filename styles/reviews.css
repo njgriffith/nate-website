@@ -5,12 +5,31 @@ html{
     font-weight: 300;
     font-style: normal;
 }
-.grid-container{
+.grid-row{
     display: grid;
     grid-template-columns: [start] 20% [title-start] 20% [artist-start] 20% [score-start] 5% [review-start] 35% [end];
+    grid-template-columns: [start] 20% [title-start] 15% [artist-start] 15% [score-start] 5% [released-start] 15% [reviewed-start] 15% [review-start] 10% [end];
     border-radius: 10px;
-    padding: 2em;
+    padding: 0em;
+    margin: 2em;
+    border: 1px solid white;
+    background: #111;
+    opacity: 90%;
 }
+.grid-row-title{
+    display: grid;
+    grid-template-columns: [start] 20% [title-start] 20% [artist-start] 20% [score-start] 5% [review-start] 35% [end];
+    grid-template-columns: [start] 20% [title-start] 15% [artist-start] 15% [score-start] 5% [released-start] 15% [reviewed-start] 15% [review-start] 10% [end];
+    border-radius: 10px;
+    padding: 0em;
+    margin: 2em;
+    border: 1px solid white;
+    background: #111;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
 .grid-item{
     place-self: center;
     text-align: center;
@@ -61,7 +80,7 @@ img{
     font-weight: bold;
 }
 a{
-    color: #aaa;
+    color: #fff;
     text-decoration: none;
 }
 .text-link:hover{

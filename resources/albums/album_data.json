@@ -2,86 +2,137 @@
     "ants_from_up_there": {
         "title": "Ants From Up There",
         "artist": "Black Country, New Road",
-        "score": 10
+        "score": 10,
+        "rank": 8,
+        "released": "02-04-2022",
+        "reviewed": "09-10-2024"
     },
     "blood_visions": {
         "title": "Blood Visions",
         "artist": "Jay Reatard",
-        "score": 10
+        "score": 10,
+        "rank": 6,
+        "released": "09-11-2006",
+        "reviewed": "09-10-2024"
     },
     "congratulations": {
         "title": "Congratulations",
         "artist": "MGMT",
-        "score": 10
+        "score": 10,
+        "rank": 2,
+        "released": "04-13-2010",
+        "reviewed": "09-10-2024"
     },
     "girl_with_basket_of_fruit": {
         "title": "Girl with Basket of Fruit",
         "artist": "Xiu Xiu",
-        "score": 10
+        "score": 10,
+        "rank": 10,
+        "released": "02-08-2019",
+        "reviewed": "09-10-2024"
     },
     "lonesome_crowded_west": {
         "title": "The Lonesome Crowded West",
         "artist": "Modest Mouse",
-        "score": 10
+        "score": 10,
+        "rank": 4,
+        "released": "09-18-1997",
+        "reviewed": "09-10-2024"
     },
     "STGSTV": {
         "title": "Spirit They're Gone, Spirit They've Vanished",
         "artist": "Animal Collective",
-        "score": 10
+        "score": 10,
+        "rank": 1,
+        "released": "07-31-2000",
+        "reviewed": "09-10-2024"
     },
     "TVU&N": {
         "title": "The Velvet Underground & Nico",
         "artist": "The Velvet Underground & Nico",
-        "score": 10
+        "score": 10,
+        "rank": 9,
+        "released": "03-12-1967",
+        "reviewed": "09-10-2024"
     },
     "TPAB": {
         "title": "To Pimp a Butterfly",
         "artist": "Kendrick Lamar",
-        "score": 10
+        "score": 10,
+        "rank": 7,
+        "released": "03-15-2015",
+        "reviewed": "09-10-2024"
     },
     "to_be_kind": {
         "title": "To Be Kind",
         "artist": "Swans",
-        "score": 10
+        "score": 10,
+        "rank": 3,
+        "released": "05-13-2014",
+        "reviewed": "09-10-2024"
     },
     "skinny_fists": {
         "title": "Lift Your Skinny Fists Like Antennas to Heaven",
         "artist": "Godspeed You! Black Emperor",
-        "score": 10
+        "score": 10,
+        "rank": 5,
+        "released": "10-09-2000",
+        "reviewed": "09-10-2024"
     },
     "volcanic_bird_enemy": {
         "title": "volcanic bird enemy and the voiced concern",
         "artist": "Lil Ugly Mane",
-        "score": 9.9
+        "score": 9.9,
+        "released": "10-12-2021",
+        "reviewed": "09-10-2024"
     },
     "love_streams": {
         "title": "Love Streams",
         "artist": "Tim Hecker",
-        "score": 9.8
+        "score": 9.8,
+        "released": "04-08-2016",
+        "reviewed": "09-10-2024"
     },
     "divine_music": {
         "title": "Divine Music From a Jail",
         "artist": "Oidupaa Vladimir Oiun",
-        "score": 9.7
+        "score": 9.7,
+        "released": "12-31-1999",
+        "reviewed": "09-10-2024"
     },
     "midnight_sun": {
         "title": "In the Midnight Sun or Stubbornly Persistent Illusion",
         "artist": "Golden Drugs",
-        "score": 9.8
+        "score": 9.8,
+        "released": "01-01-2015",
+        "reviewed": "09-10-2024"
     },
     "fishmans_live": {
         "title": "98.12.28 男達の別れ (98.12.28 Otokotachi no wakare)",
         "artist": "Fishmans",
-        "score": 9.7
+        "score": 9.7,
+        "released": "09-29-1999",
+        "reviewed": "09-10-2024"
     },
     "we_got_it_from_here": {
         "title": "We got it from Here… Thank You 4 Your service",
         "artist": "A Tribe Called Quest",
-        "score": 9.7
+        "score": 9.7,
+        "released": "11-11-2016",
+        "reviewed": "09-10-2024"
     },
     "cavalcade": {
         "title": "Cavalcade",
         "artist": "black midi",
-        "score": 9.7
+        "score": 9.7,
+        "released": "05-26-2021",
+        "reviewed": "09-10-2024"
+    },
+    "person_pitch": {
+        "title": "Person Pitch",
+        "artist": "Panda Bear",
+        "score": 9.5,
+        "released": "03-20-2007",
+        "reviewed": "09-10-2024"
     }
 }
