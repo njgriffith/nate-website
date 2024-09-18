@@ -24,9 +24,9 @@ fetch('../resources/albums/album_data.json')
         return response.json();
     })
     .then(data => {
-        document.title = data[`${title}`];
-        cover.src = `/resources/albums/covers/${title}.jpg`
-        dynamicContentElement.textContent = data[`${title}`];;
+        document.title = data[`${title}`]['title'];
+        cover.src = `/resources/albums/covers/${title}.jpg`;
+        dynamicContentElement.textContent = data[`${title}`]['title'];
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);

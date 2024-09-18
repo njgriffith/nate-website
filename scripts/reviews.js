@@ -1,95 +1,68 @@
 document.addEventListener('DOMContentLoaded', function() {
     const gridContainer = document.getElementById('grid-container');
+    fetch('../resources/albums/album_data.json')
+        .then(response => response.json())  // Fetch and parse the JSON file
+        .then(data => {       
+            for (let key in data) {
+                if (data.hasOwnProperty(key)) {
+                    // dynamically create image with link
+                    const coverItem = document.createElement('div');
+                    coverItem.classList.add('grid-item');
 
-    const items = [
-    { type: 'image', src: '/resources/albums/covers/ants_from_up_there.jpg' },
-    { type: 'text', content: 'Ants From Up There' },
-    { type: 'text', content: 'Black Country New Road' },
-    { type: 'text', content: '10', class: 'score'},
-    { type: 'link', content: 'Full Review', href: '/templates/album-review.html?album=ants_from_up_there' },
+                    const img = document.createElement('img');
+                    img.src = `../resources/albums/covers/${key}.jpg`
+                    img.classList.add('cover');
+                    const imageLink = document.createElement('a');
+                    imageLink.href = `/templates/album-review.html?album=${key}`;
+                    imageLink.classList.add('image-link');
 
-    { type: 'image', src: '/resources/albums/covers/blood_visions.jpg' },
-    { type: 'text', content: 'Blood Visions' },
-    { type: 'text', content: 'Jay Reatard' },
-    { type: 'text', content: '10', class: 'score' },
-    { type: 'link', content: 'Full Review', href: '/templates/album-review.html?album=blood_visions' },
+                    imageLink.appendChild(img);
+                    coverItem.appendChild(imageLink);
+                    gridContainer.appendChild(coverItem);
 
-    { type: 'image', src: '/resources/albums/covers/congratulations.jpg' },
-    { type: 'text', content: 'Congratulations' },
-    { type: 'text', content: 'MGMT' },
-    { type: 'text', content: '10', class: 'score' },
-    { type: 'link', content: 'Full Review', href: '/templates/album-review.html?album=congratulations' },
+                    // create title
+                    const titleItem = document.createElement('div');
+                    titleItem.classList.add('grid-item');
+                    const title = document.createElement('p');
+                    title.textContent = `${data[key].title}`;
+                    titleItem.appendChild(title);
 
-    { type: 'image', src: '/resources/albums/covers/girl_with_basket_of_fruit.jpg' },
-    { type: 'text', content: 'Girl With Basket of Fruit' },
-    { type: 'text', content: 'Xiu Xiu' },
-    { type: 'text', content: '10', class: 'score' },
-    { type: 'link', content: 'Full Review', href: '/templates/album-review.html?album=girl_with_basket_of_fruit' },
+                    // create artist
+                    const artistItem = document.createElement('div');
+                    artistItem.classList.add('grid-item');
+                    const artist = document.createElement('p');
+                    artist.textContent = `${data[key].artist}`;
+                    artistItem.appendChild(artist);
 
-    { type: 'image', src: '/resources/albums/covers/lonesome_crowded_west.jpg' },
-    { type: 'text', content: 'The Lonesome Crowded West' },
-    { type: 'text', content: 'Modest Mouse' },
-    { type: 'text', content: '10', class: 'score' },
-    { type: 'link', content: 'Full Review', href: '/templates/album-review.html?album=lonesome_crowded_west' },
+                    // create score
+                    const scoreItem = document.createElement('div');
+                    scoreItem.classList.add('grid-item');
+                    const score = document.createElement('p');
+                    score.textContent = `${data[key].score}`;
+                    scoreItem.appendChild(score);
 
-    { type: 'image', src: '/resources/albums/covers/skinny_fists.jpg' },
-    { type: 'text', content: 'Lift Your Skinny Fists Like Antennas to Heaven' },
-    { type: 'text', content: 'Godspeed You! Black Emperor' },
-    { type: 'text', content: '10', class: 'score' },
-    { type: 'link', content: 'Full Review', href: '/templates/album-review.html?album=skinny_fists' },
+                    // create review link
+                    const linkItem = document.createElement('div');
+                    linkItem.classList.add('grid-item');
+                    const link = document.createElement('a');
+                    link.classList.add('text-link');
+                    link.href = `/templates/album-review.html?album=${key}`;
+                    link.textContent = "Full Review";
+                    linkItem.appendChild(link);
 
-    { type: 'image', src: '/resources/albums/covers/STGSTV.jpg' },
-    { type: 'text', content: 'Spirit They\'re Gone, Spirit They\'ve Vanished' },
-    { type: 'text', content: 'Animal Collective' },
-    { type: 'text', content: '10', class: 'score' },
-    { type: 'link', content: 'Full Review', href: '/templates/album-review.html?album=STGSTV' },
-
-    { type: 'image', src: '/resources/albums/covers/to_be_kind.jpg' },
-    { type: 'text', content: 'To Be Kind' },
-    { type: 'text', content: 'Swans' },
-    { type: 'text', content: '10', class: 'score' },
-    { type: 'link', content: 'Full Review', href: '/templates/album-review.html?album=to_be_kind' },
-
-    { type: 'image', src: '/resources/albums/covers/TPAB.jpg' },
-    { type: 'text', content: 'To Pimp a Butterfly' },
-    { type: 'text', content: 'Kendrick Lamar' },
-    { type: 'text', content: '10', class: 'score' },
-    { type: 'link', content: 'Full Review', href: '/templates/album-review.html?album=TPAB' },
-
-    { type: 'image', src: '/resources/albums/covers/TVU&N.jpg' },
-    { type: 'text', content: 'The Velvet Underground & Nico' },
-    { type: 'text', content: 'The Velvet Underground & Nico' },
-    { type: 'text', content: '10', class: 'score' },
-    { type: 'link', content: 'Full Review', href: '/templates/album-review.html?album=TVU%26N' }
-    ];
-
-    const row = document.createElement('div');
-    row.classList.add('grid-row');
-
-    items.forEach((item, index) => {
-    const gridItem = document.createElement('div');
-    gridItem.classList.add('grid-item');
-    
-    if (item.type === 'image') {
-        const img = document.createElement('img');
-        const link = document.createElement('a');
-        link.href = items[index+4]['href'];
-        link.classList.add('image-link');
-        img.src = item.src;
-        img.classList.add('cover');
-        link.appendChild(img);
-        gridItem.appendChild(link);
-    } else if (item.type === 'text') {
-        const text = document.createElement('p');
-        text.textContent = item.content;
-        gridItem.appendChild(text);
-    } else if (item.type === 'link') {
-        const link = document.createElement('a');
-        link.classList.add('text-link');
-        link.href = item.href;
-        link.textContent = item.content;
-        gridItem.appendChild(link);
-    }
-    gridContainer.appendChild(gridItem);
+                    // append items to page
+                    gridContainer.appendChild(coverItem);
+                    gridContainer.appendChild(titleItem);
+                    gridContainer.appendChild(artistItem);
+                    gridContainer.appendChild(scoreItem);
+                    gridContainer.appendChild(linkItem);
+                }
+                
+            }
+        })
+    .catch(error => {
+        console.error('Error fetching JSON:', error);
     });
 });
+
+

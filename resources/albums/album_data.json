@@ -1,12 +1,87 @@
 {
-    "ants_from_up_there": "Ants From Up There",
-    "blood_visions": "Blood Visions",
-    "congratulations": "Congratulations",
-    "girl_with_basket_of_fruit": "Girl with Basket of Fruit",
-    "lonesome_crowded_west": "The Lonesome Crowded West",
-    "STGSTV": "Spirit They're Gone, Spirit They've Vanished",
-    "TVU&N": "The Velvet Underground & Nico",
-    "TPAB": "To Pimp a Butterfly",
-    "to_be_kind": "To Be Kind",
-    "skinny_fists": "Lift Your Skinny Fists Like Antennas to Heaven"
+    "ants_from_up_there": {
+        "title": "Ants From Up There",
+        "artist": "Black Country, New Road",
+        "score": 10
+    },
+    "blood_visions": {
+        "title": "Blood Visions",
+        "artist": "Jay Reatard",
+        "score": 10
+    },
+    "congratulations": {
+        "title": "Congratulations",
+        "artist": "MGMT",
+        "score": 10
+    },
+    "girl_with_basket_of_fruit": {
+        "title": "Girl with Basket of Fruit",
+        "artist": "Xiu Xiu",
+        "score": 10
+    },
+    "lonesome_crowded_west": {
+        "title": "The Lonesome Crowded West",
+        "artist": "Modest Mouse",
+        "score": 10
+    },
+    "STGSTV": {
+        "title": "Spirit They're Gone, Spirit They've Vanished",
+        "artist": "Animal Collective",
+        "score": 10
+    },
+    "TVU&N": {
+        "title": "The Velvet Underground & Nico",
+        "artist": "The Velvet Underground & Nico",
+        "score": 10
+    },
+    "TPAB": {
+        "title": "To Pimp a Butterfly",
+        "artist": "Kendrick Lamar",
+        "score": 10
+    },
+    "to_be_kind": {
+        "title": "To Be Kind",
+        "artist": "Swans",
+        "score": 10
+    },
+    "skinny_fists": {
+        "title": "Lift Your Skinny Fists Like Antennas to Heaven",
+        "artist": "Godspeed You! Black Emperor",
+        "score": 10
+    },
+    "volcanic_bird_enemy": {
+        "title": "volcanic bird enemy and the voiced concern",
+        "artist": "Lil Ugly Mane",
+        "score": 9.9
+    },
+    "love_streams": {
+        "title": "Love Streams",
+        "artist": "Tim Hecker",
+        "score": 9.8
+    },
+    "divine_music": {
+        "title": "Divine Music From a Jail",
+        "artist": "Oidupaa Vladimir Oiun",
+        "score": 9.7
+    },
+    "midnight_sun": {
+        "title": "In the Midnight Sun or Stubbornly Persistent Illusion",
+        "artist": "Golden Drugs",
+        "score": 9.8
+    },
+    "fishmans_live": {
+        "title": "98.12.28 男達の別れ (98.12.28 Otokotachi no wakare)",
+        "artist": "Fishmans",
+        "score": 9.7
+    },
+    "we_got_it_from_here": {
+        "title": "We got it from Here… Thank You 4 Your service",
+        "artist": "A Tribe Called Quest",
+        "score": 9.7
+    },
+    "cavalcade": {
+        "title": "Cavalcade",
+        "artist": "black midi",
+        "score": 9.7
+    }
 }

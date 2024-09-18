@@ -6,8 +6,20 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     </head>
     <body>
+        <div>
+            
+        </div>
         <div width="90%" class="grid-container" id="grid-container">
-            <div class="grid-item column-title"></div>
+            <div class="grid-item column-title">
+                <label>Sort by</label>
+                <select name="sort_by" id="sort">
+                    <option value="title">Title</option>
+                    <option value="artist">Artist</option>
+                    <option value="score">Score</option>
+                    <option value="release_date">Release Date</option>
+                    <option value="review_date">Review Date</option>
+                </select>
+            </div>
             <div class="grid-item column-title">Title</div>
             <div class="grid-item column-title">Artist</div>
             <div class="grid-item column-title">Score</div>

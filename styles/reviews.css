@@ -69,3 +69,6 @@ a{
     border-bottom: 1px solid white;
     transition-duration: 0.5s;
 }
+select{
+    scale: 1.2;
+}
