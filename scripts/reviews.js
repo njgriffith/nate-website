@@ -149,6 +149,8 @@ function sortData(columnName, sortDirection) {
 let sortDirection = 'desc'; // Default sort direction
 function sortAndReloadContent(columnName, element) {
     if (element === null){
+        const arrow = document.getElementById(columnName.toLowerCase() + '-arrow');
+        arrow.classList.add('sort-desc');
         sortData(columnName, sortDirection);
         return;
     }

@@ -99,14 +99,14 @@
         "artist": "Tim Hecker",
         "score": 9.8,
         "released": "04-08-2016",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-19-2024"
     },
     "divine_music": {
         "title": "Divine Music From a Jail",
         "artist": "Oidupaa Vladimir Oiun",
-        "score": 9.7,
+        "score": 9.5,
         "released": "12-31-1999",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-19-2024"
     },
     "midnight_sun": {
         "title": "In the Midnight Sun or Stubbornly Persistent Illusion",
@@ -127,21 +127,21 @@
         "artist": "A Tribe Called Quest",
         "score": 9.7,
         "released": "11-11-2016",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-19-2024"
     },
     "cavalcade": {
         "title": "Cavalcade",
         "artist": "black midi",
         "score": 9.6,
         "released": "05-26-2021",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-19-2024"
     },
     "person_pitch": {
         "title": "Person Pitch",
         "artist": "Panda Bear",
         "score": 9.8,
         "released": "03-20-2007",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-19-2024"
     },
     "watermusic_2": {
         "title": "Watermusic II",
@@ -149,5 +149,12 @@
         "score": 9.0,
         "released": "07-15-2003",
         "reviewed": "09-18-2024"
+    },
+    "brat": {
+        "title": "brat",
+        "artist": "Charli XCX",
+        "score": 9.2,
+        "released": "07-07-2024",
+        "reviewed": "09-20-2024"
     }
 }

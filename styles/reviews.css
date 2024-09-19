@@ -31,6 +31,7 @@ html{
     position: sticky;
     top: 0;
     z-index: 1;
+    user-select: none;
 }
 
 .grid-item{
@@ -98,4 +99,10 @@ a{
 }
 .sort-arrow{
     cursor: pointer;
+}
+.sort-asc{
+    color: #555;
+}
+.sort-desc{
+    color: #555;
 }
