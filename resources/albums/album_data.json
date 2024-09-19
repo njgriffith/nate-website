@@ -118,9 +118,9 @@
     "fishmans_live": {
         "title": "98.12.28 男達の別れ (98.12.28 Otokotachi no wakare)",
         "artist": "Fishmans",
-        "score": 9.7,
+        "score": 9.6,
         "released": "09-29-1999",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-19-2024"
     },
     "we_got_it_from_here": {
         "title": "We got it from Here… Thank You 4 Your service",
@@ -132,15 +132,22 @@
     "cavalcade": {
         "title": "Cavalcade",
         "artist": "black midi",
-        "score": 9.7,
+        "score": 9.6,
         "released": "05-26-2021",
         "reviewed": "09-10-2024"
     },
     "person_pitch": {
         "title": "Person Pitch",
         "artist": "Panda Bear",
-        "score": 9.5,
+        "score": 9.8,
         "released": "03-20-2007",
         "reviewed": "09-10-2024"
+    },
+    "watermusic_2": {
+        "title": "Watermusic II",
+        "artist": "William Basinski",
+        "score": 9.0,
+        "released": "07-15-2003",
+        "reviewed": "09-18-2024"
     }
 }

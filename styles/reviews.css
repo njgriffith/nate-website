@@ -5,6 +5,9 @@ html{
     font-weight: 300;
     font-style: normal;
 }
+.grid-container{
+    height: 100%;
+}
 .grid-row{
     display: grid;
     grid-template-columns: [start] 20% [title-start] 20% [artist-start] 20% [score-start] 5% [review-start] 35% [end];
