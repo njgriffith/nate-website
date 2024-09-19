@@ -24,6 +24,9 @@ fetch(`/resources/albums/reviews/${title}.txt`)
             document.title = jsonData[`${title}`]['title'];
             cover.src = `/resources/albums/covers/${title}.jpg`;
             dynamicContentElement.textContent = jsonData[`${title}`]['title'];
+            if (title === "TVUandN"){
+                return;
+            }
             document.getElementById('review').innerHTML += '<br>' + jsonData[`${title}`]['score'];
         })
         .catch(error => {
@@ -31,6 +34,4 @@ fetch(`/resources/albums/reviews/${title}.txt`)
         });
     })
     .catch(error => console.error('Error loading text file:', error));
-
-
 
