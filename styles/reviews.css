@@ -33,11 +33,16 @@ html{
 .grid-item{
     place-self: center;
     text-align: center;
-    padding: 2em;
-    font-size: 2em;
+    padding: 0.5em;
+    font-size: 1.7em;
 }
 .column-title{
     font-weight: bold;
+    cursor: pointer;
+}
+.column-title:hover{
+    transform: scale(1.1);
+    transition-duration: 0.3s;
 }
 img{
     width: 200px;
@@ -88,6 +93,6 @@ a{
     border-bottom: 1px solid white;
     transition-duration: 0.5s;
 }
-select{
-    scale: 1.2;
+.sort-arrow{
+    cursor: pointer;
 }

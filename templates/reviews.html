@@ -8,23 +8,15 @@
     <body style="background-image: url(../resources/adventure-time-music.jpg); background-attachment: fixed; background-position: center;">
         <div width="90%" id="grid-container">
             <div class="grid-row-title">
-                <div class="grid-item column-title">
-                    <label>Sort by</label><br><br>
-                    <select name="sort_by" id="sort">
-                        <option value="title">Title</option>
-                        <option value="artist">Artist</option>
-                        <option value="score" selected>Score</option>
-                        <option value="released">Release Date</option>
-                        <option value="reviewed">Review Date</option>
-                    </select><br><br>
-                    <div style="font-size: 0.5em">When sorting by score, 10/10 albums are ordered</div>
+                <div class="grid-item">
+                    <div style="font-size: 0.5em; font-weight: bold;">*when sorting by score, 10/10 albums are ordered</div>
                 </div>          
-                <div class="grid-item column-title">Title</div>
-                <div class="grid-item column-title">Artist</div>
-                <div class="grid-item column-title">Score</div>
-                <div class="grid-item column-title">Released</div>
-                <div class="grid-item column-title">Reviewed</div>
-                <div class="grid-item column-title"></div>
+                <div onclick="sortAndReloadContent('title', this)" class="grid-item column-title">Title<span id="title-arrow" class="sort-arrow">▼</span></div>
+                <div onclick="sortAndReloadContent('artist', this)" class="grid-item column-title">Artist<span id="artist-arrow" class="sort-arrow">▼</span></div>
+                <div onclick="sortAndReloadContent('score', this)" class="grid-item column-title">Score<span id="score-arrow" class="sort-arrow">▼</span></div>
+                <div onclick="sortAndReloadContent('released', this)" class="grid-item column-title">Released<span id="released-arrow" class="sort-arrow">▼</span></div>
+                <div onclick="sortAndReloadContent('reviewed', this)" class="grid-item column-title">Reviewed<span id="reviewed-arrow" class="sort-arrow">▼</span></div>
+                <div class="grid-item"><a href="/templates/request.html" style="text-decoration: underline;">Request a review</a></div>
             </div>       
         </div>
         <script src="/scripts/reviews.js"></script>

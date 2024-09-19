@@ -1,45 +1,65 @@
-function sortData() {
+function sortData(columnName, sortDirection) {
+    console.log(sortDirection);
     const gridContainer = document.getElementById('grid-container');
     fetch('../resources/albums/album_data.json')
         .then(response => response.json())  // Fetch and parse the JSON file
         .then(data => {
-            var sort = document.getElementById("sort");
+            var sort = columnName
 
             const entries = Object.entries(data);
 
-            if (sort.value === "title"){
+            if (sort === "title"){
                 entries.sort((a, b) => {
-                    return a[1].title.localeCompare(b[1].title);
+                    if (sortDirection === 'desc'){
+                        return a[1].title.localeCompare(b[1].title);
+                    }
+                    return b[1].title.localeCompare(a[1].title);
                 });
             }
-            else if (sort.value === "artist"){
+            else if (sort === "artist"){
                 entries.sort((a, b) => {
-                    return a[1].artist.localeCompare(b[1].artist);
+                    if (sortDirection === 'desc'){
+                        return a[1].artist.localeCompare(b[1].artist);
+                    }
+                    return b[1].artist.localeCompare(a[1].artist);
                 });
             }
-            else if (sort.value === "score"){
+            else if (sort === "score"){
                 entries.sort((a, b) => {
+                    if (sortDirection === 'desc'){
+                        if (a[1].score === 10 && b[1].score === 10){
+                            return a[1].rank - b[1].rank;
+                        }
+                        else{
+                            return b[1].score - a[1].score;
+                        }
+                    }
                     if (a[1].score === 10 && b[1].score === 10){
-                        return a[1].rank - b[1].rank;
+                        return b[1].rank - a[1].rank;
                     }
                     else{
-                        return b[1].score - a[1].score;
-                    }
-                    
+                        return a[1].score - b[1].score;
+                    }               
                 });
             }
-            else if (sort.value === "released"){
+            else if (sort === "released"){
                 entries.sort((a, b) => {
                     aValue = new Date(a[1].released);
                     bValue = new Date(b[1].released);
-                    return bValue - aValue;
+                    if (sortDirection === 'desc'){
+                        return bValue - aValue;
+                    }
+                    return aValue - bValue;
                 });
             }
-            else if (sort.value === "reviewed"){
+            else if (sort === "reviewed"){
                 entries.sort((a, b) => {
                     aValue = new Date(a[1].reviewed);
                     bValue = new Date(b[1].reviewed);
-                    return bValue - aValue;
+                    if (sortDirection === 'desc'){
+                        return bValue - aValue;
+                    }
+                    return aValue - bValue;
                 });
             }
             const sortedData = Object.fromEntries(entries);
@@ -126,16 +146,41 @@ function sortData() {
     });
 };
 
-function sortAndReloadContent() {
+let sortDirection = 'desc'; // Default sort direction
+function sortAndReloadContent(columnName, element) {
+    if (element === null){
+        sortData(columnName, sortDirection);
+        return;
+    }
+
+    var sortName = element.childNodes[0].nodeValue.trim().toLowerCase();
+    const arrow = element.querySelector('span');
+
+    if (arrow.classList.contains('sort-desc')) {
+        sortDirection = 'asc';
+    } else {
+        sortDirection = 'desc';
+    }
+    // Remove sort classes from all headers
+    document.querySelectorAll('.sort-arrow').forEach(sortArrow => {
+        sortArrow.classList.remove('sort-asc', 'sort-desc');
+    });
+    arrow.classList.add(sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
+    if (sortDirection === 'asc'){
+        arrow.innerText = '▲';
+    }
+    else{
+        arrow.innerText = '▼';
+    }
+    
+    
     const divs = document.querySelectorAll('.grid-row');
     divs.forEach(div => {
         div.remove();
     });
-    sortData();
+    sortData(columnName, sortDirection);
 }
 
-document.getElementById('sort').addEventListener('change', sortAndReloadContent);
-
-sortAndReloadContent();
+sortAndReloadContent('reviewed', null);
 
 
