@@ -11,7 +11,7 @@ html{
 .grid-row{
     display: grid;
     grid-template-columns: [start] 20% [title-start] 20% [artist-start] 20% [score-start] 5% [review-start] 35% [end];
-    grid-template-columns: [start] 20% [title-start] 15% [artist-start] 15% [score-start] 5% [released-start] 15% [reviewed-start] 15% [review-start] 10% [end];
+    grid-template-columns: [start] 20% [title-start] 15% [artist-start] 15% [score-start] 5% [released-start] 20% [reviewed-start] 20% [end];
     border-radius: 10px;
     padding: 0em;
     margin: 2em;
@@ -22,7 +22,7 @@ html{
 .grid-row-title{
     display: grid;
     grid-template-columns: [start] 20% [title-start] 20% [artist-start] 20% [score-start] 5% [review-start] 35% [end];
-    grid-template-columns: [start] 20% [title-start] 15% [artist-start] 15% [score-start] 5% [released-start] 15% [reviewed-start] 15% [review-start] 10% [end];
+    grid-template-columns: [start] 20% [title-start] 15% [artist-start] 15% [score-start] 5% [released-start] 20% [reviewed-start] 20% [end];
     border-radius: 10px;
     padding: 0em;
     margin: 2em;

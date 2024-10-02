@@ -134,7 +134,7 @@ function sortData(columnName, sortDirection) {
                     row.appendChild(scoreItem);
                     row.appendChild(releaseItem);
                     row.appendChild(reviewItem);
-                    row.appendChild(linkItem);
+                    // row.appendChild(linkItem);
 
                     gridContainer.appendChild(row);
                 }
