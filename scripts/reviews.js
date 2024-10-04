@@ -1,5 +1,4 @@
 function sortData(columnName, sortDirection) {
-    console.log(sortDirection);
     const gridContainer = document.getElementById('grid-container');
     fetch('../resources/albums/album_data.json')
         .then(response => response.json())  // Fetch and parse the JSON file

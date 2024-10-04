@@ -10,15 +10,5 @@ below is not final order
 
 
 
-tutorial:
-arrow to url seach bar, hinting that solution goes in the url
-bottle that says "straight from the source" hinting that answer is in the source code, answer will be an HTML comment
-
-
-1. weight of the word playing in the background, word/words written in periodic table format, sum of atomic weights leads to next level
-
-2. several rectangles on page with px dimensions, each length/width of a rect corresponds to an ascii letter ex. 3 shapes could be a 6 letter word (whales)
-
-3. some imagery hinting about the home page, maybe a pic of a house. in the home page is caeser ciphered text of a quote, maybe judge Holden. answer would be holden
 
 4. pass the pigs (double leaning jowler)

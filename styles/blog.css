@@ -17,4 +17,19 @@ a{
     margin: auto;
     border: 1px solid white;
     padding: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+.celeste-table{
+    margin: auto;
+    border-collapse:collapse;
+    border:1px solid white;
+}
+.celeste-table th{
+    padding: 1em 1em;
+    border:1px solid white;
+}
+.celeste-table td{
+    padding: 1em 1em;
+    border:1px solid white;
 }
