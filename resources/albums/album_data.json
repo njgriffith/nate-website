@@ -198,5 +198,26 @@
         "score": 9.4,
         "released": "11-08-1971",
         "reviewed": "10-06-2024"
+    },
+    "kaputt": {
+        "title": "Kaputt",
+        "artist": "Destroyer",
+        "score": 9.4,
+        "released": "01-25-2011",
+        "reviewed": "10-07-2024"
+    },
+    "three_love_songs": {
+        "title": "Three Love Songs",
+        "artist": "Ricky Eat Acid",
+        "score": 8.8,
+        "released": "01-25-2011",
+        "reviewed": "10-07-2024"
+    },
+    "who_is_onyeabor": {
+        "title": "William Onyeabor",
+        "artist": "Who is William Onyeabor",
+        "score": 8.7,
+        "released": "10-15-2013",
+        "reviewed": "10-07-2024"
     }
 }
