@@ -3,7 +3,7 @@ function sortData(columnName, sortDirection) {
     fetch('../resources/albums/album_data.json')
         .then(response => response.json())  // Fetch and parse the JSON file
         .then(data => {
-            var sort = columnName
+            var sort = columnName;
 
             const entries = Object.entries(data);
 

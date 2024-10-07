@@ -4,14 +4,19 @@ html{
     font-family: "Roboto", sans-serif;
     font-weight: 300;
 }
-a{
+body{
+    width: 80%;
+    margin: auto;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    border: 1px solid white;
+    padding: 2em;
+}
+.back-link{
     color: #ddd;
     font-size: 1.5em;
 }
-.main-container{
-    width: 80%;
-    margin: auto;
-}
+
 .blog{
     width: 80%;
     margin: auto;
@@ -19,6 +24,7 @@ a{
     padding: 2em;
     margin-top: 2em;
     margin-bottom: 2em;
+    background: #111;
 }
 .celeste-table{
     margin: auto;
@@ -33,3 +39,12 @@ a{
     padding: 1em 1em;
     border:1px solid white;
 }
+.progress-background{
+    background: #555;
+    width: 300px;
+    height: 24px;
+}
+.progress{
+    background: red;
+}
+

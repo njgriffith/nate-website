@@ -97,7 +97,7 @@
     "love_streams": {
         "title": "Love Streams",
         "artist": "Tim Hecker",
-        "score": 9.8,
+        "score": 9.7,
         "released": "04-08-2016",
         "reviewed": "09-19-2024"
     },
@@ -132,7 +132,7 @@
     "cavalcade": {
         "title": "Cavalcade",
         "artist": "black midi",
-        "score": 9.6,
+        "score": 9.5,
         "released": "05-26-2021",
         "reviewed": "09-19-2024"
     },
@@ -146,15 +146,50 @@
     "watermusic_2": {
         "title": "Watermusic II",
         "artist": "William Basinski",
-        "score": 9.0,
+        "score": 8.6,
         "released": "07-15-2003",
         "reviewed": "09-18-2024"
     },
     "brat": {
         "title": "brat",
         "artist": "Charli XCX",
-        "score": 9.2,
+        "score": 9.1,
         "released": "07-07-2024",
         "reviewed": "09-20-2024"
+    },
+    "heaven_or": {
+        "title": "Heaven or Las Vegas",
+        "artist": "Cocteau Twins",
+        "score": 9.3,
+        "released": "09-17-1990",
+        "reviewed": "10-04-2024"
+    },
+    "the_new_sound": {
+        "title": "The New Sound",
+        "artist": "Geordie Greep",
+        "score": 9.8,
+        "released": "10-04-2024",
+        "reviewed": "10-06-2024"
+    },
+    "burning_desire": {
+        "title": "Burning Desire",
+        "artist": "MIKE",
+        "score": 8.9,
+        "released": "10-13-2023",
+        "reviewed": "10-06-2024"
+    },
+    "forced_witness": {
+        "title": "Forced Witness",
+        "artist": "Alex Cameron",
+        "score": 9.7,
+        "released": "09-08-2017",
+        "reviewed": "10-06-2024"
+    },
+    "lz4": {
+        "title": "Led Zeppelin IV",
+        "artist": "Led Zeppelin",
+        "score": 9.4,
+        "released": "11-08-1971",
+        "reviewed": "10-06-2024"
     }
 }

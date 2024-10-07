@@ -1,0 +1,86 @@
+html{
+    background: #111;
+    color: #ddd;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+.main-container{
+    width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: [start] 33% [nav-end] 67% [end];
+    margin-top: 2em;
+}
+.nav{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 5em;
+    border: 1px solid white;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    padding: 2em;
+}
+.nav-item{
+    font-size: 1.3em;
+    padding: 1em;
+    margin: auto;
+    margin: 1em;
+    border: none;
+    border-radius: 10px;
+    background: #384959;
+    color: white;
+}
+.nav-item:hover{
+    background: #444;
+    color: white;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+.blog-container{
+    display: flex;
+    flex-direction: column;
+    font-size: 2em;
+    gap: 1.5em;
+}
+.blog{
+    border: 1px solid white;
+    width: 80%;
+    padding: 1em;
+    display: grid;
+    grid-template-columns: [start] 33% [nav-end] 67% [end];
+    text-decoration: none;
+    color: white;
+    align-items: center;
+    background: #384959;
+}
+.blog:hover{
+    background: #333;
+    transition-duration: 0.3s;
+}
+.progress-bar{
+    height: 24px;
+    width: 300px;
+    background: #666;
+    margin-top: 0.5em;
+    border: 1px solid white;
+}
+.progress{
+    background: #FFD700ed;
+    height: 100%;
+    width: 48%;
+}
+.banner-container{
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: [start] 33% [nav-end] 67% [end];
+    margin-top: 2em;
+
+}
+.banner-item{
+    align-items: center;
+    font-size: 1.5em;
+}
+
