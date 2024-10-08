@@ -209,15 +209,36 @@
     "three_love_songs": {
         "title": "Three Love Songs",
         "artist": "Ricky Eat Acid",
-        "score": 8.8,
-        "released": "01-25-2011",
-        "reviewed": "10-07-2024"
+        "score": 9.3,
+        "released": "01-21-2014",
+        "reviewed": "10-08-2024"
     },
     "who_is_onyeabor": {
-        "title": "William Onyeabor",
-        "artist": "Who is William Onyeabor",
+        "title": "Who is William Onyeabor",
+        "artist": "William Onyeabor",
         "score": 8.7,
         "released": "10-15-2013",
         "reviewed": "10-07-2024"
+    },
+    "people_who_can": {
+        "title": "People Who Can Eat People Are the Luckiest People in the World",
+        "artist": "Andrew Jackson Jihad",
+        "score": 9.2,
+        "released": "08-31-2007",
+        "reviewed": "10-08-2024"
+    },
+    "those_who_throw": {
+        "title": "Those Who Throw Objects at the Crocodiles Will Be Asked to Retrieve Them",
+        "artist": "Bruno Pernadas",
+        "score": 8.4,
+        "released": "09-23-2016",
+        "reviewed": "10-08-2024"
+    },
+    "serial_parade": {
+        "title": "Serial Parade EP",
+        "artist": "Twin Steps",
+        "score": 9.5,
+        "released": "04-10-2012",
+        "reviewed": "10-08-2024"
     }
 }
