@@ -5,7 +5,8 @@
         "score": 10,
         "rank": 8,
         "released": "02-04-2022",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Ants_from_Up_There_-_Black_Country%2C_New_Road.jpg/220px-Ants_from_Up_There_-_Black_Country%2C_New_Road.jpg"
     },
     "not_available": {
         "title": "Not Available",
@@ -13,7 +14,8 @@
         "score": 10,
         "rank": 10,
         "released": "10-31-1978",
-        "reviewed": "09-18-2024"
+        "reviewed": "09-18-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/3/32/Not_Available.jpg"
     },
     "blood_visions": {
         "title": "Blood Visions",
@@ -21,7 +23,8 @@
         "score": 10,
         "rank": 6,
         "released": "09-11-2006",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/9/9a/BloodVisionsAlbum.jpg"
     },
     "congratulations": {
         "title": "Congratulations",
@@ -29,7 +32,8 @@
         "score": 10,
         "rank": 2,
         "released": "04-13-2010",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/3/39/MGMT_-_Congratulations.png"
     },
     "girl_with_basket_of_fruit": {
         "title": "Girl with Basket of Fruit",
@@ -37,7 +41,8 @@
         "score": 10,
         "rank": 11,
         "released": "02-08-2019",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/a/a1/Xiu_Xiu_%E2%80%93_Girl_with_Basket_of_Fruit.png"
     },
     "lonesome_crowded_west": {
         "title": "The Lonesome Crowded West",
@@ -45,7 +50,8 @@
         "score": 10,
         "rank": 4,
         "released": "09-18-1997",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/f/f5/MMLonesomeCrowdedWest.jpg"
     },
     "STGSTV": {
         "title": "Spirit They're Gone, Spirit They've Vanished",
@@ -53,7 +59,8 @@
         "score": 10,
         "rank": 1,
         "released": "07-31-2000",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/8/87/Animal_Collective_-_Spirit_They%27re_Gone%2C_Spirit_They%27ve_Vanished_album_cover.png"
     },
     "TVUandN": {
         "title": "The Velvet Underground & Nico",
@@ -61,7 +68,8 @@
         "score": 10,
         "rank": 9,
         "released": "03-12-1967",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/0/0c/Velvet_Underground_and_Nico.jpg"
     },
     "TPAB": {
         "title": "To Pimp a Butterfly",
@@ -69,7 +77,8 @@
         "score": 10,
         "rank": 7,
         "released": "03-15-2015",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/f/f6/Kendrick_Lamar_-_To_Pimp_a_Butterfly.png"
     },
     "to_be_kind": {
         "title": "To Be Kind",
@@ -77,7 +86,8 @@
         "score": 10,
         "rank": 3,
         "released": "05-13-2014",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/8/85/Swans_To_Be_Kind.jpg"
     },
     "skinny_fists": {
         "title": "Lift Your Skinny Fists Like Antennas to Heaven",
@@ -85,160 +95,183 @@
         "score": 10,
         "rank": 5,
         "released": "10-09-2000",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/d/d3/Liftyrskinnyfists.jpg"
     },
     "volcanic_bird_enemy": {
         "title": "volcanic bird enemy and the voiced concern",
         "artist": "Lil Ugly Mane",
         "score": 9.9,
         "released": "10-12-2021",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/4/44/Volcanic_Bird_Enemy_and_the_Voiced_Concern.jpg"
     },
     "love_streams": {
         "title": "Love Streams",
         "artist": "Tim Hecker",
         "score": 9.7,
         "released": "04-08-2016",
-        "reviewed": "09-19-2024"
+        "reviewed": "09-19-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/2/2d/Love_Streams_%28Front_Cover%29.png"
     },
     "divine_music": {
         "title": "Divine Music From a Jail",
         "artist": "Oidupaa Vladimir Oiun",
         "score": 9.4,
         "released": "12-31-1999",
-        "reviewed": "09-19-2024"
+        "reviewed": "09-19-2024",
+        "cover": "https://f4.bcbits.com/img/a1948374945_2.jpg"
     },
     "midnight_sun": {
         "title": "In the Midnight Sun or Stubbornly Persistent Illusion",
         "artist": "Golden Drugs",
         "score": 9.8,
         "released": "01-01-2015",
-        "reviewed": "09-10-2024"
+        "reviewed": "09-10-2024",
+        "cover": "https://f4.bcbits.com/img/a1924333749_65"
     },
     "fishmans_live": {
         "title": "98.12.28 男達の別れ (98.12.28 Otokotachi no wakare)",
         "artist": "Fishmans",
         "score": 9.6,
         "released": "09-29-1999",
-        "reviewed": "09-19-2024"
+        "reviewed": "09-19-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/3/30/98.12.28_%E7%94%B7%E9%81%94%E3%81%AE%E5%88%A5%E3%82%8C_Album_Art.jpg"
     },
     "we_got_it_from_here": {
         "title": "We got it from Here… Thank You 4 Your service",
         "artist": "A Tribe Called Quest",
         "score": 9.7,
         "released": "11-11-2016",
-        "reviewed": "09-19-2024"
+        "reviewed": "09-19-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/e/e6/We_Got_It_From_Here%2C_Thank_You_For_Your_Service.png"
     },
     "cavalcade": {
         "title": "Cavalcade",
         "artist": "black midi",
         "score": 9.5,
         "released": "05-26-2021",
-        "reviewed": "09-19-2024"
+        "reviewed": "09-19-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/d/da/Black_Midi_-_Cavalcade_cover_art.png"
     },
     "person_pitch": {
         "title": "Person Pitch",
         "artist": "Panda Bear",
         "score": 9.8,
         "released": "03-20-2007",
-        "reviewed": "09-19-2024"
+        "reviewed": "09-19-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/c/c6/Panda_Bear_-_Person_Pitch_cover.png"
     },
     "watermusic_2": {
         "title": "Watermusic II",
         "artist": "William Basinski",
         "score": 8.6,
         "released": "07-15-2003",
-        "reviewed": "09-18-2024"
+        "reviewed": "09-18-2024",
+        "cover": "https://e.snmc.io/i/1200/s/2f206e7dc4b4f8d660087aeeb5c1a47a/2108688"
     },
     "brat": {
         "title": "brat",
         "artist": "Charli XCX",
         "score": 9.1,
         "released": "07-07-2024",
-        "reviewed": "09-20-2024"
+        "reviewed": "09-20-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Charli_XCX_-_Brat_%28album_cover%29.png/330px-Charli_XCX_-_Brat_%28album_cover%29.png"
     },
     "heaven_or": {
         "title": "Heaven or Las Vegas",
         "artist": "Cocteau Twins",
         "score": 9.3,
         "released": "09-17-1990",
-        "reviewed": "10-04-2024"
+        "reviewed": "10-04-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/6/60/Cocteau_Twins%E2%80%94Heaven_or_Las_Vegas.jpg"
     },
     "the_new_sound": {
         "title": "The New Sound",
         "artist": "Geordie Greep",
         "score": 9.8,
         "released": "10-04-2024",
-        "reviewed": "10-06-2024"
+        "reviewed": "10-06-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/7/76/GeordieGreep_TheNewSound.jpg"
     },
     "yots": {
         "title": "Year of the Snitch",
         "artist": "Death Grips",
         "score": 9.5,
         "released": "06-22-2018",
-        "reviewed": "10-06-2024"
+        "reviewed": "10-06-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/d/d9/Year_of_the_Snitch_album_cover.jpg"
     },
     "burning_desire": {
         "title": "Burning Desire",
         "artist": "MIKE",
         "score": 8.9,
         "released": "10-13-2023",
-        "reviewed": "10-06-2024"
+        "reviewed": "10-06-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/8/8b/Mike_-_Burning_Desire.png"
     },
     "forced_witness": {
         "title": "Forced Witness",
         "artist": "Alex Cameron",
         "score": 9.7,
         "released": "09-08-2017",
-        "reviewed": "10-06-2024"
+        "reviewed": "10-06-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/2/25/Forcedwitness_alexcameron.jpg"
     },
     "lz4": {
         "title": "Led Zeppelin IV",
         "artist": "Led Zeppelin",
         "score": 9.4,
         "released": "11-08-1971",
-        "reviewed": "10-06-2024"
+        "reviewed": "10-06-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/2/26/Led_Zeppelin_-_Led_Zeppelin_IV.jpg"
     },
     "kaputt": {
         "title": "Kaputt",
         "artist": "Destroyer",
         "score": 9.4,
         "released": "01-25-2011",
-        "reviewed": "10-07-2024"
+        "reviewed": "10-07-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/b/b9/2011Kaputt.jpg"
     },
     "three_love_songs": {
         "title": "Three Love Songs",
         "artist": "Ricky Eat Acid",
         "score": 9.3,
         "released": "01-21-2014",
-        "reviewed": "10-08-2024"
+        "reviewed": "10-08-2024",
+        "cover": "https://media.pitchfork.com/photos/5929a60eea9e61561daa52a9/1:1/w_450%2Cc_limit/26397114.jpg"
     },
     "who_is_onyeabor": {
         "title": "Who is William Onyeabor",
         "artist": "William Onyeabor",
         "score": 8.7,
         "released": "10-15-2013",
-        "reviewed": "10-07-2024"
+        "reviewed": "10-07-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/5/58/Who-Is-William-Onyeabor-cover.jpg"
     },
     "people_who_can": {
         "title": "People Who Can Eat People Are the Luckiest People in the World",
         "artist": "Andrew Jackson Jihad",
         "score": 9.2,
         "released": "08-31-2007",
-        "reviewed": "10-08-2024"
+        "reviewed": "10-08-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/e/e9/AJJ_People_That_Can_Eat_People.jpg"
     },
     "those_who_throw": {
         "title": "Those Who Throw Objects at the Crocodiles Will Be Asked to Retrieve Them",
         "artist": "Bruno Pernadas",
         "score": 8.4,
         "released": "09-23-2016",
-        "reviewed": "10-08-2024"
+        "reviewed": "10-08-2024",
+        "cover": "https://i.scdn.co/image/ab67616d0000b2734c73ab17499ac768a8a0952f"
     },
     "serial_parade": {
         "title": "Serial Parade EP",
         "artist": "Twin Steps",
         "score": 9.5,
         "released": "04-10-2012",
-        "reviewed": "10-08-2024"
+        "reviewed": "10-08-2024",
+        "cover": "https://i.scdn.co/image/ab67616d0000b2737be88eb6a172d7839e710374"
     }
 }

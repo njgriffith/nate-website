@@ -105,3 +105,29 @@ a{
 .sort-desc{
     color: #555;
 }
+a{
+    text-decoration: none;
+}
+.nav-container{
+    text-align: center;
+    background: black;
+    /* border: 1px solid white; */
+    /* border-radius: 10px; */
+}
+.nav{
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    align-items: center;
+}
+.nav-item{
+    font-size: 2em;
+    margin: auto;
+    margin: 1em;
+    color: white;
+    text-decoration: none;
+}
+.nav-item:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

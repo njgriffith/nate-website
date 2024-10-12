@@ -7,7 +7,23 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     </head>
     <body style="background-image: url(../resources/images/adventure-time-music.jpg); background-attachment: fixed; background-position: center; ">
-        <div style="text-decoration: none; display: flex; justify-content: flex-end; gap: 1em;">
+        <div class="nav-container">
+            <div class="nav">
+                <a href="/index.html">
+                    <div class="nav-item">HOME</div>
+                </a>
+                <a href="/templates/blogs.html">
+                    <div class="nav-item">BLOG</div>
+                </a>
+                <a href="/templates/reviews.html">
+                    <div class="nav-item">ALBUM REVIEWS</div>
+                </a>
+                <a href="/puzzle/tutorial.html">
+                    <div class="nav-item">SOLVE MY PUZZLE</div>
+                </a>
+            </div>
+        </div>
+        <div style="text-decoration: none; display: flex; justify-content: flex-end; gap: 1em; align-items: center;">
             <a href="/templates/request.html">
                 <div style="font-size: 1.6em; background: black; color: white; border: 1px solid white; border-radius: 5px; padding: 0.5em;">Request a review</div>
             </a>
@@ -15,12 +31,9 @@
                 <div style="font-size: 1.6em; background: black; color: white; border: 1px solid white; border-radius: 5px; padding: 0.5em;" class="nav-item">To Random Review</div>
             </a>
         </div>
-        <div width="90%" id="grid-container">
-            
+        <div width="90%" id="grid-container">    
             <div class="grid-row-title">
-                <div class="grid-item" style="display: flex; gap: 1em;">
-                    <a href="/index.html">To main page</a>
-                </div>          
+                <div class="grid-item" style="display: flex; gap: 1em; font-weight: bold;">Cover/Review Link</div>          
                 <div onclick="sortAndReloadContent('title', this)" class="grid-item column-title">Title<span id="title-arrow" class="sort-arrow">▼</span></div>
                 <div onclick="sortAndReloadContent('artist', this)" class="grid-item column-title">Artist<span id="artist-arrow" class="sort-arrow">▼</span></div>
                 <div onclick="sortAndReloadContent('score', this)" class="grid-item column-title">Score<span id="score-arrow" class="sort-arrow">▼</span></div>

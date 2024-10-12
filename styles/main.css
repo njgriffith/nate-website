@@ -12,6 +12,7 @@ html{
     padding: 2em;
     height: 100%;
     box-sizing: border-box;
+    text-align: center;
 }
 .grid-title{
     font-size: 3em;
@@ -81,4 +82,9 @@ html{
     text-align: center;
     font-weight: 400;
 }
-
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }

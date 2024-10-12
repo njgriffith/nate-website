@@ -1,5 +1,5 @@
 <html style="background-image: url(https://i.redd.it/ib33k4ax7bta1.jpg); background-attachment: fixed; background-position: center;">
-
+<!-- <html> -->
 <head>
     <title>Blog</title>
     <link rel="stylesheet" href="/styles/blogs.css">
@@ -11,38 +11,40 @@
 </head>
 
 <body>
-    <div class="banner-container">
-        <div class="banner-item">
-            <label>Celeste Golden Strawberry Collection Tracker: 15/27</label>
-            <div class="progress-bar">
-                <div class="progress"></div>
-            </div>
-        </div>
-        <div class="banner-item" style="text-align: center; justify-content: center;">
-            <div>First pole vaulting competition Nov. 1st!</div>
-            <div style="display: flex;justify-content: center; margin: 1em;">
-                <img src="https://media3.giphy.com/avatars/youngnailsinc/Hp0J7jeQjChe.gif" height="160">
-                <img src="https://st2.depositphotos.com/3246347/9765/i/950/depositphotos_97651244-stock-photo-1-november-calendar-on-white.jpg" height="160">
-            </div>
-           
-        </div>
-        
-    </div>  
-    <div class="main-container">     
+    <div class="nav-container">
         <div class="nav">
             <a href="/index.html">
-                <button class="nav-item">Home</button>
+                <div class="nav-item">HOME</div>
+            </a>
+            <a href="/templates/blogs.html">
+                <div class="nav-item">BLOG</div>
             </a>
             <a href="/templates/reviews.html">
-                <button class="nav-item">Album Reviews</button>
-            </a>
-            <a onclick="getRandomReview()">
-                <button class="nav-item">To Random Review</button>
+                <div class="nav-item">ALBUM REVIEWS</div>
             </a>
             <a href="/puzzle/tutorial.html">
-                <button class="nav-item">Solve My Puzzle</button>
+                <div class="nav-item">SOLVE MY PUZZLE</div>
             </a>
         </div>
+    </div>  
+    <div class="main-container">
+        <div class="announcement-container">
+            <div class="announcement">
+                <label>Celeste Golden Strawberry Collection Tracker: 16/27</label>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+            <div class="announcement" style="text-align: center; justify-content: center;">
+                <div>First pole vaulting competition Nov. 1st!</div>
+                <div style="display: flex;justify-content: center; margin: 1em;">
+                    <img src="https://media3.giphy.com/avatars/youngnailsinc/Hp0J7jeQjChe.gif" height="160">
+                    <img src="https://st2.depositphotos.com/3246347/9765/i/950/depositphotos_97651244-stock-photo-1-november-calendar-on-white.jpg" height="160">
+                </div>
+               
+            </div>
+        </div>
+        
         <div class="blog-container">
             <a href="/blogs/10-04-2024.html" class="blog">
                 <div>10-04-2024</div>
@@ -54,5 +56,4 @@
             </a>
         </div>
     </div>
-    <script src="/scripts/blogs.js"></script>
 </body>

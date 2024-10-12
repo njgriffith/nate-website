@@ -70,7 +70,8 @@ function sortData(columnName, sortDirection) {
                     coverItem.classList.add('grid-item');
 
                     const img = document.createElement('img');
-                    img.src = `../resources/albums/covers/${key}.jpg`
+                    // img.src = `../resources/albums/covers/${key}.jpg`
+                    img.src = `${sortedData[key].cover}`
                     img.classList.add('cover');
                     const imageLink = document.createElement('a');
                     imageLink.href = `/templates/album-review.html?album=${key}`;
