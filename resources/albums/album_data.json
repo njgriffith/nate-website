@@ -157,7 +157,7 @@
     "person_pitch": {
         "title": "Person Pitch",
         "artist": "Panda Bear",
-        "score": 9.8,
+        "score": 9.9,
         "released": "03-20-2007",
         "reviewed": "09-19-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/c/c6/Panda_Bear_-_Person_Pitch_cover.png"
@@ -271,7 +271,15 @@
         "artist": "Twin Steps",
         "score": 9.5,
         "released": "04-10-2012",
-        "reviewed": "10-08-2024",
+        "reviewed": "10-12-2024",
         "cover": "https://i.scdn.co/image/ab67616d0000b2737be88eb6a172d7839e710374"
+    },
+    "untrue": {
+        "title": "Untrue",
+        "artist": "Burial",
+        "score": 9.4,
+        "released": "11-05-2007",
+        "reviewed": "10-12-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/6/64/BurialUntrue.jpg"
     }
 }

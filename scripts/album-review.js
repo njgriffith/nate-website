@@ -22,7 +22,7 @@ fetch(`/resources/albums/reviews/${title}.txt`)
         })
         .then(jsonData => {
             document.title = jsonData[`${title}`]['title'];
-            cover.src = `/resources/albums/covers/${title}.jpg`;
+            cover.src = jsonData[`${title}`]['cover'];
             dynamicContentElement.textContent = jsonData[`${title}`]['title'];
             if (title === "TVUandN"){
                 return;
