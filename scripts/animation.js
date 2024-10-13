@@ -1,5 +1,7 @@
+// GLOBAL STUFF
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+let animationFrameId;
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -12,6 +14,7 @@ function getRandomInt(max) {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
+// PURPLE RAIN
 class Rain {
     constructor() {
         this.x = getRandomInt(canvas.width);
@@ -21,14 +24,13 @@ class Rain {
         this.speed = getRandomInt(7) + 4;
     }
 }
+let drops = [];
+let isRaining = false;
 
-const drops = [];
-for (let i = 0; i < 150; i++) {
-    drops.push(new Rain());
-}
-function draw() {
-    
+
+function purpleRain() { 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if(!isRaining) return;
 
     drops.forEach(function (drop) {
         ctx.fillStyle = '#8849cc';
@@ -42,6 +44,21 @@ function draw() {
     });
 
     // loop
-    requestAnimationFrame(draw);
+    frameId = requestAnimationFrame(purpleRain);
 }
-draw();
+function toggleRain() {
+    if (isRaining) {
+        cancelAnimationFrame(animationFrameId);
+        isRaining = false;
+        document.getElementById('rainButton').innerText = 'Purple Rain';
+        drops = [];
+    } 
+    else {
+        for (let i = 0; i < 150; i++) {
+            drops.push(new Rain());
+        }
+        isRaining = true;
+        document.getElementById('rainButton').innerText = 'Stop';
+        purpleRain();
+    }
+}
