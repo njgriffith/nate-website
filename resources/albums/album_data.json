@@ -261,7 +261,7 @@
     "those_who_throw": {
         "title": "Those Who Throw Objects at the Crocodiles Will Be Asked to Retrieve Them",
         "artist": "Bruno Pernadas",
-        "score": 8.4,
+        "score": 8.2,
         "released": "09-23-2016",
         "reviewed": "10-08-2024",
         "cover": "https://i.scdn.co/image/ab67616d0000b2734c73ab17499ac768a8a0952f"
@@ -281,5 +281,13 @@
         "released": "11-05-2007",
         "reviewed": "10-12-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/6/64/BurialUntrue.jpg"
+    },
+    "animals": {
+        "title": "Animals",
+        "artist": "Pink Floyd",
+        "score": 8.6,
+        "released": "01-21-1977",
+        "reviewed": "10-15-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/7/74/Pink_Floyd-Animals-Frontal.jpg/220px-Pink_Floyd-Animals-Frontal.jpg"
     }
 }
