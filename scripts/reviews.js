@@ -7,7 +7,7 @@ window.addEventListener('load', function () {
     if (savedScrollPosition) {
         setTimeout(() => {
             window.scrollTo(0, parseInt(savedScrollPosition));
-        }, 10);
+        }, 100);
     }
 });
 
