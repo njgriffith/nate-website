@@ -6,8 +6,6 @@ function getUrlParameter(param) {
 const title = getUrlParameter('album');
 const dynamicContentElement = document.getElementById('album-title');
 const cover = document.getElementById('album-cover');
-console.log(title);
-
 
 fetch(`/resources/albums/reviews/${title}.txt`)
     .then(response => response.text())

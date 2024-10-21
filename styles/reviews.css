@@ -111,8 +111,6 @@ a{
 .nav-container{
     text-align: center;
     background: black;
-    /* border: 1px solid white; */
-    /* border-radius: 10px; */
 }
 .nav{
     display: flex;

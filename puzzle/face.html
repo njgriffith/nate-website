@@ -2,19 +2,57 @@
     <title>lvl 9</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <style>
-        body{
+        body {
             font-family: "Roboto", sans-serif;
             background: black;
             color: white;
+            height: 100vh;
+            width: 100vw;
+            margin: 0rem;
+            overflow-y: hidden;
         }
- 
+
+        #image-track {
+            display: flex;
+            gap: 4vmin;
+            position: absolute;
+            left: 30%;
+            top: 50%;
+            transform: translate(0%, -50%);
+            user-select: none;
+            align-items: center;
+        }
+
+        img {
+            width: auto;
+            object-fit: cover;
+            object-position: 100% center;
+            transition-duration: 0.5s;
+        }
     </style>
 
 </head>
-<body>
-    <div style="display: flex; flex-direction: column; align-items: center; font-size: 1.3em;">
-        <label>Ok obviously try to do this one without clicking on "View on Google Maps.<br>Feel free to look up anything else you see I have no clue how difficult this'll be.<br>Answer is the city this picture is in.</label>
-        <iframe src="https://www.google.com/maps/embed?pb=!4v1728326615235!6m8!1m7!1sgvYs82BKjeHeoEe36Pxfsg!2m2!1d47.92194617944684!2d106.8949447046672!3f69.88229220506096!4f-1.9747843670155447!5f1.1924812503605782" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>    </div>
+
+<body style="display: flex; justify-content: center;">
+    <div id="image-track">
+        <figure>
+            <img src="/puzzle/resources/lvl-9-image.png">
+        </figure>
+        <figure>
+            <img src="/puzzle/resources/lvl-9-imag3.png">
+        </figure>
+        <figure>
+            <img src="/puzzle/resources/lvl-9-im4g3.png">
+        </figure>
+        <figure>
+            <img src="/puzzle/resources/lvl-9-1m4g3.png">
+        </figure>
+        <figure>
+            <img src="/puzzle/resources/lvl-9-1m463.png">
+        </figure>      
+    </div>
 </body>
