@@ -19,6 +19,15 @@ fetch(`/resources/albums/reviews/${title}.txt`)
             return response.json();
         })
         .then(jsonData => {
+            // let prevContainer = document.getElementById('prev');
+            // let nextContainer = document.getElementById('next');
+            // let prev = document.createElement('a');
+            // let next = document.createElement('a');
+            // prev.innerText = 'Previous';
+            // next.innerText = 'Next';
+            // prevContainer.appendChild(prev);
+            // nextContainer.appendChild(next);
+
             document.title = jsonData[`${title}`]['title'];
             cover.src = jsonData[`${title}`]['cover'];
             dynamicContentElement.textContent = jsonData[`${title}`]['title'];

@@ -47,4 +47,7 @@ body{
 .progress{
     background: red;
 }
+.img-container{
+    display: flex;
+}
 
