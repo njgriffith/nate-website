@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/styles/blog.css">
+    <style>
+        .y-axis {
+            position: relative;
+            width: 100%;
+            height: calc(21 * 120px);
+            border-left: 2px solid black;
+            padding-left: 10px;
+        }
+
+        .tick {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: black;
+        }
+
+        .tick::after {
+            content: attr(data-height) " ft";
+            position: absolute;
+            left: 10px;
+            top: -8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="y-axis" id="y-axis" style="font-size: 1.2em;">
+        <div style="position: absolute; left: 50%; bottom: 0px;">a mouse probably</div>
+        <div style="position: absolute; left: 50%; bottom: 120px;">a cat approximately</div>
+        <div style="position: absolute; left: 50%; bottom: 690px;">my height (above average)</div>
+        <div style="position: absolute; left: 50%; bottom: 1070px; z-index: 1;">tallest person to ever live (also above average)</div>
+        <div style="position: absolute; left: 50%; bottom: 1140px;">my jump</div>
+        <div style="position: absolute; left: 50%; bottom: 1260px;">first place in my division</div>
+        <div style="position: absolute; left: 50%; bottom: 1440px;">my goal this season</div>
+        <div style="position: absolute; left: 50%; bottom: 1740px;">D1 recruiting standard low end</div>
+        <div style="position: absolute; left: 50%; bottom: 1800px;">first place upper division</div>
+        <div style="position: absolute; left: 50%; bottom: 1920px;">worlds tallest burger apparently</div>
+        <div style="position: absolute; left: 50%; bottom: 2047px;">min height to be listed on worldathletics.org</div>
+        <div style="position: absolute; left: 50%; bottom: 2150px; z-index: 1;">D1 recruiting standard high end</div>
+        <div style="position: absolute; left: 50%; bottom: 2165px;">2024 olympic finals opening height</div>
+        <div style="position: absolute; left: 50%; bottom: 2465px;">world record as of today (11/4/24)</div>
+    </div>
+    <script>
+        window.scrollTo(0, document.body.scrollHeight);
+
+        const yAxis = document.getElementById('y-axis');
+        for (let i = 21; i >= 0; i--) {
+            const tick = document.createElement('div');
+            tick.classList.add('tick');
+            tick.setAttribute('data-height', i);
+            tick.style.top = `${(21 - i) * 120}px`;
+            yAxis.appendChild(tick);
+        }
+    </script>
+</body>
+
+</html>
