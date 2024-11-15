@@ -319,7 +319,7 @@
         "artist": "Animal Collective",
         "score": 8.7,
         "released": "10-18-2005",
-        "reviewed": "01-01-2000",
+        "reviewed": "11-15-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/5/50/Feels_%28Front_Cover%29.png/220px-Feels_%28Front_Cover%29.png"
     },
     "strawberry_jam": {
@@ -327,7 +327,7 @@
         "artist": "Animal Collective",
         "score": 9.3,
         "released": "09-10-2007",
-        "reviewed": "01-01-2000",
+        "reviewed": "11-15-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Animal_Collective_-_Strawberry_Jam_cover.png/220px-Animal_Collective_-_Strawberry_Jam_cover.png"
     },
     "prospect_hummer": {
@@ -335,7 +335,7 @@
         "artist": "Animal Collective",
         "score": 9.7,
         "released": "05-13-2005",
-        "reviewed": "01-01-2000",
+        "reviewed": "11-15-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b1/Prospecthummerep.jpg/220px-Prospecthummerep.jpg"
     },
     "magical_mystery": {
@@ -495,7 +495,7 @@
         "artist": "Animal Collective",
         "score": 8.0,
         "released": "01-06-2009",
-        "reviewed": "01-01-2000",
+        "reviewed": "11-15-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/Animal_Collective_-_Merriweather_Post_Pavilion.png/220px-Animal_Collective_-_Merriweather_Post_Pavilion.png"
     }
 }
