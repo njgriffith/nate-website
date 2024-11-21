@@ -12,33 +12,31 @@ fetch(`/resources/albums/reviews/${title}.txt`)
     .then(textData => {
         document.getElementById('review').innerHTML = textData;
         fetch('../resources/albums/album_data.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(jsonData => {
-            // let prevContainer = document.getElementById('prev');
-            // let nextContainer = document.getElementById('next');
-            // let prev = document.createElement('a');
-            // let next = document.createElement('a');
-            // prev.innerText = 'Previous';
-            // next.innerText = 'Next';
-            // prevContainer.appendChild(prev);
-            // nextContainer.appendChild(next);
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(jsonData => {
+                const artist = jsonData[`${title}`]['artist'];
+                document.title = jsonData[`${title}`]['title'];
+                cover.src = jsonData[`${title}`]['cover'];
+                dynamicContentElement.textContent = jsonData[`${title}`]['title'];
+                if (title === "TVUandN") {
+                    return;
+                }
+                document.getElementById('review').innerHTML += '<br>' + jsonData[`${title}`]['score'];
 
-            document.title = jsonData[`${title}`]['title'];
-            cover.src = jsonData[`${title}`]['cover'];
-            dynamicContentElement.textContent = jsonData[`${title}`]['title'];
-            if (title === "TVUandN"){
-                return;
-            }
-            document.getElementById('review').innerHTML += '<br>' + jsonData[`${title}`]['score'];
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
+                // for (const key in jsonData) {
+                //     if(jsonData[`${key}`]['artist'] == artist && jsonData[`${key}`]['title'] != document.title){
+                //         document.getElementById('more').innerHTML += '<a href="/templates/album-review.html?album=' + key + '">' + jsonData[`${key}`]['title'] + '</a><br>';
+                //     }
+                // }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
     })
     .catch(error => console.error('Error loading text file:', error));
 
