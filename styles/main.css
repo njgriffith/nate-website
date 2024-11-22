@@ -1,90 +1,158 @@
-html{
-    background: #111;
-    color: #ddd;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    font-style: normal;
+body {
+  /* background-color: #008080; */
+  background-image: url(/resources/media/peshay.png);
+  background-size: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100vh;
 }
-.grid-container{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    padding: 2em;
-    height: 100%;
-    box-sizing: border-box;
-    text-align: center;
+
+.desktop {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: flex-start;
+  gap: 2em;
+  padding: 3em;
+  max-height: 100%;
 }
-.grid-title{
-    font-size: 3em;
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
+
+.icon {
+  scale: 1.5;
+  width: 80px;
+  height: 80px;
+  margin: 1em;
+  text-align: center;
+  color: black;
+  cursor: pointer;
 }
-.grid-left{
-    border: 1px solid white;
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    color: black;
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #c0c0c0;
+  border-top: 2px solid #808080;
+  display: flex;
+  align-items: center;
 }
-.grid-top{
-    border: 1px solid white;
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
+
+.start-button {
+  background: linear-gradient(to bottom, #c0c0c0, #808080);
+  border: 1px solid #808080;
+  padding: 5px 20px;
+  margin-left: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
 }
-.grid-bottom{
-    border: 1px solid white;
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 3;
+
+.start-button:hover {
+  background: #808080;
+  color: white;
 }
-.grid-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    margin: 1em;
+
+.taskbar-empty-space {
+  flex: 1;
 }
-.grid-item img:hover{
-    opacity: 20%;
-    transition-duration: 0.8s;
-    cursor: pointer;
-    color: white;
+.datetime {
+  margin-left: auto;
+  font-size: 14px;
+  color: #000;
+  font-size: 1.1em;
+  margin-right: 2em;
+  padding: 0.5em;
+  border: 1px solid #555;
+  box-shadow: inset #555 1px 1px;
 }
-.grid-item img {
-    flex-shrink: 0;
-    min-width: 100%;
-    min-height: 100%;
+
+a {
+  text-decoration: none;
 }
-.image-overlay {
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    color: white;
-    font-size: 5em; 
-    text-align: center;
-    font-weight: 400;
+
+.start-menu {
+  position: absolute;
+  bottom: 45px;
+  left: 5px;
+  width: 400px;
+  background-color: #c0c0c0;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  display: grid;
+  grid-template-columns: [start] 20% 80%;
+
 }
-.image-overlay-readable {
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    color: black;
-    font-size: 5em; 
-    text-align: center;
-    font-weight: 400;
+
+.start-menu-banner {
+  writing-mode: vertical-rl;
+  transform: scale(-1);
+  font-size: 4em;
+  z-index: 1;
+  padding-bottom: 1em;
+  background: #808080;
+  align-items: center;
+  justify-content: center;
+  color: #ddd;
 }
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
+
+.start-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 5px;
+}
+
+.start-menu li {
+  font-size: 2em;
+  padding: 20px;
+  background-color: #a0a0a0;
+  cursor: pointer;
+}
+
+li>img {
+  padding-right: 1em;
+}
+
+.start-menu li:hover {
+  background-color: blue;
+  color: white;
+}
+
+.start-link {
+  color: black;
+}
+
+#media-library{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+}
+.library-image{
+  width: 60%;
+  height: auto;
+}
+.file-system{
+  display: flex;
+  gap: 3em; 
+  margin: 1em;
+}
+.folder{
+  cursor: pointer;
+}
+#folder-content{
+  display: flex;
+  flex-wrap: wrap;
+}
+.hidden {
+  display: none;
+}
