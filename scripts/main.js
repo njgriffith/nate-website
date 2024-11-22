@@ -162,3 +162,12 @@ document.addEventListener("mousemove", (event) => {
 document.addEventListener("mouseup", () => {
     isDragging = false;
 });
+
+function shutDown(){
+  const body = document.body;
+  body.innerHTML = "";
+  body.style.background = "black";
+  var goodbye = new Audio('/resources/media/goodbye.mp3');
+  goodbye.volume = 0.25;
+  goodbye.play();
+}
