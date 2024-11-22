@@ -1,29 +1,122 @@
-<html>
-    <head>
-        <title>Home</title>
-        <link rel="stylesheet" href="/styles/main.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <canvas id="canvas"></canvas>
-        <div class="grid-container">
-            <div class="grid-item grid-title">Welcome to nate-griffith.com</div>
-            <a href="/puzzle/tutorial.html" class="grid-item grid-left">
-                <img src="/resources/images/puzzle.gif">
-                <div class="image-overlay">Puzzle</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+    <div class="desktop">
+        <a href="/templates/blogs.html">
+            <div class="icon">
+                <img src="/resources/msft/blog-table.png">
+                <p>Blog</p>
+            </div>
+        </a>
+        <a href="/templates/reviews.html">
+            <div class="icon">
+                <img src="/resources/msft/music.png">
+                <p>Music Reviews</p>
+            </div>
+        </a>
+        <a href="/puzzle/tutorial.html">
+            <div class="icon">
+                <img src="/resources/msft/help.png">
+                <p>Solve My Puzzle</p>
                 <div style="display: none;" id="whats-his-name">Ax gxoxk lexxil, max cnwzx. Ax bl wtgvbgz, wtgvbgz. Ax ltrl matm ax pbee gxoxk wbx</div>
-            </a>
-            <a href="/templates/reviews.html" class="grid-item grid-top">
-                <img src="/resources/images/mj.gif">
-                <div class="image-overlay">Music Reviews</div>
-            </a>
-            <a href="/templates/blogs.html" class="grid-item grid-bottom">
-                <img src="/resources/images/matrix.gif">
-                <div class="image-overlay">Blog</div>
-            </a>
+            </div>
+        </a>
+        <div onclick="openMediaLibrary()">
+            <div class="icon">
+                <img src="/resources/msft/media.png">
+                <p>Media</p>
+            </div>
         </div>
-        <script src="/scripts/main.js"></script>
-    </body>
+    </div>
+    <!-- Media Library -->
+    <div class="window" id="media-library" style="display: none">
+        <div class="title-bar">
+            <div class="title-bar-text">Media Library</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeMediaLibrary()" aria-label="Close" id="close-media-library"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <!-- Main content with folders -->
+            <div id="main-content" class="file-system">
+                <div id="music-folder" class="folder" data-folder="music">
+                    <img class="folder-img" src="/resources/msft/folder-closed.png">
+                    <p>Music</p>
+                </div>
+                <div id="videos-folder" class="folder" data-folder="videos">
+                    <img class="folder-img" src="/resources/msft/folder-closed.png">
+                    <p>Videos</p>
+                </div>
+                <div id="pictures-folder" class="folder" data-folder="pictures">
+                    <img class="folder-img" src="/resources/msft/folder-closed.png">
+                    <p>Pictures</p>
+                </div>
+            </div>
+            <!-- Hidden media divs -->
+            <button id="back-button" onclick="goBack()" style="display:none;">Back</button>
+            <div id="folder-content"></div>
+            <audio id="audio-player" controls style="display:none;"></audio>
+            <div id="audio-controller" style="display: none;">
+                <button onclick="document.getElementById('audio-player').play()">Play</button>
+                <button onclick="document.getElementById('audio-player').pause()">Pause</button>
+                <div style="width: 80%; margin-top: 1em;">
+                    <div>Volume:</div><br>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>Low</div>
+                        <div>High</div>
+                    </div>
+                    <input id="volume" type="range" min="1" max="10" value="5">
+                </div>
+            </div>
+            <video id="video-player" controls width="80%" style="display: none;">
+                <source src="/resources/media/jamiroquai.mp4" type="video/mp4"/>
+            </video>
+            <div id="image-viewer"></div>
+            <!-- End hidden media divs -->
+
+        </div>
+    </div>
+    
+    <!-- Media Library End -->
+    <div class="taskbar">
+        <button id="start-button" class="start-button">
+            <img src="/resources/msft/logo.png" style="padding-right: 1em;">
+            Start
+        </button>
+        <div class="taskbar-empty-space"></div>
+        <div class="datetime" id="datetime"></div>
+    </div>
+    <div id="start-menu" class="start-menu hidden">
+        <div class="start-menu-banner"><strong style="color: #aaa;">&nbsp;Windows</strong> 95</div>
+        <ul>
+            <a class="start-link" href="/templates/blogs.html">
+                <li><img src="/resources/msft/blog-table.png"><u>B</u>log</li>
+            </a>
+            <a class="start-link" href="/templates/reviews.html">
+                <li><img src="/resources/msft/music.png"><u>M</u>usic Reviews</li>
+            </a>
+            <a class="start-link" href="/puzzle/tutorial.html">
+                <li><img src="/resources/msft/help.png"><u>P</u>uzzle</li>
+            </a>
+            <li><img src="/resources/msft/magnifying-glass.png"><u>F</u>ind</li>
+            <li><img src="/resources/msft/gears.png"><u>S</u>ettings</li>
+            <li><u>R</u>un...</li>
+            <li><u>S</u>hut Down</li>
+        </ul>
+    </div>
+    <script src="/scripts/main.js"></script>
+</body>
+
 </html>
