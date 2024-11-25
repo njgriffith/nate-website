@@ -164,6 +164,12 @@ li>img {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+#stats-library{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .blog-row:hover{
   color: white;
   background-color: blue;
@@ -189,6 +195,6 @@ li>img {
 
 .progress {
   background: #000080;
-  width: 50%; /* Adjust this to simulate progress */
+  width: 50%;
   height: 100%;
 }

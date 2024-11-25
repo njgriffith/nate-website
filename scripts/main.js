@@ -106,7 +106,7 @@ function playMedia(fileName, folderName) {
   const videoPlayer = document.getElementById('video-player');
   const controller = document.getElementById('audio-controller');
 
-  if (folderName === "music"){
+  if (folderName === "music") {
     const mediaPath = `/resources/media/${fileName}.mp3`;
     audioPlayer.src = mediaPath;
     controller.style.display = 'block';
@@ -114,11 +114,11 @@ function playMedia(fileName, folderName) {
     document.getElementById('track-title').innerText = fileName;
     document.getElementById('media-player').style.display = 'block';
   }
-  else if (folderName === "videos"){
+  else if (folderName === "videos") {
     const mediaPath = `/resources/media/${fileName}.mp4`;
     videoPlayer.style.display = 'block';
   }
-  else if (folderName === "pictures"){
+  else if (folderName === "pictures") {
     imageViewer.style.display = "block";
     const mediaPath = `/resources/media/${fileName}.png`;
     const image = document.createElement('img');
@@ -135,23 +135,22 @@ document.getElementById('volume').addEventListener('input', function (event) {
 });
 
 // open/close media library
-function openMediaLibrary(){
+function openMediaLibrary() {
   document.getElementById('media-library').style.display = 'block';
 }
-
-function closeMediaLibrary(){
+function closeMediaLibrary() {
   document.getElementById('media-library').style.display = 'none';
 }
-function openBlogLibrary(){
+function openBlogLibrary() {
   document.getElementById('blog-library').style.display = 'block';
 }
-function closeBlogLibrary(){
-  document.getElementById('stats-library').style.display = 'none';
+function closeBlogLibrary() {
+  document.getElementById('blog-library').style.display = 'none';
 }
-function openStatsLibrary(){
+function openStatsLibrary() {
   document.getElementById('stats-library').style.display = 'block';
 }
-function closeStatsLibrary(){
+function closeStatsLibrary() {
   document.getElementById('stats-library').style.display = 'none';
 }
 
@@ -165,7 +164,7 @@ let isDraggingStats = false;
 
 // pick up
 mediaTitleBar.addEventListener("mousedown", (event) => {
-    isDraggingMedia = true;
+  isDraggingMedia = true;
 });
 blogTitleBar.addEventListener("mousedown", (event) => {
   isDraggingBlog = true;
@@ -176,29 +175,28 @@ statsTitleBar.addEventListener("mousedown", (event) => {
 
 // drag
 document.addEventListener("mousemove", (event) => {
-  // console.log(event.clientX, event.clientY);
-    if (isDraggingMedia) {
-        mediaLibrary.style.left = `${event.clientX}px`;
-        mediaLibrary.style.top = `${event.clientY + (mediaLibrary.clientHeight/2) - 5}px`;
-    }
-    else if (isDraggingBlog) {
-      blogLibrary.style.left = `${event.clientX}px`;
-      blogLibrary.style.top = `${event.clientY + (blogLibrary.clientHeight/2) - 5}px`;
+  if (isDraggingMedia) {
+    mediaLibrary.style.left = `${event.clientX}px`;
+    mediaLibrary.style.top = `${event.clientY + (mediaLibrary.clientHeight / 2) - 5}px`;
+  }
+  else if (isDraggingBlog) {
+    blogLibrary.style.left = `${event.clientX}px`;
+    blogLibrary.style.top = `${event.clientY + (blogLibrary.clientHeight / 2) - 5}px`;
   }
   else if (isDraggingStats) {
     statsLibrary.style.left = `${event.clientX}px`;
-    statsLibrary.style.top = `${event.clientY + (statsLibrary.clientHeight/2) - 5}px`;
-}
+    statsLibrary.style.top = `${event.clientY + (statsLibrary.clientHeight / 2) - 5}px`;
+  }
 });
 
 // drop
 document.addEventListener("mouseup", () => {
-    isDraggingMedia = false;
-    isDraggingBlog = false;
-    isDraggingStats = false;
+  isDraggingMedia = false;
+  isDraggingBlog = false;
+  isDraggingStats = false;
 });
 
-function shutDown(){
+function shutDown() {
   const body = document.body;
   body.innerHTML = "";
   body.style.background = "black";
@@ -207,12 +205,12 @@ function shutDown(){
   goodbye.play();
 }
 
-function openBlog(div){
+function openBlog(div) {
   const date = div.querySelectorAll('td')[1];
   window.location.href = '/blogs/' + date.textContent + '.html';
 }
-function toggleMusic(){
-  if (!audioPlayer.paused){
+function toggleMusic() {
+  if (!audioPlayer.paused) {
     document.getElementById('play-button').innerText = '▶';
     audioPlayer.pause();
     return;
