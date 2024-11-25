@@ -12,12 +12,12 @@
 
 <body>
     <div class="desktop">
-        <a href="/templates/blogs.html">
+        <div onclick="openBlogLibrary()">
             <div class="icon">
                 <img src="/resources/msft/blog-table.png">
-                <p>Blog</p>
+                <p>Blogs</p>
             </div>
-        </a>
+        </div>
         <a href="/templates/reviews.html">
             <div class="icon">
                 <img src="/resources/msft/music.png">
@@ -31,6 +31,12 @@
                 <div style="display: none;" id="whats-his-name">Ax gxoxk lexxil, max cnwzx. Ax bl wtgvbgz, wtgvbgz. Ax ltrl matm ax pbee gxoxk wbx</div>
             </div>
         </a>
+        <div onclick="openStatsLibrary()">
+            <div class="icon">
+                <img src="/resources/msft/cubes.png">
+                <p>Stats</p>
+            </div>
+        </div>
         <div onclick="openMediaLibrary()">
             <div class="icon">
                 <img src="/resources/msft/media.png">
@@ -87,27 +93,122 @@
                 </div>
             </div>
             <video id="video-player" controls width="80%" style="display: none;">
-                <source src="/resources/media/jamiroquai.mp4" type="video/mp4"/>
+                <source src="/resources/media/jamiroquai.mp4" type="video/mp4" />
             </video>
             <div id="image-viewer"></div>
-            <!-- End hidden media divs -->
-
+            <!-- end hidden media -->
         </div>
     </div>
-    
-    <!-- Media Library End -->
+    <!-- End media library divs -->
+    <!-- Blog divs -->
+    <div class="window" id="blog-library" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">Blog Links</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeBlogLibrary()" aria-label="Close" id="close-media-library"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="sunken-panel">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="blog-row" onclick="openBlog(this)">
+                            <td>post first vault meet</td>
+                            <td>11-04-2024</td>
+                        </tr>
+                        <tr class="blog-row" onclick="openBlog(this)">
+                            <td>pre first vault meet</td>
+                            <td>10-22-2024</td>
+                        </tr>
+                        <tr class="blog-row" onclick="openBlog(this)">
+                            <td>pole vaulting, celeste & the worst movie ever</td>
+                            <td>10-04-2024</td>
+                        </tr>
+                        <tr class="blog-row" onclick="openBlog(this)">
+                            <td>first blog, old hobbies</td>
+                            <td>09-29-2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End blog divs -->
+    <!-- Stats library -->
+    <div class="window" id="stats-library" style="display: block;">
+        <div class="title-bar">
+            <div class="title-bar-text">Statistics</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeStatsLibrary()" aria-label="Close" id="close-media-library"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="sunken-panel">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="blog-row" onclick="openBlog(this)">
+                            <td>post first vault meet</td>
+                            <td>11-04-2024</td>
+                        </tr>
+                        <tr class="blog-row" onclick="openBlog(this)">
+                            <td>pre first vault meet</td>
+                            <td>10-22-2024</td>
+                        </tr>
+                        <tr class="blog-row" onclick="openBlog(this)">
+                            <td>pole vaulting, celeste & the worst movie ever</td>
+                            <td>10-04-2024</td>
+                        </tr>
+                        <tr class="blog-row" onclick="openBlog(this)">
+                            <td>first blog, old hobbies</td>
+                            <td>09-29-2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End stats library -->
     <div class="taskbar">
         <button id="start-button" class="start-button">
             <img src="/resources/msft/logo.png" style="padding-right: 1em;">
             Start
         </button>
         <div class="taskbar-empty-space"></div>
+        <div class="media-player" id="media-player" style="display: none;">
+            <div class="media-info">
+                <span class="track-title" id="track-title">Track Name</span>
+            </div>
+            <div class="media-controls">
+                <button class="control-button">⏮</button>
+                <button class="control-button" id="play-button" onclick="toggleMusic()">⏸</button>
+                <button class="control-button">⏭</button>
+            </div>
+            <!-- <div class="progress-bar">
+                <div class="progress"></div>
+              </div> -->
+        </div>
         <div class="datetime" id="datetime"></div>
     </div>
     <div id="start-menu" class="start-menu hidden">
         <div class="start-menu-banner"><strong style="color: #aaa;">&nbsp;Griffith</strong> 95</div>
         <ul>
-            <a class="start-link" href="/templates/blogs.html">
+            <a class="start-link" onclick="openBlogLibrary()">
                 <li><img src="/resources/msft/blog-table.png"><u>B</u>log</li>
             </a>
             <a class="start-link" href="/templates/reviews.html">

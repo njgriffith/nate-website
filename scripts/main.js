@@ -26,8 +26,11 @@ setInterval(updateDateTime, 60000);
 
 // add hover event listeners for folder icons
 const mediaLibrary = document.getElementById('media-library');
+const blogLibrary = document.getElementById('blog-library');
+const statsLibrary = document.getElementById('stats-library');
 const folderImages = mediaLibrary.querySelectorAll('.folder-img');
 const contentContainer = document.getElementById('folder-content');
+const audioPlayer = document.getElementById('audio-player');
 
 folderImages.forEach(img => {
   const originalSrc = img.src;
@@ -85,7 +88,6 @@ function goBack() {
   const videoPlayer = document.getElementById('video-player');
   videoPlayer.style.display = 'none';
   videoPlayer.pause();
-
 }
 function handleFolderClick(event) {
   const folderName = event.target.closest('.folder').dataset.folder;
@@ -101,7 +103,6 @@ document.getElementById('pictures-folder').addEventListener('click', handleFolde
 const imageViewer = document.getElementById('image-viewer');
 // play selected media
 function playMedia(fileName, folderName) {
-  const audioPlayer = document.getElementById('audio-player');
   const videoPlayer = document.getElementById('video-player');
   const controller = document.getElementById('audio-controller');
 
@@ -110,6 +111,8 @@ function playMedia(fileName, folderName) {
     audioPlayer.src = mediaPath;
     controller.style.display = 'block';
     audioPlayer.play();
+    document.getElementById('track-title').innerText = fileName;
+    document.getElementById('media-player').style.display = 'block';
   }
   else if (folderName === "videos"){
     const mediaPath = `/resources/media/${fileName}.mp4`;
@@ -139,28 +142,60 @@ function openMediaLibrary(){
 function closeMediaLibrary(){
   document.getElementById('media-library').style.display = 'none';
 }
+function openBlogLibrary(){
+  document.getElementById('blog-library').style.display = 'block';
+}
+function closeBlogLibrary(){
+  document.getElementById('stats-library').style.display = 'none';
+}
+function openStatsLibrary(){
+  document.getElementById('stats-library').style.display = 'block';
+}
+function closeStatsLibrary(){
+  document.getElementById('stats-library').style.display = 'none';
+}
 
 // drag and drop media library
-const titleBar = mediaLibrary.querySelector(".title-bar");
-let isDragging = false;
+const mediaTitleBar = mediaLibrary.querySelector(".title-bar");
+const blogTitleBar = blogLibrary.querySelector(".title-bar");
+const statsTitleBar = statsLibrary.querySelector(".title-bar");
+let isDraggingMedia = false;
+let isDraggingBlog = false;
+let isDraggingStats = false;
 
 // pick up
-titleBar.addEventListener("mousedown", (event) => {
-    isDragging = true;
+mediaTitleBar.addEventListener("mousedown", (event) => {
+    isDraggingMedia = true;
+});
+blogTitleBar.addEventListener("mousedown", (event) => {
+  isDraggingBlog = true;
+});
+statsTitleBar.addEventListener("mousedown", (event) => {
+  isDraggingStats = true;
 });
 
 // drag
 document.addEventListener("mousemove", (event) => {
   // console.log(event.clientX, event.clientY);
-    if (isDragging) {
+    if (isDraggingMedia) {
         mediaLibrary.style.left = `${event.clientX}px`;
         mediaLibrary.style.top = `${event.clientY + (mediaLibrary.clientHeight/2) - 5}px`;
     }
+    else if (isDraggingBlog) {
+      blogLibrary.style.left = `${event.clientX}px`;
+      blogLibrary.style.top = `${event.clientY + (blogLibrary.clientHeight/2) - 5}px`;
+  }
+  else if (isDraggingStats) {
+    statsLibrary.style.left = `${event.clientX}px`;
+    statsLibrary.style.top = `${event.clientY + (statsLibrary.clientHeight/2) - 5}px`;
+}
 });
 
 // drop
 document.addEventListener("mouseup", () => {
-    isDragging = false;
+    isDraggingMedia = false;
+    isDraggingBlog = false;
+    isDraggingStats = false;
 });
 
 function shutDown(){
@@ -170,4 +205,18 @@ function shutDown(){
   var goodbye = new Audio('/resources/media/goodbye.mp3');
   goodbye.volume = 0.25;
   goodbye.play();
+}
+
+function openBlog(div){
+  const date = div.querySelectorAll('td')[1];
+  window.location.href = '/blogs/' + date.textContent + '.html';
+}
+function toggleMusic(){
+  if (!audioPlayer.paused){
+    document.getElementById('play-button').innerText = '▶';
+    audioPlayer.pause();
+    return;
+  }
+  document.getElementById('play-button').innerText = '⏸';
+  audioPlayer.play();
 }

@@ -28,6 +28,7 @@ body {
   text-align: center;
   color: black;
   cursor: pointer;
+  user-select: none;
 }
 
 .taskbar {
@@ -155,4 +156,39 @@ li>img {
 }
 .hidden {
   display: none;
+}
+
+#blog-library{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.blog-row:hover{
+  color: white;
+  background-color: blue;
+  cursor: pointer;
+}
+
+.media-player {
+  margin-left: auto;
+  color: #000;
+  font-size: 1.1em;
+  margin-right: 2em;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.progress-bar {
+  background: #ffffff;
+  height: 10px;
+  border: 1px solid #808080;
+  box-shadow: inset -1px -1px 0 #ffffff, inset 1px 1px 0 #000000;
+  position: relative;
+}
+
+.progress {
+  background: #000080;
+  width: 50%; /* Adjust this to simulate progress */
+  height: 100%;
 }
