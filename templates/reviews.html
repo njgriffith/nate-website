@@ -5,41 +5,27 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/98.css">
+        <link rel="shortcut icon" href="#">
+
     </head>
-    <body style="background-image: url(../resources/media/disk-heaven.png); background-attachment: fixed; background-position: center; ">
-        <div class="nav-container">
-            <div class="nav">
-                <a href="/index.html">
-                    <div class="nav-item">HOME</div>
-                </a>
-                <a href="/templates/blogs.html">
-                    <div class="nav-item">BLOG</div>
-                </a>
-                <a href="/templates/reviews.html">
-                    <div class="nav-item" style="font-weight: bold; color: #1F51FF;">MUSIC REVIEWS</div>
-                </a>
-                <a href="/puzzle/tutorial.html">
-                    <div class="nav-item">SOLVE MY PUZZLE</div>
-                </a>
-            </div>
-        </div>
-        <div style="text-decoration: none; display: flex; justify-content: flex-end; gap: 1em; align-items: center;">
-            <a href="/templates/request.html">
-                <div style="font-size: 1.6em; background: black; color: white; border: 1px solid white; border-radius: 10px; padding: 0.5em;">Request a review</div>
-            </a>
-            <a onclick="getRandomReview()" href="">
-                <div style="font-size: 1.6em; background: black; color: white; border: 1px solid white; border-radius: 10px; padding: 0.5em;" class="nav-item">To Random Review</div>
-            </a>
-        </div>
-        <div width="90%" id="grid-container">    
-            <div class="grid-row-title">
-                <div class="grid-item" style="display: flex; gap: 1em; font-weight: bold;">Cover/Review Link</div>          
-                <div onclick="sortAndReloadContent('title', this)" class="grid-item column-title">Title<span id="title-arrow" class="sort-arrow">▼</span></div>
-                <div onclick="sortAndReloadContent('artist', this)" class="grid-item column-title">Artist<span id="artist-arrow" class="sort-arrow">▼</span></div>
-                <div onclick="sortAndReloadContent('score', this)" class="grid-item column-title">Score<span id="score-arrow" class="sort-arrow">▼</span></div>
-                <div onclick="sortAndReloadContent('released', this)" class="grid-item column-title">Released<span id="released-arrow" class="sort-arrow">▼</span></div>
-                <div onclick="sortAndReloadContent('reviewed', this)" class="grid-item column-title">Reviewed<span id="reviewed-arrow" class="sort-arrow">▼</span></div>
-            </div>       
+    <body style="background-image: url(../resources/media/disk-heaven.png); background-attachment: fixed; background-position: center; display: flex; justify-content: center;">
+        <button id="home-link" onclick="window.location.href='../index.html';">To Home</button>
+        <div id="scroll-div" class="sunken-panel" style="width: 60%; margin-top: 5em; margin-bottom: 5em;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cover</th>
+                        <th id="title" onclick="sortAndReloadContent('title', this)">Title</th>
+                        <th id="artist" onclick="sortAndReloadContent('artist', this)">Artist</th>
+                        <th id="score" onclick="sortAndReloadContent('score', this)">Score</th>
+                        <th id="released" onclick="sortAndReloadContent('released', this)">Release Date</th>
+                        <th id="reviewed" onclick="sortAndReloadContent('reviewed', this)">Review Date</th>
+                    </tr>
+                </thead>
+                <tbody id="review-table">
+                </tbody>
+            </table>
         </div>
         <script src="/scripts/reviews.js"></script>
     </body>

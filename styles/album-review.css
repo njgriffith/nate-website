@@ -7,6 +7,8 @@ html{
 }
 #album-title{
     text-align: center;
+    color: white;
+    font-size: 3em;
 }
 .grid-container{
     display: flex;
@@ -31,7 +33,7 @@ img{
     overflow-wrap: break-word; /* Allow long words to break and wrap */
 }
 a{
-    color: #ccc;
+    color: #ccc !important;
     font-size: 1.2em;
 }
 a:hover{

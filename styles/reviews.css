@@ -1,101 +1,44 @@
-html{
-    background: #111;
-    color: #ddd;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
+thead>tr{
+    font-size: 1.5em;
 }
-.grid-container{
-    height: 100%;
-}
-.grid-row{
-    display: grid;
-    grid-template-columns: [start] 20% [title-start] 20% [artist-start] 20% [score-start] 5% [review-start] 35% [end];
-    grid-template-columns: [start] 20% [title-start] 15% [artist-start] 15% [score-start] 5% [released-start] 20% [reviewed-start] 20% [end];
-    border-radius: 10px;
-    padding: 0em;
-    margin: 2em;
-    border: 1px solid white;
-    background: #111;
-    opacity: 90%;
-}
-.grid-row-title{
-    display: grid;
-    grid-template-columns: [start] 20% [title-start] 20% [artist-start] 20% [score-start] 5% [review-start] 35% [end];
-    grid-template-columns: [start] 20% [title-start] 15% [artist-start] 15% [score-start] 5% [released-start] 20% [reviewed-start] 20% [end];
-    border-radius: 10px;
-    padding: 0em;
-    margin: 2em;
-    border: 1px solid white;
-    background: #111;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    user-select: none;
-}
-
-.grid-item{
-    place-self: center;
-    text-align: center;
-    padding: 0.5em;
-    font-size: 1.7em;
-}
-.column-title{
-    font-weight: bold;
+th{
     cursor: pointer;
 }
-.column-title:hover{
-    transform: scale(1.1);
-    transition-duration: 0.3s;
+th:hover{
+    background: #444;
+    color: white;
+}
+.selected-sort{
+    background: #444;
+    color: white;
+}
+tbody>tr:hover{
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+}
+td{
+    text-wrap: wrap;
+    font-size: 1.7em;
 }
 img{
     width: 200px;
     height: 200px;
 }
-.image-link{
-    text-decoration: none;
-}
-.cover{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    place-self: center;
-}
-.cover:hover{
-    transform: scale(1.25);
-    transition-duration: 0.8s;
-}
-.title{
-    grid-column-start: 2;
-    grid-column-end: 3;
-    place-self: center;
-    font-size: 1.5em;
-}
-.artist{
-    grid-column-start: 3;
-    grid-column-end: 4;
-    place-self: center;
-    font-size: 1.5em;
-}
-.score{
-    grid-column-start: 4;
-    grid-column-end: 5;
-    place-self: center;
-    font-weight: bold;
-}
-.review{
-    grid-column-start: 5;
-    grid-column-end: 6;
-    place-self: center;
-    font-weight: bold;
+img:hover{
+    scale: 1.05;
+    transition-duration: 0.5s;
 }
 a{
     color: #fff;
     text-decoration: none;
 }
-.text-link:hover{
-    color: white;
-    border-bottom: 1px solid white;
-    transition-duration: 0.5s;
+#home-link{
+    position: absolute;
+    left: 10%;
+    cursor: pointer;
 }
+
 .sort-arrow{
     cursor: pointer;
 }
@@ -104,28 +47,4 @@ a{
 }
 .sort-desc{
     color: #555;
-}
-a{
-    text-decoration: none;
-}
-.nav-container{
-    text-align: center;
-    background: black;
-}
-.nav{
-    display: flex;
-    justify-content: space-around;
-    margin: auto;
-    align-items: center;
-}
-.nav-item{
-    font-size: 2em;
-    margin: auto;
-    margin: 1em;
-    color: white;
-    text-decoration: none;
-}
-.nav-item:hover{
-    text-decoration: underline;
-    cursor: pointer;
 }
