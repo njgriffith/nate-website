@@ -198,3 +198,8 @@ li>img {
   width: 50%;
   height: 100%;
 }
+
+tbody > tr:hover {
+  color: white;
+  background: blue;
+}

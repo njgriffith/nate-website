@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <title>head</title>
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+    <style>
+        tbody > tr:hover {
+            color: white;
+            background: blue;
+        }
+    </style>
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+    <div id="media-player" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+
+        <audio id="audio-player" style="display: none;"></audio>
+        <img src="/resources/head/head.bmp" style="position: relative; z-index: 3;">
+        <img id="vid-bkgd" src="/resources/head/vid_bkgd.bmp" style="width: 215px; position: relative; bottom: 176px; right: 227px; z-index: 2;">
+        <img src="/resources/head/play_controls_01_default.bmp" style="position: relative; bottom: 340px; right: 410px; z-index: 3;">
+        <img src="/resources/head/viz_drop_X_01_default.bmp" style="position: relative; bottom: 370px; right: 460px; z-index: 3; cursor: pointer;" onclick="closeMediaPlayer()">
+
+        <div id="right-ear" style="position: relative; right: -200px; bottom: 310px; transition-duration: 0.5s; z-index: 1;">
+            <img src="/resources/head/right_ear.bmp" style="position: relative;">
+            <img id="right-open" src="/resources/head/R_drwr_open_01_default.bmp"
+                style="cursor: pointer; position: relative; right: 30px; bottom: 38px;">
+            <img src="/resources/head/right_drawer_top.bmp"
+                style="position: relative; right: 280px; bottom: 160px;">
+            <img src="/resources/head/right_drawer_bottom.bmp"
+                style="position: relative; right: 455px; bottom: 10px;">
+            <img src="/resources/head/right_drawer_left.bmp"
+                style="position: relative; right: 640px; bottom: 10px;">
+            <div id="media-table" class="sunken-panel"
+                style="position: relative; right: 165px; bottom: 165px; height: 145px; width: 165px; border: 1px solid blue;">
+                <table class="interactive">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>length</th>
+                            <th>file type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="media-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="left-ear" style="position: relative; right: 55px; bottom: 630px; transition-duration: 0.5s; z-index: 0;">
+            <img src="/resources/head/left_ear.bmp" style="position: relative;">
+            <img id="left-open" src="/resources/head/L_drwr_open_01_default.bmp"
+                style="cursor: pointer; position: relative; right: 80px; bottom: 38px;">
+            <img src="/resources/head/left_drawer_top.bmp"
+                style="position: relative; right: 25px; bottom: 160px;">
+            <img src="/resources/head/left_drawer_bottom.bmp"
+                style="position: relative; right: 195px; bottom: 10px;">
+            <img src="/resources/head/left_drawer_right.bmp"
+                style="position: relative; right: 200px; bottom: 10px;">
+        </div>
+    </div>
+    <script src="/scripts/head.js"></script>
+</body>
+
+</html>

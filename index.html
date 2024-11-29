@@ -37,7 +37,7 @@
                 <p>Stats</p>
             </div>
         </div>
-        <div onclick="openMediaLibrary()">
+        <div onclick="openMediaPlayer()">
             <div class="icon">
                 <img src="/resources/msft/media.png">
                 <p>Media</p>
@@ -51,52 +51,50 @@
         </div>
     </div>
     <!-- Media Library -->
-    <div class="window" id="media-library" style="display: none">
-        <div class="title-bar">
-            <div class="title-bar-text">Media Library</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
-                <button aria-label="Maximize"></button>
-                <button onclick="closeMediaLibrary()" aria-label="Close" id="close-media-library"></button>
+    <div id="media-player" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none;">
+
+        <audio id="audio-player" style="display: none;"></audio>
+        <img id="head" src="/resources/head/head.bmp" style="position: relative; z-index: 3;">
+        <img id="vid-bkgd" src="/resources/head/vid_bkgd.bmp" style="width: 215px; position: relative; bottom: 176px; right: 227px; z-index: 2;">
+        <img src="/resources/head/play_controls_01_default.bmp" style="position: relative; bottom: 340px; right: 410px; z-index: 3;">
+        <img src="/resources/head/viz_drop_X_01_default.bmp" style="position: relative; bottom: 370px; right: 460px; z-index: 3; cursor: pointer;" onclick="closeMediaPlayer()">
+
+        <div id="right-ear" style="position: relative; right: -200px; bottom: 310px; transition-duration: 0.5s; z-index: 1;">
+            <img src="/resources/head/right_ear.bmp" style="position: relative;">
+            <img id="right-open" src="/resources/head/R_drwr_open_01_default.bmp"
+                style="cursor: pointer; position: relative; right: 30px; bottom: 38px;">
+            <img src="/resources/head/right_drawer_top.bmp"
+                style="position: relative; right: 280px; bottom: 160px;">
+            <img src="/resources/head/right_drawer_bottom.bmp"
+                style="position: relative; right: 455px; bottom: 10px;">
+            <img src="/resources/head/right_drawer_left.bmp"
+                style="position: relative; right: 640px; bottom: 10px;">
+            <div id="media-table" class="sunken-panel"
+                style="position: relative; right: 165px; bottom: 165px; height: 145px; width: 165px; border: 1px solid blue;">
+                <table class="interactive">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>length</th>
+                            <th>file type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="media-table-body">
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="window-body">
-            <!-- Main content with folders -->
-            <div id="main-content" class="file-system">
-                <div id="music-folder" class="folder" data-folder="music">
-                    <img class="folder-img" src="/resources/msft/folder-closed.png">
-                    <p>Music</p>
-                </div>
-                <div id="videos-folder" class="folder" data-folder="videos">
-                    <img class="folder-img" src="/resources/msft/folder-closed.png">
-                    <p>Videos</p>
-                </div>
-                <div id="pictures-folder" class="folder" data-folder="pictures">
-                    <img class="folder-img" src="/resources/msft/folder-closed.png">
-                    <p>Pictures</p>
-                </div>
-            </div>
-            <!-- Hidden media divs -->
-            <button id="back-button" onclick="goBack()" style="display:none;">Back</button>
-            <div id="folder-content"></div>
-            <audio id="audio-player" controls style="display:none;"></audio>
-            <div id="audio-controller" style="display: none;">
-                <button onclick="document.getElementById('audio-player').play()">Play</button>
-                <button onclick="document.getElementById('audio-player').pause()">Pause</button>
-                <div style="width: 80%; margin-top: 1em;">
-                    <div>Volume:</div><br>
-                    <div style="display: flex; justify-content: space-between;">
-                        <div>Low</div>
-                        <div>High</div>
-                    </div>
-                    <input id="volume" type="range" min="1" max="10" value="5">
-                </div>
-            </div>
-            <video id="video-player" controls width="80%" style="display: none;">
-                <source src="/resources/media/jamiroquai.mp4" type="video/mp4" />
-            </video>
-            <div id="image-viewer"></div>
-            <!-- end hidden media -->
+
+        <div id="left-ear" style="position: relative; right: 55px; bottom: 630px; transition-duration: 0.5s; z-index: 0;">
+            <img src="/resources/head/left_ear.bmp" style="position: relative;">
+            <img id="left-open" src="/resources/head/L_drwr_open_01_default.bmp"
+                style="cursor: pointer; position: relative; right: 80px; bottom: 38px;">
+            <img src="/resources/head/left_drawer_top.bmp"
+                style="position: relative; right: 25px; bottom: 160px;">
+            <img src="/resources/head/left_drawer_bottom.bmp"
+                style="position: relative; right: 195px; bottom: 10px;">
+            <img src="/resources/head/left_drawer_right.bmp"
+                style="position: relative; right: 200px; bottom: 10px;">
         </div>
     </div>
     <!-- End media library divs -->

@@ -28,22 +28,8 @@ setInterval(updateDateTime, 60000);
 const mediaLibrary = document.getElementById('media-library');
 const blogLibrary = document.getElementById('blog-library');
 const statsLibrary = document.getElementById('stats-library');
-const folderImages = mediaLibrary.querySelectorAll('.folder-img');
 const contentContainer = document.getElementById('folder-content');
-const audioPlayer = document.getElementById('audio-player');
 
-folderImages.forEach(img => {
-  const originalSrc = img.src;
-  const hoverSrc = '/resources/msft/folder-open.png';
-
-  img.addEventListener('mouseenter', function () {
-    img.src = hoverSrc;
-  });
-
-  img.addEventListener('mouseleave', function () {
-    img.src = originalSrc;
-  });
-});
 
 // load folder's content on click
 async function loadFolderContents(folderName) {
@@ -96,50 +82,19 @@ function handleFolderClick(event) {
   }
 }
 
-document.getElementById('music-folder').addEventListener('click', handleFolderClick);
-document.getElementById('videos-folder').addEventListener('click', handleFolderClick);
-document.getElementById('pictures-folder').addEventListener('click', handleFolderClick);
-
 const imageViewer = document.getElementById('image-viewer');
-// play selected media
-function playMedia(fileName, folderName) {
-  const videoPlayer = document.getElementById('video-player');
-  const controller = document.getElementById('audio-controller');
 
-  if (folderName === "music") {
-    const mediaPath = `/resources/media/${fileName}.mp3`;
-    audioPlayer.src = mediaPath;
-    controller.style.display = 'block';
-    audioPlayer.play();
-    document.getElementById('track-title').innerText = fileName;
-    document.getElementById('media-player').style.display = 'block';
-  }
-  else if (folderName === "videos") {
-    const mediaPath = `/resources/media/${fileName}.mp4`;
-    videoPlayer.style.display = 'block';
-  }
-  else if (folderName === "pictures") {
-    imageViewer.style.display = "block";
-    const mediaPath = `/resources/media/${fileName}.png`;
-    const image = document.createElement('img');
-    image.classList.add('library-image')
-    image.src = mediaPath;
-    imageViewer.innerHTML = "";
-    imageViewer.appendChild(image);
-  }
-}
-
-document.getElementById('volume').addEventListener('input', function (event) {
-  const audioPlayer = document.getElementById('audio-player');
-  audioPlayer.volume = event.target.value / 10;
-});
+// document.getElementById('volume').addEventListener('input', function (event) {
+//   const audioPlayer = document.getElementById('audio-player');
+//   audioPlayer.volume = event.target.value / 10;
+// });
 
 // open/close media library
-function openMediaLibrary() {
-  document.getElementById('media-library').style.display = 'block';
+function openMediaPlayer() {
+  document.getElementById('media-player').style.display = 'block';
 }
-function closeMediaLibrary() {
-  document.getElementById('media-library').style.display = 'none';
+function closeMediaPlayer() {
+  document.getElementById('media-player').style.display = 'none';
 }
 function openBlogLibrary() {
   document.getElementById('blog-library').style.display = 'block';
@@ -155,15 +110,17 @@ function closeStatsLibrary() {
 }
 
 // drag and drop media library
-const mediaTitleBar = mediaLibrary.querySelector(".title-bar");
 const blogTitleBar = blogLibrary.querySelector(".title-bar");
 const statsTitleBar = statsLibrary.querySelector(".title-bar");
+const mediaPlayer = document.getElementById('media-player');
+const head = document.getElementById('head');
+
 let isDraggingMedia = false;
 let isDraggingBlog = false;
 let isDraggingStats = false;
 
 // pick up
-mediaTitleBar.addEventListener("mousedown", (event) => {
+head.addEventListener("mousedown", (event) => {
   isDraggingMedia = true;
 });
 blogTitleBar.addEventListener("mousedown", (event) => {
@@ -176,8 +133,8 @@ statsTitleBar.addEventListener("mousedown", (event) => {
 // drag
 document.addEventListener("mousemove", (event) => {
   if (isDraggingMedia) {
-    mediaLibrary.style.left = `${event.clientX}px`;
-    mediaLibrary.style.top = `${event.clientY + (mediaLibrary.clientHeight / 2) - 5}px`;
+    mediaPlayer.style.left = `${event.clientX}px`;
+    mediaPlayer.style.top = `${event.clientY + (mediaPlayer.clientHeight / 2) - 5}px`;
   }
   else if (isDraggingBlog) {
     blogLibrary.style.left = `${event.clientX}px`;
@@ -191,9 +148,9 @@ document.addEventListener("mousemove", (event) => {
 
 // drop
 document.addEventListener("mouseup", () => {
-  isDraggingMedia = false;
   isDraggingBlog = false;
   isDraggingStats = false;
+  isDraggingMedia = false;
 });
 
 function shutDown() {
@@ -218,3 +175,169 @@ function toggleMusic() {
   document.getElementById('play-button').innerText = '⏸';
   audioPlayer.play();
 }
+
+// START HEAD JS
+const rightOpen = document.getElementById('right-open');
+const rightEar = document.getElementById('right-ear');
+const leftOpen = document.getElementById('left-open');
+const leftEar = document.getElementById('left-ear');
+
+const mediaTable = document.getElementById('media-table');
+const mediaTableBody = document.getElementById('media-table-body');
+const audioPlayer = document.getElementById('audio-player');
+
+let isRightOpen = false;
+let isLeftOpen = false;
+let drawerDistance = 200;
+
+// handle opening right drawer
+rightOpen.addEventListener("mouseover", (event) => {
+    if (isRightOpen) {
+        rightOpen.src = '/resources/head/R_drwr_close_02_rollover.bmp';
+        return;
+    }
+    rightOpen.src = '/resources/head/R_drwr_open_02_rollover.bmp';
+});
+
+rightOpen.addEventListener("mouseleave", (event) => {
+    if (isRightOpen) {
+        rightOpen.src = '/resources/head/R_drwr_close_01_default.bmp';
+        return;
+    }
+    rightOpen.src = '/resources/head/R_drwr_open_01_default.bmp';
+});
+
+rightOpen.addEventListener("mouseup", (event) => {
+  console.log(rightEar.style.right);
+    isRightOpen = !isRightOpen;
+    if (isRightOpen) {
+        rightOpen.src = '/resources/head/R_drwr_close_02_rollover.bmp';
+        rightEar.style.right = parseInt(rightEar.style.right) - drawerDistance;
+        loadFolderContents();
+        console.log(rightEar.style.right);
+        return;
+    }
+    rightOpen.src = '/resources/head/R_drwr_open_02_rollover.bmp';
+    rightEar.style.right = parseInt(rightEar.style.right) + drawerDistance;
+    mediaTable.style.zIndex = -2;
+    console.log(rightEar.style.right);
+
+});
+
+rightEar.addEventListener('transitionend', function handleTransitionEnd() {
+    if (isRightOpen) {
+        mediaTable.style.zIndex = 1
+        mediaTable.removeEventListener('transitionend', handleTransitionEnd);
+        return;
+    }
+    mediaTable.style.zIndex = -2
+    mediaTable.removeEventListener('transitionend', handleTransitionEnd);
+});
+
+// handle opening left drawer
+leftOpen.addEventListener("mouseover", (event) => {
+    if (isLeftOpen) {
+        leftOpen.src = '/resources/head/L_drwr_close_02_rollover.bmp';
+        return;
+    }
+    leftOpen.src = '/resources/head/L_drwr_open_02_rollover.bmp';
+});
+
+leftOpen.addEventListener("mouseleave", (event) => {
+    if (isLeftOpen) {
+        leftOpen.src = '/resources/head/L_drwr_close_01_default.bmp';
+        return;
+    }
+    leftOpen.src = '/resources/head/L_drwr_open_01_default.bmp';
+});
+
+leftOpen.addEventListener("mouseup", (event) => {
+    isLeftOpen = !isLeftOpen;
+    if (isLeftOpen) {
+        leftOpen.src = '/resources/head/L_drwr_close_02_rollover.bmp';
+        leftEar.style.right = parseInt(leftEar.style.right) + drawerDistance;
+        return;
+    }
+    leftOpen.src = '/resources/head/L_drwr_open_02_rollover.bmp';
+    leftEar.style.right = parseInt(leftEar.style.right) - drawerDistance;
+});
+
+// handle media shit
+async function loadFolderContents() {
+    try {
+        const folderName = 'music';
+        const response = await fetch('/resources/files.json');
+        const data = await response.json();
+        const mediaContent = data[folderName];
+        mediaTableBody.innerHTML = '';
+
+        mediaContent.forEach(item => {
+            const itemDiv = document.createElement('tr');
+
+            const title = document.createElement('td');
+            const length = document.createElement('td');
+            const code = document.createElement('td');
+
+            title.textContent = item;
+            length.textContent = "1:23";
+            code.textContent = item;
+
+            itemDiv.appendChild(title);
+            itemDiv.appendChild(length);
+            itemDiv.appendChild(code);
+            itemDiv.style.cursor = "pointer";
+            itemDiv.addEventListener('click', () => playMedia(item, folderName));
+
+            mediaTableBody.appendChild(itemDiv);
+        });
+    } catch (error) {
+        console.log('Folder not found ', error);
+    }
+}
+
+function playMedia(fileName, folderName) {
+    if (folderName === "music") {
+        const mediaPath = `/resources/media/${fileName}.mp3`;
+        audioPlayer.src = mediaPath;
+        audioPlayer.play();
+    }
+    else if (folderName === "videos") {
+        const mediaPath = `/resources/media/${fileName}.mp4`;
+        videoPlayer.style.display = 'block';
+    }
+    else if (folderName === "pictures") {
+        imageViewer.style.display = "block";
+        const mediaPath = `/resources/media/${fileName}.png`;
+        const image = document.createElement('img');
+        image.classList.add('library-image')
+        image.src = mediaPath;
+        imageViewer.innerHTML = "";
+        imageViewer.appendChild(image);
+    }
+    // startVisualization();
+}
+function startVisualization() {
+    const imgElement = document.getElementById('vid-bkgd');
+
+    // Create a new <video> element
+    const videoElement = document.createElement('video');
+    videoElement.setAttribute('width', '200'); // Same width as the image
+    videoElement.setAttribute('controls', 'false'); // Add video controls
+
+    // Add the <source> element for the video
+    const sourceElement = document.createElement('source');
+    sourceElement.setAttribute('src', '/resources/media/jamiroquai.mp4'); // Path to your video file
+    sourceElement.setAttribute('type', 'video/mp4');
+    sourceElement.style="position: relative; bottom: 176px; right: 228px; z-index: -1;"
+    sourceElement.play;
+
+    // Append the source to the video element
+    videoElement.appendChild(sourceElement);
+
+    // Replace the image with the video in the DOM
+    imgElement.parentNode.replaceChild(videoElement, imgElement);
+}
+function closeMediaPlayer(){
+    document.getElementById('media-player').style.display = 'none';
+}
+// END HEAD JS
