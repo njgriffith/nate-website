@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="#">
 </head>
 
-<body>
+<body style="overflow: hidden;">
     <div class="desktop">
         <div onclick="openBlogLibrary()">
             <div class="icon">
@@ -28,7 +28,8 @@
             <div class="icon">
                 <img src="/resources/msft/help.png">
                 <p>Solve My Puzzle</p>
-                <div style="display: none;" id="whats-his-name">Ax gxoxk lexxil, max cnwzx. Ax bl wtgvbgz, wtgvbgz. Ax ltrl matm ax pbee gxoxk wbx</div>
+                <div style="display: none;" id="whats-his-name">Ax gxoxk lexxil, max cnwzx. Ax bl wtgvbgz, wtgvbgz. Ax
+                    ltrl matm ax pbee gxoxk wbx</div>
             </div>
         </a>
         <div onclick="openStatsLibrary()">
@@ -51,26 +52,27 @@
         </div>
     </div>
     <!-- Media Library -->
-    <div id="media-player" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none;">
+    <div id="media-player" style="position: absolute; left: 30%; top: 25%; display: none;">
 
         <audio id="audio-player" style="display: none;"></audio>
-        <img id="head" src="/resources/head/head.bmp" style="position: relative; z-index: 3;">
-        <img id="vid-bkgd" src="/resources/head/vid_bkgd.bmp" style="width: 215px; position: relative; bottom: 176px; right: 227px; z-index: 2;">
-        <img src="/resources/head/play_controls_01_default.bmp" style="position: relative; bottom: 340px; right: 410px; z-index: 3;">
-        <img src="/resources/head/viz_drop_X_01_default.bmp" style="position: relative; bottom: 370px; right: 460px; z-index: 3; cursor: pointer;" onclick="closeMediaPlayer()">
+        <img id="head" src="/resources/head/head.bmp" style="position: absolute; z-index: 3;">
+        <img id="vid-bkgd" src="/resources/head/vid_bkgd.bmp"
+            style="width: 215px; position: absolute; top: 60px; left: 10px; z-index: 2;">
+        <img src="/resources/head/play_controls_01_default.bmp"
+            style="position: absolute; top: 30px; left: 40px; z-index: 3;">
+        <img src="/resources/head/viz_drop_X_01_default.bmp"
+            style="position: absolute; top: 10px; left: 150px; z-index: 3; cursor: pointer;"
+            onclick="closeMediaPlayer()">
 
-        <div id="right-ear" style="position: relative; right: -200px; bottom: 310px; transition-duration: 0.5s; z-index: 1;">
-            <img src="/resources/head/right_ear.bmp" style="position: relative;">
+        <div id="right-ear" style="position: absolute; left: 200px; top: 100px; transition-duration: 0.5s; z-index: 1;">
+            <img src="/resources/head/right_ear.bmp" style="position: absolute;">
             <img id="right-open" src="/resources/head/R_drwr_open_01_default.bmp"
-                style="cursor: pointer; position: relative; right: 30px; bottom: 38px;">
-            <img src="/resources/head/right_drawer_top.bmp"
-                style="position: relative; right: 280px; bottom: 160px;">
-            <img src="/resources/head/right_drawer_bottom.bmp"
-                style="position: relative; right: 455px; bottom: 10px;">
-            <img src="/resources/head/right_drawer_left.bmp"
-                style="position: relative; right: 640px; bottom: 10px;">
+                style="cursor: pointer; position: absolute; left: 60px; top: 65px;">
+            <img src="/resources/head/right_drawer_top.bmp" style="position: absolute; left: -172px; top: 0px;">
+            <img src="/resources/head/right_drawer_bottom.bmp" style="position: absolute; left: -172px; top: 150px;">
+            <img src="/resources/head/right_drawer_left.bmp" style="position: absolute; left: -182px; top: 0px;">
             <div id="media-table" class="sunken-panel"
-                style="position: relative; right: 165px; bottom: 165px; height: 145px; width: 165px; border: 1px solid blue;">
+                style="position: absolute; left: -172px; top: 10px; height: 140px; width: 172px; border: 1px solid blue;">
                 <table class="interactive">
                     <thead>
                         <tr>
@@ -85,16 +87,15 @@
             </div>
         </div>
 
-        <div id="left-ear" style="position: relative; right: 55px; bottom: 630px; transition-duration: 0.5s; z-index: 0;">
-            <img src="/resources/head/left_ear.bmp" style="position: relative;">
-            <img id="left-open" src="/resources/head/L_drwr_open_01_default.bmp"
-                style="cursor: pointer; position: relative; right: 80px; bottom: 38px;">
-            <img src="/resources/head/left_drawer_top.bmp"
-                style="position: relative; right: 25px; bottom: 160px;">
-            <img src="/resources/head/left_drawer_bottom.bmp"
-                style="position: relative; right: 195px; bottom: 10px;">
-            <img src="/resources/head/left_drawer_right.bmp"
-                style="position: relative; right: 200px; bottom: 10px;">
+        <div id="left-ear" style="position: absolute; left: -55px; top: 100px; transition-duration: 0.5s; z-index: 1;">
+            <img src="/resources/head/left_ear.bmp" style="position: absolute;">
+            <img id="left-open" src="/resources/head/L_drwr_open_01_default.bmp" style="cursor: pointer; position: absolute; left: 10px; top: 65px;">
+            <img src="/resources/head/left_drawer_top.bmp" style="position: absolute; left: 84px; top: 0px;">
+            <img src="/resources/head/left_drawer_bottom.bmp" style="position: absolute; left: 84px; top: 150px;">
+            <img src="/resources/head/left_drawer_right.bmp" style="position: absolute; left: 250px; top: 0px;">
+            <div>
+
+            </div>
         </div>
     </div>
     <!-- End media library divs -->

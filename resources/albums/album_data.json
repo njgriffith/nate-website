@@ -65,8 +65,7 @@
     "TVUandN": {
         "title": "The Velvet Underground & Nico",
         "artist": "The Velvet Underground & Nico",
-        "score": 10.0,
-        "rank": 9,
+        "score": 9.9,
         "released": "03-12-1967",
         "reviewed": "09-10-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/0/0c/Velvet_Underground_and_Nico.jpg"
@@ -423,7 +422,7 @@
         "artist": "Childish Gambino",
         "score": 9.0,
         "released": "12-02-2016",
-        "reviewed": "01-01-2000",
+        "reviewed": "11-20-2000",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/1/10/Childish_Gambino_-_Awaken%2C_My_Love%21.png/220px-Childish_Gambino_-_Awaken%2C_My_Love%21.png"
     },
     "we_are_21st": {
@@ -463,7 +462,7 @@
         "artist": "Jai Paul",
         "score": 9.1,
         "released": "06-01-2019",
-        "reviewed": "01-01-2000",
+        "reviewed": "11-29-2000",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/7/73/Jai_Paul_-_Leak_04-13_%28Bait_Ones%29.png/220px-Jai_Paul_-_Leak_04-13_%28Bait_Ones%29.png"
     },
     "night_of_broken": {
@@ -497,5 +496,13 @@
         "released": "02-01-1996",
         "reviewed": "01-01-2000",
         "cover": "https://i.ytimg.com/vi/JK8ilaPZbKE/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AH-BIAC4AOKAgwIABABGEggRihZMA8=&rs=AOn4CLDbkOZO0CBzqu6ZDDDRkpWXxo7hYg"
+    },
+    "folsom_prison": {
+        "title": "At Folsom Prison",
+        "artist": "Johnny Cash",
+        "score": 8.8,
+        "released": "05-06-1968",
+        "reviewed": "11-29-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/Johnny_Cash_At_Folsom_Prison.jpg/220px-Johnny_Cash_At_Folsom_Prison.jpg"
     }
 }

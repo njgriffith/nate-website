@@ -133,8 +133,8 @@ statsTitleBar.addEventListener("mousedown", (event) => {
 // drag
 document.addEventListener("mousemove", (event) => {
   if (isDraggingMedia) {
-    mediaPlayer.style.left = `${event.clientX}px`;
-    mediaPlayer.style.top = `${event.clientY + (mediaPlayer.clientHeight / 2) - 5}px`;
+    mediaPlayer.style.left = `${event.clientX - 100}px`;
+    mediaPlayer.style.top = `${event.clientY + (mediaPlayer.clientHeight / 2)}px`;
   }
   else if (isDraggingBlog) {
     blogLibrary.style.left = `${event.clientX}px`;
@@ -208,20 +208,16 @@ rightOpen.addEventListener("mouseleave", (event) => {
 });
 
 rightOpen.addEventListener("mouseup", (event) => {
-  console.log(rightEar.style.right);
     isRightOpen = !isRightOpen;
     if (isRightOpen) {
         rightOpen.src = '/resources/head/R_drwr_close_02_rollover.bmp';
-        rightEar.style.right = parseInt(rightEar.style.right) - drawerDistance;
+        rightEar.style.left = `${parseInt(rightEar.style.left) + drawerDistance}px`;
         loadFolderContents();
-        console.log(rightEar.style.right);
         return;
     }
     rightOpen.src = '/resources/head/R_drwr_open_02_rollover.bmp';
-    rightEar.style.right = parseInt(rightEar.style.right) + drawerDistance;
+    rightEar.style.left = `${parseInt(rightEar.style.left) - drawerDistance}px`;
     mediaTable.style.zIndex = -2;
-    console.log(rightEar.style.right);
-
 });
 
 rightEar.addEventListener('transitionend', function handleTransitionEnd() {
@@ -255,11 +251,11 @@ leftOpen.addEventListener("mouseup", (event) => {
     isLeftOpen = !isLeftOpen;
     if (isLeftOpen) {
         leftOpen.src = '/resources/head/L_drwr_close_02_rollover.bmp';
-        leftEar.style.right = parseInt(leftEar.style.right) + drawerDistance;
+        leftEar.style.left = `${parseInt(leftEar.style.left) - drawerDistance}px`;
         return;
     }
     leftOpen.src = '/resources/head/L_drwr_open_02_rollover.bmp';
-    leftEar.style.right = parseInt(leftEar.style.right) - drawerDistance;
+    leftEar.style.left = `${parseInt(leftEar.style.left) + drawerDistance}px`;
 });
 
 // handle media shit
