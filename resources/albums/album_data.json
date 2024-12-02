@@ -500,9 +500,17 @@
     "folsom_prison": {
         "title": "At Folsom Prison",
         "artist": "Johnny Cash",
-        "score": 8.8,
+        "score": 8.7,
         "released": "05-06-1968",
         "reviewed": "11-29-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/Johnny_Cash_At_Folsom_Prison.jpg/220px-Johnny_Cash_At_Folsom_Prison.jpg"
+    },
+    "secret_of_us": {
+        "title": "The Secret of Us",
+        "artist": "Gracie Abrams",
+        "score": 3.9,
+        "released": "06-21-2024",
+        "reviewed": "12-02-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/1/18/Gracie_Abrams_-_The_Secret_of_Us.png/220px-Gracie_Abrams_-_The_Secret_of_Us.png"
     }
 }

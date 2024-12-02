@@ -18,12 +18,12 @@
                 <p>Blogs</p>
             </div>
         </div>
-        <a href="/templates/reviews.html">
+        <div onclick="openMusicLibrary()">
             <div class="icon">
-                <img src="/resources/msft/music.png">
-                <p>Music Reviews</p>
+                <img src="/resources/msft/media.png">
+                <p>Reviews & Lists</p>
             </div>
-        </a>
+        </div>
         <a href="/puzzle/tutorial.html">
             <div class="icon">
                 <img src="/resources/msft/help.png">
@@ -33,15 +33,15 @@
             </div>
         </a>
         <div onclick="openStatsLibrary()">
-            <div class="icon">
+            <div class="icon" id="stats-icon">
                 <img src="/resources/msft/cubes.png">
                 <p>Stats</p>
             </div>
         </div>
         <div onclick="openMediaPlayer()">
             <div class="icon">
-                <img src="/resources/msft/media.png">
-                <p>Media</p>
+                <img src="/resources/msft/music.png">
+                <p>Media Player</p>
             </div>
         </div>
         <div>
@@ -89,7 +89,8 @@
 
         <div id="left-ear" style="position: absolute; left: -55px; top: 100px; transition-duration: 0.5s; z-index: 1;">
             <img src="/resources/head/left_ear.bmp" style="position: absolute;">
-            <img id="left-open" src="/resources/head/L_drwr_open_01_default.bmp" style="cursor: pointer; position: absolute; left: 10px; top: 65px;">
+            <img id="left-open" src="/resources/head/L_drwr_open_01_default.bmp"
+                style="cursor: pointer; position: absolute; left: 10px; top: 65px;">
             <img src="/resources/head/left_drawer_top.bmp" style="position: absolute; left: 84px; top: 0px;">
             <img src="/resources/head/left_drawer_bottom.bmp" style="position: absolute; left: 84px; top: 150px;">
             <img src="/resources/head/left_drawer_right.bmp" style="position: absolute; left: 250px; top: 0px;">
@@ -100,7 +101,7 @@
     </div>
     <!-- End media library divs -->
     <!-- Blog divs -->
-    <div class="window" id="blog-library" style="display: none;">
+    <div class="window" id="blog-library" class="library" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">Blog Links</div>
             <div class="title-bar-controls">
@@ -142,7 +143,7 @@
     </div>
     <!-- End blog divs -->
     <!-- Stats library -->
-    <div class="window" id="stats-library" style="display: none;">
+    <div class="window" id="stats-library" class="library" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">Statistics</div>
             <div class="title-bar-controls">
@@ -187,11 +188,66 @@
         </div>
     </div>
     <!-- End stats library -->
+    <!-- Music stuff library -->
+    <div class="window" id="music-library" class="library" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">Reviews & Lists</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeMusicLibrary()" aria-label="Close" id="close-music-library"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div class="sunken-panel">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="blog-row" onclick="openList(this)">
+                            <td>all reviews</td>
+                            <td>All albums I've reviewed. Personal favorites plus requests</td>
+                            <td>reviews</td>
+                        </tr>
+                        <tr class="blog-row" onclick="openList(this)">
+                            <td>all time 50 albums</td>
+                            <td>50 favorite albums of all time, 1 entry per artist</td>
+                            <td>50-albums</td>
+                        </tr>
+                        <tr class="blog-row" onclick="openList(this)">
+                            <td>all time 50 songs</td>
+                            <td>50 favorite songs of all time, 1 song per artist</td>
+                            <td>50-songs</td>
+                        </tr>
+                        <tr class="blog-row" onclick="openList(this)">
+                            <td>all time 50 movies</td>
+                            <td>50 favorite movies of all time</td>
+                            <td>50-movies</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- End music stuff -->
+    <iframe style="border-radius:12px; margin: auto; user-select: none; display: none;" id="50-spotify"
+        src="https://open.spotify.com/embed/playlist/76HQo6xvIj4iyFBxmcFDKC?utm_source=generator" width="50%"
+        height="60%" frameBorder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     <div class="taskbar">
         <button id="start-button" class="start-button">
             <img src="/resources/msft/logo.png" style="padding-right: 1em;">
             Start
         </button>
+        <div id="taskbar-apps" style="display: flex;">
+        </div>
+
         <div class="taskbar-empty-space"></div>
         <div class="media-player" id="media-player" style="display: none;">
             <div class="media-info">
