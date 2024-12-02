@@ -1,4 +1,4 @@
-// open and close start menu
+// START TASKBAR LOGIC
 document.getElementById('start-button').addEventListener('click', function () {
   const startMenu = document.getElementById('start-menu');
   startMenu.classList.toggle('hidden');
@@ -65,11 +65,17 @@ function updateTaskbar(iconName, action) {
   }
   else if (action === 'remove'){
     const taskBarApps = document.getElementsByClassName('taskbar-button');
-    taskBarApps[0].remove();
+    for(let i=0;i<taskBarApps.length;i++){
+      if (taskBarApps[i].querySelector('p').innerText === appName){
+        taskBarApps[i].remove();
+        return;
+      }
+    }
   }
 }
 updateDateTime();
 setInterval(updateDateTime, 60000);
+// END  TASKBAR LOGIC
 
 // ICON LOGIC START
 const mediaLibrary = document.getElementById('media-library');
@@ -186,10 +192,9 @@ function openList(div) {
     document.getElementById('50-spotify').style.display = 'block';
   }
 }
-
 // ICON LOGIC END
 
-// START HEAD JS
+// START HEAD LOGIC
 const rightOpen = document.getElementById('right-open');
 const rightEar = document.getElementById('right-ear');
 const leftOpen = document.getElementById('left-open');
@@ -350,4 +355,4 @@ function closeMediaPlayer() {
   document.getElementById('media-player').style.display = 'none';
   updateTaskbar('media', 'remove');
 }
-// END HEAD JS
+// END HEAD LOGIC
