@@ -379,6 +379,7 @@ function closeMediaPlayer() {
 
 function createList(fileName) {
   const listContainer = document.getElementById('list-container');
+  listContainer.innerHTML = '';
   listContainer.style.marginTop = '5em';
   const listTable = document.createElement('table');
   listContainer.appendChild(listTable);
