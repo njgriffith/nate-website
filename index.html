@@ -229,14 +229,39 @@
                             <td>50 favorite movies of all time</td>
                             <td>50-movies</td>
                         </tr>
+                        <tr class="blog-row" onclick="openList(this)">
+                            <td>2024 10 albums</td>
+                            <td>10 favorite albums of 2024</td>
+                            <td>2024-albums</td>
+                        </tr>
+                        <tr class="blog-row" onclick="openList(this)">
+                            <td>2020s 50 albums</td>
+                            <td>50 favorite albums of the 2020s</td>
+                            <td>2020s-albums</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    
     <!-- End music stuff -->
-    <iframe style="border-radius:12px; margin: auto; user-select: none; display: none;" id="50-spotify"
+
+    <!-- Hidden List -->
+    <div class="window" id="hidden-list" class="library" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">List</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeHiddenList()" aria-label="Close" id="close-music-library"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div id="list-container" class="sunken-panel" style="height: 300px;"></div>
+        </div>
+    </div>
+    <!-- End hidden list -->
+    <iframe allow="encrypted-media *;" style="border-radius:12px; margin: auto; user-select: none; display: none;" id="50-spotify"
         src="https://open.spotify.com/embed/playlist/76HQo6xvIj4iyFBxmcFDKC?utm_source=generator" width="50%"
         height="60%" frameBorder="0" allowfullscreen="true"
         loading="lazy"></iframe>
@@ -282,6 +307,7 @@
             <li onclick="shutDown()"><img src="/resources/msft/power.png"><u>S</u>hut Down</li>
         </ul>
     </div>
+    
     <script src="/scripts/main.js"></script>
 </body>
 

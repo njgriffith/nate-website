@@ -39,19 +39,19 @@ function updateTaskbar(iconName, action) {
     appName = 'Media Player';
     imgSrc = '/resources/msft/music.png';
   }
-  else if (iconName === 'blog'){
+  else if (iconName === 'blog') {
     appName = 'Blogs';
     imgSrc = '/resources/msft/blog-table.png';
   }
-  else if (iconName === 'stats'){
+  else if (iconName === 'stats') {
     appName = 'Stats';
     imgSrc = '/resources/msft/cubes.png';
   }
-  else if(iconName === 'music'){
+  else if (iconName === 'music') {
     appName = 'Reviews & Lists';
     imgSrc = '/resources/msft/media.png';
   }
-  if(action === 'add'){
+  if (action === 'add') {
     const appImage = document.createElement('img');
     const appButton = document.createElement('button');
     const nameDiv = document.createElement('p');
@@ -63,10 +63,10 @@ function updateTaskbar(iconName, action) {
     appButton.appendChild(nameDiv);
     taskbarContainer.appendChild(appButton);
   }
-  else if (action === 'remove'){
+  else if (action === 'remove') {
     const taskBarApps = document.getElementsByClassName('taskbar-button');
-    for(let i=0;i<taskBarApps.length;i++){
-      if (taskBarApps[i].querySelector('p').innerText === appName){
+    for (let i = 0; i < taskBarApps.length; i++) {
+      if (taskBarApps[i].querySelector('p').innerText === appName) {
         taskBarApps[i].remove();
         return;
       }
@@ -82,6 +82,7 @@ const mediaLibrary = document.getElementById('media-library');
 const blogLibrary = document.getElementById('blog-library');
 const statsLibrary = document.getElementById('stats-library');
 const musicLibrary = document.getElementById('music-library');
+const hiddenList = document.getElementById('hidden-list');
 
 // open/close libraries
 function openMediaPlayer() {
@@ -117,11 +118,16 @@ function closeMusicLibrary() {
   updateTaskbar('music', 'remove');
   document.getElementById('50-spotify').style.display = 'none';
 }
+function closeHiddenList() {
+  document.getElementById('hidden-list').style.display = 'none';
+  document.getElementById('list-container').innerHTML = '';
+}
 
 // drag and drop libraries
 const blogTitleBar = blogLibrary.querySelector(".title-bar");
 const statsTitleBar = statsLibrary.querySelector(".title-bar");
 const musicTitleBar = musicLibrary.querySelector(".title-bar");
+const listTitleBar = hiddenList.querySelector(".title-bar");
 const mediaPlayer = document.getElementById('media-player');
 const head = document.getElementById('head');
 
@@ -129,6 +135,7 @@ let isDraggingMedia = false;
 let isDraggingBlog = false;
 let isDraggingStats = false;
 let isDraggingMusic = false;
+let isDraggingList = false;
 
 // pick up
 head.addEventListener("mousedown", (event) => {
@@ -142,6 +149,9 @@ statsTitleBar.addEventListener("mousedown", (event) => {
 });
 musicTitleBar.addEventListener("mousedown", (event) => {
   isDraggingMusic = true;
+});
+listTitleBar.addEventListener("mousedown", (event) => {
+  isDraggingList = true;
 });
 
 // drag
@@ -162,6 +172,10 @@ document.addEventListener("mousemove", (event) => {
     musicLibrary.style.left = `${event.clientX}px`;
     musicLibrary.style.top = `${event.clientY + (musicLibrary.clientHeight / 2) - 5}px`;
   }
+  else if (isDraggingList) {
+    hiddenList.style.left = `${event.clientX}px`;
+    hiddenList.style.top = `${event.clientY + (hiddenList.clientHeight / 2) - 5}px`;
+  }
 });
 
 // drop
@@ -170,6 +184,7 @@ document.addEventListener("mouseup", () => {
   isDraggingStats = false;
   isDraggingMedia = false;
   isDraggingMusic = false;
+  isDraggingList = false;
 });
 
 function openBlog(div) {
@@ -179,17 +194,22 @@ function openBlog(div) {
 
 function openList(div) {
   const note = div.querySelectorAll('td')[2].textContent;
-  if (note === 'reviews'){
+  if (note === 'reviews') {
     window.location.href = '/templates/' + note + '.html';
   }
-  else if(note === '50-movies'){
+  else if (note === '50-movies') {
     window.open('https://letterboxd.com/moviefan34/list/top-50/', '_blank').focus();
   }
-  else if( note === '50-albums'){
+  else if (note === '50-albums') {
     window.open('https://rateyourmusic.com/list/frankyfasthands/top-50-albums-of-all-time/', '_blank').focus();
   }
-  else if(note === '50-songs'){
+  else if (note === '50-songs') {
     document.getElementById('50-spotify').style.display = 'block';
+  }
+  else{
+    createList(note);
+    document.getElementById('hidden-list').querySelector('.title-bar-text').innerHTML = div.querySelectorAll('td')[0].textContent;
+    document.getElementById('hidden-list').style.display = 'block';
   }
 }
 // ICON LOGIC END
@@ -356,3 +376,45 @@ function closeMediaPlayer() {
   updateTaskbar('media', 'remove');
 }
 // END HEAD LOGIC
+
+function createList(fileName) {
+  const listContainer = document.getElementById('list-container');
+  listContainer.style.marginTop = '5em';
+  const listTable = document.createElement('table');
+  listContainer.appendChild(listTable);
+  fetch(`../resources/lists/${fileName}.json`)
+    .then(response => response.json())
+    .then(data => {
+      const tableHead = document.createElement('thead');
+      const tableBody = document.createElement('tbody');
+      listTable.appendChild(tableHead);
+      listTable.appendChild(tableBody);
+      data.forEach((item, index) => {
+        if (index === 0) {
+          const headerRow = document.createElement('tr');
+          const rankTitle = document.createElement('th');
+          rankTitle.innerHTML = 'Rank';
+          headerRow.appendChild(rankTitle);
+          for (let i = 0; i < Object.keys(item).length; i++) {
+            const colTitle = document.createElement('th');
+            colTitle.innerHTML = Object.keys(item)[i].toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); // why tf does js not have toTitleCase???
+            headerRow.appendChild(colTitle);
+          }
+          tableHead.appendChild(headerRow);
+        }
+        const row = document.createElement('tr');
+        row.classList.add('blog-row');
+        const rankIndex = document.createElement('td');
+        rankIndex.innerHTML = index + 1;
+        row.appendChild(rankIndex);
+        for (let i = 0; i < Object.keys(item).length; i++) {
+          const tableData = document.createElement('td');
+          tableData.innerHTML = Object.values(item)[i];
+          row.appendChild(tableData);
+        }
+        tableBody.appendChild(row);
+      });
+    })
+}
+// createList('2020s-albums')
+// document.getElementById('hidden-list').style.display = 'block';

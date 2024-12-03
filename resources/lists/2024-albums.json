@@ -1,42 +1,42 @@
-{
-    "1": {
-        "title": "The New Sound",
+[
+    {
+        "album": "The New Sound",
         "artist": "Geordie Greep"
     },
-    "2": {
-        "title": "brat",
+    {
+        "album": "brat",
         "artist": "Charli XCX"
     },
-    "3": {
-        "title": "No Hands",
-        "artist": "Joey Valance & Brae"
+    {
+        "album": "No Hands",
+        "artist": "Joey Valence & Brae"
     },
-    "4": {
-        "title": "Imaginal Disk",
+    {
+        "album": "KILL YOU",
+        "artist": "Tek Lintowe"
+    },
+    {
+        "album": "Imaginal Disk",
         "artist": "Magdalena Bay"
     },
-    "5": {
-        "title": "GNX",
+    {
+        "album": "GNX",
         "artist": "Kendrick Lamar"
     },
-    "6": {
-        "title": "The New Sound",
-        "artist": "Geordie Greep"
+    {
+        "album": "Samurai",
+        "artist": "Lupe Fiasco"
     },
-    "7": {
-        "title": "The New Sound",
-        "artist": "Geordie Greep"
+    {
+        "album": "Chromakopia",
+        "artist": "Tyler the Creator"
     },
-    "8": {
-        "title": "The New Sound",
-        "artist": "Geordie Greep"
+    {
+        "album": "I Lay Down My Life for You",
+        "artist": "JPEGMAFIA"
     },
-    "9": {
-        "title": "The New Sound",
-        "artist": "Geordie Greep"
-    },
-    "10": {
-        "title": "The New Sound",
-        "artist": "Geordie Greep"
+    {
+        "album": "Bright Future",
+        "artist": "Adrienne Lenker"
     }
-}
+]
