@@ -200,9 +200,6 @@ function openList(div) {
   else if (note === '50-movies') {
     window.open('https://letterboxd.com/moviefan34/list/top-50/', '_blank').focus();
   }
-  else if (note === '50-albums') {
-    window.open('https://rateyourmusic.com/list/frankyfasthands/top-50-albums-of-all-time/', '_blank').focus();
-  }
   else if (note === '50-songs') {
     document.getElementById('50-spotify').style.display = 'block';
   }
@@ -223,6 +220,8 @@ const leftEar = document.getElementById('left-ear');
 const mediaTable = document.getElementById('media-table');
 const mediaTableBody = document.getElementById('media-table-body');
 const audioPlayer = document.getElementById('audio-player');
+
+const knobDrawer = document.getElementById('knob-drawer');
 
 let isRightOpen = false;
 let isLeftOpen = false;
@@ -294,6 +293,16 @@ leftOpen.addEventListener("mouseup", (event) => {
   }
   leftOpen.src = '/resources/head/L_drwr_open_02_rollover.bmp';
   leftEar.style.left = `${parseInt(leftEar.style.left) + drawerDistance}px`;
+});
+
+leftEar.addEventListener('transitionend', function handleTransitionEnd() {
+  if (isLeftOpen) {
+    knobDrawer.style.zIndex = 1
+    knobDrawer.removeEventListener('transitionend', handleTransitionEnd);
+    return;
+  }
+  knobDrawer.style.zIndex = -2
+  knobDrawer.removeEventListener('transitionend', handleTransitionEnd);
 });
 
 // handle media shit
@@ -417,5 +426,5 @@ function createList(fileName) {
       });
     })
 }
-// createList('2020s-albums')
+// createList('50-albums')
 // document.getElementById('hidden-list').style.display = 'block';

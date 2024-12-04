@@ -9,6 +9,14 @@ body {
   height: 100vh;
 }
 
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
 .desktop {
   display: flex;
   flex-wrap: wrap;
@@ -57,6 +65,7 @@ body {
   align-items: center;
   margin-right: 5em;
 }
+
 .taskbar-button {
   background: linear-gradient(to bottom, #c0c0c0, #808080);
   border: 1px solid #808080;
@@ -70,10 +79,12 @@ body {
   display: flex;
   align-items: center;
 }
-.taskbar-button:hover{
+
+.taskbar-button:hover {
   background: linear-gradient(to bottom, #a0a0a0, #606060);
 }
-.taskbar-img{
+
+.taskbar-img {
   margin-right: 1em;
   margin-left: -1.5em;
 }
@@ -86,6 +97,7 @@ body {
 .taskbar-empty-space {
   flex: 1;
 }
+
 .datetime {
   margin-left: auto;
   font-size: 14px;
@@ -152,7 +164,7 @@ li>img {
   color: black;
 }
 
-#media-library{
+#media-library {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -160,62 +172,72 @@ li>img {
   width: 500px;
 }
 
-#blog-library{
+#blog-library {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#stats-library{
+
+#stats-library {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#music-library{
+
+#music-library {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#hidden-list{
+
+#hidden-list {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.library-image{
+
+.library-image {
   width: 60%;
   height: auto;
 }
-.file-system{
+
+.file-system {
   display: flex;
-  gap: 3em; 
+  gap: 3em;
   margin: 1em;
 }
-.folder{
+
+.folder {
   cursor: pointer;
 }
-#folder-content{
+
+#folder-content {
   display: flex;
   flex-wrap: wrap;
 }
+
 .hidden {
   display: none;
 }
 
-.blog-row:hover{
+.blog-row:hover {
   color: white;
   background-color: blue;
   cursor: pointer;
 }
-.blog-row > td{
+
+.blog-row>td {
   padding-top: 0.25em;
   padding-bottom: 0.25em;
   font-size: 1em;
   /* border-right: 1px solid blue; */
 }
-.blog-row{
+
+.blog-row {
   border-bottom: 1px solid blue;
 }
 
@@ -242,7 +264,24 @@ li>img {
   height: 100%;
 }
 
-tbody > tr:hover {
+tbody>tr:hover {
   color: white;
   background: blue;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  /* 10 equal columns */
+  grid-template-rows: repeat(2, 1fr);
+  /* 2 equal rows */
+  width: 100%;
+  /* Adjust as needed */
+  height: 200px;
+  /* Adjust as needed */
+}
+
+.grid-container>img {
+  width: 5px;
+  height: 100px;
 }
