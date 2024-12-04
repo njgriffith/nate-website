@@ -92,6 +92,7 @@ function openMediaPlayer() {
 function closeMediaPlayer() {
   document.getElementById('media-player').style.display = 'none';
   updateTaskbar('media', 'remove');
+  audioPlayer.pause();
 }
 function openBlogLibrary() {
   document.getElementById('blog-library').style.display = 'block';
@@ -380,10 +381,6 @@ function startVisualization() {
   // Replace the image with the video in the DOM
   imgElement.parentNode.replaceChild(videoElement, imgElement);
 }
-function closeMediaPlayer() {
-  document.getElementById('media-player').style.display = 'none';
-  updateTaskbar('media', 'remove');
-}
 // END HEAD LOGIC
 
 function createList(fileName) {
@@ -426,5 +423,5 @@ function createList(fileName) {
       });
     })
 }
-// createList('50-albums')
+// createList('2020s-albums')
 // document.getElementById('hidden-list').style.display = 'block';
