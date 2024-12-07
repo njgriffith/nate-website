@@ -52,6 +52,12 @@ function updateTaskbar(iconName, action) {
     imgSrc = '/resources/msft/media.png';
   }
   if (action === 'add') {
+    const taskBarApps = document.getElementsByClassName('taskbar-button');
+    for (let i = 0; i < taskBarApps.length; i++) {
+      if (taskBarApps[i].querySelector('p').innerText === appName) {
+        return;
+      }
+    }
     const appImage = document.createElement('img');
     const appButton = document.createElement('button');
     const nameDiv = document.createElement('p');
@@ -423,5 +429,5 @@ function createList(fileName) {
       });
     })
 }
-// createList('2020s-albums')
-// document.getElementById('hidden-list').style.display = 'block';
+createList('2020s-movies')
+document.getElementById('hidden-list').style.display = 'block';
