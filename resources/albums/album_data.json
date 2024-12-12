@@ -350,15 +350,15 @@
         "artist": "Death Grips",
         "score": 8.8,
         "released": "04-24-2012",
-        "reviewed": "01-01-2000",
+        "reviewed": "12-11-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/a/af/Death_Grips_-_The_Money_Store.jpg"
     },
     "no_love_deep_web": {
         "title": "No Love Deep Web",
         "artist": "Death Grips",
-        "score": 9.1,
+        "score": 9.3,
         "released": "10-01-2012",
-        "reviewed": "01-01-2000",
+        "reviewed": "12-11-2024",
         "cover": "https://media.pitchfork.com/photos/5929c027c0084474cd0c314f/1:1/w_450%2Cc_limit/6698e088.jpeg"
     },
     "moon_ant": {
@@ -430,7 +430,7 @@
         "artist": "Foxygen",
         "score": 9.1,
         "released": "01-22-2013",
-        "reviewed": "01-01-2000",
+        "reviewed": "12-11-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/WAt2CAoPaM.jpg/220px-WAt2CAoPaM.jpg"
     },
     "virgins": {
@@ -454,7 +454,7 @@
         "artist": "Kendrick Lamar",
         "score": 9.2,
         "released": "03-04-2016",
-        "reviewed": "01-01-2000",
+        "reviewed": "12-11-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/b/be/Kendrick_Lamar_-_Untitled_Unmastered_%28Artwork%29.jpg/220px-Kendrick_Lamar_-_Untitled_Unmastered_%28Artwork%29.jpg"
     },
     "bait_ones": {
@@ -518,7 +518,16 @@
         "artist": "Adrienne Lenker",
         "score": 9.1,
         "released": "10-23-2020",
-        "reviewed": "01-01-2000",
+        "reviewed": "12-11-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/a/a8/Songs_%28Adrianne_Lenker%29.png"
+    },
+    "demon_days": {
+        "title": "Demon Days",
+        "artist": "Gorillaz",
+        "score": 9.2,
+        "released": "05-11-2005",
+        "reviewed": "12-11-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Gorillaz_Demon_Days.PNG/220px-Gorillaz_Demon_Days.PNG"
     }
+
 }

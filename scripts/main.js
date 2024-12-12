@@ -429,5 +429,5 @@ function createList(fileName) {
       });
     })
 }
-createList('2020s-movies')
-document.getElementById('hidden-list').style.display = 'block';
+// createList('2020s-movies')
+// document.getElementById('hidden-list').style.display = 'block';
