@@ -33,9 +33,13 @@ img{
     overflow-wrap: break-word; /* Allow long words to break and wrap */
 }
 a{
-    color: #ccc !important;
-    font-size: 1.2em;
+    color: #555 !important;
+    font-size: 1em;
 }
-a:hover{
+.back-link{
+    color: #ddd !important;
+    font-size: 1.5em;
+}
+.back-link:hover{
     color:white;
 }
