@@ -13,7 +13,7 @@ This is sort of <strong><em>THE</em></strong> protogenitor for all indie music t
             transition-duration: 1s;
         }
         .banana:hover:before{
-            content: "10";
+            content: "9.9";
         }
     </style>
     <div class="banana">
