@@ -1,23 +1,38 @@
 const reviewTable = document.getElementById('review-table');
+let sortColumn = 'reviewed';
+let sortDirection = true;
+
 window.addEventListener('beforeunload', function () {
     const scrollableDiv = document.getElementById('scroll-div');
     if (scrollableDiv) {
         sessionStorage.setItem('scrollPosition', scrollableDiv.scrollTop);
     }
+    sessionStorage.setItem('savedSortColumn', sortColumn);
+    sessionStorage.setItem('savedSortDirection', sortDirection);
 });
 
 window.addEventListener('load', function () {
     const scrollableDiv = document.getElementById('scroll-div');
     const savedScrollPosition = sessionStorage.getItem('scrollPosition');
+    const savedSortColumn = sessionStorage.getItem('savedSortColumn');
+    const savedSortDirection = sessionStorage.getItem('savedSortDirection');
 
     if (scrollableDiv && savedScrollPosition) {
         setTimeout(() => {
             scrollableDiv.scrollTop = parseInt(savedScrollPosition);
         }, 100);
     }
+    if (savedSortColumn){
+        sortDirection = savedSortDirection;
+        sortAndReloadContent(savedSortColumn, null);
+    }
+    else{
+        sortAndReloadContent(sortColumn, null);
+    }
 });
 
-function sortData(columnName, sortDirection) {
+function sortData(columnName) {
+    sortColumn = columnName;
     fetch('../resources/albums/album_data.json')
         .then(response => response.json())
         .then(data => {
@@ -128,12 +143,11 @@ function sortData(columnName, sortDirection) {
         });
 };
 
-let sortDirection = true;
 function sortAndReloadContent(columnName, element) {
     if (element === null) {
         const selected = document.getElementById('reviewed');
         selected.classList.add('selected-sort');
-        sortData(columnName, sortDirection);
+        sortData(columnName);
         return;
     }
 
@@ -152,10 +166,8 @@ function sortAndReloadContent(columnName, element) {
     divs.forEach(div => {
         div.remove();
     });
-    sortData(columnName, sortDirection);
+    sortData(columnName);
 }
-
-sortAndReloadContent('reviewed', null);
 
 function getRandomReview() {
     fetch('../resources/albums/album_data.json')
