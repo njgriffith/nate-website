@@ -145,7 +145,7 @@ function sortData(columnName) {
 
 function sortAndReloadContent(columnName, element) {
     if (element === null) {
-        const selected = document.getElementById('reviewed');
+        const selected = document.getElementById(`${columnName}`);
         selected.classList.add('selected-sort');
         sortData(columnName);
         return;

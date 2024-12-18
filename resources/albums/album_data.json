@@ -1,4 +1,12 @@
 {
+    "steroids": {
+        "title": "Steroids (Crouching Tiger Hidden Gabber Megamix)",
+        "artist": "Death Grips",
+        "score": 8.6,
+        "released": "05-22-2017",
+        "reviewed": "12-18-2024",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/5/5e/Steroids_crouching_tiger_hidden_gabber_megamix_death_grips.jpg"
+    },
     "ants_from_up_there": {
         "title": "Ants From Up There",
         "artist": "Black Country, New Road",
@@ -14,7 +22,7 @@
         "score": 10.0,
         "rank": 10,
         "released": "10-31-1978",
-        "reviewed": "09-18-2024",
+        "reviewed": "12-18-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/3/32/Not_Available.jpg"
     },
     "blood_visions": {
@@ -236,7 +244,7 @@
     "three_love_songs": {
         "title": "Three Love Songs",
         "artist": "Ricky Eat Acid",
-        "score": 9.3,
+        "score": 9.6,
         "released": "01-21-2014",
         "reviewed": "10-08-2024",
         "cover": "https://media.pitchfork.com/photos/5929a60eea9e61561daa52a9/1:1/w_450%2Cc_limit/26397114.jpg"
@@ -292,7 +300,8 @@
     "ark": {
         "title": "Ark",
         "artist": "Animal Collective",
-        "score": 9.9,
+        "score": 10,
+        "rank": 9,
         "released": "03-17-2003",
         "reviewed": "11-15-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/Here_Comes_the_Indian_%28Front_Cover%29.png/220px-Here_Comes_the_Indian_%28Front_Cover%29.png"
@@ -334,7 +343,7 @@
         "artist": "The Beatles",
         "score": 9.3,
         "released": "11-27-1967",
-        "reviewed": "01-01-2000",
+        "reviewed": "12-18-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/4/48/Magical_Mystery_Tour_US_Cover.jpeg/220px-Magical_Mystery_Tour_US_Cover.jpeg"
     },
     "abbey_road": {
@@ -374,7 +383,7 @@
         "artist": "Modest Mouse",
         "score": 9.4,
         "released": "04-16-1996",
-        "reviewed": "01-01-2000",
+        "reviewed": "12-18-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5b/MMLongDrive5075.jpg/220px-MMLongDrive5075.jpg"
     },
     "good_news": {
@@ -528,5 +537,13 @@
         "released": "05-11-2005",
         "reviewed": "12-14-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Gorillaz_Demon_Days.PNG/220px-Gorillaz_Demon_Days.PNG"
+    },
+    "kill_you": {
+        "title": "KILL YOU",
+        "artist": "Tek Lintowe",
+        "score": 8.1,
+        "released": "06-22-2024",
+        "reviewed": "12-18-2024",
+        "cover": "https://i1.sndcdn.com/artworks-5ZgzfFVS6SarLjnA-AXaVfQ-t500x500.jpg"
     }
 }
