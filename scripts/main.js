@@ -51,6 +51,10 @@ function updateTaskbar(iconName, action) {
     appName = 'Reviews & Lists';
     imgSrc = '/resources/msft/media.png';
   }
+  else if (iconName === 'internet') {
+    appName = 'Internet';
+    imgSrc = '/resources/msft/internet.png';
+  }
   if (action === 'add') {
     const taskBarApps = document.getElementsByClassName('taskbar-button');
     for (let i = 0; i < taskBarApps.length; i++) {
@@ -89,6 +93,7 @@ const blogLibrary = document.getElementById('blog-library');
 const statsLibrary = document.getElementById('stats-library');
 const musicLibrary = document.getElementById('music-library');
 const hiddenList = document.getElementById('hidden-list');
+const internet = document.getElementById('internet');
 
 // open/close libraries
 function openMediaPlayer() {
@@ -129,12 +134,23 @@ function closeHiddenList() {
   document.getElementById('hidden-list').style.display = 'none';
   document.getElementById('list-container').innerHTML = '';
 }
+function openInternet() {
+  document.getElementById('internet').style.display = 'block';
+  updateTaskbar('internet', 'add');
+}
+function closeInternet() {
+  document.getElementById('internet').style.display = 'none';
+  updateTaskbar('internet', 'remove');
+  document.body.style.backgroundImage = "url('/resources/media/peshay.png')"
+}
+
 
 // drag and drop libraries
 const blogTitleBar = blogLibrary.querySelector(".title-bar");
 const statsTitleBar = statsLibrary.querySelector(".title-bar");
 const musicTitleBar = musicLibrary.querySelector(".title-bar");
 const listTitleBar = hiddenList.querySelector(".title-bar");
+const internetTitleBar = internet.querySelector(".title-bar");
 const mediaPlayer = document.getElementById('media-player');
 const head = document.getElementById('head');
 
@@ -143,6 +159,7 @@ let isDraggingBlog = false;
 let isDraggingStats = false;
 let isDraggingMusic = false;
 let isDraggingList = false;
+let isDraggingInternet = false;
 
 // pick up
 head.addEventListener("mousedown", (event) => {
@@ -159,6 +176,9 @@ musicTitleBar.addEventListener("mousedown", (event) => {
 });
 listTitleBar.addEventListener("mousedown", (event) => {
   isDraggingList = true;
+});
+internetTitleBar.addEventListener("mousedown", (event) => {
+  isDraggingInternet = true;
 });
 
 // drag
@@ -183,6 +203,10 @@ document.addEventListener("mousemove", (event) => {
     hiddenList.style.left = `${event.clientX}px`;
     hiddenList.style.top = `${event.clientY + (hiddenList.clientHeight / 2) - 5}px`;
   }
+  else if (isDraggingInternet) {
+    internet.style.left = `${event.clientX}px`;
+    internet.style.top = `${event.clientY + (internet.clientHeight / 2) - 5}px`;
+  }
 });
 
 // drop
@@ -192,6 +216,7 @@ document.addEventListener("mouseup", () => {
   isDraggingMedia = false;
   isDraggingMusic = false;
   isDraggingList = false;
+  isDraggingInternet = false;
 });
 
 function openBlog(div) {
@@ -210,7 +235,7 @@ function openList(div) {
   else if (note === '50-songs') {
     document.getElementById('50-spotify').style.display = 'block';
   }
-  else{
+  else {
     createList(note);
     document.getElementById('hidden-list').querySelector('.title-bar-text').innerHTML = div.querySelectorAll('td')[0].textContent;
     document.getElementById('hidden-list').style.display = 'block';
@@ -364,28 +389,6 @@ function playMedia(fileName, folderName) {
     imageViewer.innerHTML = "";
     imageViewer.appendChild(image);
   }
-  // startVisualization();
-}
-function startVisualization() {
-  const imgElement = document.getElementById('vid-bkgd');
-
-  // Create a new <video> element
-  const videoElement = document.createElement('video');
-  videoElement.setAttribute('width', '200'); // Same width as the image
-  videoElement.setAttribute('controls', 'false'); // Add video controls
-
-  // Add the <source> element for the video
-  const sourceElement = document.createElement('source');
-  sourceElement.setAttribute('src', '/resources/media/jamiroquai.mp4'); // Path to your video file
-  sourceElement.setAttribute('type', 'video/mp4');
-  sourceElement.style = "position: relative; bottom: 176px; right: 228px; z-index: -1;"
-  sourceElement.play;
-
-  // Append the source to the video element
-  videoElement.appendChild(sourceElement);
-
-  // Replace the image with the video in the DOM
-  imgElement.parentNode.replaceChild(videoElement, imgElement);
 }
 // END HEAD LOGIC
 
@@ -429,5 +432,73 @@ function createList(fileName) {
       });
     })
 }
+
+function invertBackground() {
+  const canvas = document.getElementById('backgroundCanvas');
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+
+  img.src = '/resources/media/peshay.png'; // Background image source
+  img.onload = () => {
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Draw image to canvas
+    ctx.drawImage(img, 0, 0);
+
+    // Get image data
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    for (let i = 0; i < 10; i++) {
+      console.log(data[i]);
+    }
+    // Manipulate pixels (e.g., invert colors)
+    for (let i = 0; i < data.length; i += 4) {
+      data[i] = 255 - data[i];       // Red
+      data[i + 1] = 255 - data[i + 1]; // Green
+      data[i + 2] = 255 - data[i + 2]; // Blue
+    }
+
+    // Put image data back
+    ctx.putImageData(imageData, 0, 0);
+    canvas.style.height = '100vh';
+    canvas.style.width = '100vw';
+    canvas.style.display = 'block';
+  };
+}
+
+const url = document.getElementById('url');
+url.addEventListener('change', (event) => {
+  const selectedValue = event.target.value;
+  if (selectedValue === ''){
+    return;
+  }
+  loadHTML(selectedValue.substring(12, selectedValue.length - 4));
+});
+
+function loadHTML(filePath) {
+  const targetDiv = document.getElementById('internet-screen');
+  fetch(`/templates/${filePath}.html`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(html => {
+      targetDiv.innerHTML = html;
+    })
+    .catch(error => {
+      console.error('Error loading HTML:', error);
+    });
+}
+function downloadVirus(){
+  console.log('test')
+  document.body.style.backgroundImage = "url('/resources/media/virus.gif')";
+}
+
+// ----- TEST SUITE -----
+
 // createList('2020s-movies')
 // document.getElementById('hidden-list').style.display = 'block';
+// loadHTML('notavirus');

@@ -10,7 +10,8 @@
     <link rel="shortcut icon" href="#">
 </head>
 
-<body style="overflow: hidden;">
+<body style="overflow: hidden; position: relative">
+    <canvas id="backgroundCanvas" style="display: none; position: absolute;"></canvas>
     <div class="desktop">
         <div onclick="openBlogLibrary()">
             <div class="icon">
@@ -55,13 +56,13 @@
                 <img src="/resources/msft/game.png">
                 <p>My Games</p>
             </div>
-        </div>
-        <div>
+        </div> -->
+        <div onclick="openInternet()">
             <div class="icon">
                 <img src="/resources/msft/internet.png">
                 <p>Internet</p>
             </div>
-        </div> -->
+        </div>
     </div>
     <!-- BIG HEAD -->
     <div id="media-player" style="position: absolute; left: 30%; top: 25%; display: none;">
@@ -90,7 +91,7 @@
                         <tr>
                             <th>name</th>
                             <th>length</th>
-                            <th>file type</th>
+                            <th>notes</th>
                         </tr>
                     </thead>
                     <tbody id="media-table-body">
@@ -109,17 +110,17 @@
             <div id="knob-drawer" style="position: absolute; left: 84px; top: 10px; height: 140px; width: 172px;">
                 <img src="/resources/head/drawer_bkgrnd_top.bmp" style="width: 100%; height: 100%;">
                 <div class="grid-container" style="position: absolute; top: 20px; left: 5px;">
-                    <img src="/resources/head/horizontal_thumb.bmp" alt="Thumbnail 1">
-                    <img src="/resources/head/horizontal_thumb.bmp" alt="Thumbnail 2">
-                    <img src="/resources/head/horizontal_thumb.bmp" alt="Thumbnail 3">
-                    <img src="/resources/head/horizontal_thumb.bmp" alt="Thumbnail 4">
-                    <img src="/resources/head/horizontal_thumb.bmp" alt="Thumbnail 5">
-                    <img src="/resources/head/horizontal_thumb.bmp" alt="Thumbnail 6">
-                    <img src="/resources/head/horizontal_thumb.bmp" alt="Thumbnail 7">
-                    <img src="/resources/head/horizontal_thumb.bmp" alt="Thumbnail 8">
-                    <img src="/resources/head/horizontal_thumb.bmp" alt="Thumbnail 9">
-                    <img src="/resources/head/horizontal_thumb.bmp" alt="Thumbnail 10">
-                  </div>
+                    <img src="/resources/head/horizontal_thumb.bmp">
+                    <img src="/resources/head/horizontal_thumb.bmp">
+                    <img src="/resources/head/horizontal_thumb.bmp">
+                    <img src="/resources/head/horizontal_thumb.bmp">
+                    <img src="/resources/head/horizontal_thumb.bmp">
+                    <img src="/resources/head/horizontal_thumb.bmp">
+                    <img src="/resources/head/horizontal_thumb.bmp">
+                    <img src="/resources/head/horizontal_thumb.bmp">
+                    <img src="/resources/head/horizontal_thumb.bmp">
+                    <img src="/resources/head/horizontal_thumb.bmp">
+                </div>
             </div>
         </div>
     </div>
@@ -263,11 +264,6 @@
                             <td>50 favorite albums of the 2020s</td>
                             <td>2020s-albums</td>
                         </tr>
-                        <!-- <tr class="blog-row" onclick="openList(this)">
-                            <td>2020s 50 movies</td>
-                            <td>50 favorite movies of the 2020s</td>
-                            <td>2020s-movies</td>
-                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -276,7 +272,7 @@
     <!-- End music stuff -->
 
     <!-- Hidden List -->
-    <div class="window" id="hidden-list" class="library" style="display: none;">
+    <div class="window library" id="hidden-list" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">List</div>
             <div class="title-bar-controls">
@@ -289,11 +285,40 @@
             <div id="list-container" class="sunken-panel" style="height: 300px;"></div>
         </div>
     </div>
+    <iframe allow="encrypted-media *;" style="border-radius:12px; margin: auto; user-select: none; display: none;"
+        id="50-spotify" src="https://open.spotify.com/embed/playlist/76HQo6xvIj4iyFBxmcFDKC?utm_source=generator"
+        width="50%" height="60%" frameBorder="0" allowfullscreen="true" loading="lazy"></iframe>
     <!-- End hidden list -->
-    <iframe allow="encrypted-media *;" style="border-radius:12px; margin: auto; user-select: none; display: none;" id="50-spotify"
-        src="https://open.spotify.com/embed/playlist/76HQo6xvIj4iyFBxmcFDKC?utm_source=generator" width="50%"
-        height="60%" frameBorder="0" allowfullscreen="true"
-        loading="lazy"></iframe>
+
+    <!-- Start internet -->
+    <div class="window library" id="internet" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">Internet</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeInternet()" aria-label="Close" id="close-internet"></button>
+            </div>
+        </div>
+        <div class="window-body" style="width: 100%; padding: 1em; margin: auto;">
+            <div style="display: flex; align-items: center; margin-bottom: 1em; gap: 2em;">
+                <div>Address:</div>
+                <select style="width: 80%;" id="url">
+                    <option selected></option>
+                    <option>https://www.notavirus.com</option>
+                  </select>
+                  <img src="/resources/msft/entire_network_globe-5.png">
+            </div>
+            <div id="internet-screen" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-left: -2em;">
+                <div style="width: 700px; height: 475px; background: white; padding: 1em;">
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- End internet -->
+
     <div class="taskbar">
         <button id="start-button" class="start-button">
             <img src="/resources/msft/logo.png" style="padding-right: 1em;">
@@ -312,9 +337,6 @@
                 <button class="control-button" id="play-button" onclick="toggleMusic()">⏸</button>
                 <button class="control-button">⏭</button>
             </div>
-            <!-- <div class="progress-bar">
-                <div class="progress"></div>
-              </div> -->
         </div>
         <div class="datetime" id="datetime"></div>
     </div>
