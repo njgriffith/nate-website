@@ -20,7 +20,7 @@
         "title": "Not Available",
         "artist": "The Residents",
         "score": 10.0,
-        "rank": 10,
+        "rank": 9,
         "released": "10-31-1978",
         "reviewed": "12-18-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/3/32/Not_Available.jpg"
@@ -301,7 +301,7 @@
         "title": "Ark",
         "artist": "Animal Collective",
         "score": 10,
-        "rank": 9,
+        "rank": 10,
         "released": "03-17-2003",
         "reviewed": "11-15-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/Here_Comes_the_Indian_%28Front_Cover%29.png/220px-Here_Comes_the_Indian_%28Front_Cover%29.png"
@@ -375,7 +375,7 @@
         "artist": "Modest Mouse",
         "score": 9.3,
         "released": "06-13-2000",
-        "reviewed": "01-01-2000",
+        "reviewed": "12-28-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/0/00/TheMoonAntarctica.jpg/220px-TheMoonAntarctica.jpg"
     },
     "long_drive": {
@@ -479,7 +479,7 @@
         "artist": "Jay Reatard",
         "score": 9.3,
         "released": "05-01-2007",
-        "reviewed": "01-01-2000",
+        "reviewed": "12-28-2024",
         "cover": "https://i.scdn.co/image/ab67616d0000b273f49505ba9932720b4d86284c"
     },
     "schlag": {
@@ -487,7 +487,7 @@
         "artist": "black midi",
         "score": 9.2,
         "released": "06-21-2019",
-        "reviewed": "01-01-2000",
+        "reviewed": "12-28-2024",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ef/Black_Midi_-_Schlagenheim.png/220px-Black_Midi_-_Schlagenheim.png"
     },
     "mpp": {
