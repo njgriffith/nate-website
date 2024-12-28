@@ -12,6 +12,11 @@ document.addEventListener('click', function (event) {
   }
 });
 
+// document.addEventListener('contextmenu', (event) => {
+//   event.preventDefault();
+//   alert('right click');
+// });
+
 function shutDown() {
   const body = document.body;
   body.innerHTML = "";
@@ -47,13 +52,17 @@ function updateTaskbar(iconName, action) {
     appName = 'Stats';
     imgSrc = '/resources/msft/cubes.png';
   }
-  else if (iconName === 'music') {
+  else if (iconName === 'lists') {
     appName = 'Reviews & Lists';
     imgSrc = '/resources/msft/media.png';
   }
   else if (iconName === 'internet') {
     appName = 'Internet';
     imgSrc = '/resources/msft/internet.png';
+  }
+  else if (iconName === 'catalog') {
+    appName = 'Catalogue';
+    imgSrc = '/resources/msft/catalog.png';
   }
   if (action === 'add') {
     const taskBarApps = document.getElementsByClassName('taskbar-button');
@@ -88,62 +97,45 @@ setInterval(updateDateTime, 60000);
 // END  TASKBAR LOGIC
 
 // ICON LOGIC START
-const mediaLibrary = document.getElementById('media-library');
-const blogLibrary = document.getElementById('blog-library');
-const statsLibrary = document.getElementById('stats-library');
-const musicLibrary = document.getElementById('music-library');
+const mediaLibrary = document.getElementById('media');
+const blogLibrary = document.getElementById('blog');
+const statsLibrary = document.getElementById('stats');
+const musicLibrary = document.getElementById('lists');
 const hiddenList = document.getElementById('hidden-list');
 const internet = document.getElementById('internet');
+const catalog = document.getElementById('catalog');
 
 // open/close libraries
-function openMediaPlayer() {
-  document.getElementById('media-player').style.display = 'block';
-  updateTaskbar('media', 'add');
-}
-function closeMediaPlayer() {
-  document.getElementById('media-player').style.display = 'none';
-  updateTaskbar('media', 'remove');
-  audioPlayer.pause();
-}
-function openBlogLibrary() {
-  document.getElementById('blog-library').style.display = 'block';
-  updateTaskbar('blog', 'add');
-}
-function closeBlogLibrary() {
-  document.getElementById('blog-library').style.display = 'none';
-  updateTaskbar('blog', 'remove');
-}
-function openStatsLibrary() {
-  document.getElementById('stats-library').style.display = 'block';
-  updateTaskbar('stats', 'add');
-}
-function closeStatsLibrary() {
-  document.getElementById('stats-library').style.display = 'none';
-  updateTaskbar('stats', 'remove');
-}
-function openMusicLibrary() {
-  document.getElementById('music-library').style.display = 'block';
-  updateTaskbar('music', 'add');
-}
-function closeMusicLibrary() {
-  document.getElementById('music-library').style.display = 'none';
-  updateTaskbar('music', 'remove');
-  document.getElementById('50-spotify').style.display = 'none';
-}
-function closeHiddenList() {
-  document.getElementById('hidden-list').style.display = 'none';
-  document.getElementById('list-container').innerHTML = '';
-}
-function openInternet() {
-  document.getElementById('internet').style.display = 'block';
-  updateTaskbar('internet', 'add');
-}
-function closeInternet() {
-  document.getElementById('internet').style.display = 'none';
-  updateTaskbar('internet', 'remove');
-  document.body.style.backgroundImage = "url('/resources/media/peshay.png')"
-}
+function openApp(appName) {
+  document.getElementById(appName).style.display = 'block';
+  updateTaskbar(appName, 'add');
 
+  if (appName === 'catalog'){
+    scrollCatalog(0);
+  }
+}
+function closeApp(appName) {
+  document.getElementById(appName).style.display = 'none';
+  updateTaskbar(appName, 'remove');
+
+  if (appName === 'internet') {
+    document.body.style.backgroundImage = "url('/resources/media/peshay.png')";
+  }
+  else if (appName === 'hidden-list') {
+    document.getElementById('hidden-list').style.display = 'none';
+    document.getElementById('list-container').innerHTML = '';
+  }
+  else if (appName === 'media') {
+    document.getElementById('media').style.display = 'none';
+    updateTaskbar('media', 'remove');
+    audioPlayer.pause();
+  }
+  else if (appName === 'lists') {
+    document.getElementById('music').style.display = 'none';
+    updateTaskbar('music', 'remove');
+    document.getElementById('50-spotify').style.display = 'none';
+  }
+}
 
 // drag and drop libraries
 const blogTitleBar = blogLibrary.querySelector(".title-bar");
@@ -151,7 +143,8 @@ const statsTitleBar = statsLibrary.querySelector(".title-bar");
 const musicTitleBar = musicLibrary.querySelector(".title-bar");
 const listTitleBar = hiddenList.querySelector(".title-bar");
 const internetTitleBar = internet.querySelector(".title-bar");
-const mediaPlayer = document.getElementById('media-player');
+const catalogTitleBar = catalog.querySelector(".title-bar");
+const mediaPlayer = document.getElementById('media');
 const head = document.getElementById('head');
 
 let isDraggingMedia = false;
@@ -160,6 +153,7 @@ let isDraggingStats = false;
 let isDraggingMusic = false;
 let isDraggingList = false;
 let isDraggingInternet = false;
+let isDraggingCatalog = false;
 
 // pick up
 head.addEventListener("mousedown", (event) => {
@@ -179,6 +173,9 @@ listTitleBar.addEventListener("mousedown", (event) => {
 });
 internetTitleBar.addEventListener("mousedown", (event) => {
   isDraggingInternet = true;
+});
+catalogTitleBar.addEventListener("mousedown", (event) => {
+  isDraggingCatalog = true;
 });
 
 // drag
@@ -207,6 +204,10 @@ document.addEventListener("mousemove", (event) => {
     internet.style.left = `${event.clientX}px`;
     internet.style.top = `${event.clientY + (internet.clientHeight / 2) - 5}px`;
   }
+  else if (isDraggingCatalog) {
+    catalog.style.left = `${event.clientX}px`;
+    catalog.style.top = `${event.clientY + (catalog.clientHeight / 2) - 5}px`;
+  }
 });
 
 // drop
@@ -217,6 +218,7 @@ document.addEventListener("mouseup", () => {
   isDraggingMusic = false;
   isDraggingList = false;
   isDraggingInternet = false;
+  isDraggingCatalog = false;
 });
 
 function openBlog(div) {
@@ -470,7 +472,7 @@ function invertBackground() {
 const url = document.getElementById('url');
 url.addEventListener('change', (event) => {
   const selectedValue = event.target.value;
-  if (selectedValue === ''){
+  if (selectedValue === '') {
     return;
   }
   loadHTML(selectedValue.substring(12, selectedValue.length - 4));
@@ -492,13 +494,45 @@ function loadHTML(filePath) {
       console.error('Error loading HTML:', error);
     });
 }
-function downloadVirus(){
-  console.log('test')
+function downloadVirus() {
   document.body.style.backgroundImage = "url('/resources/media/virus.gif')";
 }
+
+function scrollCatalog(direction) {
+  const catalogSize = 2;
+  const creature = document.getElementById('creature');
+  const creatureDesc = document.getElementById('creature-desc');
+  var index = parseInt(creature.src.substring(creature.src.length - 7, creature.src.length - 4));
+  index += direction;
+  var indexString = "";
+  if (index > catalogSize){
+    index = 1;
+  }
+  else if(index < 1){
+    index = catalogSize;
+  }
+
+  if (index < 10) {
+    indexString = "00" + index.toString();
+  }
+  else {
+    indexString = "0" + index.toString();
+  }
+  creature.src = `/resources/catalog/${indexString}.gif`;
+  fetch(`/resources/catalog/${indexString}.txt`)
+    .then(response => response.text())
+    .then(textData => {
+      creatureDesc.innerHTML = textData;
+    })
+    .catch(error => console.error('Error loading text file:', error));
+}
+
+
 
 // ----- TEST SUITE -----
 
 // createList('2020s-movies')
 // document.getElementById('hidden-list').style.display = 'block';
 // loadHTML('notavirus');
+// catalog.style.display = 'block';
+// scrollCatalog(2);

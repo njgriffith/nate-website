@@ -176,21 +176,21 @@ li>img {
   width: 500px;
 }
 
-#blog-library {
+#blog {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-#stats-library {
+#stats {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-#music-library {
+#lists {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -205,6 +205,14 @@ li>img {
 }
 
 #internet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 600px;
+}
+#catalog {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -254,7 +262,7 @@ li>img {
   border-bottom: 1px solid blue;
 }
 
-.media-player {
+.media {
   margin-left: auto;
   color: #000;
   font-size: 1.1em;
@@ -294,3 +302,25 @@ tbody>tr:hover {
   /* Adjust as needed */
 }
 
+.img-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5em;
+  margin-bottom: 3em;
+}
+#creature{
+  width: 200px;
+  height: 200px;
+  border: 10px solid red;
+}
+#creature-desc{
+  width: 80%;
+  font-size: 1.5em;
+  background: white;
+  padding: 1em;
+  box-shadow: inset #555 2px 2px 2px;
+  white-space: pre-wrap;
+  overflow-y: scroll;
+  height: 150px;
+}

@@ -13,7 +13,7 @@
 <body style="overflow: hidden; position: relative">
     <canvas id="backgroundCanvas" style="display: none; position: absolute;"></canvas>
     <div class="desktop">
-        <div onclick="openBlogLibrary()">
+        <div onclick="openApp('blog')">
             <div class="icon">
                 <img src="/resources/msft/blog-table.png">
                 <p>Blogs</p>
@@ -25,7 +25,7 @@
                 <p>Album Reviews</p>
             </div>
         </a>
-        <div onclick="openMusicLibrary()">
+        <div onclick="openApp('lists')">
             <div class="icon">
                 <img src="/resources/msft/list.png">
                 <p>Lists</p>
@@ -39,33 +39,33 @@
                     ltrl matm ax pbee gxoxk wbx</div>
             </div>
         </a>
-        <div onclick="openStatsLibrary()">
+        <div onclick="openApp('stats')">
             <div class="icon" id="stats-icon">
                 <img src="/resources/msft/cubes.png">
                 <p>Stats</p>
             </div>
         </div>
-        <div onclick="openMediaPlayer()">
+        <div onclick="openApp('media')">
             <div class="icon">
                 <img src="/resources/msft/media-player.png">
                 <p>Media Player</p>
             </div>
         </div>
-        <!-- <div>
-            <div class="icon">
-                <img src="/resources/msft/game.png">
-                <p>My Games</p>
-            </div>
-        </div> -->
-        <div onclick="openInternet()">
+        <div onclick="openApp('internet')">
             <div class="icon">
                 <img src="/resources/msft/internet.png">
                 <p>Internet</p>
             </div>
         </div>
+        <div onclick="openApp('catalog')">
+            <div class="icon">
+                <img src="/resources/msft/catalog.png">
+                <p>Catalog</p>
+            </div>
+        </div>
     </div>
     <!-- BIG HEAD -->
-    <div id="media-player" style="position: absolute; left: 30%; top: 25%; display: none;">
+    <div id="media" style="position: absolute; left: 30%; top: 25%; display: none;">
 
         <audio id="audio-player" style="display: none;"></audio>
         <img id="head" src="/resources/head/head.bmp" style="position: absolute; z-index: 3;">
@@ -75,7 +75,7 @@
             style="position: absolute; top: 30px; left: 40px; z-index: 3;">
         <img src="/resources/head/viz_drop_X_01_default.bmp"
             style="position: absolute; top: 10px; left: 150px; z-index: 3; cursor: pointer;"
-            onclick="closeMediaPlayer()">
+            onclick="closeApp('media')">
 
         <div id="right-ear" style="position: absolute; left: 200px; top: 100px; transition-duration: 0.5s; z-index: 1;">
             <img src="/resources/head/right_ear.bmp" style="position: absolute;">
@@ -126,13 +126,13 @@
     </div>
     <!-- END BIG HEAD -->
     <!-- Blog divs -->
-    <div class="window" id="blog-library" class="library" style="display: none;">
+    <div class="window" id="blog" class="library" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">Blog Links</div>
             <div class="title-bar-controls">
                 <button aria-label="Minimize"></button>
                 <button aria-label="Maximize"></button>
-                <button onclick="closeBlogLibrary()" aria-label="Close" id="close-blog-library"></button>
+                <button onclick="closeApp('blog')" aria-label="Close" id="close-blog"></button>
             </div>
         </div>
         <div class="window-body">
@@ -168,13 +168,13 @@
     </div>
     <!-- End blog divs -->
     <!-- Stats library -->
-    <div class="window" id="stats-library" class="library" style="display: none;">
+    <div class="window" id="stats" class="library" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">Statistics</div>
             <div class="title-bar-controls">
                 <button aria-label="Minimize"></button>
                 <button aria-label="Maximize"></button>
-                <button onclick="closeStatsLibrary()" aria-label="Close" id="close-stats-library"></button>
+                <button onclick="closeApp('stats')" aria-label="Close" id="close-stats"></button>
             </div>
         </div>
         <div class="window-body">
@@ -214,13 +214,13 @@
     </div>
     <!-- End stats library -->
     <!-- Music stuff library -->
-    <div class="window" id="music-library" class="library" style="display: none;">
+    <div class="window" id="lists" class="library" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">Lists</div>
             <div class="title-bar-controls">
                 <button aria-label="Minimize"></button>
                 <button aria-label="Maximize"></button>
-                <button onclick="closeMusicLibrary()" aria-label="Close" id="close-music-library"></button>
+                <button onclick="closeApp('lists')" aria-label="Close" id="close-hidden"></button>
             </div>
         </div>
         <div class="window-body">
@@ -278,7 +278,7 @@
             <div class="title-bar-controls">
                 <button aria-label="Minimize"></button>
                 <button aria-label="Maximize"></button>
-                <button onclick="closeHiddenList()" aria-label="Close" id="close-music-library"></button>
+                <button onclick="closeApp('hidden-list')" aria-label="Close" id="close-hidden"></button>
             </div>
         </div>
         <div class="window-body">
@@ -297,7 +297,7 @@
             <div class="title-bar-controls">
                 <button aria-label="Minimize"></button>
                 <button aria-label="Maximize"></button>
-                <button onclick="closeInternet()" aria-label="Close" id="close-internet"></button>
+                <button onclick="closeApp('internet')" aria-label="Close" id="close-internet"></button>
             </div>
         </div>
         <div class="window-body" style="width: 100%; padding: 1em; margin: auto;">
@@ -319,6 +319,27 @@
     </div>
     <!-- End internet -->
 
+    <!-- Start catalog -->
+    <div class="window library" id="catalog" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">Catalog</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeApp('catalog')" aria-label="Close" id="close-catalog"></button>
+            </div>
+        </div>
+        <div class="window-body" style="display: flex; flex-direction: column; align-items: center;">
+            <button style="position: absolute; bottom: 2em; left: 2em;" onclick="scrollCatalog(-1)">prev</button>
+            <button style="position: absolute; bottom: 2em; right: 2em;" onclick="scrollCatalog(1)">next</button>
+            <div class="img-container">
+                <img id="creature" src="/resources/catalog/001.gif">
+            </div>
+            <div id="creature-desc"></div>
+        </div>
+    </div>
+    <!-- End catalog -->
+
     <div class="taskbar">
         <button id="start-button" class="start-button">
             <img src="/resources/msft/logo.png" style="padding-right: 1em;">
@@ -328,7 +349,7 @@
         </div>
 
         <div class="taskbar-empty-space"></div>
-        <div class="media-player" id="media-player" style="display: none;">
+        <div class="media" id="media" style="display: none;">
             <div class="media-info">
                 <span class="track-title" id="track-title">Track Name</span>
             </div>

@@ -1,13 +1,5 @@
-html{
-    background: #111;
-    color: #ddd;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-}
 #album-title{
     text-align: center;
-    color: white;
     font-size: 3em;
 }
 .grid-container{
@@ -36,10 +28,6 @@ a{
     color: #555 !important;
     font-size: 1em;
 }
-.back-link{
-    color: #ddd !important;
-    font-size: 1.5em;
-}
-.back-link:hover{
-    color:white;
+button{
+    cursor: pointer;
 }
