@@ -178,7 +178,14 @@ function getRandomReview() {
             window.location.href = `/templates/album-review.html?album=${keys[index]}`;
         });
 }
+
 function toReview(element){
     window.location.href = `/templates/album-review.html?album=${element.id}`;
 }
 
+function help(){
+    document.getElementById('help').style.display = 'block';
+}
+function closeHelp(){
+    document.getElementById('help').style.display = 'none';
+}

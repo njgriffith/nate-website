@@ -19,7 +19,8 @@
             <div class="title-bar">
                 <div class="title-bar-text" style="margin-left: 1em;">Album Reviews</div>
                 <div class="title-bar-controls">
-                    <button aria-label="Minimize"></button>
+                    <button aria-label="Help" onclick="help()"></button>
+                    <button aria-label="Minimize" style="margin-left: 1em;"></button>
                     <button aria-label="Maximize" style="margin-left: 2px;"></button>
                     <button aria-label="Close"></button>
                 </div>
@@ -41,6 +42,30 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+        <div class="window library" id="help" style="display: block;">
+            <div class="title-bar">
+                <div class="title-bar-text">Help</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Maximize" style="margin-left: 0.2em;"></button>
+                    <button onclick="closeHelp()" aria-label="Close" id="close-help"></button>
+                </div>
+            </div>
+            <div class="window-body" style="font-size: 1.2em; font-weight: bold; width: 80%; margin-top: 5em;">
+                <ul>
+                    <li>I don't rate most things I listen to. I only will if it's:<br><br>
+                        <ul>
+                            <li>A personal favorite</li>
+                            <li>Something interesting I want to talk about</li>
+                            <li>A suggestion from someone else</li>
+                        </ul>
+                    </li>
+                    <li>Reviews with "Review Date" set to 01-01-2000 are just reviews I haven't gotten to yet</li>
+                    <li>For albums with a 10/10 score, ties are broken by preference, meaning if you sort by score it will start with my favorite album of all time and proceed in descending order. No other scores have their ties broken</li>
+                    <li>Default sort order is most recently reviewed</li>
+                </ul>
             </div>
         </div>
         <script src="/scripts/reviews.js"></script>

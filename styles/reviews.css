@@ -1,64 +1,90 @@
-body{
+body {
     overflow: hidden;
 }
-.window{
+
+.window {
     margin-top: 5em;
     width: 70%;
 }
 
-thead>tr{
+thead>tr {
     font-size: 1.5em;
 }
-th{
+
+th {
     cursor: pointer;
 }
-th:hover{
+
+th:hover {
     background: #444;
     color: white;
 }
-.selected-sort{
+
+.selected-sort {
     background: #444;
     color: white;
 }
-tbody>tr:hover{
+
+tbody>tr:hover {
     cursor: pointer;
     background-color: blue;
     color: white;
 }
-td{
+
+td {
     text-wrap: wrap;
     font-size: 1.7em;
 }
-img{
+
+img {
     width: 200px;
     height: 200px;
 }
-img:hover{
+
+img:hover {
     scale: 1.05;
     transition-duration: 0.5s;
 }
-a{
+
+a {
     color: #fff;
     text-decoration: none;
 }
-.button-container{
+
+.button-container {
     position: absolute;
     left: 5%;
     top: 2%;
 }
-button{
+
+button {
     left: 10%;
     cursor: pointer;
     height: 2%;
     margin-left: 2em;
 }
 
-.sort-arrow{
+.sort-arrow {
     cursor: pointer;
 }
-.sort-asc{
+
+.sort-asc {
     color: #555;
 }
-.sort-desc{
+
+.sort-desc {
     color: #555;
+}
+
+#help {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 600px;
+}
+
+#help > .window-body > ul > li {
+    padding-bottom: 2em;
 }
