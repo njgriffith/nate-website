@@ -499,7 +499,7 @@ function downloadVirus() {
 }
 
 function scrollCatalog(direction) {
-  const catalogSize = 2;
+  const catalogSize = 7;
   const creature = document.getElementById('creature');
   const creatureDesc = document.getElementById('creature-desc');
   var index = parseInt(creature.src.substring(creature.src.length - 7, creature.src.length - 4));
@@ -528,11 +528,9 @@ function scrollCatalog(direction) {
 }
 
 
-
 // ----- TEST SUITE -----
-
 // createList('2020s-movies')
 // document.getElementById('hidden-list').style.display = 'block';
 // loadHTML('notavirus');
 // catalog.style.display = 'block';
-// scrollCatalog(2);
+// scrollCatalog(6);
