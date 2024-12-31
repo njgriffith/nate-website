@@ -13,54 +13,60 @@
 <body style="overflow: hidden; position: relative">
     <canvas id="backgroundCanvas" style="display: none; position: absolute;"></canvas>
     <div class="desktop">
-        <div onclick="openApp('blog')">
+        <div ondblclick="openApp('blog')" onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/msft/blog-table.png">
                 <p>Blogs</p>
             </div>
         </div>
-        <a href="/templates/reviews.html">
+        <div ondblclick="openApp('reviews')" onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/msft/music.png">
                 <p>Album Reviews</p>
             </div>
-        </a>
-        <div onclick="openApp('lists')">
+        </div>
+        <div ondblclick="openApp('lists')" onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/msft/list.png">
                 <p>Lists</p>
             </div>
         </div>
-        <a href="/puzzle/tutorial.html">
+        <div ondblclick="openApp('puzzle')"  onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/msft/help.png">
                 <p>Solve My Puzzle</p>
                 <div style="display: none;" id="whats-his-name">Ax gxoxk lexxil, max cnwzx. Ax bl wtgvbgz, wtgvbgz. Ax
                     ltrl matm ax pbee gxoxk wbx</div>
             </div>
-        </a>
-        <div onclick="openApp('stats')">
+        </div>
+        <div ondblclick="openApp('stats')" onclick="highlightApp(this)">
             <div class="icon" id="stats-icon">
                 <img src="/resources/msft/cubes.png">
                 <p>Stats</p>
             </div>
         </div>
-        <div onclick="openApp('media')">
+        <div ondblclick="openApp('media')" onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/msft/media-player.png">
                 <p>Media Player</p>
             </div>
         </div>
-        <div onclick="openApp('internet')">
+        <div ondblclick="openApp('internet')" onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/msft/internet.png">
                 <p>Internet</p>
             </div>
         </div>
-        <div onclick="openApp('catalog')">
+        <div ondblclick="openApp('catalog')" onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/msft/catalog.png">
                 <p>Catalog</p>
+            </div>
+        </div>
+        <div onclick="highlightApp(this)">
+            <div class="icon">
+                <img src="/resources/msft/bin.png">
+                <p>Recycle</p>
             </div>
         </div>
     </div>
@@ -130,7 +136,7 @@
         <div class="title-bar">
             <div class="title-bar-text">Blog Links</div>
             <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
+                <button aria-label="Minimize" onclick="minApp('blog')"></button>
                 <button aria-label="Maximize"></button>
                 <button onclick="closeApp('blog')" aria-label="Close" id="close-blog"></button>
             </div>
@@ -172,7 +178,7 @@
         <div class="title-bar">
             <div class="title-bar-text">Statistics</div>
             <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
+                <button aria-label="Minimize" onclick="minApp('stats')"></button>
                 <button aria-label="Maximize"></button>
                 <button onclick="closeApp('stats')" aria-label="Close" id="close-stats"></button>
             </div>
@@ -213,12 +219,12 @@
         </div>
     </div>
     <!-- End stats library -->
-    <!-- Music stuff library -->
+    <!-- List library -->
     <div class="window" id="lists" class="library" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">Lists</div>
             <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
+                <button aria-label="Minimize" onclick="minApp('lists')"></button>
                 <button aria-label="Maximize"></button>
                 <button onclick="closeApp('lists')" aria-label="Close" id="close-hidden"></button>
             </div>
@@ -269,14 +275,14 @@
             </div>
         </div>
     </div>
-    <!-- End music stuff -->
+    <!-- End lists -->
 
     <!-- Hidden List -->
     <div class="window library" id="hidden-list" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">List</div>
             <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
+                <button aria-label="Minimize" onclick="minApp('hidden-list')"></button>
                 <button aria-label="Maximize"></button>
                 <button onclick="closeApp('hidden-list')" aria-label="Close" id="close-hidden"></button>
             </div>
@@ -295,7 +301,7 @@
         <div class="title-bar">
             <div class="title-bar-text">Internet</div>
             <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
+                <button aria-label="Minimize" onclick="minApp('internet')"></button>
                 <button aria-label="Maximize"></button>
                 <button onclick="closeApp('internet')" aria-label="Close" id="close-internet"></button>
             </div>
@@ -324,7 +330,7 @@
         <div class="title-bar">
             <div class="title-bar-text">Catalog</div>
             <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
+                <button aria-label="Minimize" onclick="minApp('catalog')"></button>
                 <button aria-label="Maximize"></button>
                 <button onclick="closeApp('catalog')" aria-label="Close" id="close-catalog"></button>
             </div>
@@ -364,7 +370,7 @@
     <div id="start-menu" class="start-menu hidden">
         <div class="start-menu-banner"><strong style="color: #aaa;">&nbsp;Griffith</strong> 95</div>
         <ul>
-            <a class="start-link" onclick="openBlogLibrary()">
+            <a class="start-link" onclick="openApp('blog')">
                 <li><img src="/resources/msft/blog-table.png"><u>B</u>log</li>
             </a>
             <a class="start-link" href="/templates/reviews.html">
@@ -373,9 +379,13 @@
             <a class="start-link" href="/puzzle/tutorial.html">
                 <li><img src="/resources/msft/help.png"><u>P</u>uzzle</li>
             </a>
-            <li><img src="/resources/msft/magnifying-glass.png"><u>F</u>ind</li>
+            <a class="start-link" onclick="openApp('catalog')">
+                <li><img src="/resources/msft/catalog.png"><u>C</u>atalog</li>
+            </a>
+            <a class="start-link" onclick="openApp('internet')">
+                <li><img src="/resources/msft/beacon.png"><u>I</u>nternet</li>
+            </a>
             <li><img src="/resources/msft/gears.png"><u>S</u>ettings</li>
-            <li><img src="/resources/msft/computer.png"><u>R</u>un...</li>
             <li onclick="shutDown()"><img src="/resources/msft/power.png"><u>S</u>hut Down</li>
         </ul>
     </div>

@@ -10,6 +10,12 @@ document.addEventListener('click', function (event) {
   if (!startMenu.contains(event.target) && event.target !== startButton) {
     startMenu.classList.add('hidden');
   }
+  if(!event.target.classList.contains('icon') && !event.target.parentNode.classList.contains('icon')){
+    const icons = document.querySelectorAll('.icon');
+    for(var i=0;i<icons.length;i++){
+      icons[i].style.outline='none';
+    }
+  }
 });
 
 // document.addEventListener('contextmenu', (event) => {
@@ -80,6 +86,7 @@ function updateTaskbar(iconName, action) {
     appButton.classList.add('taskbar-button');
     appButton.appendChild(appImage);
     appButton.appendChild(nameDiv);
+    appButton.onclick = function() { maxApp(iconName) };
     taskbarContainer.appendChild(appButton);
   }
   else if (action === 'remove') {
@@ -105,14 +112,24 @@ const hiddenList = document.getElementById('hidden-list');
 const internet = document.getElementById('internet');
 const catalog = document.getElementById('catalog');
 
+const windows = document.querySelectorAll('.window');
 // open/close libraries
 function openApp(appName) {
+  if(appName === 'reviews'){
+    window.location.href = '/templates/reviews.html';
+    return;
+  }
+  else if(appName === 'puzzle'){
+    window.location.href = '/puzzle/tutorial.html';
+    return;
+  }
   document.getElementById(appName).style.display = 'block';
   updateTaskbar(appName, 'add');
 
   if (appName === 'catalog'){
     scrollCatalog(0);
   }
+  
 }
 function closeApp(appName) {
   document.getElementById(appName).style.display = 'none';
@@ -127,56 +144,49 @@ function closeApp(appName) {
   }
   else if (appName === 'media') {
     document.getElementById('media').style.display = 'none';
-    updateTaskbar('media', 'remove');
     audioPlayer.pause();
   }
   else if (appName === 'lists') {
-    document.getElementById('music').style.display = 'none';
-    updateTaskbar('music', 'remove');
+    document.getElementById('lists').style.display = 'none';
     document.getElementById('50-spotify').style.display = 'none';
   }
 }
+function minApp(appName){
+  document.getElementById(appName).style.display = 'none';
+}
+function maxApp(appName){
+  document.getElementById(appName).style.display = 'block';
+}
 
 // drag and drop libraries
-const blogTitleBar = blogLibrary.querySelector(".title-bar");
-const statsTitleBar = statsLibrary.querySelector(".title-bar");
-const musicTitleBar = musicLibrary.querySelector(".title-bar");
-const listTitleBar = hiddenList.querySelector(".title-bar");
-const internetTitleBar = internet.querySelector(".title-bar");
-const catalogTitleBar = catalog.querySelector(".title-bar");
+const titleBars = document.querySelectorAll('.title-bar');
+let isDragging = [];
+for(let i=0;i<titleBars.length;i++){
+  isDragging.push(false);
+}
+
 const mediaPlayer = document.getElementById('media');
 const head = document.getElementById('head');
-
 let isDraggingMedia = false;
-let isDraggingBlog = false;
-let isDraggingStats = false;
-let isDraggingMusic = false;
-let isDraggingList = false;
-let isDraggingInternet = false;
-let isDraggingCatalog = false;
 
 // pick up
 head.addEventListener("mousedown", (event) => {
-  isDraggingMedia = true;
+  isDraggingMedia = true; 
+  windows.forEach((window) => {
+    window.style.zIndex = '1';
+  });
+  head.zIndex = 2;
 });
-blogTitleBar.addEventListener("mousedown", (event) => {
-  isDraggingBlog = true;
-});
-statsTitleBar.addEventListener("mousedown", (event) => {
-  isDraggingStats = true;
-});
-musicTitleBar.addEventListener("mousedown", (event) => {
-  isDraggingMusic = true;
-});
-listTitleBar.addEventListener("mousedown", (event) => {
-  isDraggingList = true;
-});
-internetTitleBar.addEventListener("mousedown", (event) => {
-  isDraggingInternet = true;
-});
-catalogTitleBar.addEventListener("mousedown", (event) => {
-  isDraggingCatalog = true;
-});
+
+for(let i=0;i<titleBars.length;i++){
+  titleBars[i].addEventListener("mousedown", (event) => {
+    isDragging[i] = true;
+    windows.forEach((window) => {
+      window.style.zIndex = '1';
+    });
+    windows[i].style.zIndex = '2';
+  });
+}
 
 // drag
 document.addEventListener("mousemove", (event) => {
@@ -184,41 +194,20 @@ document.addEventListener("mousemove", (event) => {
     mediaPlayer.style.left = `${event.clientX - 100}px`;
     mediaPlayer.style.top = `${event.clientY + (mediaPlayer.clientHeight / 2)}px`;
   }
-  else if (isDraggingBlog) {
-    blogLibrary.style.left = `${event.clientX}px`;
-    blogLibrary.style.top = `${event.clientY + (blogLibrary.clientHeight / 2) - 5}px`;
-  }
-  else if (isDraggingStats) {
-    statsLibrary.style.left = `${event.clientX}px`;
-    statsLibrary.style.top = `${event.clientY + (statsLibrary.clientHeight / 2) - 5}px`;
-  }
-  else if (isDraggingMusic) {
-    musicLibrary.style.left = `${event.clientX}px`;
-    musicLibrary.style.top = `${event.clientY + (musicLibrary.clientHeight / 2) - 5}px`;
-  }
-  else if (isDraggingList) {
-    hiddenList.style.left = `${event.clientX}px`;
-    hiddenList.style.top = `${event.clientY + (hiddenList.clientHeight / 2) - 5}px`;
-  }
-  else if (isDraggingInternet) {
-    internet.style.left = `${event.clientX}px`;
-    internet.style.top = `${event.clientY + (internet.clientHeight / 2) - 5}px`;
-  }
-  else if (isDraggingCatalog) {
-    catalog.style.left = `${event.clientX}px`;
-    catalog.style.top = `${event.clientY + (catalog.clientHeight / 2) - 5}px`;
+  for(let i=0;i<isDragging.length;i++){
+    if (isDragging[i]){
+      windows[i].style.left = `${event.clientX}px`;
+      windows[i].style.top = `${event.clientY + (windows[i].clientHeight / 2) - 5}px`;
+    }
   }
 });
 
 // drop
 document.addEventListener("mouseup", () => {
-  isDraggingBlog = false;
-  isDraggingStats = false;
   isDraggingMedia = false;
-  isDraggingMusic = false;
-  isDraggingList = false;
-  isDraggingInternet = false;
-  isDraggingCatalog = false;
+  for(let i=0;i<isDragging.length;i++){
+    isDragging[i] = false;
+  }
 });
 
 function openBlog(div) {
@@ -435,40 +424,7 @@ function createList(fileName) {
     })
 }
 
-function invertBackground() {
-  const canvas = document.getElementById('backgroundCanvas');
-  const ctx = canvas.getContext('2d');
-  const img = new Image();
-
-  img.src = '/resources/media/peshay.png'; // Background image source
-  img.onload = () => {
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    // Draw image to canvas
-    ctx.drawImage(img, 0, 0);
-
-    // Get image data
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
-    for (let i = 0; i < 10; i++) {
-      console.log(data[i]);
-    }
-    // Manipulate pixels (e.g., invert colors)
-    for (let i = 0; i < data.length; i += 4) {
-      data[i] = 255 - data[i];       // Red
-      data[i + 1] = 255 - data[i + 1]; // Green
-      data[i + 2] = 255 - data[i + 2]; // Blue
-    }
-
-    // Put image data back
-    ctx.putImageData(imageData, 0, 0);
-    canvas.style.height = '100vh';
-    canvas.style.width = '100vw';
-    canvas.style.display = 'block';
-  };
-}
-
+// navigate internet
 const url = document.getElementById('url');
 url.addEventListener('change', (event) => {
   const selectedValue = event.target.value;
@@ -526,8 +482,14 @@ function scrollCatalog(direction) {
     })
     .catch(error => console.error('Error loading text file:', error));
 }
-
-
+function highlightApp(div){
+  const icon = div.querySelector('.icon');
+  const icons = document.querySelectorAll('.icon');
+  for(var i=0;i<icons.length;i++){
+    icons[i].style.outline='none';
+  }
+  icon.style.outline = '1px dotted blue';
+}
 // ----- TEST SUITE -----
 // createList('2020s-movies')
 // document.getElementById('hidden-list').style.display = 'block';
