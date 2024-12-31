@@ -1,3 +1,17 @@
+function updateBackgroundImage() {
+  const smallScreenImage = '/resources/media/peshay-mobile.png';
+  const largeScreenImage = '/resources/media/peshay.png';
+  const thresholdWidth = 800;
+
+  if (window.innerWidth <= thresholdWidth) {
+      document.body.style.backgroundImage = `url(${smallScreenImage})`;
+  } else {
+      document.body.style.backgroundImage = `url(${largeScreenImage})`;
+  }
+}
+window.addEventListener('resize', updateBackgroundImage);
+updateBackgroundImage();
+
 // START TASKBAR LOGIC
 document.getElementById('start-button').addEventListener('click', function () {
   const startMenu = document.getElementById('start-menu');
