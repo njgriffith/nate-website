@@ -12,6 +12,14 @@ function updateBackgroundImage() {
 window.addEventListener('resize', updateBackgroundImage);
 updateBackgroundImage();
 
+// document.addEventListener('contextmenu', (event) => {
+//   event.preventDefault();
+//   var rightClickMenu = document.getElementById('right-click-menu');
+//   rightClickMenu.style.display = 'block';
+//   rightClickMenu.style.left = `${event.clientX}px`;
+//   rightClickMenu.style.top = `${event.clientY}px`;
+// });
+
 // START TASKBAR LOGIC
 document.getElementById('start-button').addEventListener('click', function () {
   const startMenu = document.getElementById('start-menu');
@@ -19,6 +27,7 @@ document.getElementById('start-button').addEventListener('click', function () {
 });
 
 document.addEventListener('click', function (event) {
+  document.getElementById('right-click-menu').style.display = 'none';
   const startMenu = document.getElementById('start-menu');
   const startButton = document.getElementById('start-button');
   if (!startMenu.contains(event.target) && event.target !== startButton) {
@@ -31,11 +40,6 @@ document.addEventListener('click', function (event) {
     }
   }
 });
-
-// document.addEventListener('contextmenu', (event) => {
-//   event.preventDefault();
-//   alert('right click');
-// });
 
 function shutDown() {
   const body = document.body;
@@ -84,6 +88,10 @@ function updateTaskbar(iconName, action) {
     appName = 'Catalogue';
     imgSrc = '/resources/msft/catalog.png';
   }
+  else if (iconName === 'signup') {
+    appName = 'Sign Up';
+    imgSrc = '/resources/msft/user-signup.png';
+  }
   if (action === 'add') {
     const taskBarApps = document.getElementsByClassName('taskbar-button');
     for (let i = 0; i < taskBarApps.length; i++) {
@@ -102,6 +110,11 @@ function updateTaskbar(iconName, action) {
     appButton.appendChild(nameDiv);
     appButton.onclick = function() { maxApp(iconName) };
     taskbarContainer.appendChild(appButton);
+
+    windows.forEach((window) => {
+      window.style.zIndex = '1';
+    });
+    document.getElementById(iconName).style.zIndex = '2';
   }
   else if (action === 'remove') {
     const taskBarApps = document.getElementsByClassName('taskbar-button');
@@ -143,7 +156,6 @@ function openApp(appName) {
   if (appName === 'catalog'){
     scrollCatalog(0);
   }
-  
 }
 function closeApp(appName) {
   document.getElementById(appName).style.display = 'none';
@@ -170,6 +182,10 @@ function minApp(appName){
 }
 function maxApp(appName){
   document.getElementById(appName).style.display = 'block';
+  windows.forEach((window) => {
+    window.style.zIndex = '1';
+  });
+  document.getElementById(appName).style.zIndex = '2';
 }
 
 // drag and drop libraries
@@ -231,19 +247,18 @@ function openBlog(div) {
 
 function openList(div) {
   const note = div.querySelectorAll('td')[2].textContent;
-  if (note === 'reviews') {
-    window.location.href = '/templates/' + note + '.html';
-  }
-  else if (note === '50-movies') {
+if (note === '50-movies') {
     window.open('https://letterboxd.com/moviefan34/list/top-50/', '_blank').focus();
   }
   else if (note === '50-songs') {
     document.getElementById('50-spotify').style.display = 'block';
+    document.getElementById('hidden-list').style.zIndex = '3';
   }
   else {
     createList(note);
     document.getElementById('hidden-list').querySelector('.title-bar-text').innerHTML = div.querySelectorAll('td')[0].textContent;
     document.getElementById('hidden-list').style.display = 'block';
+    document.getElementById('hidden-list').style.display = '3';
   }
 }
 // ICON LOGIC END
@@ -504,6 +519,15 @@ function highlightApp(div){
   }
   icon.style.outline = '1px dotted blue';
 }
+
+function signUp(){
+  var email = document.getElementById('signup-email').value;
+  alert("this shit don't work rn, come back later");
+  return;
+  confirm("Sign up using this email?\n" + email);
+}
+// openApp('signup');
+
 // ----- TEST SUITE -----
 // createList('2020s-movies')
 // document.getElementById('hidden-list').style.display = 'block';

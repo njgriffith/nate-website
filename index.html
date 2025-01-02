@@ -63,6 +63,12 @@
                 <p>Catalog</p>
             </div>
         </div>
+        <!-- <div ondblclick="openApp('signup')" onclick="highlightApp(this)">
+            <div class="icon">
+                <img src="/resources/msft/user-signup.png">
+                <p>Sign Up!</p>
+            </div>
+        </div> -->
         <div onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/msft/bin.png">
@@ -345,6 +351,28 @@
         </div>
     </div>
     <!-- End catalog -->
+
+     <!-- Start signup -->
+    <div class="window library" id="signup" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">Signup</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize" onclick="minApp('signup')"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeApp('signup')" aria-label="Close" id="close-signup"></button>
+            </div>
+        </div>
+        <div class="window-body" style="width: 80%;">
+            <div style="margin-top: 2em; margin-bottom: 2em; display: flex; height: 30px; width: 100%;">
+                <input style="width: 75%; font-size: 1.5em;" id="signup-email">
+                <button style="font-size: 1.2em;" onclick="signUp()">Sign Up</button>
+            </div>
+            <div style="font-size: 1.5em;">Sign up for email updates on new album reviews, blogs, and more</div>
+        </div>
+    </div>
+    <!-- End signup -->
+     <div id="right-click-menu">
+     </div>
 
     <div class="taskbar">
         <button id="start-button" class="start-button">

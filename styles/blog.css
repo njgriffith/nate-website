@@ -1,30 +1,22 @@
 html{
-    background: #111;
-    color: #ddd;
-    font-family: "Roboto", sans-serif;
+    background-color: #008080;
     font-weight: 300;
 }
 body{
+    background-color: #ccc;
+    color: black;
     width: 80%;
     margin: auto;
     margin-top: 3em;
     margin-bottom: 3em;
     border: 1px solid white;
     padding: 2em;
+    font-family: "Pixelated MS Sans Serif" !important;
+    box-shadow: inset red 1px 1px;
 }
 .back-link{
-    color: #ddd;
+    color: black;
     font-size: 1.5em;
-}
-
-.blog{
-    width: 80%;
-    margin: auto;
-    border: 1px solid white;
-    padding: 2em;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    background: #111;
 }
 .celeste-table{
     margin: auto;
@@ -50,4 +42,3 @@ body{
 .img-container{
     display: flex;
 }
-

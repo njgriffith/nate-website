@@ -75,22 +75,18 @@ function sortData(columnName) {
             }
             else if (sort === "released") {
                 entries.sort((a, b) => {
-                    aValue = new Date(a[1].released);
-                    bValue = new Date(b[1].released);
-                    if (sortDirection) {
-                        return bValue - aValue;
+                    if (!sortDirection) {
+                        return a[1].released.localeCompare(b[1].released);
                     }
-                    return aValue - bValue;
+                    return b[1].released.localeCompare(a[1].released);
                 });
             }
             else if (sort === "reviewed") {
                 entries.sort((a, b) => {
-                    aValue = new Date(a[1].reviewed);
-                    bValue = new Date(b[1].reviewed);
-                    if (sortDirection) {
-                        return bValue - aValue;
+                    if (!sortDirection) {
+                        return a[1].reviewed.localeCompare(b[1].reviewed);
                     }
-                    return aValue - bValue;
+                    return b[1].reviewed.localeCompare(a[1].reviewed);
                 });
             }
             const sortedData = Object.fromEntries(entries);

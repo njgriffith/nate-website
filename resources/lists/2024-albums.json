@@ -8,6 +8,10 @@
         "artist": "Charli XCX"
     },
     {
+        "album": "Heavy Metal",
+        "artist": "Cameron Winter"
+    },
+    {
         "album": "No Hands",
         "artist": "Joey Valence & Brae"
     },
@@ -34,9 +38,5 @@
     {
         "album": "I Lay Down My Life for You",
         "artist": "JPEGMAFIA"
-    },
-    {
-        "album": "Bright Future",
-        "artist": "Adrienne Lenker"
     }
 ]

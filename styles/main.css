@@ -1,6 +1,4 @@
 body {
-  /* background-color: #008080; */
-  background-image: url(/resources/media/peshay.png);
   background-size: 100%;
   height: 100vh;
   width: 100vw;
@@ -8,7 +6,6 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  font-family: "Pixelated MS Sans Serif";
 }
 
 img {
@@ -39,6 +36,7 @@ img {
   color: black;
   cursor: pointer;
   user-select: none;
+  font-family: "Pixelated MS Sans Serif";
 }
 
 .taskbar {
@@ -220,6 +218,14 @@ li>img {
   width: 800px;
   height: 600px;
 }
+#signup {
+  position: absolute;
+  top: 20%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+}
 
 .library-image {
   width: 60%;
@@ -323,4 +329,11 @@ tbody>tr:hover {
   white-space: pre-wrap;
   overflow-y: scroll;
   height: 150px;
+}
+#right-click-menu{
+  position: absolute;
+  background-color: white;
+  width: 150px;
+  height: 250px;
+  display: none;
 }
