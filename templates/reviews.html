@@ -13,6 +13,7 @@
         <div class="button-container">
             <button id="home-link" onclick="window.location.href='../';">To Home</button>
             <button onclick="getRandomReview()">To Random Review</button>
+            <button onclick="openStats()">Statistics</button>
         </div>
         
         <div class="window">
@@ -63,9 +64,35 @@
                         </ul>
                     </li>
                     <li>Reviews with "Review Date" set to 01-01-2000 are just reviews I haven't gotten to yet</li>
-                    <li>For albums with a 10/10 score, ties are broken by preference, meaning if you sort by score it will start with my favorite album of all time and proceed in descending order. No other scores have their ties broken</li>
+                    <li>For albums with a 10/10 score, ties are broken by when I gave them a 10. So if you sort by highest score, the top entry is the most recent 10 I've given.</li>
                     <li>Default sort order is most recently reviewed</li>
                 </ul>
+            </div>
+        </div>
+        <div class="window library" id="stats" style="display: none;">
+            <div class="title-bar">
+                <div class="title-bar-text">Statistics</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Maximize" style="margin-left: 0.2em;"></button>
+                    <button onclick="closeStats()" aria-label="Close" id="close-help"></button>
+                </div>
+            </div>
+            <div class="window-body" style="font-size: 1.7em; margin: 1em;">
+                <div style="margin-bottom: 1em; font-weight: bold;">Reviews by score</div>
+                <div id="10">10: </div>
+                <div id="9">9: </div>
+                <div id="8">8: </div>
+                <div id="other">other: </div>
+
+                <div style="margin-bottom: 1em; margin-top: 1em; font-weight: bold;">Reviews by decade</div>
+                <div id="20s">2020s: </div>
+                <div id="10s">2010s: </div>
+                <div id="00s">2000s: </div>
+                <div id="90s">1990s: </div>
+                <div id="80s">1980s: </div>
+                <div id="70s">1970s: </div>
+                <div id="60s">1960s: </div>
             </div>
         </div>
         <script src="/scripts/reviews.js"></script>

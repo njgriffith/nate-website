@@ -12,6 +12,10 @@
         "artist": "Geordie Greep"
     },
     {
+        "album": "Heavy Metal",
+        "artist": "Cameron Winter"
+    },
+    {
         "album": "Cavalcade",
         "artist": "black midi"
     },
@@ -194,9 +198,5 @@
     {
         "album": "Wall of Eyes",
         "artist": "The Smile"
-    },
-    {
-        "album": "Lives Outgrown",
-        "artist": "Beth Gibbons"
     }
 ]

@@ -68,8 +68,8 @@
         "artist": "Geordie Greep"
     },
     {
-        "album": "Alex Cameron",
-        "artist": "Forced Witness"
+        "album": "Forced Witness",
+        "artist": "Alex Cameron"
     },
     {
         "album": "Divine Music From a Jail",
@@ -82,6 +82,10 @@
     {
         "album": "Serial Parade",
         "artist": "Twin Steps"
+    },
+    {
+        "album": "Heavy Metal",
+        "artist": "Cameron Winter"
     },
     {
         "album": "Cavalcade",
@@ -194,9 +198,5 @@
     {
         "album": "Private Parts",
         "artist": "Robert Ashley"
-    },
-    {
-        "album": "Ryo Fukui",
-        "artist": "Scenery"
     }
 ]

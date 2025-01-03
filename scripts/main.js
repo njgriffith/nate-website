@@ -417,6 +417,7 @@ function createList(fileName) {
   listContainer.innerHTML = '';
   listContainer.style.marginTop = '5em';
   const listTable = document.createElement('table');
+  listTable.style.width = "100%";
   listContainer.appendChild(listTable);
   fetch(`../resources/lists/${fileName}.json`)
     .then(response => response.json())

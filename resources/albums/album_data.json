@@ -10,8 +10,8 @@
     "ants_from_up_there": {
         "title": "Ants From Up There",
         "artist": "Black Country, New Road",
-        "score": 10.0,
-        "rank": 7,
+        "score": 10,
+        "order": 10,
         "released": "2022-02-04",
         "reviewed": "2024-09-10",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Ants_from_Up_There_-_Black_Country%2C_New_Road.jpg/220px-Ants_from_Up_There_-_Black_Country%2C_New_Road.jpg"
@@ -19,8 +19,8 @@
     "not_available": {
         "title": "Not Available",
         "artist": "The Residents",
-        "score": 10.0,
-        "rank": 8,
+        "score": 10,
+        "order": 11,
         "released": "1978-10-31",
         "reviewed": "2024-12-18",
         "cover": "https://upload.wikimedia.org/wikipedia/en/3/32/Not_Available.jpg"
@@ -28,8 +28,8 @@
     "blood_visions": {
         "title": "Blood Visions",
         "artist": "Jay Reatard",
-        "score": 10.0,
-        "rank": 4,
+        "score": 10,
+        "order": 5,
         "released": "2006-09-11",
         "reviewed": "2024-09-10",
         "cover": "https://upload.wikimedia.org/wikipedia/en/9/9a/BloodVisionsAlbum.jpg"
@@ -37,8 +37,8 @@
     "congratulations": {
         "title": "Congratulations",
         "artist": "MGMT",
-        "score": 10.0,
-        "rank": 2,
+        "score": 10,
+        "order": 4,
         "released": "2010-04-13",
         "reviewed": "2024-09-10",
         "cover": "https://upload.wikimedia.org/wikipedia/en/3/39/MGMT_-_Congratulations.png"
@@ -46,8 +46,8 @@
     "girl_with_basket_of_fruit": {
         "title": "Girl with Basket of Fruit",
         "artist": "Xiu Xiu",
-        "score": 10.0,
-        "rank": 11,
+        "score": 10,
+        "order": 8,
         "released": "2019-02-08",
         "reviewed": "2024-09-10",
         "cover": "https://upload.wikimedia.org/wikipedia/en/a/a1/Xiu_Xiu_%E2%80%93_Girl_with_Basket_of_Fruit.png"
@@ -55,8 +55,8 @@
     "lonesome_crowded_west": {
         "title": "The Lonesome Crowded West",
         "artist": "Modest Mouse",
-        "score": 10.0,
-        "rank": 5,
+        "score": 10,
+        "order": 6,
         "released": "1997-09-18",
         "reviewed": "2024-09-10",
         "cover": "https://upload.wikimedia.org/wikipedia/en/f/f5/MMLonesomeCrowdedWest.jpg"
@@ -64,8 +64,8 @@
     "STGSTV": {
         "title": "Spirit They're Gone, Spirit They've Vanished",
         "artist": "Animal Collective",
-        "score": 10.0,
-        "rank": 1,
+        "score": 10,
+        "order": 7,
         "released": "2000-07-31",
         "reviewed": "2024-09-10",
         "cover": "https://upload.wikimedia.org/wikipedia/en/8/87/Animal_Collective_-_Spirit_They%27re_Gone%2C_Spirit_They%27ve_Vanished_album_cover.png"
@@ -81,8 +81,8 @@
     "TPAB": {
         "title": "To Pimp a Butterfly",
         "artist": "Kendrick Lamar",
-        "score": 10.0,
-        "rank": 6,
+        "score": 10,
+        "order": 1,
         "released": "2015-03-15",
         "reviewed": "2024-09-10",
         "cover": "https://upload.wikimedia.org/wikipedia/en/f/f6/Kendrick_Lamar_-_To_Pimp_a_Butterfly.png"
@@ -90,8 +90,8 @@
     "to_be_kind": {
         "title": "To Be Kind",
         "artist": "Swans",
-        "score": 10.0,
-        "rank": 3,
+        "score": 10,
+        "order": 2,
         "released": "2014-05-13",
         "reviewed": "2024-09-10",
         "cover": "https://upload.wikimedia.org/wikipedia/en/8/85/Swans_To_Be_Kind.jpg"
@@ -99,8 +99,8 @@
     "skinny_fists": {
         "title": "Lift Your Skinny Fists Like Antennas to Heaven",
         "artist": "Godspeed You! Black Emperor",
-        "score": 10.0,
-        "rank": 9,
+        "score": 10,
+        "order": 3,
         "released": "2000-10-09",
         "reviewed": "2024-09-10",
         "cover": "https://upload.wikimedia.org/wikipedia/en/d/d3/Liftyrskinnyfists.jpg"
@@ -301,7 +301,7 @@
         "title": "Ark",
         "artist": "Animal Collective",
         "score": 10,
-        "rank": 10,
+        "order": 9,
         "released": "2003-03-17",
         "reviewed": "2024-11-15",
         "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/Here_Comes_the_Indian_%28Front_Cover%29.png/220px-Here_Comes_the_Indian_%28Front_Cover%29.png"
@@ -569,5 +569,13 @@
         "released": "2024-12-06",
         "reviewed": "2025-01-02",
         "cover": "https://i.scdn.co/image/ab67616d0000b2734738aa171569052376f162fe"
+    },
+    "rain_dogs": {
+        "title": "Rain Dogs",
+        "artist": "Tom Waits",
+        "score": 8,
+        "released": "1985-09-30",
+        "reviewed": "2025-01-02",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/6/60/Tom_Waits_-_Rain_Dogs.png"
     }
 }
