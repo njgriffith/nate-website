@@ -4,9 +4,9 @@ function updateBackgroundImage() {
   const thresholdWidth = 800;
 
   if (window.innerWidth <= thresholdWidth) {
-      document.body.style.backgroundImage = `url(${smallScreenImage})`;
+    document.body.style.backgroundImage = `url(${smallScreenImage})`;
   } else {
-      document.body.style.backgroundImage = `url(${largeScreenImage})`;
+    document.body.style.backgroundImage = `url(${largeScreenImage})`;
   }
 }
 window.addEventListener('resize', updateBackgroundImage);
@@ -33,10 +33,10 @@ document.addEventListener('click', function (event) {
   if (!startMenu.contains(event.target) && event.target !== startButton) {
     startMenu.classList.add('hidden');
   }
-  if(!event.target.classList.contains('icon') && !event.target.parentNode.classList.contains('icon')){
+  if (!event.target.classList.contains('icon') && !event.target.parentNode.classList.contains('icon')) {
     const icons = document.querySelectorAll('.icon');
-    for(var i=0;i<icons.length;i++){
-      icons[i].style.outline='none';
+    for (var i = 0; i < icons.length; i++) {
+      icons[i].style.outline = 'none';
     }
   }
 });
@@ -108,7 +108,7 @@ function updateTaskbar(iconName, action) {
     appButton.classList.add('taskbar-button');
     appButton.appendChild(appImage);
     appButton.appendChild(nameDiv);
-    appButton.onclick = function() { maxApp(iconName) };
+    appButton.onclick = function () { maxApp(iconName) };
     taskbarContainer.appendChild(appButton);
 
     windows.forEach((window) => {
@@ -142,18 +142,18 @@ const catalog = document.getElementById('catalog');
 const windows = document.querySelectorAll('.window');
 // open/close libraries
 function openApp(appName) {
-  if(appName === 'reviews'){
+  if (appName === 'reviews') {
     window.location.href = '/templates/reviews.html';
     return;
   }
-  else if(appName === 'puzzle'){
+  else if (appName === 'puzzle') {
     window.location.href = '/puzzle/tutorial.html';
     return;
   }
   document.getElementById(appName).style.display = 'block';
   updateTaskbar(appName, 'add');
 
-  if (appName === 'catalog'){
+  if (appName === 'catalog') {
     scrollCatalog(0);
   }
 }
@@ -177,10 +177,10 @@ function closeApp(appName) {
     document.getElementById('50-spotify').style.display = 'none';
   }
 }
-function minApp(appName){
+function minApp(appName) {
   document.getElementById(appName).style.display = 'none';
 }
-function maxApp(appName){
+function maxApp(appName) {
   document.getElementById(appName).style.display = 'block';
   windows.forEach((window) => {
     window.style.zIndex = '1';
@@ -191,7 +191,7 @@ function maxApp(appName){
 // drag and drop libraries
 const titleBars = document.querySelectorAll('.title-bar');
 let isDragging = [];
-for(let i=0;i<titleBars.length;i++){
+for (let i = 0; i < titleBars.length; i++) {
   isDragging.push(false);
 }
 
@@ -201,14 +201,14 @@ let isDraggingMedia = false;
 
 // pick up
 head.addEventListener("mousedown", (event) => {
-  isDraggingMedia = true; 
+  isDraggingMedia = true;
   windows.forEach((window) => {
     window.style.zIndex = '1';
   });
   head.zIndex = 2;
 });
 
-for(let i=0;i<titleBars.length;i++){
+for (let i = 0; i < titleBars.length; i++) {
   titleBars[i].addEventListener("mousedown", (event) => {
     isDragging[i] = true;
     windows.forEach((window) => {
@@ -224,8 +224,8 @@ document.addEventListener("mousemove", (event) => {
     mediaPlayer.style.left = `${event.clientX - 100}px`;
     mediaPlayer.style.top = `${event.clientY + (mediaPlayer.clientHeight / 2)}px`;
   }
-  for(let i=0;i<isDragging.length;i++){
-    if (isDragging[i]){
+  for (let i = 0; i < isDragging.length; i++) {
+    if (isDragging[i]) {
       windows[i].style.left = `${event.clientX}px`;
       windows[i].style.top = `${event.clientY + (windows[i].clientHeight / 2) - 5}px`;
     }
@@ -235,7 +235,7 @@ document.addEventListener("mousemove", (event) => {
 // drop
 document.addEventListener("mouseup", () => {
   isDraggingMedia = false;
-  for(let i=0;i<isDragging.length;i++){
+  for (let i = 0; i < isDragging.length; i++) {
     isDragging[i] = false;
   }
 });
@@ -247,7 +247,7 @@ function openBlog(div) {
 
 function openList(div) {
   const note = div.querySelectorAll('td')[2].textContent;
-if (note === '50-movies') {
+  if (note === '50-movies') {
     window.open('https://letterboxd.com/moviefan34/list/top-50/', '_blank').focus();
   }
   else if (note === '50-songs') {
@@ -491,10 +491,10 @@ function scrollCatalog(direction) {
   var index = parseInt(creature.src.substring(creature.src.length - 7, creature.src.length - 4));
   index += direction;
   var indexString = "";
-  if (index > catalogSize){
+  if (index > catalogSize) {
     index = 1;
   }
-  else if(index < 1){
+  else if (index < 1) {
     index = catalogSize;
   }
 
@@ -512,21 +512,88 @@ function scrollCatalog(direction) {
     })
     .catch(error => console.error('Error loading text file:', error));
 }
-function highlightApp(div){
+function highlightApp(div) {
   const icon = div.querySelector('.icon');
   const icons = document.querySelectorAll('.icon');
-  for(var i=0;i<icons.length;i++){
-    icons[i].style.outline='none';
+  for (var i = 0; i < icons.length; i++) {
+    icons[i].style.outline = 'none';
   }
   icon.style.outline = '1px dotted blue';
 }
 
-function signUp(){
+function signUp() {
   var email = document.getElementById('signup-email').value;
   alert("this shit don't work rn, come back later");
   return;
   confirm("Sign up using this email?\n" + email);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const desktopMedia = document.getElementById("desktop-media");
+  const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+  let currentColorIndex = 0;
+
+  setInterval(() => {
+    desktopMedia.style.outline = `10px solid ${colors[currentColorIndex]}`;
+    currentColorIndex = (currentColorIndex + 1) % colors.length;
+  }, 500);
+
+  const consoleDiv = document.getElementById("console");
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+
+  consoleDiv.appendChild(canvas);
+  canvas.style.position = "absolute";
+  canvas.style.top = '0px';
+  canvas.style.right = '0px';
+
+  canvas.width = consoleDiv.offsetWidth;
+  canvas.height = consoleDiv.offsetHeight;
+
+  const characters = "アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const fontSize = 16;
+  const columns = Math.floor(canvas.width / fontSize);
+  const drops = Array(columns).fill(1);
+
+  let frameCount = 0;
+  const speedFactor = 3;
+
+  function draw() {
+    frameCount++;
+
+    if (frameCount % speedFactor !== 0) {
+      requestAnimationFrame(draw);
+      return;
+    }
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#0F0";
+    ctx.font = `${fontSize}px monospace`;
+
+    drops.forEach((y, i) => {
+      const text = characters.charAt(Math.floor(Math.random() * characters.length));
+      const x = i * fontSize;
+
+      ctx.fillText(text, x, y * fontSize);
+
+      if (y * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    });
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  // Resize the canvas when the container size changes
+  window.addEventListener("resize", () => {
+    canvas.width = consoleDiv.offsetWidth;
+    canvas.height = consoleDiv.offsetHeight;
+  });
+});
+
 // openApp('signup');
 
 // ----- TEST SUITE -----

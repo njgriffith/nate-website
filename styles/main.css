@@ -38,6 +38,9 @@ img {
   user-select: none;
   font-family: "Pixelated MS Sans Serif";
 }
+.icon > img{
+  width: 32px;
+}
 
 .taskbar {
   position: fixed;
@@ -336,4 +339,18 @@ tbody>tr:hover {
   width: 150px;
   height: 250px;
   display: none;
+}
+
+#desktop-media{
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%);
+  background: #008080;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 1em;
+  outline: 10px solid white;
 }
