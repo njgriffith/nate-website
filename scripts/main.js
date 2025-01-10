@@ -24,14 +24,8 @@ async function getCommits() {
   const url = `https://api.github.com/repos/njgriffith/nate-website/commits`;
 
   try {
-    // Fetch the token from the text file
-    const tokenResponse = await fetch(`/resources/token.txt`);
-    const token = await tokenResponse.text();
-
-    // Fetch commits using the token
     const response = await fetch(url, {
       headers: {
-        'Authorization': `Bearer ${token}`,
         'Accept': 'application/vnd.github.v3+json'
       }
     });
@@ -42,7 +36,6 @@ async function getCommits() {
 
     const commits = await response.json();
 
-    // Create and display the list of commit messages
     const commitList = document.createElement('ul');
     commits.slice(0, commits.length).forEach(commit => {
       if (commit.commit.message.length < 10) {
