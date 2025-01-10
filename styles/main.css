@@ -229,6 +229,14 @@ li>img {
   width: 400px;
   height: 200px;
 }
+#changelog {
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 20%;
+}
 
 .library-image {
   width: 60%;

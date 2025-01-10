@@ -20,6 +20,49 @@ updateBackgroundImage();
 //   rightClickMenu.style.top = `${event.clientY}px`;
 // });
 
+async function getCommits() {
+  const url = `https://api.github.com/repos/njgriffith/nate-website/commits`;
+
+  try {
+    // Fetch the token from the text file
+    const tokenResponse = await fetch(`/resources/token.txt`);
+    const token = await tokenResponse.text();
+
+    // Fetch commits using the token
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error fetching commits: ${response.status} ${response.statusText}`);
+    }
+
+    const commits = await response.json();
+
+    // Create and display the list of commit messages
+    const commitList = document.createElement('ul');
+    commits.slice(0, commits.length).forEach(commit => {
+      if (commit.commit.message.length < 10) {
+        return;
+      }
+      const listEntry = document.createElement('li');
+      listEntry.style.fontWeight = 'bold';
+      commitList.appendChild(listEntry);
+      listEntry.innerText = commit.commit.message;
+    });
+
+    document.getElementById('changelog-container').appendChild(commitList);
+
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
+
+getCommits();
+
 // START TASKBAR LOGIC
 document.getElementById('start-button').addEventListener('click', function () {
   const startMenu = document.getElementById('start-menu');
@@ -395,6 +438,7 @@ function playMedia(fileName, folderName) {
     const mediaPath = `/resources/media/${fileName}.mp3`;
     audioPlayer.src = mediaPath;
     audioPlayer.play();
+    startVisualization();
   }
   else if (folderName === "videos") {
     const mediaPath = `/resources/media/${fileName}.mp4`;
@@ -409,6 +453,7 @@ function playMedia(fileName, folderName) {
     imageViewer.innerHTML = "";
     imageViewer.appendChild(image);
   }
+
 }
 // END HEAD LOGIC
 
@@ -528,17 +573,19 @@ function signUp() {
   confirm("Sign up using this email?\n" + email);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const desktopMedia = document.getElementById("desktop-media");
-  const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
-  let currentColorIndex = 0;
+// document.addEventListener("DOMContentLoaded", () => {
+//   const desktopMedia = document.getElementById("desktop-media");
+//   const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+//   let currentColorIndex = 0;
 
-  setInterval(() => {
-    desktopMedia.style.outline = `10px solid ${colors[currentColorIndex]}`;
-    currentColorIndex = (currentColorIndex + 1) % colors.length;
-  }, 500);
+//   setInterval(() => {
+//     desktopMedia.style.outline = `10px solid ${colors[currentColorIndex]}`;
+//     currentColorIndex = (currentColorIndex + 1) % colors.length;
+//   }, 500);
+// });
 
-  const consoleDiv = document.getElementById("console");
+function startVisualization(){
+  const consoleDiv = document.getElementById("vid-bkgd");
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
 
@@ -546,6 +593,10 @@ document.addEventListener("DOMContentLoaded", () => {
   canvas.style.position = "absolute";
   canvas.style.top = '0px';
   canvas.style.right = '0px';
+  canvas.style.zIndex = '3';
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  
 
   canvas.width = consoleDiv.offsetWidth;
   canvas.height = consoleDiv.offsetHeight;
@@ -584,15 +635,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     requestAnimationFrame(draw);
   }
-
   draw();
 
-  // Resize the canvas when the container size changes
   window.addEventListener("resize", () => {
     canvas.width = consoleDiv.offsetWidth;
     canvas.height = consoleDiv.offsetHeight;
   });
-});
+}
 
 // openApp('signup');
 
@@ -602,3 +651,4 @@ document.addEventListener("DOMContentLoaded", () => {
 // loadHTML('notavirus');
 // catalog.style.display = 'block';
 // scrollCatalog(6);
+// media.style.display = 'block';
