@@ -1,12 +1,22 @@
 function updateBackgroundImage() {
   const smallScreenImage = '/resources/media/peshay-mobile.png';
-  const largeScreenImage = '/resources/media/peshay.png';
+  const largeScreenImage = '/resources/media/metropolis.jpg';
   const thresholdWidth = 800;
-
+  const icons = document.querySelectorAll('.icon > p');
   if (window.innerWidth <= thresholdWidth) {
     document.body.style.backgroundImage = `url(${smallScreenImage})`;
-  } else {
+    icons.forEach(icon => {
+      icon.style.background = 'none';
+      icon.style.color = 'black';
+    });
+  } 
+  else {
     document.body.style.backgroundImage = `url(${largeScreenImage})`;
+    document.body.style.backgroundPosition = '0px 25%';
+    icons.forEach(icon => {
+      icon.style.background = 'rgba(0, 0, 0, 0.6)';
+      icon.style.color = 'white';
+    });
   }
 }
 window.addEventListener('resize', updateBackgroundImage);
@@ -19,6 +29,10 @@ updateBackgroundImage();
 //   rightClickMenu.style.left = `${event.clientX}px`;
 //   rightClickMenu.style.top = `${event.clientY}px`;
 // });
+
+const windows = document.querySelectorAll('.window');
+let isAsleep = false;
+let previousState = '';
 
 async function getCommits() {
   const url = `https://api.github.com/repos/njgriffith/nate-website/commits`;
@@ -35,7 +49,6 @@ async function getCommits() {
     }
 
     const commits = await response.json();
-
     const commitList = document.createElement('ul');
     commits.slice(0, commits.length).forEach(commit => {
       if (commit.commit.message.length < 10) {
@@ -53,9 +66,31 @@ async function getCommits() {
     console.error('Error:', error.message);
   }
 }
-
 getCommits();
 
+function randomizeWindows(){
+  for(let i=0;i<windows.length;i++){
+    if(windows[i].id === 'reviews'){
+      windows[i].style.position = 'absolute';
+      windows[i].style.top = `50%`;
+      windows[i].style.left = `50%`;
+      windows[i].style.transform = `translate(-50%, -50%)`;
+      continue;
+    }
+    windows[i].style.position = 'absolute';
+    windows[i].style.top = `${30 + Math.floor(Math.random() * 60)}%`;
+    windows[i].style.left = `${30 + Math.floor(Math.random() * 60)}%`;
+    windows[i].style.transform = `translate(-50%, -50%)`;
+  }
+}
+randomizeWindows()
+
+function updateWindowZIndex(frontWindow){
+  windows.forEach((window) => {
+    window.style.zIndex = '1';
+  });
+  document.getElementById(frontWindow).style.zIndex = '2';
+}
 // START TASKBAR LOGIC
 document.getElementById('start-button').addEventListener('click', function () {
   const startMenu = document.getElementById('start-menu');
@@ -86,6 +121,17 @@ function shutDown() {
   goodbye.play();
 }
 
+function sleep() {
+  isAsleep = true;
+  const body = document.body;
+  previousState = body.innerHTML;
+  body.innerHTML = "";
+  body.style.background = "url('/resources/media/pipes.gif')";
+  body.style.backgroundPosition = 'center';
+  body.style.backgroundRepeat = 'no-repeat';
+  body.style.backgroundSize = 'cover';
+}
+
 // date/time in bottom right
 function updateDateTime() {
   const datetimeElement = document.getElementById("datetime");
@@ -102,7 +148,7 @@ function updateTaskbar(iconName, action) {
   let imgSrc = '';
   if (iconName === 'media') {
     appName = 'Media Player';
-    imgSrc = '/resources/msft/music.png';
+    imgSrc = '/resources/msft/media-player.png';
   }
   else if (iconName === 'blog') {
     appName = 'Blogs';
@@ -114,7 +160,7 @@ function updateTaskbar(iconName, action) {
   }
   else if (iconName === 'lists') {
     appName = 'Reviews & Lists';
-    imgSrc = '/resources/msft/media.png';
+    imgSrc = '/resources/msft/list.png';
   }
   else if (iconName === 'internet') {
     appName = 'Internet';
@@ -127,6 +173,10 @@ function updateTaskbar(iconName, action) {
   else if (iconName === 'signup') {
     appName = 'Sign Up';
     imgSrc = '/resources/msft/user-signup.png';
+  }
+  else if (iconName === 'reviews') {
+    appName = 'Album Reviews';
+    imgSrc = '/resources/msft/music.png';
   }
   if (action === 'add') {
     const taskBarApps = document.getElementsByClassName('taskbar-button');
@@ -147,10 +197,7 @@ function updateTaskbar(iconName, action) {
     appButton.onclick = function () { maxApp(iconName) };
     taskbarContainer.appendChild(appButton);
 
-    windows.forEach((window) => {
-      window.style.zIndex = '1';
-    });
-    document.getElementById(iconName).style.zIndex = '2';
+    updateWindowZIndex(iconName);
   }
   else if (action === 'remove') {
     const taskBarApps = document.getElementsByClassName('taskbar-button');
@@ -175,14 +222,9 @@ const hiddenList = document.getElementById('hidden-list');
 const internet = document.getElementById('internet');
 const catalog = document.getElementById('catalog');
 
-const windows = document.querySelectorAll('.window');
 // open/close libraries
 function openApp(appName) {
-  if (appName === 'reviews') {
-    window.location.href = '/templates/reviews.html';
-    return;
-  }
-  else if (appName === 'puzzle') {
+  if (appName === 'puzzle') {
     window.location.href = '/puzzle/tutorial.html';
     return;
   }
@@ -198,7 +240,7 @@ function closeApp(appName) {
   updateTaskbar(appName, 'remove');
 
   if (appName === 'internet') {
-    document.body.style.backgroundImage = "url('/resources/media/peshay.png')";
+    document.body.style.backgroundImage = "url('/resources/media/metropolis.jpg')";
   }
   else if (appName === 'hidden-list') {
     document.getElementById('hidden-list').style.display = 'none';
@@ -217,11 +259,13 @@ function minApp(appName) {
   document.getElementById(appName).style.display = 'none';
 }
 function maxApp(appName) {
-  document.getElementById(appName).style.display = 'block';
-  windows.forEach((window) => {
-    window.style.zIndex = '1';
-  });
-  document.getElementById(appName).style.zIndex = '2';
+  const appToMax = document.getElementById(appName);
+  appToMax.style.display = 'block';
+  appToMax.style.left = '50%';
+  appToMax.style.top = '50%';
+  appToMax.style.top = '50%';
+  appToMax.style.transform = 'translate(-50%, -50%)';
+  updateWindowZIndex(appName);
 }
 
 // drag and drop libraries
@@ -238,19 +282,12 @@ let isDraggingMedia = false;
 // pick up
 head.addEventListener("mousedown", (event) => {
   isDraggingMedia = true;
-  windows.forEach((window) => {
-    window.style.zIndex = '1';
-  });
-  head.zIndex = 2;
 });
 
 for (let i = 0; i < titleBars.length; i++) {
   titleBars[i].addEventListener("mousedown", (event) => {
     isDragging[i] = true;
-    windows.forEach((window) => {
-      window.style.zIndex = '1';
-    });
-    windows[i].style.zIndex = '2';
+    updateWindowZIndex(windows[i].id);
   });
 }
 
@@ -258,13 +295,20 @@ for (let i = 0; i < titleBars.length; i++) {
 document.addEventListener("mousemove", (event) => {
   if (isDraggingMedia) {
     mediaPlayer.style.left = `${event.clientX - 100}px`;
-    mediaPlayer.style.top = `${event.clientY + (mediaPlayer.clientHeight / 2)}px`;
+    mediaPlayer.style.top = `${event.clientY + (mediaPlayer.clientHeight / 2) - 20}px`;
   }
   for (let i = 0; i < isDragging.length; i++) {
     if (isDragging[i]) {
       windows[i].style.left = `${event.clientX}px`;
       windows[i].style.top = `${event.clientY + (windows[i].clientHeight / 2) - 5}px`;
     }
+  }
+  if (isAsleep){
+    isAsleep = false;
+    document.body.innerHTML = previousState;
+    document.body.style.backgroundImage = "url('/resources/media/metropolis.jpg')"
+    document.body.style.backgroundSize = "100%";
+    previousState = '';
   }
 });
 
@@ -449,7 +493,6 @@ function playMedia(fileName, folderName) {
 
 }
 // END HEAD LOGIC
-
 function createList(fileName) {
   const listContainer = document.getElementById('list-container');
   listContainer.innerHTML = '';
@@ -490,6 +533,7 @@ function createList(fileName) {
         tableBody.appendChild(row);
       });
     })
+    updateWindowZIndex('hidden-list');
 }
 
 // navigate internet
@@ -566,17 +610,6 @@ function signUp() {
   confirm("Sign up using this email?\n" + email);
 }
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   const desktopMedia = document.getElementById("desktop-media");
-//   const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
-//   let currentColorIndex = 0;
-
-//   setInterval(() => {
-//     desktopMedia.style.outline = `10px solid ${colors[currentColorIndex]}`;
-//     currentColorIndex = (currentColorIndex + 1) % colors.length;
-//   }, 500);
-// });
-
 function startVisualization(){
   const consoleDiv = document.getElementById("vid-bkgd");
   const canvas = document.createElement("canvas");
@@ -634,6 +667,268 @@ function startVisualization(){
     canvas.width = consoleDiv.offsetWidth;
     canvas.height = consoleDiv.offsetHeight;
   });
+}
+
+const reviewTable = document.getElementById('review-table');
+let sortColumn = 'reviewed';
+let sortDirection = true;
+
+window.addEventListener('beforeunload', function () {
+    const scrollableDiv = document.getElementById('scroll-div');
+    const reviews = document.getElementById('reviews');
+    if (scrollableDiv) {
+        sessionStorage.setItem('scrollPosition', scrollableDiv.scrollTop);
+    }
+    sessionStorage.setItem('savedSortColumn', sortColumn);
+    sessionStorage.setItem('savedSortDirection', sortDirection);
+    sessionStorage.setItem('areReviewsOpen', reviews.style.display);
+});
+
+window.addEventListener('load', function () {
+    const scrollableDiv = document.getElementById('scroll-div');
+    const savedScrollPosition = sessionStorage.getItem('scrollPosition');
+    const savedSortColumn = sessionStorage.getItem('savedSortColumn');
+    const savedSortDirection = sessionStorage.getItem('savedSortDirection');
+    const reviewDisplay = sessionStorage.getItem('areReviewsOpen');
+
+    if (scrollableDiv && savedScrollPosition) {
+        setTimeout(() => {
+            scrollableDiv.scrollTop = parseInt(savedScrollPosition);
+        }, 100);
+    }
+    if (savedSortColumn) {
+        sortDirection = savedSortDirection;
+        sortAndReloadContent(savedSortColumn, null);
+    }
+    else {
+        sortAndReloadContent(sortColumn, null);
+    }
+    if (reviewDisplay){
+      this.document.getElementById('reviews').style.display = reviewDisplay;
+    }
+});
+
+function sortData(columnName) {
+    sortColumn = columnName;
+    fetch('../resources/albums/album_data.json')
+        .then(response => response.json())
+        .then(data => {
+            var sort = columnName;
+            const entries = Object.entries(data);
+
+            if (sort === "title") {
+                entries.sort((a, b) => {
+                    if (sortDirection) {
+                        return a[1].title.localeCompare(b[1].title);
+                    }
+                    return b[1].title.localeCompare(a[1].title);
+                });
+            }
+            else if (sort === "artist") {
+                entries.sort((a, b) => {
+                    if (sortDirection) {
+                        return a[1].artist.localeCompare(b[1].artist);
+                    }
+                    return b[1].artist.localeCompare(a[1].artist);
+                });
+            }
+            else if (sort === "score") {
+                entries.sort((a, b) => {
+                    if (sortDirection) {
+                        if (a[1].score === 10 && b[1].score === 10) {
+                            return b[1].order - a[1].order;
+                        }
+                        else {
+                            return b[1].score - a[1].score;
+                        }
+                    }
+                    if (a[1].score === 10 && b[1].score === 10) {
+                        return a[1].order - b[1].order;
+                    }
+                    else {
+                        return a[1].score - b[1].score;
+                    }
+                });
+            }
+            else if (sort === "released") {
+                entries.sort((a, b) => {
+                    if (!sortDirection) {
+                        return a[1].released.localeCompare(b[1].released);
+                    }
+                    return b[1].released.localeCompare(a[1].released);
+                });
+            }
+            else if (sort === "reviewed") {
+                entries.sort((a, b) => {
+                    if (!sortDirection) {
+                        return a[1].reviewed.localeCompare(b[1].reviewed);
+                    }
+                    return b[1].reviewed.localeCompare(a[1].reviewed);
+                });
+            }
+            const sortedData = Object.fromEntries(entries);
+
+            for (let key in sortedData) {
+                if (sortedData.hasOwnProperty(key)) {
+                    // create image
+                    const coverItem = document.createElement('td');
+                    coverItem.classList.add('review-data');
+                    const img = document.createElement('img');
+                    img.classList.add('review-img')
+                    img.src = `${sortedData[key].cover}`
+                    coverItem.appendChild(img);
+
+                    // create title
+                    const titleItem = document.createElement('td');
+                    titleItem.classList.add('review-data');
+                    titleItem.textContent = `${sortedData[key].title}`;
+
+                    // create artist
+                    const artistItem = document.createElement('td');
+                    artistItem.classList.add('review-data');
+                    artistItem.textContent = `${sortedData[key].artist}`;
+
+                    // create score
+                    const scoreItem = document.createElement('td');
+                    scoreItem.classList.add('review-data');
+                    scoreItem.textContent = `${sortedData[key].score}`;
+
+                    // create releaseDate
+                    const releaseItem = document.createElement('td');
+                    releaseItem.classList.add('review-data');
+                    releaseItem.textContent = `${sortedData[key].released}`;
+
+                    // create reviewDate
+                    const reviewItem = document.createElement('td');
+                    reviewItem.classList.add('review-data');
+                    reviewItem.textContent = `${sortedData[key].reviewed}`;
+
+                    // append items to row, then append row to page
+                    const row = document.createElement('tr');
+                    row.appendChild(coverItem);
+                    row.appendChild(titleItem);
+                    row.appendChild(artistItem);
+                    row.appendChild(scoreItem);
+                    row.appendChild(releaseItem);
+                    row.appendChild(reviewItem);
+                    row.setAttribute("onclick", "toReview(this)");
+                    row.id = `${key}`;
+
+                    reviewTable.appendChild(row);
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching JSON:', error);
+        });
+};
+
+function sortAndReloadContent(columnName, element) {
+    if (element === null) {
+        const selected = document.getElementById(`${columnName}`);
+        selected.classList.add('selected-sort');
+        sortData(columnName);
+        return;
+    }
+
+    if (element.classList.contains('selected-sort')) {
+        sortDirection = !sortDirection;
+    }
+    else {
+        sortDirection = true;
+        document.querySelectorAll('th').forEach(colTitle => {
+            colTitle.classList.remove('selected-sort');
+        });
+        element.classList.add('selected-sort');
+    }
+
+    const divs = document.querySelectorAll('tbody>tr');
+    divs.forEach(div => {
+        div.remove();
+    });
+    sortData(columnName);
+}
+
+function getRandomReview() {
+    fetch('../resources/albums/album_data.json')
+        .then(response => response.json())
+        .then(data => {
+            let index = Math.trunc(Math.random() * Object.keys(data).length);
+            const keys = Object.keys(data);
+            window.location.href = `/templates/album-review.html?album=${keys[index]}`;
+        });
+}
+
+function toReview(element) {
+    window.location.href = `/templates/album-review.html?album=${element.id}`;
+}
+
+function help() {
+    document.getElementById('help').style.display = 'block';
+}
+function closeHelp() {
+    document.getElementById('help').style.display = 'none';
+}
+
+function openStats() {
+    fetch('../resources/albums/album_data.json')
+        .then(response => response.json())
+        .then(data => {
+            var scores = {
+                10: 0,
+                9: 0,
+                8: 0
+            };
+            var decades = {};
+            for (let key in data) {
+                var score = parseInt(data[key]['score']);
+                var decade = data[key]['released'].substring(0, 3);
+                
+                if (score in scores){
+                    scores[score]++;
+                }
+                else{
+                    scores['other'] = 1;
+                }
+
+                if (decade in decades){
+                    decades[decade]++;
+                }
+                else{
+                    decades[decade] = 1;
+                }
+            }
+            document.getElementById('10').innerHTML += scores['10'];
+            document.getElementById('9').innerHTML += scores['9'];
+            document.getElementById('8').innerHTML += scores['8'];
+            document.getElementById('other').innerHTML += scores['other'];
+
+            document.getElementById('20s').innerHTML += decades['202'];
+            document.getElementById('10s').innerHTML += decades['201'];
+            document.getElementById('00s').innerHTML += decades['200'];
+            document.getElementById('90s').innerHTML += decades['199'];
+            document.getElementById('80s').innerHTML += decades['198'];
+            document.getElementById('70s').innerHTML += decades['197'];
+            document.getElementById('60s').innerHTML += decades['196'];
+
+            document.getElementById('stats').style.display = 'block';
+        });
+}
+function closeStats() {
+    document.getElementById('stats').style.display = 'none';
+
+    document.getElementById('10').innerHTML = '10: ';
+    document.getElementById('9').innerHTML = '9: ';
+    document.getElementById('8').innerHTML = '8: ';
+    document.getElementById('other').innerHTML = 'other: ';
+
+    document.getElementById('20s').innerHTML = '2020s: ';
+    document.getElementById('10s').innerHTML = '2010s: ';
+    document.getElementById('00s').innerHTML = '2000s: ';
+    document.getElementById('90s').innerHTML = '1990s: ';
+    document.getElementById('80s').innerHTML = '1980s: ';
+    document.getElementById('70s').innerHTML = '1970s: ';
+    document.getElementById('60s').innerHTML = '1960s: ';
 }
 
 // openApp('signup');

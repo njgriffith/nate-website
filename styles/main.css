@@ -33,13 +33,18 @@ img {
   height: 80px;
   margin: 1em;
   text-align: center;
-  color: black;
+  color: white;
   cursor: pointer;
   user-select: none;
   font-family: "Pixelated MS Sans Serif";
+  
 }
 .icon > img{
   width: 32px;
+  height: 32px;
+}
+.icon > p{
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .taskbar {
@@ -52,6 +57,7 @@ img {
   border-top: 2px solid #808080;
   display: flex;
   align-items: center;
+  z-index: 5;
 }
 
 .start-button {
@@ -67,6 +73,7 @@ img {
   display: flex;
   align-items: center;
   margin-right: 5em;
+  height: 80%;
 }
 
 .taskbar-button {
@@ -174,70 +181,20 @@ li>img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
 }
 
-#blog {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#stats {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#lists {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#hidden-list {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#internet {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
-  height: 600px;
-}
 #catalog {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
-  height: 600px;
-}
-#signup {
-  position: absolute;
-  top: 20%;
-  left: 70%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 200px;
+  width: 50%;
+  height: 70%;
 }
 #changelog {
-  position: absolute;
-  bottom: 0%;
-  right: 0%;
-  transform: translate(-50%, -50%);
   width: 30%;
-  height: 20%;
+  height: 30%;
+} 
+#reviews{
+  width: 70%;
+  height: 80%;
 }
-
 .library-image {
   width: 60%;
   height: auto;
@@ -325,6 +282,7 @@ tbody>tr:hover {
   align-items: center;
   margin-top: 5em;
   margin-bottom: 3em;
+  gap: 1em;
 }
 #creature{
   width: 200px;
@@ -361,4 +319,66 @@ tbody>tr:hover {
   gap: 10px;
   padding: 1em;
   outline: 10px solid white;
+}
+
+/* Adding reviews style */
+
+.review-table-head > tr {
+  font-size: 1.5em;
+}
+
+th {
+  cursor: pointer;
+}
+
+th:hover {
+  background: #444;
+  color: white;
+}
+
+.selected-sort {
+  background: #444;
+  color: white;
+}
+
+tbody>tr:hover {
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+}
+
+.review-data {
+  text-wrap: wrap;
+  font-size: 1.7em;
+}
+
+.review-img {
+  width: 200px;
+  height: 200px;
+}
+
+.review-img:hover {
+  scale: 1.05;
+  transition-duration: 0.5s;
+}
+
+.sort-asc {
+  color: #555;
+}
+
+.sort-desc {
+  color: #555;
+}
+
+#help {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 600px;
+}
+
+#help > .window-body > ul > li {
+  padding-bottom: 2em;
 }

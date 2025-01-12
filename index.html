@@ -33,7 +33,7 @@
         </div>
         <div ondblclick="openApp('puzzle')"  onclick="highlightApp(this)">
             <div class="icon">
-                <img src="/resources/media/racer.gif">
+                <img src="/resources/media/death.gif">
                 <p>Solve My Puzzle</p>
                 <div style="display: none;" id="whats-his-name">Ax gxoxk lexxil, max cnwzx. Ax bl wtgvbgz, wtgvbgz. Ax
                     ltrl matm ax pbee gxoxk wbx</div>
@@ -41,7 +41,7 @@
         </div>
         <div ondblclick="openApp('stats')" onclick="highlightApp(this)">
             <div class="icon" id="stats-icon">
-                <img src="/resources/msft/cubes.png">
+                <img src="/resources/media/matrix-code.gif">
                 <p>Stats</p>
             </div>
         </div>
@@ -53,7 +53,7 @@
         </div>
         <div ondblclick="openApp('internet')" onclick="highlightApp(this)">
             <div class="icon">
-                <img src="/resources/msft/internet.png">
+                <img src="/resources/media/racer.gif">
                 <p>Internet</p>
             </div>
         </div>
@@ -71,11 +71,6 @@
         </div> -->
     </div>
     <div id="console" style="position: absolute; top: 0; right: 0; width: 30%; height: 35%;"></div>
-    <!-- <div id="desktop-media">
-        <img src="/resources/media/rotate_head.gif">
-        <img src="/resources/media/transformer.gif">
-        <img src="/resources/media/fire.gif">
-    </div> -->
     
     <!-- BIG HEAD -->
     <div id="media" style="position: absolute; left: 30%; top: 25%; display: none;">
@@ -346,7 +341,9 @@
             <button style="position: absolute; bottom: 2em; left: 2em;" onclick="scrollCatalog(-1)">prev</button>
             <button style="position: absolute; bottom: 2em; right: 2em;" onclick="scrollCatalog(1)">next</button>
             <div class="img-container">
+                <img src="/resources/media/lab.jpg">
                 <img id="creature" src="/resources/catalog/001.gif">
+                <img src="/resources/media/lab.jpg">
             </div>
             <div id="creature-desc"></div>
         </div>
@@ -363,10 +360,93 @@
                 <button onclick="closeApp('changelog')" aria-label="Close" id="close-changelog"></button>
             </div>
         </div>
-        <div class="window-body" style="overflow-y: scroll; width: 95%; height: 80%;" id="changelog-container">
+        <div class="window-body" style="overflow-y: scroll; width: 95%; height: 80%; display: flex;">
+            <div id="changelog-container"></div>
+            <img src="/resources/media/fire.gif">
         </div>
     </div>
     <!-- End changelog -->
+    <!-- Start reviews -->
+    <div class="window" id="reviews" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text" style="margin-left: 1em;">Album Reviews</div>
+            <div class="title-bar-controls">
+                <button aria-label="Help" onclick="help()"></button>
+                <button aria-label="Minimize" style="margin-left: 1em;" onclick="minApp('reviews')"></button>
+                <button aria-label="Maximize" style="margin-left: 2px;"></button>
+                <button aria-label="Close" onclick="closeApp('reviews')"></button>
+            </div>
+        </div>
+        <div class="window-body" style="height: 100%;">
+            <div id="scroll-div" class="sunken-panel" style="width: 100%; height: 95%;">
+                <table style="width: 100%;">
+                    <thead class="review-table-head">
+                        <tr>
+                            <th>Cover</th>
+                            <th id="title" onclick="sortAndReloadContent('title', this)">Title</th>
+                            <th id="artist" onclick="sortAndReloadContent('artist', this)">Artist</th>
+                            <th id="score" onclick="sortAndReloadContent('score', this)">Score</th>
+                            <th id="released" onclick="sortAndReloadContent('released', this)">Release Date</th>
+                            <th id="reviewed" onclick="sortAndReloadContent('reviewed', this)">Review Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="review-table">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="window library" id="help" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">Help</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize" style="margin-left: 0.2em;"></button>
+                <button onclick="closeHelp()" aria-label="Close" id="close-help"></button>
+            </div>
+        </div>
+        <div class="window-body" style="font-size: 1.2em; font-weight: bold; width: 80%; margin-top: 5em;">
+            <ul>
+                <li>I don't rate most things I listen to. I only will if it's:<br><br>
+                    <ul>
+                        <li>A personal favorite</li>
+                        <li>Something interesting I want to talk about</li>
+                        <li>A suggestion from someone else</li>
+                    </ul>
+                </li>
+                <li>Reviews with "Review Date" set to 01-01-2000 are just reviews I haven't gotten to yet</li>
+                <li>For albums with a 10/10 score, ties are broken by when I gave them a 10. So if you sort by highest score, the top entry is the most recent 10 I've given.</li>
+                <li>Default sort order is most recently reviewed</li>
+            </ul>
+        </div>
+    </div>
+    <div class="window library" id="stats" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">Statistics</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize" style="margin-left: 0.2em;"></button>
+                <button onclick="closeStats()" aria-label="Close" id="close-help"></button>
+            </div>
+        </div>
+        <div class="window-body" style="font-size: 1.7em; margin: 1em;">
+            <div style="margin-bottom: 1em; font-weight: bold;">Reviews by score</div>
+            <div id="10">10: </div>
+            <div id="9">9: </div>
+            <div id="8">8: </div>
+            <div id="other">other: </div>
+
+            <div style="margin-bottom: 1em; margin-top: 1em; font-weight: bold;">Reviews by decade</div>
+            <div id="20s">2020s: </div>
+            <div id="10s">2010s: </div>
+            <div id="00s">2000s: </div>
+            <div id="90s">1990s: </div>
+            <div id="80s">1980s: </div>
+            <div id="70s">1970s: </div>
+            <div id="60s">1960s: </div>
+        </div>
+    </div>
+    <!-- End reviews -->
 
      <!-- Start signup -->
     <div class="window library" id="signup" style="display: none;">
@@ -417,7 +497,7 @@
             <a class="start-link" onclick="openApp('blog')">
                 <li><img src="/resources/msft/blog-table.png"><u>B</u>log</li>
             </a>
-            <a class="start-link" href="/templates/reviews.html">
+            <a class="start-link" onclick="openApp('reviews')">
                 <li><img src="/resources/msft/music.png"><u>M</u>usic Reviews</li>
             </a>
             <a class="start-link" href="/puzzle/tutorial.html">
@@ -429,7 +509,7 @@
             <a class="start-link" onclick="openApp('internet')">
                 <li><img src="/resources/msft/beacon.png"><u>I</u>nternet</li>
             </a>
-            <li><img src="/resources/msft/gears.png"><u>S</u>ettings</li>
+            <li onclick="sleep()"><img src="/resources/msft/computer.png"><u>S</u>leep</li>
             <li onclick="shutDown()"><img src="/resources/msft/power.png"><u>S</u>hut Down</li>
         </ul>
     </div>
