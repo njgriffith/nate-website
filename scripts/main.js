@@ -78,8 +78,8 @@ function randomizeWindows(){
       continue;
     }
     windows[i].style.position = 'absolute';
-    windows[i].style.top = `${30 + Math.floor(Math.random() * 60)}%`;
-    windows[i].style.left = `${30 + Math.floor(Math.random() * 60)}%`;
+    windows[i].style.top = `${window.innerHeight * 0.1 + Math.floor(Math.random() * window.innerHeight * 0.9)}px`;
+    windows[i].style.left = `${window.innerWidth * 0.1 + Math.floor(Math.random() * window.innerWidth * 0.9)}px`;
     windows[i].style.transform = `translate(-50%, -50%)`;
   }
 }
@@ -271,6 +271,7 @@ function maxApp(appName) {
 // drag and drop libraries
 const titleBars = document.querySelectorAll('.title-bar');
 let isDragging = [];
+let shift = 0;
 for (let i = 0; i < titleBars.length; i++) {
   isDragging.push(false);
 }
@@ -288,6 +289,7 @@ for (let i = 0; i < titleBars.length; i++) {
   titleBars[i].addEventListener("mousedown", (event) => {
     isDragging[i] = true;
     updateWindowZIndex(windows[i].id);
+    shift = parseFloat(windows[i].style.left) - event.clientX;
   });
 }
 
@@ -299,7 +301,8 @@ document.addEventListener("mousemove", (event) => {
   }
   for (let i = 0; i < isDragging.length; i++) {
     if (isDragging[i]) {
-      windows[i].style.left = `${event.clientX}px`;
+      console.log(parseFloat(windows[i].style.left) - event.clientX);
+      windows[i].style.left = `${event.clientX + shift}px`;
       windows[i].style.top = `${event.clientY + (windows[i].clientHeight / 2) - 5}px`;
     }
   }
