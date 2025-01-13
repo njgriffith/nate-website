@@ -26,13 +26,11 @@ fetch(`/resources/albums/reviews/${title}.txt`)
                 if (title === "TVUandN") {
                     return;
                 }
+                if (title === "perverts"){
+                    document.getElementById('review').style.color = '#aaa';
+                    document.getElementById('review').style.backgroundColor = '#000';
+                }
                 document.getElementById('review').innerHTML += '<br>' + jsonData[`${title}`]['score'];
-
-                // for (const key in jsonData) {
-                //     if(jsonData[`${key}`]['artist'] == artist && jsonData[`${key}`]['title'] != document.title){
-                //         document.getElementById('more').innerHTML += '<a href="/templates/album-review.html?album=' + key + '">' + jsonData[`${key}`]['title'] + '</a><br>';
-                //     }
-                // }
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);

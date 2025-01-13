@@ -15,19 +15,19 @@
     <div class="desktop">
         <div ondblclick="openApp('blog')" onclick="highlightApp(this)">
             <div class="icon">
-                <img src="/resources/msft/blog-table.png">
+                <img src="/resources/media/transformer.gif">
                 <p>Blogs</p>
             </div>
         </div>
         <div ondblclick="openApp('reviews')" onclick="highlightApp(this)">
             <div class="icon">
-                <img src="/resources/msft/music.png">
+                <img src="/resources/media/ms-vis.gif">
                 <p>Album Reviews</p>
             </div>
         </div>
         <div ondblclick="openApp('lists')" onclick="highlightApp(this)">
             <div class="icon">
-                <img src="/resources/msft/list.png">
+                <img src="/resources/media/blobs.gif">
                 <p>Lists</p>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 <p>Stats</p>
             </div>
         </div>
-        <div ondblclick="openApp('media')" onclick="highlightApp(this)">
+        <div ondblclick="openApp('media-player')" onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/media/vis.gif">
                 <p>Media Player</p>
@@ -79,7 +79,7 @@
     <div id="console" style="position: absolute; top: 0; right: 0; width: 30%; height: 35%;"></div>
     
     <!-- BIG HEAD -->
-    <div id="media" style="position: absolute; left: 30%; top: 25%; display: none;">
+    <div id="media-player" style="position: absolute; left: 30%; top: 25%; display: none;">
         <audio id="audio-player" style="display: none;"></audio>
         <img id="head" src="/resources/head/head.bmp" style="position: absolute; z-index: 3;">
         <div id="vid-bkgd" style="width: 215px; height: 160px; position: absolute; top: 60px; left: 10px; z-index: 2;">
@@ -89,7 +89,7 @@
             style="position: absolute; top: 30px; left: 40px; z-index: 3;">
         <img src="/resources/head/viz_drop_X_01_default.bmp"
             style="position: absolute; top: 10px; left: 150px; z-index: 3; cursor: pointer;"
-            onclick="closeApp('media')">
+            onclick="closeApp('media-player')">
 
         <div id="right-ear" style="position: absolute; left: 200px; top: 100px; transition-duration: 0.5s; z-index: 1;">
             <img src="/resources/head/right_ear.bmp" style="position: absolute;">
@@ -225,7 +225,7 @@
                     </tbody>
                 </table>
             </div>
-            <img src="/resources/media/transformer.gif">
+            <img src="/resources/media/scholastic.gif" style="width: 300px">
         </div>
     </div>
     <!-- End stats library -->
@@ -379,7 +379,7 @@
         <div class="title-bar">
             <div class="title-bar-text" style="margin-left: 1em;">Album Reviews</div>
             <div class="title-bar-controls">
-                <button aria-label="Help" onclick="help()"></button>
+                <button aria-label="Help" onclick="openApp('help')"></button>
                 <button aria-label="Minimize" style="margin-left: 1em;" onclick="minApp('reviews')"></button>
                 <button aria-label="Maximize" style="margin-left: 2px;"></button>
                 <button aria-label="Close" onclick="closeApp('reviews')"></button>
@@ -390,7 +390,7 @@
                 <button onclick="getRandomReview()">To Random Review</button>
                 <button onclick="openReviewStats()">Statistics</button>
             </div>
-            <div id="scroll-div" class="sunken-panel" style="width: 100%; height: 95%;">
+            <div id="scroll-div" class="sunken-panel" style="width: 100%; height: 90%;">
                 <table style="width: 100%;">
                     <thead class="review-table-head">
                         <tr>
@@ -414,7 +414,7 @@
             <div class="title-bar-controls">
                 <button aria-label="Minimize"></button>
                 <button aria-label="Maximize" style="margin-left: 0.2em;"></button>
-                <button onclick="closeHelp()" aria-label="Close" id="close-help"></button>
+                <button onclick="closeApp('help')" aria-label="Close" id="close-help"></button>
             </div>
         </div>
         <div class="window-body" style="font-size: 1.2em; font-weight: bold; width: 80%; margin-top: 5em;">
@@ -449,13 +449,13 @@
             <div id="other">other: </div>
 
             <div style="margin-bottom: 1em; margin-top: 1em; font-weight: bold;">Reviews by decade</div>
-            <div id="20s">2020s: </div>
-            <div id="10s">2010s: </div>
-            <div id="00s">2000s: </div>
-            <div id="90s">1990s: </div>
-            <div id="80s">1980s: </div>
-            <div id="70s">1970s: </div>
-            <div id="60s">1960s: </div>
+            <div id="2020s">2020s: </div>
+            <div id="2010s">2010s: </div>
+            <div id="2000s">2000s: </div>
+            <div id="1990s">1990s: </div>
+            <div id="1980s">1980s: </div>
+            <div id="1970s">1970s: </div>
+            <div id="1960s">1960s: </div>
         </div>
     </div>
     <!-- End reviews -->
@@ -503,28 +503,17 @@
         </button>
         <div id="taskbar-apps" style="display: flex;">
         </div>
-
         <div class="taskbar-empty-space"></div>
-        <div class="media" id="media" style="display: none;">
-            <div class="media-info">
-                <span class="track-title" id="track-title">Track Name</span>
-            </div>
-            <div class="media-controls">
-                <button class="control-button">⏮</button>
-                <button class="control-button" id="play-button" onclick="toggleMusic()">⏸</button>
-                <button class="control-button">⏭</button>
-            </div>
-        </div>
         <div class="datetime" id="datetime"></div>
     </div>
     <div id="start-menu" class="start-menu hidden">
         <div class="start-menu-banner"><strong style="color: #aaa;">&nbsp;Griffith</strong> 95</div>
         <ul>
             <a class="start-link" onclick="openApp('blog')">
-                <li><img src="/resources/msft/blog-table.png"><u>B</u>log</li>
+                <li><img src="/resources/msft/blog.png"><u>B</u>log</li>
             </a>
             <a class="start-link" onclick="openApp('reviews')">
-                <li><img src="/resources/msft/music.png"><u>M</u>usic Reviews</li>
+                <li><img src="/resources/msft/reviews.png"><u>M</u>usic Reviews</li>
             </a>
             <a class="start-link" href="/puzzle/tutorial.html">
                 <li><img src="/resources/msft/help.png"><u>P</u>uzzle</li>
@@ -535,7 +524,7 @@
             <a class="start-link" onclick="openApp('internet')">
                 <li><img src="/resources/msft/beacon.png"><u>I</u>nternet</li>
             </a>
-            <li onclick="shutDown()"><img src="/resources/msft/gears.png"><u>S</u>ettings</li>
+            <li onclick="openApp('settings')"><img src="/resources/msft/settings.png"><u>S</u>ettings</li>
             <li onclick="sleep()"><img src="/resources/msft/computer.png"><u>S</u>leep</li>
         </ul>
     </div>

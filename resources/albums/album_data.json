@@ -577,5 +577,13 @@
         "released": "1985-09-30",
         "reviewed": "2025-01-02",
         "cover": "https://upload.wikimedia.org/wikipedia/en/6/60/Tom_Waits_-_Rain_Dogs.png"
+    },
+    "perverts": {
+        "title": "Perverts",
+        "artist": "Ethel Cain",
+        "score": "9.3",
+        "released": "2025-01-08",
+        "reviewed": "2025-01-13",
+        "cover": "https://upload.wikimedia.org/wikipedia/en/f/f8/Perverts_-_Ethel_Cain.png"
     }
 }

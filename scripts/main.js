@@ -1,3 +1,4 @@
+// Pre-load and window logic
 const smallScreenImage = '/resources/backgrounds/peshay-mobile.png';
 var largeScreenImage = '/resources/backgrounds/metropolis.png';
 
@@ -71,15 +72,13 @@ function randomizeWindows(){
   for(let i=0;i<windows.length;i++){
     if(windows[i].id === 'reviews' || windows[i].id === 'internet'){
       windows[i].style.position = 'absolute';
-      windows[i].style.top = `50%`;
-      windows[i].style.left = `50%`;
-      windows[i].style.transform = `translate(-50%, -50%)`;
+      windows[i].style.top = `20%`;
+      windows[i].style.left = `20%`;
       continue;
     }
     windows[i].style.position = 'absolute';
-    windows[i].style.top = `${window.innerHeight * 0.3 + Math.floor(Math.random() * window.innerHeight * 0.6)}px`;
-    windows[i].style.left = `${window.innerWidth * 0.3 + Math.floor(Math.random() * window.innerWidth * 0.6)}px`;
-    windows[i].style.transform = `translate(-50%, -50%)`;
+    windows[i].style.top = `${Math.floor(Math.random() * window.innerHeight * 0.6)}px`;
+    windows[i].style.left = `${Math.floor(Math.random() * window.innerWidth * 0.6)}px`;
   }
 }
 randomizeWindows()
@@ -90,6 +89,12 @@ function updateWindowZIndex(frontWindow){
   });
   document.getElementById(frontWindow).style.zIndex = '2';
 }
+
+function updateBackground(newBackground){
+  largeScreenImage = `/resources/backgrounds/${newBackground}.png`;
+  updateBackgroundImage();
+}
+
 // START TASKBAR LOGIC
 document.getElementById('start-button').addEventListener('click', function () {
   const startMenu = document.getElementById('start-menu');
@@ -97,7 +102,6 @@ document.getElementById('start-button').addEventListener('click', function () {
 });
 
 document.addEventListener('click', function (event) {
-  document.getElementById('right-click-menu').style.display = 'none';
   const startMenu = document.getElementById('start-menu');
   const startButton = document.getElementById('start-button');
   if (!startMenu.contains(event.target) && event.target !== startButton) {
@@ -134,44 +138,11 @@ function updateDateTime() {
 
 function updateTaskbar(iconName, action) {
   const taskbarContainer = document.getElementById('taskbar-apps');
-  let appName = '';
-  let imgSrc = '';
-  if (iconName === 'media') {
-    appName = 'Media Player';
-    imgSrc = '/resources/msft/media-player.png';
-  }
-  else if (iconName === 'blog') {
-    appName = 'Blogs';
-    imgSrc = '/resources/msft/blog-table.png';
-  }
-  else if (iconName === 'stats') {
-    appName = 'Stats';
-    imgSrc = '/resources/msft/cubes.png';
-  }
-  else if (iconName === 'lists') {
-    appName = 'Reviews & Lists';
-    imgSrc = '/resources/msft/list.png';
-  }
-  else if (iconName === 'internet') {
-    appName = 'Internet';
-    imgSrc = '/resources/msft/internet.png';
-  }
-  else if (iconName === 'catalog') {
-    appName = 'Catalogue';
-    imgSrc = '/resources/msft/catalog.png';
-  }
-  else if (iconName === 'signup') {
-    appName = 'Sign Up';
-    imgSrc = '/resources/msft/user-signup.png';
-  }
-  else if (iconName === 'reviews') {
-    appName = 'Album Reviews';
-    imgSrc = '/resources/msft/music.png';
-  }
-  else if (iconName === 'settings'){
-    appName = 'Settings';
-    imgSrc = '/resources/msft/gears.png';
-  }
+
+  let appName = iconName.toLowerCase().split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ').replace('-', ' ');
+  console.log(appName)
+  let imgSrc = `/resources/msft/${iconName}.png`;
+
   if (action === 'add') {
     const taskBarApps = document.getElementsByClassName('taskbar-button');
     for (let i = 0; i < taskBarApps.length; i++) {
@@ -208,7 +179,7 @@ setInterval(updateDateTime, 60000);
 // END  TASKBAR LOGIC
 
 // ICON LOGIC START
-const mediaLibrary = document.getElementById('media');
+const mediaLibrary = document.getElementById('media-player');
 const blogLibrary = document.getElementById('blog');
 const statsLibrary = document.getElementById('stats');
 const musicLibrary = document.getElementById('lists');
@@ -231,21 +202,20 @@ function openApp(appName) {
   else if (appName === 'settings'){
     loadFolderContents('background');
   }
-  
 }
 function closeApp(appName) {
   document.getElementById(appName).style.display = 'none';
   updateTaskbar(appName, 'remove');
 
   if (appName === 'internet') {
-    document.body.style.backgroundImage = `url(${largeScreenImage})`;
+    updateBackgroundImage();
   }
   else if (appName === 'hidden-list') {
     document.getElementById('hidden-list').style.display = 'none';
     document.getElementById('list-container').innerHTML = '';
   }
-  else if (appName === 'media') {
-    document.getElementById('media').style.display = 'none';
+  else if (appName === 'media-player') {
+    document.getElementById('media-player').style.display = 'none';
     audioPlayer.pause();
   }
   else if (appName === 'lists') {
@@ -259,10 +229,8 @@ function minApp(appName) {
 function maxApp(appName) {
   const appToMax = document.getElementById(appName);
   appToMax.style.display = 'block';
-  appToMax.style.left = '50%';
-  appToMax.style.top = '50%';
-  appToMax.style.top = '50%';
-  appToMax.style.transform = 'translate(-50%, -50%)';
+  appToMax.style.left = '20%';
+  appToMax.style.top = '20%';
   updateWindowZIndex(appName);
 }
 
@@ -274,7 +242,7 @@ for (let i = 0; i < titleBars.length; i++) {
   isDragging.push(false);
 }
 
-const mediaPlayer = document.getElementById('media');
+const mediaPlayer = document.getElementById('media-player');
 const head = document.getElementById('head');
 let isDraggingMedia = false;
 
@@ -301,7 +269,7 @@ document.addEventListener("mousemove", (event) => {
   for (let i = 0; i < isDragging.length; i++) {
     if (isDragging[i]) {
       windows[i].style.left = `${event.clientX + shift}px`;
-      windows[i].style.top = `${event.clientY + (windows[i].clientHeight / 2) - 5}px`;
+      windows[i].style.top = `${event.clientY - 5}px`;
       event.preventDefault();
     }
   }
@@ -340,7 +308,6 @@ function openList(div) {
     createList(note);
     document.getElementById('hidden-list').querySelector('.title-bar-text').innerHTML = div.querySelectorAll('td')[0].textContent;
     document.getElementById('hidden-list').style.display = 'block';
-    document.getElementById('hidden-list').style.display = '3';
   }
 }
 // ICON LOGIC END
@@ -587,9 +554,6 @@ function loadHTML(filePath) {
 function downloadVirus() {
   document.body.style.backgroundImage = "url('/resources/media/virus.gif')";
 }
-function isFloat(value) {
-  return Number(value) === value && value % 1 !== 0;
-}
 function startEbay(){
   const items = document.querySelectorAll('.ebay-item');
   items.forEach(item => {
@@ -667,7 +631,6 @@ function handleBid(itemName, bid){
   }
 }
 
-
 function scrollCatalog(direction) {
   const catalogSize = 7;
   const creature = document.getElementById('creature');
@@ -724,7 +687,6 @@ function startVisualization(){
   canvas.style.zIndex = '3';
   canvas.style.width = '100%';
   canvas.style.height = '100%';
-  
 
   canvas.width = consoleDiv.offsetWidth;
   canvas.height = consoleDiv.offsetHeight;
@@ -746,7 +708,6 @@ function startVisualization(){
     }
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
     ctx.fillStyle = "#0F0";
     ctx.font = `${fontSize}px monospace`;
 
@@ -771,6 +732,7 @@ function startVisualization(){
   });
 }
 
+// Reviews logic
 const reviewTable = document.getElementById('review-table');
 let sortColumn = 'reviewed';
 let sortDirection = true;
@@ -965,22 +927,11 @@ function toReview(element) {
     window.location.href = `/templates/album-review.html?album=${element.id}`;
 }
 
-function help() {
-    document.getElementById('help').style.display = 'block';
-}
-function closeHelp() {
-    document.getElementById('help').style.display = 'none';
-}
-
 function openReviewStats() {
     fetch('../resources/albums/album_data.json')
         .then(response => response.json())
         .then(data => {
-            var scores = {
-                10: 0,
-                9: 0,
-                8: 0
-            };
+            var scores = {10: 0, 9: 0, 8: 0};
             var decades = {};
             for (let key in data) {
                 var score = parseInt(data[key]['score']);
@@ -1000,50 +951,28 @@ function openReviewStats() {
                     decades[decade] = 1;
                 }
             }
-            document.getElementById('10').innerHTML += scores['10'];
-            document.getElementById('9').innerHTML += scores['9'];
-            document.getElementById('8').innerHTML += scores['8'];
-            document.getElementById('other').innerHTML += scores['other'];
-
-            document.getElementById('20s').innerHTML += decades['202'];
-            document.getElementById('10s').innerHTML += decades['201'];
-            document.getElementById('00s').innerHTML += decades['200'];
-            document.getElementById('90s').innerHTML += decades['199'];
-            document.getElementById('80s').innerHTML += decades['198'];
-            document.getElementById('70s').innerHTML += decades['197'];
-            document.getElementById('60s').innerHTML += decades['196'];
-
+            for (let key in scores){
+              document.getElementById(key).innerHTML += scores[key];
+            }
+            for (let key in decades){
+              document.getElementById(key + '0s').innerHTML += decades[key];
+            }
             document.getElementById('review-stats').style.display = 'block';
+            updateWindowZIndex('review-stats');
         });
 }
 function closeReviewStats() {
     document.getElementById('review-stats').style.display = 'none';
-
-    document.getElementById('10').innerHTML = '10: ';
-    document.getElementById('9').innerHTML = '9: ';
-    document.getElementById('8').innerHTML = '8: ';
-    document.getElementById('other').innerHTML = 'other: ';
-
-    document.getElementById('20s').innerHTML = '2020s: ';
-    document.getElementById('10s').innerHTML = '2010s: ';
-    document.getElementById('00s').innerHTML = '2000s: ';
-    document.getElementById('90s').innerHTML = '1990s: ';
-    document.getElementById('80s').innerHTML = '1980s: ';
-    document.getElementById('70s').innerHTML = '1970s: ';
-    document.getElementById('60s').innerHTML = '1960s: ';
-}
-
-function updateBackground(newBackground){
-  largeScreenImage = `/resources/backgrounds/${newBackground}.png`;
-  updateBackgroundImage();
+    document.getElementById('review-stats').querySelectorAll('div').forEach(child => {
+      if (!child.hasAttribute('id')){
+        return;
+      }
+      child.innerHTML = child.id + ': ';
+    });
 }
 
 // ----- TEST SUITE -----
 // createList('2020s-movies')
-// loadHTML('notavirus');
-// catalog.style.display = 'block';
 // scrollCatalog(6);
-// openApp('stats')
 // openApp('internet');
 // loadHTML('ebay')
-
