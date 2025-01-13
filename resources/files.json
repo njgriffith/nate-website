@@ -3,17 +3,12 @@
         "ov_dreams",
         "savestate"
     ],
-    "videos": [
-        "jamiroquai"
-    ],
-    "pictures": [
-        "ball-avalanche",
-        "columbus",
-        "disk-heaven",
-        "fiji",
-        "ice-cubes",
-        "iceberg",
-        "peshay",
-        "volleyball"
+    "background": [
+        "cave",
+        "end_jungle",
+        "floating_island",
+        "metropolis",
+        "mushroom_kingdom",
+        "rainbow_road"
     ]
 }

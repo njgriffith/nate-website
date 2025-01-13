@@ -63,6 +63,12 @@
                 <p>Catalog</p>
             </div>
         </div>
+        <div ondblclick="openApp('settings')" onclick="highlightApp(this)">
+            <div class="icon">
+                <img src="/resources/media/settings.gif">
+                <p>Settings</p>
+            </div>
+        </div>
         <!-- <div ondblclick="openApp('signup')" onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/msft/user-signup.png">
@@ -134,7 +140,7 @@
     </div>
     <!-- END BIG HEAD -->
     <!-- Blog divs -->
-    <div class="window" id="blog" class="library" style="display: none;">
+    <div class="window library" id="blog" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">Blog Links</div>
             <div class="title-bar-controls">
@@ -143,7 +149,7 @@
                 <button onclick="closeApp('blog')" aria-label="Close" id="close-blog"></button>
             </div>
         </div>
-        <div class="window-body">
+        <div class="window-body" style="display: flex; gap: 2em;">
             <div class="sunken-panel">
                 <table>
                     <thead>
@@ -172,6 +178,7 @@
                     </tbody>
                 </table>
             </div>
+            <img src="resources/media/matrix.gif">
         </div>
     </div>
     <!-- End blog divs -->
@@ -185,7 +192,7 @@
                 <button onclick="closeApp('stats')" aria-label="Close" id="close-stats"></button>
             </div>
         </div>
-        <div class="window-body">
+        <div class="window-body" style="display: flex;">
             <div class="sunken-panel">
                 <table>
                     <thead>
@@ -218,6 +225,7 @@
                     </tbody>
                 </table>
             </div>
+            <img src="/resources/media/transformer.gif">
         </div>
     </div>
     <!-- End stats library -->
@@ -231,7 +239,7 @@
                 <button onclick="closeApp('lists')" aria-label="Close" id="close-hidden"></button>
             </div>
         </div>
-        <div class="window-body">
+        <div class="window-body" style="display: flex;">
             <div class="sunken-panel">
                 <table>
                     <thead>
@@ -275,7 +283,8 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+            <img src="/resources/media/tron.jpg">
+        </div>   
     </div>
     <!-- End lists -->
 
@@ -314,6 +323,7 @@
                 <select style="width: 80%;" id="url">
                     <option selected></option>
                     <option>https://www.notavirus.com</option>
+                    <option>https://www.ebay.com</option>
                   </select>
                   <img src="/resources/msft/entire_network_globe-5.png">
             </div>
@@ -341,9 +351,7 @@
             <button style="position: absolute; bottom: 2em; left: 2em;" onclick="scrollCatalog(-1)">prev</button>
             <button style="position: absolute; bottom: 2em; right: 2em;" onclick="scrollCatalog(1)">next</button>
             <div class="img-container">
-                <img src="/resources/media/lab.jpg">
                 <img id="creature" src="/resources/catalog/001.gif">
-                <img src="/resources/media/lab.jpg">
             </div>
             <div id="creature-desc"></div>
         </div>
@@ -378,6 +386,10 @@
             </div>
         </div>
         <div class="window-body" style="height: 100%;">
+            <div class="button-container">
+                <button onclick="getRandomReview()">To Random Review</button>
+                <button onclick="openReviewStats()">Statistics</button>
+            </div>
             <div id="scroll-div" class="sunken-panel" style="width: 100%; height: 95%;">
                 <table style="width: 100%;">
                     <thead class="review-table-head">
@@ -420,13 +432,13 @@
             </ul>
         </div>
     </div>
-    <div class="window library" id="stats" style="display: none;">
+    <div class="window library" id="review-stats" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">Statistics</div>
             <div class="title-bar-controls">
                 <button aria-label="Minimize"></button>
                 <button aria-label="Maximize" style="margin-left: 0.2em;"></button>
-                <button onclick="closeStats()" aria-label="Close" id="close-help"></button>
+                <button onclick="closeReviewStats()" aria-label="Close" id="close-help"></button>
             </div>
         </div>
         <div class="window-body" style="font-size: 1.7em; margin: 1em;">
@@ -447,6 +459,20 @@
         </div>
     </div>
     <!-- End reviews -->
+
+    <!-- Start settings -->
+    <div class="window library" id="settings" style="display: none; width: 30%;">
+        <div class="title-bar">
+            <div class="title-bar-text">Settings</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize" onclick="minApp('settings')"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeApp('settings')" aria-label="Close" id="close-settings"></button>
+            </div>
+        </div>
+        <div class="window-body background-container"></div>
+    </div>
+    <!-- End settings -->
 
      <!-- Start signup -->
     <div class="window library" id="signup" style="display: none;">
@@ -509,8 +535,8 @@
             <a class="start-link" onclick="openApp('internet')">
                 <li><img src="/resources/msft/beacon.png"><u>I</u>nternet</li>
             </a>
+            <li onclick="shutDown()"><img src="/resources/msft/gears.png"><u>S</u>ettings</li>
             <li onclick="sleep()"><img src="/resources/msft/computer.png"><u>S</u>leep</li>
-            <li onclick="shutDown()"><img src="/resources/msft/power.png"><u>S</u>hut Down</li>
         </ul>
     </div>
     <script src="/scripts/main.js"></script>

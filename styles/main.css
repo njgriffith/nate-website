@@ -259,7 +259,7 @@ li>img {
   height: 100%;
 }
 
-tbody>tr:hover {
+#review-table>tr:hover {
   color: white;
   background: blue;
 }
@@ -267,13 +267,9 @@ tbody>tr:hover {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  /* 10 equal columns */
   grid-template-rows: repeat(4, 1fr);
-  /* 2 equal rows */
   width: 100%;
-  /* Adjust as needed */
   height: 200px;
-  /* Adjust as needed */
 }
 
 .img-container{
@@ -381,4 +377,12 @@ tbody>tr:hover {
 
 #help > .window-body > ul > li {
   padding-bottom: 2em;
+}
+
+.background-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 90%;
+  gap: 10px;
 }

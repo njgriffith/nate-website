@@ -1,6 +1,7 @@
+const smallScreenImage = '/resources/backgrounds/peshay-mobile.png';
+var largeScreenImage = '/resources/backgrounds/metropolis.png';
+
 function updateBackgroundImage() {
-  const smallScreenImage = '/resources/media/peshay-mobile.png';
-  const largeScreenImage = '/resources/media/metropolis.jpg';
   const thresholdWidth = 800;
   const icons = document.querySelectorAll('.icon > p');
   if (window.innerWidth <= thresholdWidth) {
@@ -12,7 +13,13 @@ function updateBackgroundImage() {
   } 
   else {
     document.body.style.backgroundImage = `url(${largeScreenImage})`;
-    document.body.style.backgroundPosition = '0px 25%';
+    if (largeScreenImage.includes('metropolis')){
+      document.body.style.backgroundPosition = '0px 25%';
+    }
+    else{
+      document.body.style.backgroundPosition = '0px 25%';
+    }
+    
     icons.forEach(icon => {
       icon.style.background = 'rgba(0, 0, 0, 0.6)';
       icon.style.color = 'white';
@@ -21,14 +28,6 @@ function updateBackgroundImage() {
 }
 window.addEventListener('resize', updateBackgroundImage);
 updateBackgroundImage();
-
-// document.addEventListener('contextmenu', (event) => {
-//   event.preventDefault();
-//   var rightClickMenu = document.getElementById('right-click-menu');
-//   rightClickMenu.style.display = 'block';
-//   rightClickMenu.style.left = `${event.clientX}px`;
-//   rightClickMenu.style.top = `${event.clientY}px`;
-// });
 
 const windows = document.querySelectorAll('.window');
 let isAsleep = false;
@@ -70,7 +69,7 @@ getCommits();
 
 function randomizeWindows(){
   for(let i=0;i<windows.length;i++){
-    if(windows[i].id === 'reviews'){
+    if(windows[i].id === 'reviews' || windows[i].id === 'internet'){
       windows[i].style.position = 'absolute';
       windows[i].style.top = `50%`;
       windows[i].style.left = `50%`;
@@ -78,8 +77,8 @@ function randomizeWindows(){
       continue;
     }
     windows[i].style.position = 'absolute';
-    windows[i].style.top = `${window.innerHeight * 0.1 + Math.floor(Math.random() * window.innerHeight * 0.9)}px`;
-    windows[i].style.left = `${window.innerWidth * 0.1 + Math.floor(Math.random() * window.innerWidth * 0.9)}px`;
+    windows[i].style.top = `${window.innerHeight * 0.3 + Math.floor(Math.random() * window.innerHeight * 0.6)}px`;
+    windows[i].style.left = `${window.innerWidth * 0.3 + Math.floor(Math.random() * window.innerWidth * 0.6)}px`;
     windows[i].style.transform = `translate(-50%, -50%)`;
   }
 }
@@ -111,15 +110,6 @@ document.addEventListener('click', function (event) {
     }
   }
 });
-
-function shutDown() {
-  const body = document.body;
-  body.innerHTML = "";
-  body.style.background = "black";
-  var goodbye = new Audio('/resources/media/goodbye.mp3');
-  goodbye.volume = 0.25;
-  goodbye.play();
-}
 
 function sleep() {
   isAsleep = true;
@@ -178,6 +168,10 @@ function updateTaskbar(iconName, action) {
     appName = 'Album Reviews';
     imgSrc = '/resources/msft/music.png';
   }
+  else if (iconName === 'settings'){
+    appName = 'Settings';
+    imgSrc = '/resources/msft/gears.png';
+  }
   if (action === 'add') {
     const taskBarApps = document.getElementsByClassName('taskbar-button');
     for (let i = 0; i < taskBarApps.length; i++) {
@@ -234,13 +228,17 @@ function openApp(appName) {
   if (appName === 'catalog') {
     scrollCatalog(0);
   }
+  else if (appName === 'settings'){
+    loadFolderContents('background');
+  }
+  
 }
 function closeApp(appName) {
   document.getElementById(appName).style.display = 'none';
   updateTaskbar(appName, 'remove');
 
   if (appName === 'internet') {
-    document.body.style.backgroundImage = "url('/resources/media/metropolis.jpg')";
+    document.body.style.backgroundImage = `url(${largeScreenImage})`;
   }
   else if (appName === 'hidden-list') {
     document.getElementById('hidden-list').style.display = 'none';
@@ -298,18 +296,19 @@ document.addEventListener("mousemove", (event) => {
   if (isDraggingMedia) {
     mediaPlayer.style.left = `${event.clientX - 100}px`;
     mediaPlayer.style.top = `${event.clientY + (mediaPlayer.clientHeight / 2) - 20}px`;
+    event.preventDefault();
   }
   for (let i = 0; i < isDragging.length; i++) {
     if (isDragging[i]) {
-      console.log(parseFloat(windows[i].style.left) - event.clientX);
       windows[i].style.left = `${event.clientX + shift}px`;
       windows[i].style.top = `${event.clientY + (windows[i].clientHeight / 2) - 5}px`;
+      event.preventDefault();
     }
   }
   if (isAsleep){
     isAsleep = false;
     document.body.innerHTML = previousState;
-    document.body.style.backgroundImage = "url('/resources/media/metropolis.jpg')"
+    document.body.style.backgroundImage = "url('/resources/media/metropolis.png')"
     document.body.style.backgroundSize = "100%";
     previousState = '';
   }
@@ -384,7 +383,7 @@ rightOpen.addEventListener("mouseup", (event) => {
   if (isRightOpen) {
     rightOpen.src = '/resources/head/R_drwr_close_02_rollover.bmp';
     rightEar.style.left = `${parseInt(rightEar.style.left) + drawerDistance}px`;
-    loadFolderContents();
+    loadFolderContents('music');
     return;
   }
   rightOpen.src = '/resources/head/R_drwr_open_02_rollover.bmp';
@@ -441,52 +440,68 @@ leftEar.addEventListener('transitionend', function handleTransitionEnd() {
 });
 
 // handle media shit
-async function loadFolderContents() {
+async function loadFolderContents(type) {
+  const response = await fetch('/resources/files.json');
+  const data = await response.json();
+  const mediaContent = data[type];
   try {
-    const folderName = 'music';
-    const response = await fetch('/resources/files.json');
-    const data = await response.json();
-    const mediaContent = data[folderName];
-    mediaTableBody.innerHTML = '';
+    if (type === 'music'){
+      mediaTableBody.innerHTML = '';
+  
+      mediaContent.forEach(item => {
+        const itemDiv = document.createElement('tr');
+        const title = document.createElement('td');
+        const length = document.createElement('td');
+        const code = document.createElement('td');
+  
+        title.textContent = item;
+        length.textContent = "1:23";
+        code.textContent = item;
+  
+        itemDiv.appendChild(title);
+        itemDiv.appendChild(length);
+        itemDiv.appendChild(code);
+        itemDiv.style.cursor = "pointer";
+        itemDiv.addEventListener('click', () => playMedia(item, type));
+  
+        mediaTableBody.appendChild(itemDiv);
+      });
+    }
+    else if (type === 'background'){
+      const settings = document.getElementById('settings').querySelector('.window-body');
+      if (settings.innerHTML !== ''){
+        return;
+      }
+      mediaContent.forEach(item => {
+        const backgroundDiv = document.createElement('div');
+        const backgroundImg = document.createElement('img');
+        const backgroundLabel = document.createElement('div');
 
-    mediaContent.forEach(item => {
-      const itemDiv = document.createElement('tr');
+        backgroundImg.src = `/resources/msft/pictures-file.png`;
+        backgroundLabel.innerText = item;
 
-      const title = document.createElement('td');
-      const length = document.createElement('td');
-      const code = document.createElement('td');
-
-      title.textContent = item;
-      length.textContent = "1:23";
-      code.textContent = item;
-
-      itemDiv.appendChild(title);
-      itemDiv.appendChild(length);
-      itemDiv.appendChild(code);
-      itemDiv.style.cursor = "pointer";
-      itemDiv.addEventListener('click', () => playMedia(item, folderName));
-
-      mediaTableBody.appendChild(itemDiv);
-    });
-  } catch (error) {
+        backgroundDiv.appendChild(backgroundImg);
+        backgroundDiv.appendChild(backgroundLabel);
+        backgroundDiv.onclick = function () { updateBackground(item) };
+        settings.appendChild(backgroundDiv);
+      });
+    }
+  }
+  catch (error) {
     console.log('Folder not found ', error);
   }
 }
 
 function playMedia(fileName, folderName) {
   if (folderName === "music") {
-    const mediaPath = `/resources/media/${fileName}.mp3`;
+    const mediaPath = `/resources/music/${fileName}.mp3`;
     audioPlayer.src = mediaPath;
     audioPlayer.play();
     startVisualization();
   }
-  else if (folderName === "videos") {
-    const mediaPath = `/resources/media/${fileName}.mp4`;
-    videoPlayer.style.display = 'block';
-  }
-  else if (folderName === "pictures") {
+  else if (folderName === "background") {
     imageViewer.style.display = "block";
-    const mediaPath = `/resources/media/${fileName}.png`;
+    const mediaPath = `/resources/media/${fileName}.jpg`;
     const image = document.createElement('img');
     image.classList.add('library-image')
     image.src = mediaPath;
@@ -560,14 +575,98 @@ function loadHTML(filePath) {
     })
     .then(html => {
       targetDiv.innerHTML = html;
+      if (filePath === 'ebay'){
+        startEbay();
+      }
     })
     .catch(error => {
       console.error('Error loading HTML:', error);
     });
+    
 }
 function downloadVirus() {
   document.body.style.backgroundImage = "url('/resources/media/virus.gif')";
 }
+function isFloat(value) {
+  return Number(value) === value && value % 1 !== 0;
+}
+function startEbay(){
+  const items = document.querySelectorAll('.ebay-item');
+  items.forEach(item => {
+      item.addEventListener('mouseup', function (){
+        let response = prompt('What would you like to bid?');
+        if (response === null || response === ''){
+          return;
+        }
+        let bid = parseFloat(response);
+        if (Number(bid) === bid){
+          handleBid(item.id, bid);
+        }
+        else{
+          alert("Please enter a valid number");
+          return;
+        }
+      });
+  });
+}
+function handleBid(itemName, bid){
+  let shortName = itemName.substring(5);
+  if(shortName === 'doll'){
+    if (bid > 10){
+      alert('Bid accepted');
+    }
+    else{
+      alert('Bid rejected');
+    }
+  }
+  else if(shortName === 'art'){
+    if (bid > 199.99){
+      alert('Bid accepted');
+    }
+    else{
+      alert('How dare you');
+    }
+  }
+  else if(shortName === 'cars'){
+    alert('You know I would\'ve taken anything');
+  }
+  else if(shortName === 'rock'){
+    if (bid > 20000){
+      alert('Bid accepted');
+    }
+    else{
+      alert('I have recently become privy to the true power of this device, you will need a higher bid');
+    }
+  }
+  else if(shortName === 'computer'){
+    if (bid > 274.99){
+      alert('sure');
+    }
+    else{
+      alert('too low');
+    }
+  }
+  else if(shortName === 'dentist'){
+    alert('I need these off my hands asap, what your address so I can drop them off');
+  }
+  else if(shortName === 'soup'){
+    if (bid > 9.99){
+      alert('enjoy the soup');
+    }
+    else{
+      alert('all out of soup');
+    }
+  }
+  else if(shortName === 'rent'){
+    if (confirm('woman?')){
+      alert('how soon can you move in?');
+    }
+    else{
+      alert('not interested');
+    }
+  }
+}
+
 
 function scrollCatalog(direction) {
   const catalogSize = 7;
@@ -873,7 +972,7 @@ function closeHelp() {
     document.getElementById('help').style.display = 'none';
 }
 
-function openStats() {
+function openReviewStats() {
     fetch('../resources/albums/album_data.json')
         .then(response => response.json())
         .then(data => {
@@ -914,11 +1013,11 @@ function openStats() {
             document.getElementById('70s').innerHTML += decades['197'];
             document.getElementById('60s').innerHTML += decades['196'];
 
-            document.getElementById('stats').style.display = 'block';
+            document.getElementById('review-stats').style.display = 'block';
         });
 }
-function closeStats() {
-    document.getElementById('stats').style.display = 'none';
+function closeReviewStats() {
+    document.getElementById('review-stats').style.display = 'none';
 
     document.getElementById('10').innerHTML = '10: ';
     document.getElementById('9').innerHTML = '9: ';
@@ -934,12 +1033,17 @@ function closeStats() {
     document.getElementById('60s').innerHTML = '1960s: ';
 }
 
-// openApp('signup');
+function updateBackground(newBackground){
+  largeScreenImage = `/resources/backgrounds/${newBackground}.png`;
+  updateBackgroundImage();
+}
 
 // ----- TEST SUITE -----
 // createList('2020s-movies')
-// document.getElementById('hidden-list').style.display = 'block';
 // loadHTML('notavirus');
 // catalog.style.display = 'block';
 // scrollCatalog(6);
-// media.style.display = 'block';
+// openApp('stats')
+// openApp('internet');
+// loadHTML('ebay')
+
