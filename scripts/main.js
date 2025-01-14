@@ -2,6 +2,10 @@
 const smallScreenImage = '/resources/backgrounds/peshay-mobile.png';
 var largeScreenImage = '/resources/backgrounds/metropolis.png';
 
+if (window.location.href.includes('netlify')){
+  alert('nate-griffith.com is now available!\nGo there for the latest updates')
+}
+
 function updateBackgroundImage() {
   const thresholdWidth = 800;
   const icons = document.querySelectorAll('.icon > p');
@@ -81,7 +85,7 @@ function randomizeWindows(){
     windows[i].style.left = `${Math.floor(Math.random() * window.innerWidth * 0.6)}px`;
   }
 }
-randomizeWindows()
+randomizeWindows();
 
 function updateWindowZIndex(frontWindow){
   windows.forEach((window) => {
@@ -140,7 +144,6 @@ function updateTaskbar(iconName, action) {
   const taskbarContainer = document.getElementById('taskbar-apps');
 
   let appName = iconName.toLowerCase().split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ').replace('-', ' ');
-  console.log(appName)
   let imgSrc = `/resources/msft/${iconName}.png`;
 
   if (action === 'add') {
@@ -274,11 +277,7 @@ document.addEventListener("mousemove", (event) => {
     }
   }
   if (isAsleep){
-    isAsleep = false;
-    document.body.innerHTML = previousState;
-    document.body.style.backgroundImage = "url('/resources/media/metropolis.png')"
-    document.body.style.backgroundSize = "100%";
-    previousState = '';
+    window.location.href = '/';
   }
 });
 
