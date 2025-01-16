@@ -667,11 +667,32 @@ function highlightApp(div) {
   icon.style.outline = '1px dotted blue';
 }
 
-function signUp() {
+async function signUp() {
   var email = document.getElementById('signup-email').value;
-  alert("this shit don't work rn, come back later");
-  return;
-  confirm("Sign up using this email?\n" + email);
+  const responseMessage = document.getElementById('signup-response');
+
+  if (confirm("Sign up using this email?\n" + email)){
+    try {
+      const response = await fetch('http://127.0.0.1:5000/signup', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+          alert('successfully signed up!')
+      } 
+      else {
+          alert('error signing up')
+      }
+    } 
+    catch (error) {
+        console.error(error);
+    }
+  }
 }
 
 function startVisualization(){
@@ -975,3 +996,4 @@ function closeReviewStats() {
 // scrollCatalog(6);
 // openApp('internet');
 // loadHTML('ebay')
+openApp('signup');
