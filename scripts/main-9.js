@@ -2,15 +2,15 @@
 const smallScreenImage = '/resources/backgrounds/peshay-mobile.png';
 var largeScreenImage = '/resources/backgrounds/metropolis.png';
 fetch(`../resources/files.json`)
-    .then(response => response.json())
-    .then(data => {
-      let index = Math.floor(Math.random() * data['background'].length);
-      largeScreenImage = `/resources/backgrounds/${data['background'][index]}.png`;
-      updateBackgroundImage();
-    });
+  .then(response => response.json())
+  .then(data => {
+    let index = Math.floor(Math.random() * data['background'].length);
+    largeScreenImage = `/resources/backgrounds/${data['background'][index]}.png`;
+    updateBackgroundImage();
+  });
 
 
-if (window.location.href.includes('netlify')){
+if (window.location.href.includes('netlify')) {
   alert('nate-griffith.com is now available!\nGo there for the latest updates')
 }
 
@@ -23,7 +23,7 @@ function updateBackgroundImage() {
       icon.style.background = 'none';
       icon.style.color = 'black';
     });
-  } 
+  }
   else {
     document.body.style.backgroundImage = `url(${largeScreenImage})`;
     document.body.style.backgroundPosition = '0px 25%';
@@ -73,9 +73,9 @@ async function getCommits() {
 }
 getCommits();
 
-function randomizeWindows(){
-  for(let i=0;i<windows.length;i++){
-    if(windows[i].id === 'reviews' || windows[i].id === 'internet'){
+function randomizeWindows() {
+  for (let i = 0; i < windows.length; i++) {
+    if (windows[i].id === 'reviews' || windows[i].id === 'internet') {
       windows[i].style.position = 'absolute';
       windows[i].style.top = `20%`;
       windows[i].style.left = `20%`;
@@ -89,7 +89,10 @@ function randomizeWindows(){
 randomizeWindows();
 
 var focusedWindow = '';
-function updateWindowZIndex(frontWindow){
+function updateWindowZIndex(frontWindow) {
+  if (frontWindow === null) {
+    return;
+  }
   windows.forEach((window) => {
     window.style.zIndex = '1';
   });
@@ -97,7 +100,7 @@ function updateWindowZIndex(frontWindow){
   focusedWindow = frontWindow;
 }
 
-function updateBackground(newBackground){
+function updateBackground(newBackground) {
   largeScreenImage = `/resources/backgrounds/${newBackground}.png`;
   updateBackgroundImage();
 }
@@ -205,7 +208,7 @@ function openApp(appName) {
   if (appName === 'catalog') {
     scrollCatalog(0);
   }
-  else if (appName === 'settings'){
+  else if (appName === 'settings') {
     loadFolderContents('background');
   }
 }
@@ -279,7 +282,7 @@ document.addEventListener("mousemove", (event) => {
       event.preventDefault();
     }
   }
-  if (isAsleep){
+  if (isAsleep) {
     window.location.href = '/';
   }
 });
@@ -414,31 +417,31 @@ async function loadFolderContents(type) {
   const data = await response.json();
   const mediaContent = data[type];
   try {
-    if (type === 'music'){
+    if (type === 'music') {
       mediaTableBody.innerHTML = '';
-  
+
       mediaContent.forEach(item => {
         const itemDiv = document.createElement('tr');
         const title = document.createElement('td');
         const length = document.createElement('td');
         const code = document.createElement('td');
-  
+
         title.textContent = item;
         length.textContent = "1:23";
         code.textContent = item;
-  
+
         itemDiv.appendChild(title);
         itemDiv.appendChild(length);
         itemDiv.appendChild(code);
         itemDiv.style.cursor = "pointer";
         itemDiv.addEventListener('click', () => playMedia(item, type));
-  
+
         mediaTableBody.appendChild(itemDiv);
       });
     }
-    else if (type === 'background'){
+    else if (type === 'background') {
       const settings = document.getElementById('settings').querySelector('.window-body');
-      if (settings.innerHTML !== ''){
+      if (settings.innerHTML !== '') {
         return;
       }
       mediaContent.forEach(item => {
@@ -520,7 +523,7 @@ function createList(fileName) {
         tableBody.appendChild(row);
       });
     })
-    updateWindowZIndex('hidden-list');
+  updateWindowZIndex('hidden-list');
 }
 
 // navigate internet
@@ -544,90 +547,90 @@ function loadHTML(filePath) {
     })
     .then(html => {
       targetDiv.innerHTML = html;
-      if (filePath === 'ebay'){
+      if (filePath === 'ebay') {
         startEbay();
       }
     })
     .catch(error => {
       console.error('Error loading HTML:', error);
     });
-    
+
 }
 function downloadVirus() {
   document.body.style.backgroundImage = "url('/resources/media/virus.gif')";
 }
-function startEbay(){
+function startEbay() {
   const items = document.querySelectorAll('.ebay-item');
   items.forEach(item => {
-      item.addEventListener('mouseup', function (){
-        let response = prompt('What would you like to bid?');
-        if (response === null || response === ''){
-          return;
-        }
-        let bid = parseFloat(response);
-        if (Number(bid) === bid){
-          handleBid(item.id, bid);
-        }
-        else{
-          alert("Please enter a valid number");
-          return;
-        }
-      });
+    item.addEventListener('mouseup', function () {
+      let response = prompt('What would you like to bid?');
+      if (response === null || response === '') {
+        return;
+      }
+      let bid = parseFloat(response);
+      if (Number(bid) === bid) {
+        handleBid(item.id, bid);
+      }
+      else {
+        alert("Please enter a valid number");
+        return;
+      }
+    });
   });
 }
-function handleBid(itemName, bid){
+function handleBid(itemName, bid) {
   let shortName = itemName.substring(5);
-  if(shortName === 'doll'){
-    if (bid > 10){
+  if (shortName === 'doll') {
+    if (bid > 10) {
       alert('Bid accepted');
     }
-    else{
+    else {
       alert('Bid rejected');
     }
   }
-  else if(shortName === 'art'){
-    if (bid > 199.99){
+  else if (shortName === 'art') {
+    if (bid > 199.99) {
       alert('Bid accepted');
     }
-    else{
+    else {
       alert('How dare you');
     }
   }
-  else if(shortName === 'cars'){
+  else if (shortName === 'cars') {
     alert('You know I would\'ve taken anything');
   }
-  else if(shortName === 'rock'){
-    if (bid > 20000){
+  else if (shortName === 'rock') {
+    if (bid > 20000) {
       alert('Bid accepted');
     }
-    else{
+    else {
       alert('I have recently become privy to the true power of this device, you will need a higher bid');
     }
   }
-  else if(shortName === 'computer'){
-    if (bid > 274.99){
+  else if (shortName === 'computer') {
+    if (bid > 274.99) {
       alert('sure');
     }
-    else{
+    else {
       alert('too low');
     }
   }
-  else if(shortName === 'dentist'){
+  else if (shortName === 'dentist') {
     alert('I need these off my hands asap, what your address so I can drop them off');
   }
-  else if(shortName === 'soup'){
-    if (bid > 9.99){
+  else if (shortName === 'soup') {
+    if (bid > 9.99) {
       alert('enjoy the soup');
     }
-    else{
+    else {
       alert('all out of soup');
     }
   }
-  else if(shortName === 'rent'){
-    if (confirm('woman?')){
+  else if (shortName === 'rent') {
+    if (confirm('woman?')) {
       alert('how soon can you move in?');
     }
-    else{
+    else {
       alert('not interested');
     }
   }
@@ -674,24 +677,24 @@ async function signUp() {
   var email = document.getElementById('signup-email').value;
   const responseMessage = document.getElementById('signup-response');
 
-  if (confirm("Sign up using this email?\n" + email)){
+  if (confirm("Sign up using this email?\n" + email)) {
     try {
       const response = await fetch('https://api.nate-griffith.com/signup', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email }),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
       if (response.ok) {
-          alert('successfully signed up!');
-      } 
-      else {
-          alert('error signing up');
+        alert('successfully signed up!');
       }
-    } 
+      else {
+        alert('error signing up');
+      }
+    }
     catch (error) {
       alert('error connecting to service');
       console.error(error);
@@ -699,7 +702,7 @@ async function signUp() {
   }
 }
 
-function startVisualization(){
+function startVisualization() {
   const consoleDiv = document.getElementById("vid-bkgd");
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -762,248 +765,259 @@ let sortColumn = 'reviewed';
 let sortDirection = true;
 
 window.addEventListener('beforeunload', function () {
-    const scrollableDiv = document.getElementById('scroll-div');
-    const reviews = document.getElementById('reviews');
-    if (scrollableDiv) {
-        sessionStorage.setItem('scrollPosition', scrollableDiv.scrollTop);
-    }
-    sessionStorage.setItem('savedSortColumn', sortColumn);
-    sessionStorage.setItem('savedSortDirection', sortDirection);
+  const scrollableDiv = document.getElementById('scroll-div');
+  const reviews = document.getElementById('reviews');
+  if (scrollableDiv) {
+    sessionStorage.setItem('scrollPosition', scrollableDiv.scrollTop);
+  }
+  sessionStorage.setItem('savedSortColumn', sortColumn);
+  sessionStorage.setItem('savedSortDirection', sortDirection);
 
-    windows.forEach(wind => {
-      sessionStorage.setItem(`${wind.id}Style`, wind.style.display.toString());
-    });
-    sessionStorage.setItem('focusedWindow', focusedWindow);
+  windows.forEach(wind => {
+    sessionStorage.setItem(`${wind.id}Style`, wind.style.display.toString());
+  });
+  sessionStorage.setItem('focusedWindow', focusedWindow);
 });
 
 window.addEventListener('load', function () {
-    const scrollableDiv = document.getElementById('scroll-div');
-    const savedScrollPosition = sessionStorage.getItem('scrollPosition');
-    const savedSortColumn = sessionStorage.getItem('savedSortColumn');
-    const savedSortDirection = sessionStorage.getItem('savedSortDirection');
+  const scrollableDiv = document.getElementById('scroll-div');
+  const savedScrollPosition = sessionStorage.getItem('scrollPosition');
+  const savedSortColumn = sessionStorage.getItem('savedSortColumn');
+  const savedSortDirection = sessionStorage.getItem('savedSortDirection');
 
-    if (scrollableDiv && savedScrollPosition) {
-        setTimeout(() => {
-            scrollableDiv.scrollTop = parseInt(savedScrollPosition);
-        }, 100);
-    }
-    if (savedSortColumn) {
-        sortDirection = savedSortDirection;
-        sortAndReloadContent(savedSortColumn, null);
-    }
-    else {
-        sortAndReloadContent(sortColumn, null);
-    }
+  if (scrollableDiv && savedScrollPosition) {
+    setTimeout(() => {
+      scrollableDiv.scrollTop = parseInt(savedScrollPosition);
+    }, 100);
+  }
+  if (savedSortColumn) {
+    sortDirection = savedSortDirection;
+    sortAndReloadContent(savedSortColumn, null);
+  }
+  else {
+    sortAndReloadContent(sortColumn, null);
+  }
+  const windows = this.document.querySelectorAll('.window');
+  if (windows) {
     windows.forEach(wind => {
-      if (wind.id === 'changelog'){
+      if(!wind || wind.id === 'changelog'){
         return;
       }
       const windowStyle = sessionStorage.getItem(`${wind.id}Style`);
+      if (!windowStyle || windowStyle === null || windowStyle === ''){
+        return;
+      }
       wind.style.display = windowStyle;
-      if (windowStyle !== 'none'){
+      if (windowStyle === 'block') {
         updateTaskbar(wind.id, 'add');
+        return;
       }
     });
-    updateWindowZIndex(sessionStorage.getItem('focusedWindow'));
+    if (sessionStorage.getItem('focusedWindow') !== '') {
+      updateWindowZIndex(sessionStorage.getItem('focusedWindow'));
+    }
+  }
+
+
 });
 
 function sortData(columnName) {
-    sortColumn = columnName;
-    fetch('../resources/albums/album_data.json')
-        .then(response => response.json())
-        .then(data => {
-            var sort = columnName;
-            const entries = Object.entries(data);
+  sortColumn = columnName;
+  fetch('../resources/albums/album_data.json')
+    .then(response => response.json())
+    .then(data => {
+      var sort = columnName;
+      const entries = Object.entries(data);
 
-            if (sort === "title") {
-                entries.sort((a, b) => {
-                    if (sortDirection) {
-                        return a[1].title.localeCompare(b[1].title);
-                    }
-                    return b[1].title.localeCompare(a[1].title);
-                });
-            }
-            else if (sort === "artist") {
-                entries.sort((a, b) => {
-                    if (sortDirection) {
-                        return a[1].artist.localeCompare(b[1].artist);
-                    }
-                    return b[1].artist.localeCompare(a[1].artist);
-                });
-            }
-            else if (sort === "score") {
-                entries.sort((a, b) => {
-                    if (sortDirection) {
-                        if (a[1].score === 10 && b[1].score === 10) {
-                            return b[1].order - a[1].order;
-                        }
-                        else {
-                            return b[1].score - a[1].score;
-                        }
-                    }
-                    if (a[1].score === 10 && b[1].score === 10) {
-                        return a[1].order - b[1].order;
-                    }
-                    else {
-                        return a[1].score - b[1].score;
-                    }
-                });
-            }
-            else if (sort === "released") {
-                entries.sort((a, b) => {
-                    if (!sortDirection) {
-                        return a[1].released.localeCompare(b[1].released);
-                    }
-                    return b[1].released.localeCompare(a[1].released);
-                });
-            }
-            else if (sort === "reviewed") {
-                entries.sort((a, b) => {
-                    if (!sortDirection) {
-                        return a[1].reviewed.localeCompare(b[1].reviewed);
-                    }
-                    return b[1].reviewed.localeCompare(a[1].reviewed);
-                });
-            }
-            const sortedData = Object.fromEntries(entries);
-
-            for (let key in sortedData) {
-                if (sortedData.hasOwnProperty(key)) {
-                    // create image
-                    const coverItem = document.createElement('td');
-                    coverItem.classList.add('review-data');
-                    const img = document.createElement('img');
-                    img.classList.add('review-img')
-                    img.src = `${sortedData[key].cover}`
-                    coverItem.appendChild(img);
-
-                    // create title
-                    const titleItem = document.createElement('td');
-                    titleItem.classList.add('review-data');
-                    titleItem.textContent = `${sortedData[key].title}`;
-
-                    // create artist
-                    const artistItem = document.createElement('td');
-                    artistItem.classList.add('review-data');
-                    artistItem.textContent = `${sortedData[key].artist}`;
-
-                    // create score
-                    const scoreItem = document.createElement('td');
-                    scoreItem.classList.add('review-data');
-                    scoreItem.textContent = `${sortedData[key].score}`;
-
-                    // create releaseDate
-                    const releaseItem = document.createElement('td');
-                    releaseItem.classList.add('review-data');
-                    releaseItem.textContent = `${sortedData[key].released}`;
-
-                    // create reviewDate
-                    const reviewItem = document.createElement('td');
-                    reviewItem.classList.add('review-data');
-                    reviewItem.textContent = `${sortedData[key].reviewed}`;
-
-                    // append items to row, then append row to page
-                    const row = document.createElement('tr');
-                    row.appendChild(coverItem);
-                    row.appendChild(titleItem);
-                    row.appendChild(artistItem);
-                    row.appendChild(scoreItem);
-                    row.appendChild(releaseItem);
-                    row.appendChild(reviewItem);
-                    row.setAttribute("onclick", "toReview(this)");
-                    row.id = `${key}`;
-
-                    reviewTable.appendChild(row);
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching JSON:', error);
+      if (sort === "title") {
+        entries.sort((a, b) => {
+          if (sortDirection) {
+            return a[1].title.localeCompare(b[1].title);
+          }
+          return b[1].title.localeCompare(a[1].title);
         });
+      }
+      else if (sort === "artist") {
+        entries.sort((a, b) => {
+          if (sortDirection) {
+            return a[1].artist.localeCompare(b[1].artist);
+          }
+          return b[1].artist.localeCompare(a[1].artist);
+        });
+      }
+      else if (sort === "score") {
+        entries.sort((a, b) => {
+          if (sortDirection) {
+            if (a[1].score === 10 && b[1].score === 10) {
+              return b[1].order - a[1].order;
+            }
+            else {
+              return b[1].score - a[1].score;
+            }
+          }
+          if (a[1].score === 10 && b[1].score === 10) {
+            return a[1].order - b[1].order;
+          }
+          else {
+            return a[1].score - b[1].score;
+          }
+        });
+      }
+      else if (sort === "released") {
+        entries.sort((a, b) => {
+          if (!sortDirection) {
+            return a[1].released.localeCompare(b[1].released);
+          }
+          return b[1].released.localeCompare(a[1].released);
+        });
+      }
+      else if (sort === "reviewed") {
+        entries.sort((a, b) => {
+          if (!sortDirection) {
+            return a[1].reviewed.localeCompare(b[1].reviewed);
+          }
+          return b[1].reviewed.localeCompare(a[1].reviewed);
+        });
+      }
+      const sortedData = Object.fromEntries(entries);
+
+      for (let key in sortedData) {
+        if (sortedData.hasOwnProperty(key)) {
+          // create image
+          const coverItem = document.createElement('td');
+          coverItem.classList.add('review-data');
+          const img = document.createElement('img');
+          img.classList.add('review-img')
+          img.src = `${sortedData[key].cover}`
+          coverItem.appendChild(img);
+
+          // create title
+          const titleItem = document.createElement('td');
+          titleItem.classList.add('review-data');
+          titleItem.textContent = `${sortedData[key].title}`;
+
+          // create artist
+          const artistItem = document.createElement('td');
+          artistItem.classList.add('review-data');
+          artistItem.textContent = `${sortedData[key].artist}`;
+
+          // create score
+          const scoreItem = document.createElement('td');
+          scoreItem.classList.add('review-data');
+          scoreItem.textContent = `${sortedData[key].score}`;
+
+          // create releaseDate
+          const releaseItem = document.createElement('td');
+          releaseItem.classList.add('review-data');
+          releaseItem.textContent = `${sortedData[key].released}`;
+
+          // create reviewDate
+          const reviewItem = document.createElement('td');
+          reviewItem.classList.add('review-data');
+          reviewItem.textContent = `${sortedData[key].reviewed}`;
+
+          // append items to row, then append row to page
+          const row = document.createElement('tr');
+          row.appendChild(coverItem);
+          row.appendChild(titleItem);
+          row.appendChild(artistItem);
+          row.appendChild(scoreItem);
+          row.appendChild(releaseItem);
+          row.appendChild(reviewItem);
+          row.setAttribute("onclick", "toReview(this)");
+          row.id = `${key}`;
+
+          reviewTable.appendChild(row);
+        }
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching JSON:', error);
+    });
 };
 
 function sortAndReloadContent(columnName, element) {
-    if (element === null) {
-        const selected = document.getElementById(`${columnName}`);
-        selected.classList.add('selected-sort');
-        sortData(columnName);
-        return;
-    }
-
-    if (element.classList.contains('selected-sort')) {
-        sortDirection = !sortDirection;
-    }
-    else {
-        sortDirection = true;
-        document.querySelectorAll('th').forEach(colTitle => {
-            colTitle.classList.remove('selected-sort');
-        });
-        element.classList.add('selected-sort');
-    }
-
-    const divs = document.querySelectorAll('tbody>tr');
-    divs.forEach(div => {
-        div.remove();
-    });
+  if (element === null) {
+    const selected = document.getElementById(`${columnName}`);
+    selected.classList.add('selected-sort');
     sortData(columnName);
+    return;
+  }
+
+  if (element.classList.contains('selected-sort')) {
+    sortDirection = !sortDirection;
+  }
+  else {
+    sortDirection = true;
+    document.querySelectorAll('th').forEach(colTitle => {
+      colTitle.classList.remove('selected-sort');
+    });
+    element.classList.add('selected-sort');
+  }
+
+  const divs = document.querySelectorAll('tbody>tr');
+  divs.forEach(div => {
+    div.remove();
+  });
+  sortData(columnName);
 }
 
 function getRandomReview() {
-    fetch('../resources/albums/album_data.json')
-        .then(response => response.json())
-        .then(data => {
-            let index = Math.trunc(Math.random() * Object.keys(data).length);
-            const keys = Object.keys(data);
-            window.location.href = `/templates/album-review.html?album=${keys[index]}`;
-        });
+  fetch('../resources/albums/album_data.json')
+    .then(response => response.json())
+    .then(data => {
+      let index = Math.trunc(Math.random() * Object.keys(data).length);
+      const keys = Object.keys(data);
+      window.location.href = `/templates/album-review.html?album=${keys[index]}`;
+    });
 }
 
 function toReview(element) {
-    window.location.href = `/templates/album-review.html?album=${element.id}`;
+  window.location.href = `/templates/album-review.html?album=${element.id}`;
 }
 
 function openReviewStats() {
-    fetch('../resources/albums/album_data.json')
-        .then(response => response.json())
-        .then(data => {
-            var scores = {10: 0, 9: 0, 8: 0};
-            var decades = {};
-            for (let key in data) {
-                var score = parseInt(data[key]['score']);
-                var decade = data[key]['released'].substring(0, 3);
-                
-                if (score in scores){
-                    scores[score]++;
-                }
-                else{
-                    scores['other'] = 1;
-                }
+  fetch('../resources/albums/album_data.json')
+    .then(response => response.json())
+    .then(data => {
+      var scores = { 10: 0, 9: 0, 8: 0 };
+      var decades = {};
+      for (let key in data) {
+        var score = parseInt(data[key]['score']);
+        var decade = data[key]['released'].substring(0, 3);
 
-                if (decade in decades){
-                    decades[decade]++;
-                }
-                else{
-                    decades[decade] = 1;
-                }
-            }
-            for (let key in scores){
-              document.getElementById(key).innerHTML += scores[key];
-            }
-            for (let key in decades){
-              document.getElementById(key + '0s').innerHTML += decades[key];
-            }
-            document.getElementById('review-stats').style.display = 'block';
-            updateWindowZIndex('review-stats');
-        });
+        if (score in scores) {
+          scores[score]++;
+        }
+        else {
+          scores['other'] = 1;
+        }
+
+        if (decade in decades) {
+          decades[decade]++;
+        }
+        else {
+          decades[decade] = 1;
+        }
+      }
+      for (let key in scores) {
+        document.getElementById(key).innerHTML += scores[key];
+      }
+      for (let key in decades) {
+        document.getElementById(key + '0s').innerHTML += decades[key];
+      }
+      document.getElementById('review-stats').style.display = 'block';
+      updateWindowZIndex('review-stats');
+    });
 }
 function closeReviewStats() {
-    document.getElementById('review-stats').style.display = 'none';
-    document.getElementById('review-stats').querySelectorAll('div').forEach(child => {
-      if (!child.hasAttribute('id')){
-        return;
-      }
-      child.innerHTML = child.id + ': ';
-    });
+  document.getElementById('review-stats').style.display = 'none';
+  document.getElementById('review-stats').querySelectorAll('div').forEach(child => {
+    if (!child.hasAttribute('id')) {
+      return;
+    }
+    child.innerHTML = child.id + ': ';
+  });
 }
 
 // ----- TEST SUITE -----
