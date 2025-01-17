@@ -1,80 +1,95 @@
-<html>
 
 <head>
-    <title>HK Pantheon Progress</title>
     <link rel="stylesheet" href="/styles/blog.css">
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+    <link rel="shortcut icon" href="#">
+    <title>HK Pantheon Progress</title>
 </head>
 
 <body>
-    <a class="back-link" href="/">Back</a><br><br>
-    <div style="margin-bottom: 2em;">
-        In Hollow Knight, the pantheons are the final challenge of the game, and they are far and away the most difficult challenges available to you.<br><br>
-        You can however, greatly increase this difficulty by equipping a binding. There are 4 to choose from.<br><br>
-        <ul>
-            <li>Nail binding - Reduces the damage you deal with your nail (sword) from 21 to 13.</li>
-            <li>Shell binding - You now have 4 health instead of 9.</li>
-            <li>Soul binding - You soul capacity (for healing and casting spells) is reduced to 17% of the original.</li>
-            <li>Charm binding - You can no longer use charms. Charms give you bonuses like extra damage or healing.</li>
-        </ul>
-        The ultimate and final challenge is to have all bindings on at the same time.
+    <a class="back-link" href="/"><button>Back</button></a>
+    <div class="header title" style="display: flex; flex-direction: column; align-items: center; gap: 1em;">
+        HK Pantheon Progress
+        <button onclick="toggleFont()" class="toggle-button">Toggle font</button>
     </div>
-    <table class="celeste-table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Nail Binding</th>
-                <th>Shell Binding</th>
-                <th>Soul Binding</th>
-                <th>Charm Binding</th>
-                <th>All Bindings at Once</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Pantheon 1</td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-            </tr>
-            <tr>
 
-                <td>Pantheon 2</td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-            </tr>
-            <tr>
+    <div class="blog">
+        <div class="blog-body" style="overflow-x: scroll;">
+            <div style="margin-bottom: 2em;">
+                In Hollow Knight, the pantheons are the final challenge of the game, and they are far and away the most
+                difficult challenges available to you.<br><br>
+                You can however, greatly increase this difficulty by equipping a binding. There are 4 to choose
+                from.<br><br>
+                <ul>
+                    <li>Nail binding - Reduces the damage you deal with your nail (sword) from 21 to 13.</li>
+                    <li>Shell binding - You now have 4 health instead of 9.</li>
+                    <li>Soul binding - You soul capacity (for healing and casting spells) is reduced to 17% of the
+                        original.</li>
+                    <li>Charm binding - You can no longer use charms. Charms give you bonuses like extra damage or
+                        healing.</li>
+                </ul>
+                The ultimate and final challenge is to have all bindings on at the same time.
+            </div>
+            <table class="celeste-table" style="margin: auto;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nail Binding</th>
+                        <th>Shell Binding</th>
+                        <th>Soul Binding</th>
+                        <th>Charm Binding</th>
+                        <th>All Bindings at Once</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pantheon 1</td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                    </tr>
+                    <tr>
 
-                <td>Pantheon 3</td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-            <tr>
-            <tr>
-                <td>Pantheon 4</td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-            </tr>
-            <tr>
+                        <td>Pantheon 2</td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                    </tr>
+                    <tr>
 
-                <td>Pantheon 5</td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/check.png"></td>
-                <td><img src="/resources/msft/x.png"></td>
-            </tr>
-        </tbody>
-    </table>
+                        <td>Pantheon 3</td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                    <tr>
+                    <tr>
+                        <td>Pantheon 4</td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                    </tr>
+                    <tr>
+
+                        <td>Pantheon 5</td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/check.png"></td>
+                        <td><img src="/resources/msft/x.png"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/scripts/blog.js"></script>
 </body>
 
 </html>

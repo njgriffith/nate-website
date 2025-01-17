@@ -1,29 +1,40 @@
 <html>
 
 <head>
-    <title>Celeste Golden Strawberry Progress</title>
     <link rel="stylesheet" href="/styles/blog.css">
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+    <link rel="shortcut icon" href="#">
     <style>
         .progress-bar {
             height: 24px;
             width: 300px;
-            background: #666;
+            background: #222;
             margin-top: 0.5em;
             border: 1px solid white;
             margin-bottom: 2em;
         }
 
         .progress {
-            background: #FFD700ed;
+            background: #008080;
             height: 100%;
         }
+        label{
+            font-size: 0.8em;
+        }
     </style>
+    <title>Celeste Golden Strawberry Progress</title>
 </head>
 
 <body>
-    <a class="back-link" href="/">Back</a><br><br>
-    <div>
-        The difficulty of Celeste precedes itself, but this difficulty can see much greater heights in the world of
+    <a class="back-link" href="/"><button>Back</button></a>
+    <div class="header title" style="display: flex; flex-direction: column; align-items: center; gap: 1em;">
+        Celeste Golden Strawberry Progress
+        <button onclick="toggleFont()" class="toggle-button">Toggle font</button>
+    </div>
+    
+    <div class="blog">
+        <div class="blog-body">
+            The difficulty of Celeste precedes itself, but this difficulty can see much greater heights in the world of
         modded Celeste. The biggest of which is called Strawberry Jam.<br><br>
         Strawberry Jam is a mod that is larger than the original game itself, and a mod that sees the game pushed to its
         absolute limits in terms of what is possible. There are 5 "lobbies" available in SJ, each lobby is a collection
@@ -40,7 +51,7 @@
             <li>Grandmaster lobby - Adderall</li>
         </ol>
         <u><label>Beginner Lobby</label></u><br><br>
-        <div style="display: flex; gap: 2em;">
+        <div style="display: flex; gap: 2em; flex-wrap: wrap;">
             <div>
                 <label>Green 5/5</label>
                 <div class="progress-bar">
@@ -68,7 +79,7 @@
         </div>
 
         <u><label>Intermediate Lobby</label></u><br><br>
-        <div style="display: flex; gap: 2em;">
+        <div style="display: flex; gap: 2em; flex-wrap: wrap;">
             <div>
                 <label>Green 5/5</label>
                 <div class="progress-bar">
@@ -96,7 +107,7 @@
         </div>
 
         <u><label>Advanced Lobby</label></u><br><br>
-        <div style="display: flex; gap: 2em;">
+        <div style="display: flex; gap: 2em; flex-wrap: wrap;">
             <div>
                 <label>Green 0/6</label>
                 <div class="progress-bar">
@@ -124,7 +135,7 @@
         </div>
 
         <u><label>Expert Lobby</label></u><br><br>
-        <div style="display: flex; gap: 2em;">
+        <div style="display: flex; gap: 2em; flex-wrap: wrap;">
             <div>
                 <label>Green 0/8</label>
                 <div class="progress-bar">
@@ -152,7 +163,7 @@
         </div>
 
         <u><label>Grandmaster Lobby</label></u><br><br>
-        <div style="display: flex; gap: 2em;">
+        <div style="display: flex; gap: 2em; flex-wrap: wrap;">
             <div>
                 <label>Green 0/4</label>
                 <div class="progress-bar">
@@ -184,7 +195,12 @@
                 <div class="progress" style="width: 0%"></div>
             </div>
         </div> 
-    </div>
-</body>
+        </div>
+        <div class="header"></div>
+        <div class="blog-body">
 
+        </div> 
+    </div>
+    <script src="/scripts/blog.js"></script>
+</body>
 </html>

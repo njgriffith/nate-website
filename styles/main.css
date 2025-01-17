@@ -229,7 +229,6 @@ li>img {
   padding-top: 0.25em;
   padding-bottom: 0.25em;
   font-size: 1em;
-  /* border-right: 1px solid blue; */
 }
 
 .blog-row {
@@ -368,9 +367,8 @@ tbody>tr:hover {
 
 #help {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 30%;
+  left: 30%;
   width: 800px;
   height: 600px;
 }
@@ -385,12 +383,4 @@ tbody>tr:hover {
   justify-content: space-between;
   width: 90%;
   gap: 10px;
-}
-
-.pixel {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: #ff5722;
-  pointer-events: none;
 }

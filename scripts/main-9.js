@@ -1,6 +1,14 @@
 // Pre-load and window logic
 const smallScreenImage = '/resources/backgrounds/peshay-mobile.png';
 var largeScreenImage = '/resources/backgrounds/metropolis.png';
+fetch(`../resources/files.json`)
+    .then(response => response.json())
+    .then(data => {
+      let index = Math.floor(Math.random() * data['background'].length);
+      largeScreenImage = `/resources/backgrounds/${data['background'][index]}.png`;
+      updateBackgroundImage();
+    });
+
 
 if (window.location.href.includes('netlify')){
   alert('nate-griffith.com is now available!\nGo there for the latest updates')
@@ -18,13 +26,7 @@ function updateBackgroundImage() {
   } 
   else {
     document.body.style.backgroundImage = `url(${largeScreenImage})`;
-    if (largeScreenImage.includes('metropolis')){
-      document.body.style.backgroundPosition = '0px 25%';
-    }
-    else{
-      document.body.style.backgroundPosition = '0px 25%';
-    }
-    
+    document.body.style.backgroundPosition = '0px 25%';
     icons.forEach(icon => {
       icon.style.background = 'rgba(0, 0, 0, 0.6)';
       icon.style.color = 'white';
@@ -32,7 +34,6 @@ function updateBackgroundImage() {
   }
 }
 window.addEventListener('resize', updateBackgroundImage);
-updateBackgroundImage();
 
 const windows = document.querySelectorAll('.window');
 let isAsleep = false;
@@ -87,11 +88,13 @@ function randomizeWindows(){
 }
 randomizeWindows();
 
+var focusedWindow = '';
 function updateWindowZIndex(frontWindow){
   windows.forEach((window) => {
     window.style.zIndex = '1';
   });
   document.getElementById(frontWindow).style.zIndex = '2';
+  focusedWindow = frontWindow;
 }
 
 function updateBackground(newBackground){
@@ -766,7 +769,11 @@ window.addEventListener('beforeunload', function () {
     }
     sessionStorage.setItem('savedSortColumn', sortColumn);
     sessionStorage.setItem('savedSortDirection', sortDirection);
-    sessionStorage.setItem('areReviewsOpen', reviews.style.display);
+
+    windows.forEach(wind => {
+      sessionStorage.setItem(`${wind.id}Style`, wind.style.display.toString());
+    });
+    sessionStorage.setItem('focusedWindow', focusedWindow);
 });
 
 window.addEventListener('load', function () {
@@ -774,7 +781,6 @@ window.addEventListener('load', function () {
     const savedScrollPosition = sessionStorage.getItem('scrollPosition');
     const savedSortColumn = sessionStorage.getItem('savedSortColumn');
     const savedSortDirection = sessionStorage.getItem('savedSortDirection');
-    const reviewDisplay = sessionStorage.getItem('areReviewsOpen');
 
     if (scrollableDiv && savedScrollPosition) {
         setTimeout(() => {
@@ -788,9 +794,17 @@ window.addEventListener('load', function () {
     else {
         sortAndReloadContent(sortColumn, null);
     }
-    if (reviewDisplay){
-      this.document.getElementById('reviews').style.display = reviewDisplay;
-    }
+    windows.forEach(wind => {
+      if (wind.id === 'changelog'){
+        return;
+      }
+      const windowStyle = sessionStorage.getItem(`${wind.id}Style`);
+      wind.style.display = windowStyle;
+      if (windowStyle !== 'none'){
+        updateTaskbar(wind.id, 'add');
+      }
+    });
+    updateWindowZIndex(sessionStorage.getItem('focusedWindow'));
 });
 
 function sortData(columnName) {

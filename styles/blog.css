@@ -1,34 +1,45 @@
 html{
     background-color: #008080;
 }
-body{
+
+.title{
+    text-align: center;
+}
+.blog{
     background-color: #ccc;
-    color: black;
-    width: 70%;
+    width: 60%;
     margin: auto;
-    margin-top: 3em;
     margin-bottom: 3em;
     border: 1px solid white;
     padding: 2em;
-    font-family: "Pixelated MS Sans Serif" !important;
-    box-shadow: inset red 1px 1px;
+    box-shadow: inset black 1px 1px 1px;
 }
-.back-link{
-    color: black;
-    font-size: 1.5em;
+.blog-body{
+    font-size: 2em;
+}
+.header{
+    font-size: 3em;
+    font-weight: bold;
+    margin: 1em;
+}
+.toggle-button{
+    font-size: 0.5em;
+    padding: 0.5em;
 }
 .celeste-table{
     margin: auto;
-    border-collapse:collapse;
-    border:1px solid white;
+    width: 100%;
+    background: #ccc;
 }
 .celeste-table th{
     padding: 1em 1em;
-    border:1px solid white;
+    font-size: 1.5em;
+    font-weight: bold;
+    border:1px solid black;
 }
 .celeste-table td{
     padding: 1em 1em;
-    border:1px solid white;
+    border:1px solid black;
 }
 .progress-background{
     background: #555;
@@ -40,4 +51,11 @@ body{
 }
 .img-container{
     display: flex;
+}
+.img-container > img{
+    margin: auto;
+    width: 500px;
+}
+a{
+    color: black !important;
 }
