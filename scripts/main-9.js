@@ -673,7 +673,7 @@ async function signUp() {
 
   if (confirm("Sign up using this email?\n" + email)){
     try {
-      const response = await fetch('http://127.0.0.1:5000/signup', {
+      const response = await fetch('https://api.nate-griffith.com/signup', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -683,14 +683,15 @@ async function signUp() {
 
       const data = await response.json();
       if (response.ok) {
-          alert('successfully signed up!')
+          alert('successfully signed up!');
       } 
       else {
-          alert('error signing up')
+          alert('error signing up');
       }
     } 
     catch (error) {
-        console.error(error);
+      alert('error connecting to service');
+      console.error(error);
     }
   }
 }
@@ -996,4 +997,4 @@ function closeReviewStats() {
 // scrollCatalog(6);
 // openApp('internet');
 // loadHTML('ebay')
-openApp('signup');
+// openApp('signup');
