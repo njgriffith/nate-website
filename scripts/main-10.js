@@ -85,8 +85,8 @@ function randomizeWindows() {
   for (let i = 0; i < windows.length; i++) {
     if (windows[i].id === 'reviews' || windows[i].id === 'internet') {
       windows[i].style.position = 'absolute';
-      windows[i].style.top = `20%`;
-      windows[i].style.left = `20%`;
+      windows[i].style.top = `200px`;
+      windows[i].style.left = `200px`;
       continue;
     }
     windows[i].style.position = 'absolute';
@@ -246,8 +246,8 @@ function minApp(appName) {
 function maxApp(appName) {
   const appToMax = document.getElementById(appName);
   appToMax.style.display = 'block';
-  appToMax.style.left = '20%';
-  appToMax.style.top = '20%';
+  appToMax.style.left = '200px';
+  appToMax.style.top = '200px';
   updateWindowZIndex(appName);
 }
 
@@ -449,7 +449,6 @@ leftEar.addEventListener('transitionend', function handleTransitionEnd() {
 
 
 // handle media shit
-
 function loadFolderContents(type) {
   try {
     if (type === 'music') {
@@ -505,6 +504,9 @@ function loadFolderContents(type) {
 
 audioPlayer.addEventListener('ended', event => {
   currentSongIndex++;
+  if (currentSongIndex === songList.length){
+    currentSongIndex = 0;
+  }
   handleMediaEvent('play');
 });
 
@@ -523,6 +525,11 @@ function handleMediaEvent(action, songIndex = currentSongIndex){
     }
     isMediaPaused = false;
     currentSongIndex = songIndex;
+    const rows = mediaTableBody.querySelectorAll('tr');
+    rows.forEach(row => {
+      row.classList.remove('playing');
+    });
+    rows[currentSongIndex].classList.add('playing');
     audioPlayer.play();
     startVisualization();
     handleLeftEar(songIndex);

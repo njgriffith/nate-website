@@ -272,6 +272,11 @@ li>img {
   gap: 1em;
 }
 
+.playing{
+  background-color: blue;
+  color: white;
+}
+
 .img-container{
   display: flex;
   justify-content: center;
