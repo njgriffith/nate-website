@@ -70,7 +70,8 @@ async function getCommits() {
       const listEntry = document.createElement('li');
       listEntry.style.fontWeight = 'bold';
       commitList.appendChild(listEntry);
-      listEntry.innerText = commit.commit.message;
+      console.log(commit.commit.author['date'])
+      listEntry.innerText = commit.commit.author['date'].substring(5, 10) + ": " + commit.commit.message;
     });
 
     document.getElementById('changelog-container').appendChild(commitList);
