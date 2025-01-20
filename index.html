@@ -31,7 +31,7 @@
                 <p>Lists</p>
             </div>
         </div>
-        <div ondblclick="openApp('puzzle')"  onclick="highlightApp(this)">
+        <div ondblclick="openApp('puzzle')" onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/media/death.gif">
                 <p>Solve My Puzzle</p>
@@ -76,20 +76,26 @@
             </div>
         </div>
     </div>
-    <div id="console" style="position: absolute; top: 0; right: 0; width: 30%; height: 35%;"></div>
-    
+
     <!-- BIG HEAD -->
-    <div id="media-player" style="position: absolute; left: 30%; top: 25%; display: none;">
+    <div id="media-player" style="position: absolute; left: 200px; top: 200px; display: none;">
         <audio id="audio-player" style="display: none;"></audio>
         <img id="head" src="/resources/head/head.bmp" style="position: absolute; z-index: 3;">
         <div id="vid-bkgd" style="width: 215px; height: 160px; position: absolute; top: 60px; left: 10px; z-index: 2;">
             <img src="/resources/head/vid_bkgd.bmp" style="width: 100%; height: 100%; position: absolute; z-index: 1;">
         </div>
-        <img src="/resources/head/play_controls_01_default.bmp"
-            style="position: absolute; top: 30px; left: 40px; z-index: 3;">
-        <img src="/resources/head/viz_drop_X_01_default.bmp"
-            style="position: absolute; top: 10px; left: 150px; z-index: 3; cursor: pointer;"
-            onclick="closeApp('media-player')">
+        <div class="media-window-controller" style="display: flex; z-index: 3; position: absolute; top: 5px; left: 120px; cursor: pointer;">
+            <img src="/resources/head/player_min.bmp"
+                onclick="minApp('media-player')">
+            <img src="/resources/head/player_close.bmp"
+                onclick="closeApp('media-player')">
+        </div>
+        <div class="media-player-controller"; style="display: flex; z-index: 3; position: absolute; top: 30px; left: 65px; cursor: pointer;">
+            <img src="/resources/head/player_prev.bmp" onclick="handleMediaEvent('prev')" class="media-control">
+            <img src="/resources/head/player_pause.bmp" onclick="handleMediaEvent('pause')" class="media-control">
+            <img src="/resources/head/player_play.bmp" onclick="handleMediaEvent('play')" class="media-control">
+            <img src="/resources/head/player_next.bmp" onclick="handleMediaEvent('next')" class="media-control">
+        </div>
 
         <div id="right-ear" style="position: absolute; left: 200px; top: 100px; transition-duration: 0.5s; z-index: 1;">
             <img src="/resources/head/right_ear.bmp" style="position: absolute;">
@@ -103,9 +109,9 @@
                 <table class="interactive">
                     <thead>
                         <tr>
-                            <th>name</th>
+                            <th>title</th>
+                            <th>artist</th>
                             <th>length</th>
-                            <th>notes</th>
                         </tr>
                     </thead>
                     <tbody id="media-table-body">
@@ -123,17 +129,17 @@
             <img src="/resources/head/left_drawer_right.bmp" style="position: absolute; left: 250px; top: 0px;">
             <div id="knob-drawer" style="position: absolute; left: 84px; top: 10px; height: 140px; width: 172px;">
                 <img src="/resources/head/drawer_bkgrnd_top.bmp" style="width: 100%; height: 100%;">
-                <div class="grid-container" style="position: absolute; top: 20px; left: 5px;">
-                    <img src="/resources/head/horizontal_thumb.bmp">
-                    <img src="/resources/head/horizontal_thumb.bmp">
-                    <img src="/resources/head/horizontal_thumb.bmp">
-                    <img src="/resources/head/horizontal_thumb.bmp">
-                    <img src="/resources/head/horizontal_thumb.bmp">
-                    <img src="/resources/head/horizontal_thumb.bmp">
-                    <img src="/resources/head/horizontal_thumb.bmp">
-                    <img src="/resources/head/horizontal_thumb.bmp">
-                    <img src="/resources/head/horizontal_thumb.bmp">
-                    <img src="/resources/head/horizontal_thumb.bmp">
+                <div class="player-grid-container">
+                    <div style="text-align: center; margin: 1em;">Now Playing</div>
+                    <div class="track-details">        
+                        <div id="player-artist"></div>
+                        <div> - </div>
+                        <div id="player-song"></div>
+                    </div>
+                    <div style="position: absolute; bottom: 15px; left: 0px;">
+                        <img src="/resources/head/progressbar.bmp" id="player-duration-bar" style="position: absolute; left: 5px;">
+                        <img src="/resources/head/thumb_01_default.bmp" id="player-current-time" style="position: absolute; left: 0px; cursor: pointer;">
+                    </div>           
                 </div>
             </div>
         </div>
@@ -288,7 +294,7 @@
                 </table>
             </div>
             <img src="/resources/media/tron.jpg">
-        </div>   
+        </div>
     </div>
     <!-- End lists -->
 
@@ -328,14 +334,15 @@
                     <option selected></option>
                     <option>https://www.notavirus.com</option>
                     <option>https://www.ebay.com</option>
-                  </select>
-                  <img src="/resources/msft/entire_network_globe-5.png">
+                </select>
+                <img src="/resources/msft/entire_network_globe-5.png">
             </div>
-            <div id="internet-screen" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-left: -2em;">
+            <div id="internet-screen"
+                style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-left: -2em;">
                 <div style="width: 700px; height: 475px; background: white; padding: 1em;">
                 </div>
             </div>
-            
+
         </div>
     </div>
     <!-- End internet -->
@@ -351,7 +358,8 @@
             </div>
         </div>
         <div class="window-body" style="display: flex; flex-direction: column; align-items: center;">
-            <p style="position: absolute; bottom: 2em; left: 50%; transform: translate(-50%, 0%);">all creature gifs created by <a href="https://giphy.com/daxnorman" target="_blank">Dax Norman</a></p>
+            <p style="position: absolute; bottom: 2em; left: 50%; transform: translate(-50%, 0%);">all creature gifs
+                created by <a href="https://giphy.com/daxnorman" target="_blank">Dax Norman</a></p>
             <button style="position: absolute; bottom: 2em; left: 2em;" onclick="scrollCatalog(-1)">prev</button>
             <button style="position: absolute; bottom: 2em; right: 2em;" onclick="scrollCatalog(1)">next</button>
             <div class="img-container">
@@ -378,7 +386,7 @@
         </div>
     </div>
     <!-- End changelog -->
-     
+
     <!-- Start reviews -->
     <div class="window" id="reviews" style="display: none;">
         <div class="title-bar">
@@ -432,7 +440,8 @@
                     </ul>
                 </li>
                 <li>Reviews with "Review Date" set to 01-01-2000 are just reviews I haven't gotten to yet</li>
-                <li>For albums with a 10/10 score, ties are broken by when I gave them a 10. So if you sort by highest score, the top entry is the most recent 10 I've given.</li>
+                <li>For albums with a 10/10 score, ties are broken by when I gave them a 10. So if you sort by highest
+                    score, the top entry is the most recent 10 I've given.</li>
                 <li>Default sort order is most recently reviewed</li>
             </ul>
         </div>
@@ -479,7 +488,7 @@
     </div>
     <!-- End settings -->
 
-     <!-- Start signup -->
+    <!-- Start signup -->
     <div class="window library" id="signup" style="display: none;">
         <div class="title-bar">
             <div class="title-bar-text">Signup</div>
@@ -499,8 +508,8 @@
         </div>
     </div>
     <!-- End signup -->
-     <div id="right-click-menu">
-     </div>
+    <div id="right-click-menu">
+    </div>
 
     <div class="taskbar">
         <button id="start-button" class="start-button">
@@ -534,7 +543,7 @@
             <li onclick="sleep()"><img src="/resources/msft/computer.png"><u>S</u>leep</li>
         </ul>
     </div>
-    <script src="/scripts/main-9.js"></script>
+    <script src="/scripts/main-10.js"></script>
 </body>
 
 </html>
