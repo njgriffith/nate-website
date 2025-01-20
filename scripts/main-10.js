@@ -70,7 +70,6 @@ async function getCommits() {
       const listEntry = document.createElement('li');
       listEntry.style.fontWeight = 'bold';
       commitList.appendChild(listEntry);
-      console.log(commit.commit.author['date'])
       listEntry.innerText = commit.commit.author['date'].substring(5, 10) + ": " + commit.commit.message;
     });
 
