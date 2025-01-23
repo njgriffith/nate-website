@@ -5,6 +5,61 @@ var largeScreenImage = '/resources/backgrounds/metropolis.png';
 var backgroundList = [];
 var songList = [];
 var currentSongIndex = 0;
+var windowStack = [];
+var weatherData = {};
+weatherData = {
+  "cloudBase": null,
+  "cloudCeiling": null,
+  "cloudCover": 1,
+  "dewPoint": 11.53,
+  "freezingRainIntensity": 0,
+  "hailProbability": 47.5,
+  "hailSize": 2.35,
+  "humidity": 69,
+  "precipitationProbability": 0,
+  "pressureSurfaceLevel": 30.02,
+  "rainIntensity": 0,
+  "sleetIntensity": 0,
+  "snowIntensity": 0,
+  "temperature": 19.96,
+  "temperatureApparent": 15.09,
+  "uvHealthConcern": 0,
+  "uvIndex": 0,
+  "visibility": 9.94,
+  "weatherCode": 1000,
+  "windDirection": 175.63,
+  "windGust": 8.25,
+  "windSpeed": 3.36,
+  "location": [
+      "Durham, Durham County, North Carolina, 27703, United States"
+  ]
+}
+const weatherCodes = {
+  "0": "Unknown",
+  "1000": "Clear",
+  "1100": "Mostly Clear",
+  "1101": "Partly Cloudy",
+  "1102": "Mostly Cloudy",
+  "1001": "Cloudy",
+  "2000": "Fog",
+  "2100": "Light Fog",
+  "4000": "Drizzle",
+  "4200": "Light Rain",
+  "4001": "Rain",
+  "4201": "Heavy Rain",
+  "5000": "Snow",
+  "5001": "Flurries",
+  "5100": "Light Snow",
+  "5101": "Heavy Snow",
+  "6000": "Freezing Drizzle",
+  "6001": "Freezing Rain",
+  "6200": "Light Freezing Rain",
+  "6201": "Heavy Freezing Rain",
+  "7000": "Ice Pellets",
+  "7101": "Heavy Ice Pellets",
+  "7102": "Light Ice Pellets",
+  "8000": "Thunderstorm"
+}
 
 fetch(`../resources/files.json`)
   .then(response => response.json())
@@ -16,6 +71,74 @@ fetch(`../resources/files.json`)
     // largeScreenImage = `/resources/backgrounds/${backgroundList[index]}.png`;
     updateBackgroundImage();
   });
+
+async function getWeather(){
+  try {
+    const response = await fetch('https://api.nate-griffith.com/weather', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+  
+    const data = await response.json();
+    if (response.ok) {
+      let keys = Object.keys(data['data']['values']);
+      let values = Object.values(data['data']['values']);
+      for(let i=0;i<keys.length;i++){
+        weatherData[keys[i]] = values[i];
+      }
+      weatherData['location'] = [data['location']['name']];
+      handleWeatherResponse();
+    }
+    else {
+      alert('error fetching weather');
+    }
+  }
+  catch (error) {
+    alert('error connecting to service');
+    console.error(error);
+  }
+}
+function handleWeatherResponse(){
+  document.getElementById('temperature').innerText = `${weatherData['temperature']} \u00B0F`;
+  document.getElementById('weather-label').innerText = `${weatherCodes[weatherData['weatherCode']]}`;
+  document.getElementById('wind-speed').innerText = `Wind: ${handleWindDirection(weatherData['windDirection'])} ${weatherData['windSpeed']} mph`;
+  document.getElementById('wind-gust').innerText = `Gusts up to ${weatherData['windGust']} mph`;
+
+  var weatherLocation = weatherData['location'][0].split(', ');
+  document.getElementById('location').querySelectorAll('div')[1].innerText = weatherLocation[0];
+  document.getElementById('humidity').querySelectorAll('div')[1].innerText = `${weatherData['humidity']}%`;
+  document.getElementById('dewpoint').querySelectorAll('div')[1].innerText = `${weatherData['dewPoint']} \u00B0F`;
+  document.getElementById('pressure-surface-level').querySelectorAll('div')[1].innerText = `${weatherData['pressureSurfaceLevel']} inHg`;
+  document.getElementById('visibility').querySelectorAll('div')[1].innerText = `${weatherData['visibility']} miles`;
+  document.getElementById('uv-index').querySelectorAll('div')[1].innerText = `${weatherData['uvIndex']}`;
+  handleWeatherIcon();
+}
+
+function handleWindDirection(directionString){
+  var direction = parseInt(directionString);
+  var windDirections = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  const increment = 22.5;
+  var start = 348.75;
+  for (let i=0;i<16;i++){
+    if (start < direction && direction < (start + increment % 360)){
+      return windDirections[i];
+    }
+    start = (start + increment) % 360;
+  }
+}
+
+function handleWeatherIcon(){
+  var iconName = weatherCodes[weatherData['weatherCode']];
+  const isNight = (new Date().toTimeString().substring(0, 2) - 12) > 6;
+  const codesForNight = [1000, 1100, 1101, 1102];
+  if (isNight && codesForNight.includes(weatherData['weatherCode'])){
+    iconName += ' Night';
+  }
+  document.getElementById('weather-img').src = `/resources/weather/${iconName}.png`;
+}
+getWeather();
 
 
 if (window.location.href.includes('netlify')) {
@@ -89,6 +212,12 @@ function randomizeWindows() {
       windows[i].style.left = `200px`;
       continue;
     }
+    else if(windows[i].id === 'changelog'){
+      windows[i].style.position = 'absolute';
+      windows[i].style.bottom = `200px`;
+      windows[i].style.left = `400px`;
+      continue;
+    }
     windows[i].style.position = 'absolute';
     windows[i].style.top = `${Math.floor(Math.random() * window.innerHeight * 0.6)}px`;
     windows[i].style.left = `${Math.floor(Math.random() * window.innerWidth * 0.6)}px`;
@@ -101,11 +230,18 @@ function updateWindowZIndex(frontWindow) {
   if (frontWindow === null) {
     return;
   }
-  windows.forEach((window) => {
-    window.style.zIndex = '1';
+  if(!windowStack.includes(document.getElementById(frontWindow))){
+    windowStack.unshift(document.getElementById(frontWindow));
+  }
+  else{
+    var indexToRemove = windowStack.indexOf(document.getElementById(frontWindow));
+    windowStack.splice(indexToRemove, 1);
+    windowStack.unshift(document.getElementById(frontWindow));
+  }
+  windowStack.forEach((wind, index) => {
+    wind.style.zIndex = windowStack.length - index;
   });
-  document.getElementById(frontWindow).style.zIndex = '2';
-  focusedWindow = frontWindow;
+  document.querySelector('.taskbar').style.zIndex = windowStack.length + 1;
 }
 
 function updateBackground(newBackground) {
@@ -223,6 +359,7 @@ function openApp(appName) {
 function closeApp(appName) {
   document.getElementById(appName).style.display = 'none';
   updateTaskbar(appName, 'remove');
+  windowStack.remove(document.getElementById(appName));
 
   if (appName === 'internet') {
     updateBackgroundImage();
@@ -273,6 +410,7 @@ var isDraggingMedia = false;
 var isDraggingMediaTime = false;
 // pick up
 head.addEventListener("mousedown", (event) => {
+  updateWindowZIndex('media-player');
   isDraggingMedia = true;
   mediaPlayerShiftX = parseFloat(mediaPlayer.style.left) - event.clientX;
   mediaPlayerShiftY = parseFloat(mediaPlayer.style.top) - event.clientY; 
@@ -295,6 +433,9 @@ for (let i = 0; i < titleBars.length; i++) {
 document.addEventListener("mousemove", (event) => {
   if (isAsleep) {
     window.location.href = '/';
+    return;
+  }
+  if (event.clientY < 0 || event.clientX < 0 || event.clientX > window.innerWidth){
     return;
   }
   event.preventDefault();

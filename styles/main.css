@@ -37,7 +37,6 @@ img {
   cursor: pointer;
   user-select: none;
   font-family: "Pixelated MS Sans Serif";
-  
 }
 .icon > img{
   width: 32px;
@@ -176,6 +175,10 @@ li>img {
   color: black;
 }
 
+.hidden{
+  display: none;
+}
+
 #catalog {
   width: 50%;
   height: 70%;
@@ -188,31 +191,8 @@ li>img {
   width: 70%;
   height: 80%;
 }
-.library-image {
-  width: 60%;
-  height: auto;
-}
 
-.file-system {
-  display: flex;
-  gap: 3em;
-  margin: 1em;
-}
-
-.folder {
-  cursor: pointer;
-}
-
-#folder-content {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.hidden {
-  display: none;
-}
-
-.blog-row:hover {
+tbody > tr:hover {
   color: white;
   background-color: blue;
   cursor: pointer;
@@ -226,34 +206,6 @@ li>img {
 
 .blog-row {
   border-bottom: 1px solid blue;
-}
-
-.media {
-  margin-left: auto;
-  color: #000;
-  font-size: 1.1em;
-  margin-right: 2em;
-  padding: 0.5em;
-  text-align: center;
-}
-
-.progress-bar {
-  background: #ffffff;
-  height: 10px;
-  border: 1px solid #808080;
-  box-shadow: inset -1px -1px 0 #ffffff, inset 1px 1px 0 #000000;
-  position: relative;
-}
-
-.progress {
-  background: #000080;
-  width: 50%;
-  height: 100%;
-}
-
-#review-table>tr:hover {
-  color: white;
-  background: blue;
 }
 
 .player-grid-container {
@@ -300,13 +252,6 @@ li>img {
   overflow-y: scroll;
   height: 150px;
 }
-#right-click-menu{
-  position: absolute;
-  background-color: white;
-  width: 150px;
-  height: 250px;
-  display: none;
-}
 
 .media-control:hover{
   outline: 1px dotted blue;
@@ -329,12 +274,6 @@ th:hover {
 
 .selected-sort {
   background: #444;
-  color: white;
-}
-
-tbody>tr:hover {
-  cursor: pointer;
-  background-color: blue;
   color: white;
 }
 
@@ -379,4 +318,45 @@ tbody>tr:hover {
   justify-content: space-between;
   width: 90%;
   gap: 10px;
+}
+
+#weather-container{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 30%;
+  height: 30%;
+  margin: 1em;
+  align-self: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  align-content: center;
+  color: white;
+  background: linear-gradient(to top, #000000, #000000, #333333, #333333);
+  background-size: cover;
+  background-size: 100% 1px;
+  font-size: 1.5em;
+  font-family: "Pixelated MS Sans Serif";
+}
+#primary-weather-data{
+  text-align: center;
+  margin-right: 1em;
+}
+#primary-weather-data > img{
+  width: 100px;
+  margin: auto;
+}
+#secondary-weather-data{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-right: 1.5em;
+}
+#secondary-weather-data > div{
+  display: flex;
+  justify-content: space-between;
+}
+#temperature{
+  font-size: 2em;
+  padding-top: 0.5em;
 }
