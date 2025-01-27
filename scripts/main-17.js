@@ -7,33 +7,6 @@ var songList = [];
 var currentSongIndex = 0;
 var windowStack = [];
 var weatherData = {};
-weatherData = {
-  "cloudBase": null,
-  "cloudCeiling": null,
-  "cloudCover": 1,
-  "dewPoint": 11.53,
-  "freezingRainIntensity": 0,
-  "hailProbability": 47.5,
-  "hailSize": 2.35,
-  "humidity": 69,
-  "precipitationProbability": 0,
-  "pressureSurfaceLevel": 30.02,
-  "rainIntensity": 0,
-  "sleetIntensity": 0,
-  "snowIntensity": 0,
-  "temperature": 19.96,
-  "temperatureApparent": 15.09,
-  "uvHealthConcern": 0,
-  "uvIndex": 0,
-  "visibility": 9.94,
-  "weatherCode": 1000,
-  "windDirection": 175.63,
-  "windGust": 8.25,
-  "windSpeed": 3.36,
-  "location": [
-      "Durham, Durham County, North Carolina, 27703, United States"
-  ]
-}
 const weatherCodes = {
   "0": "Unknown",
   "1000": "Clear",
@@ -138,11 +111,13 @@ function handleWeatherIcon(){
   }
   document.getElementById('weather-img').src = `/resources/weather/${iconName}.png`;
 }
-getWeather();
 
 
 if (window.location.href.includes('netlify')) {
   alert('nate-griffith.com is now available!\nGo there for the latest updates')
+}
+else if (window.location.href.includes('nate-griffith.com')){
+  getWeather();
 }
 
 function updateBackgroundImage() {
@@ -171,8 +146,7 @@ let isAsleep = false;
 let previousState = '';
 
 async function getCommits() {
-  const url = `https://api.github.com/repos/njgriffith/nate-website/commits`;
-
+  const url = `https://api.nate-griffith.com/commits`;
   try {
     const response = await fetch(url, {
       headers: {
@@ -359,7 +333,8 @@ function openApp(appName) {
 function closeApp(appName) {
   document.getElementById(appName).style.display = 'none';
   updateTaskbar(appName, 'remove');
-  windowStack.remove(document.getElementById(appName));
+  windowStack.splice(windowStack.indexOf(document.getElementById(appName)), 1);
+  // windowStack.remove(document.getElementById(appName));
 
   if (appName === 'internet') {
     updateBackgroundImage();
