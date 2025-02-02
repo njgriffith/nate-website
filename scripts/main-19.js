@@ -33,33 +33,33 @@ const weatherCodes = {
   "7102": "Light Ice Pellets",
   "8000": "Thunderstorm"
 }
-// weatherData = {
-//   "cloudBase": 0.9,
-//   "cloudCeiling": 0.9,
-//   "cloudCover": 100,
-//   "dewPoint": 30.8,
-//   "freezingRainIntensity": 0,
-//   "hailProbability": 9.7,
-//   "hailSize": 1.19,
-//   "humidity": 46,
-//   "precipitationProbability": 0,
-//   "pressureSurfaceLevel": 29.8,
-//   "rainIntensity": 0,
-//   "sleetIntensity": 0,
-//   "snowIntensity": 0,
-//   "temperature": 50.9,
-//   "temperatureApparent": 50.9,
-//   "uvHealthConcern": 0,
-//   "uvIndex": 0,
-//   "visibility": 9.94,
-//   "weatherCode": 1001,
-//   "windDirection": 170,
-//   "windGust": 14.3,
-//   "windSpeed": 5.9,
-//   "location": [
-//       "Durham, Durham County, North Carolina, 27703, United States"
-//   ]
-// }
+weatherData = {
+  "cloudBase": 0.9,
+  "cloudCeiling": 0.9,
+  "cloudCover": 100,
+  "dewPoint": 30.8,
+  "freezingRainIntensity": 0,
+  "hailProbability": 9.7,
+  "hailSize": 1.19,
+  "humidity": 46,
+  "precipitationProbability": 0,
+  "pressureSurfaceLevel": 29.8,
+  "rainIntensity": 0,
+  "sleetIntensity": 0,
+  "snowIntensity": 0,
+  "temperature": 50.9,
+  "temperatureApparent": 50.9,
+  "uvHealthConcern": 0,
+  "uvIndex": 0,
+  "visibility": 9.94,
+  "weatherCode": 1001,
+  "windDirection": 170,
+  "windGust": 14.3,
+  "windSpeed": 5.9,
+  "location": [
+      "Durham, Durham County, North Carolina, 27703, United States"
+  ]
+}
 // element variables
 const iconLabels = document.querySelectorAll('.icon > p');
 const icons = document.querySelectorAll('.icon');
