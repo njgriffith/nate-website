@@ -320,21 +320,19 @@ th:hover {
   gap: 10px;
 }
 
+#weather{
+  width: 30%;
+  height: 30%;
+}
 #weather-container{
   display: grid;
   grid-template-columns: 50% 50%;
-  width: 30%;
-  height: 30%;
-  margin: 1em;
+  width: 80%;
+  height: 80%;
+  margin: 2em;
   align-self: center;
-  position: absolute;
-  top: 0;
-  right: 0;
   align-content: center;
-  color: white;
-  background: linear-gradient(to top, #000000, #000000, #333333, #333333);
-  background-size: cover;
-  background-size: 100% 1px;
+  color: black;
   font-size: 1.5em;
   font-family: "Pixelated MS Sans Serif";
 }
@@ -359,4 +357,14 @@ th:hover {
 #temperature{
   font-size: 2em;
   padding-top: 0.5em;
+}
+#right-click-box{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: rgba(0, 0, 255, 0.4);
+  outline: 1px dotted blue;
+}
+.highlighted-icon{
+  background: rgba(0, 40, 255, 0.4);
 }

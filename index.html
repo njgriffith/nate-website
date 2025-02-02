@@ -7,7 +7,7 @@
     <title>Home</title>
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="https://unpkg.com/98.css">
-    <link rel="shortcut icon" href="#">
+    <link rel="shortcut icon" type="image/x-icon" href="/resources/favicon.ico">
 </head>
 
 <body style="overflow: hidden; position: relative">
@@ -15,7 +15,7 @@
     <div class="desktop">
         <div ondblclick="openApp('blog')" onclick="highlightApp(this)">
             <div class="icon">
-                <img src="/resources/media/transformer.gif">
+                <img src="/resources/media/rotater.gif">
                 <p>Blogs</p>
             </div>
         </div>
@@ -47,7 +47,7 @@
         </div>
         <div ondblclick="openApp('media-player')" onclick="highlightApp(this)">
             <div class="icon">
-                <img src="/resources/media/vis.gif">
+                <img src="/resources/media/open-head.gif">
                 <p>Media Player</p>
             </div>
         </div>
@@ -71,46 +71,71 @@
         </div>
         <div ondblclick="openApp('signup')" onclick="highlightApp(this)">
             <div class="icon">
-                <img src="/resources/msft/signup.png">
+                <img src="/resources/media/running.gif">
                 <p>Sign Up!</p>
             </div>
         </div>
-    </div>
-    <!-- weather -->
-    <div id="weather-container">
-        <div id="primary-weather-data">
-            <div id="temperature"></div>
-            <div id="weather-label"></div>
-            <img id="weather-img" src="">
-            <div id="wind-speed"></div>
-            <div id="wind-gust"></div>
+        <div ondblclick="openApp('weather')" onclick="highlightApp(this)">
+            <div class="icon">
+                <img src="/resources/media/time-travel.gif">
+                <p>Weather</p>
+            </div>
         </div>
-        <div id="secondary-weather-data">
-            <div id="location">
-                <div>Location:</div>
-                <div></div>
+        <div ondblclick="openApp('recycle')" onclick="highlightApp(this)">
+            <div class="icon">
+                <img src="/resources/media/void.gif">
+                <p>Recycle</p>
             </div>
-            <div id="humidity">
-                <div>Humidity:</div>
-                <div></div>
+        </div>
+    </div>
+    <div id="right-click-box"></div>
+    <!-- weather -->
+    <div class="window library" id="weather" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">Weather</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize" onclick="minApp('weather')"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeApp('weather')" aria-label="Close" id="close-weather"></button>
             </div>
-            <div id="dewpoint">
-                <div>Dewpoint:</div>
-                <div></div>
+        </div>
+        <div class="window-body" style="display: flex; gap: 2em; height: 80%; overflow-y: scroll;">
+            <div id="weather-container">
+                <div id="primary-weather-data">
+                    <div id="temperature"></div>
+                    <div id="weather-label"></div>
+                    <img id="weather-img" src="">
+                    <div id="wind-speed"></div>
+                    <div id="wind-gust"></div>
+                </div>
+                <div id="secondary-weather-data">
+                    <div id="location">
+                        <div>Location:</div>
+                        <div></div>
+                    </div>
+                    <div id="humidity">
+                        <div>Humidity:</div>
+                        <div></div>
+                    </div>
+                    <div id="dewpoint">
+                        <div>Dewpoint:</div>
+                        <div></div>
+                    </div>
+                    <div id="pressure-surface-level">
+                        <div>Pressure</div>
+                        <div></div>
+                    </div>
+                    <div id="visibility">
+                        <div>Visibility:</div>
+                        <div></div>
+                    </div>
+                    <div id="uv-index">
+                        <div>UV Index:</div>
+                        <div></div>
+                    </div>
+                </div>   
             </div>
-            <div id="pressure-surface-level">
-                <div>Pressure</div>
-                <div></div>
-            </div>
-            <div id="visibility">
-                <div>Visibility:</div>
-                <div></div>
-            </div>
-            <div id="uv-index">
-                <div>UV Index:</div>
-                <div></div>
-            </div>
-        </div>   
+        </div>
     </div>     
 
     
@@ -377,7 +402,7 @@
             </div>
             <div id="internet-screen"
                 style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-left: -2em;">
-                <div style="width: 700px; height: 475px; background: white; padding: 1em;">
+                <div style="width: 700px; height: 475px; background-image: url('/resources/media/backrooms.gif'); background-size: cover; margin: 3em;">
                 </div>
             </div>
 
@@ -546,8 +571,35 @@
         </div>
     </div>
     <!-- End signup -->
-    <div id="right-click-menu">
+
+    <!-- Start recycle -->
+    <div class="window library" id="recycle" style="display: none;">
+        <div class="title-bar">
+            <div class="title-bar-text">Recycle</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize" onclick="minApp('recycle')"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeApp('recycle')" aria-label="Close" id="close-recycle"></button>
+            </div>
+        </div>
+        <div class="window-body" style="width: 80%;">
+            <div class="sunken-panel">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>App Name</th>
+                            <th>Deleted</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recycle-body">
+
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
     </div>
+    <!-- End recycle -->
 
     <div class="taskbar">
         <button id="start-button" class="start-button">
@@ -581,7 +633,7 @@
             <li onclick="sleep()"><img src="/resources/msft/computer.png"><u>S</u>leep</li>
         </ul>
     </div>
-    <script src="/scripts/main-17.js"></script>
+    <script src="/scripts/main-18.js"></script>
 </body>
 
 </html>
