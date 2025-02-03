@@ -368,3 +368,43 @@ th:hover {
 .highlighted-icon{
   background: rgba(0, 40, 255, 0.4);
 }
+
+#minesweeper-window{
+  margin: 1em auto;
+  width: 90%;
+  height: 90%;
+}
+
+#minesweeper-window > table{
+  margin: auto;
+  margin-top: 5em;
+}
+
+#minesweeper-menu{
+  width: 80%; 
+  margin: 2em auto;
+  display: flex; 
+  justify-content: space-around; 
+}
+
+.minesweeper-cell {
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+.minesweeper-cell > img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#game-hud > img{
+  scale: 1.5;
+  cursor: pointer;
+}
+#leaderboard-container ol {
+  padding-left: 0; /* Removes default indentation */
+  list-style-position: inside; /* Ensures list items align with label */
+}
+#leaderboard-container label {
+  font-weight: bold;
+}

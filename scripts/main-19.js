@@ -234,7 +234,7 @@ async function getCommits() {
 
 function randomizeWindows() {
   for (let i = 0; i < windows.length; i++) {
-    if (windows[i].id === 'reviews' || windows[i].id === 'internet') {
+    if (windows[i].id === 'reviews' || windows[i].id === 'internet' || windows[i].id === 'minesweeper') {
       windows[i].style.position = 'absolute';
       windows[i].style.top = `200px`;
       windows[i].style.left = `200px`;
@@ -1136,7 +1136,7 @@ window.addEventListener('load', function () {
   const windows = this.document.querySelectorAll('.window');
   if (windows) {
     windows.forEach(wind => {
-      if(!wind || wind.id === 'changelog'){
+      if(!wind || wind.id === 'changelog' || wind.id === 'leaderboard'){
         return;
       }
       const windowStyle = sessionStorage.getItem(`${wind.id}Style`);
@@ -1153,8 +1153,6 @@ window.addEventListener('load', function () {
       updateWindowZIndex(sessionStorage.getItem('focusedWindow'));
     }
   }
-
-
 });
 
 function sortData(columnName) {
@@ -1359,7 +1357,7 @@ function closeReviewStats() {
 // ----- TEST SUITE -----
 // createList('2020s-movies')
 // scrollCatalog(6);
-// openApp('internet');
+// openApp('minesweeper');
 // loadHTML('ebay')
 // openApp('media-player');
 // playMedia('one', 'music');

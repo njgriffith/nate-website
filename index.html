@@ -81,6 +81,12 @@
                 <p>Weather</p>
             </div>
         </div>
+        <div ondblclick="openApp('minesweeper')" onclick="highlightApp(this)">
+            <div class="icon">
+                <img src="/resources/media/fire.gif">
+                <p>Minesweeper</p>
+            </div>
+        </div>
         <div ondblclick="openApp('recycle')" onclick="highlightApp(this)">
             <div class="icon">
                 <img src="/resources/media/void.gif">
@@ -600,6 +606,77 @@
         </div>
     </div>
     <!-- End recycle -->
+    <!-- Start minesweeper -->
+    <div class="window library" id="minesweeper" style="display: none; width: 500px; height: 500px;">
+        <div class="title-bar">
+            <div class="title-bar-text">Minesweeper</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize" onclick="minApp('minesweeper')"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeMinesweeper(); closeApp('minesweeper')" aria-label="Close" id="close-minesweeper"></button>
+            </div>
+        </div>
+        <div class="window-body" id="minesweeper-window">
+            <div id="minesweeper-menu">
+                <button onclick="playMinesweeper()">Play</button>
+                <select id="ms-difficulty">
+                    <option selected>Choose a difficulty</option>
+                    <option>Easy</option>
+                    <option>Medium</option>
+                    <option>Hard</option>
+                </select>
+                <button onclick="openApp('leaderboard'); getLeaderboard()">Leaderboards</button> 
+            </div>   
+            <div id="game-hud" style="display: flex; justify-content: space-around; margin: 2em 0; font-size: 1.5em;">
+                <div id="timer" style="display: flex; gap: 0;">
+                    <img src="resources/minesweeper/-.png">
+                    <img src="resources/minesweeper/-.png">
+                    <img src="resources/minesweeper/-.png">
+                </div>
+                <img id="minesweeper-face" src="resources/minesweeper/smile.png">
+                <div id="flags-left" style="display: flex; gap: 0;">
+                    <img src="resources/minesweeper/-.png">
+                    <img src="resources/minesweeper/-.png">
+                    <img src="resources/minesweeper/-.png">
+                </div>  
+            </div>
+        </div>
+    </div>
+    <!-- End minesweeper -->
+     <!-- start leaderboard -->
+    <div class="window library" id="leaderboard" style="display: none; width: 300px;">
+        <div class="title-bar">
+            <div class="title-bar-text">Leaderboard</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize" onclick="minApp('leaderboard')"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeApp('leaderboard')" aria-label="Close" id="close-hidden"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <div id="leaderboard-container" style="height: 300px; width: 100%; display: flex; justify-content: space-around;">
+                <div id="leaderboard-easy">
+                    <label>Easy</label>
+                    <ol>
+
+                    </ol>
+                </div>
+                <div id="leaderboard-medium">
+                    <label>Medium</label>
+                    <ol>
+           
+                    </ol>
+                </div>
+                <div id="leaderboard-hard">
+                    <label>Hard</label>
+                    <ol>
+         
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end leaderboard -->
 
     <div class="taskbar">
         <button id="start-button" class="start-button">
@@ -634,6 +711,7 @@
         </ul>
     </div>
     <script src="/scripts/main-19.js"></script>
+    <script src="/scripts/minesweeper.js"></script>
 </body>
 
 </html>
