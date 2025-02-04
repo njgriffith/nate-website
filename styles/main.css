@@ -373,6 +373,7 @@ th:hover {
   margin: 1em auto;
   width: 90%;
   height: 90%;
+  overflow-y: scroll;
 }
 
 #minesweeper-window > table{

@@ -14,16 +14,18 @@ var cols = 10;
 var totalBombs = 10;
 var intervalTracker;
 var numFlagsLeft = 10;
+var hasPlacedYet = false;
 
 // playMinesweeper();
 function closeMinesweeper(){
+    hasPlacedYet = false;
     if (document.getElementById('minesweeper-table') !== null) {
         clearInterval(intervalTracker);
         document.getElementById('minesweeper-table').remove();
     }
-    document.getElementById('minesweeper-menu').style.display = 'flex';
 }
 function playMinesweeper() {
+    hasPlacedYet = false;
     if (document.getElementById('minesweeper-table') !== null) {
         clearInterval(intervalTracker);
         document.getElementById('minesweeper-table').remove();
@@ -78,7 +80,6 @@ function playMinesweeper() {
 }
 
 function createGrid() {
-    document.getElementById('minesweeper-menu').style.display = 'none';
     const gameTable = document.createElement('table');
     gameTable.id = 'minesweeper-table';
     gameTable.style.gap = '0';
@@ -161,6 +162,12 @@ function revealCell(row, col) {
     let cell = gameGrid[row][col];
     cell.revealed = true;
 
+    if((!hasPlacedYet && cell.count > 0) || cell.mine){
+        closeMinesweeper();
+        playMinesweeper();
+        revealCell(row, col);
+        return;
+    }
     if (cell.mine) {
         document.querySelector(`#cell-${row}-${col}>img`).src = '/resources/minesweeper/tile-mine-hit.png';
         gameOver = true;
@@ -170,6 +177,7 @@ function revealCell(row, col) {
         alert("Game Over! You hit a mine.");
         return;
     }
+    hasPlacedYet = true;
 
     if (cell.count > 0) {
         document.querySelector(`#cell-${row}-${col}>img`).src = `/resources/minesweeper/near-${cell.count}.png`;

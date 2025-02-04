@@ -450,6 +450,11 @@ function closeApp(appName) {
     document.getElementById('lists').style.display = 'none';
     document.getElementById('50-spotify').style.display = 'none';
   }
+  else if (appName === 'leaderboard') {
+    document.getElementById('leaderboard-container').querySelectorAll('div>ol>li').forEach(leaderboardEntry => {
+      leaderboardEntry.remove();
+    });
+  }
 }
 function minApp(appName) {
   document.getElementById(appName).style.display = 'none';
