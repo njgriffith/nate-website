@@ -8,6 +8,7 @@ const flagDigits = document.querySelectorAll('#flags-left>img');
 
 var gameGrid = [];
 let seconds = 0;
+let thousandSecond = 0;
 let gameOver = false;
 var rows = 8;
 var cols = 10;
@@ -31,7 +32,8 @@ function playMinesweeper() {
         document.getElementById('minesweeper-table').remove();
     }
     gameOver = false;
-    seconds = 0;
+    seconds = 998;
+    thousandSecond = 0;
     const difficulty = msDifficulty.value;
     if (difficulty.includes('Choose')) {
         alert('Choose a difficulty');
@@ -64,6 +66,13 @@ function playMinesweeper() {
 
     intervalTracker = setInterval(() => {
         seconds++;
+        if (seconds === 1000){
+            thousandSecond++;
+            seconds = 0;
+            timerDigits[0].src = `resources/minesweeper/0.png`;
+            timerDigits[1].src = `resources/minesweeper/0.png`;
+            timerDigits[2].src = `resources/minesweeper/0.png`;
+        }
         if (seconds < 10) {
             timerDigits[2].src = `resources/minesweeper/${seconds}.png`;
         }
@@ -247,13 +256,14 @@ function checkWin() {
         clearInterval(intervalTracker);
         gameOver = true;
         var username = prompt("Congratulations! Enter your name to join the leaderboards");
-        updateLeaderboard(username, seconds);
+        updateLeaderboard(username, seconds + (thousandSecond * 1000));
     }
 }
 
 async function updateLeaderboard(username, score) {
     try {
         const difficulty = msDifficulty.value;
+        console.log(JSON.stringify({ username, score, difficulty }));
         const response = await fetch('https://api.nate-griffith.com/minesweeper', {
             method: 'POST',
             headers: {
@@ -277,6 +287,7 @@ async function updateLeaderboard(username, score) {
 }
 
 async function getLeaderboard() {
+    if (document.getElementById('leaderboard').querySelector('li')) return;
     try {
         const response = await fetch('https://api.nate-griffith.com/minesweeper', {
             method: 'GET',
