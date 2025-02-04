@@ -162,7 +162,7 @@ function revealCell(row, col) {
     let cell = gameGrid[row][col];
     cell.revealed = true;
 
-    if((!hasPlacedYet && cell.count > 0) || cell.mine){
+    if(!hasPlacedYet && (cell.count > 0 || cell.mine)){
         closeMinesweeper();
         playMinesweeper();
         revealCell(row, col);
@@ -233,6 +233,7 @@ function revealAllMines() {
 }
 
 function checkWin() {
+    if (gameOver) return;
     let revealedCells = 0;
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
