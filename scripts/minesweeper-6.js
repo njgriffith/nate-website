@@ -32,7 +32,7 @@ function playMinesweeper() {
         document.getElementById('minesweeper-table').remove();
     }
     gameOver = false;
-    seconds = 998;
+    seconds = 0;
     thousandSecond = 0;
     const difficulty = msDifficulty.value;
     if (difficulty.includes('Choose')) {
@@ -256,6 +256,9 @@ function checkWin() {
         clearInterval(intervalTracker);
         gameOver = true;
         var username = prompt("Congratulations! Enter your name to join the leaderboards");
+        if (username === null || username.trim().length === 0){
+            return;
+        }
         updateLeaderboard(username, seconds + (thousandSecond * 1000));
     }
 }
