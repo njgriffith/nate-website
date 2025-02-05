@@ -155,6 +155,7 @@ function handleWindDirection(directionString){
     }
     start = (start + increment) % 360;
   }
+  return 'N';
 }
 
 function handleWeatherIcon(){
