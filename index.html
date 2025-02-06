@@ -481,11 +481,11 @@
                     <thead class="review-table-head">
                         <tr>
                             <th>Cover</th>
-                            <th id="title" onclick="sortAndReloadContent('title', this)">Title</th>
-                            <th id="artist" onclick="sortAndReloadContent('artist', this)">Artist</th>
-                            <th id="score" onclick="sortAndReloadContent('score', this)">Score</th>
-                            <th id="released" onclick="sortAndReloadContent('released', this)">Release Date</th>
-                            <th id="reviewed" onclick="sortAndReloadContent('reviewed', this)">Review Date</th>
+                            <th id="title" onclick="sortReviewData('title')">Title</th>
+                            <th id="artist" onclick="sortReviewData('artist')">Artist</th>
+                            <th id="score" onclick="sortReviewData('score')">Score</th>
+                            <th id="released" onclick="sortReviewData('released')">Release Date</th>
+                            <th id="reviewed" onclick="sortReviewData('reviewed')">Review Date</th>
                         </tr>
                     </thead>
                     <tbody id="review-table">
@@ -715,6 +715,7 @@
         </ul>
     </div>
     <script src="/scripts/main-21.js"></script>
+    <script src="/scripts/reviews.js"></script>
     <script src="/scripts/minesweeper-6.js"></script>
 </body>
 

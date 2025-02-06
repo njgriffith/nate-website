@@ -266,7 +266,6 @@ function checkWin() {
 async function updateLeaderboard(username, score) {
     try {
         const difficulty = msDifficulty.value;
-        console.log(JSON.stringify({ username, score, difficulty }));
         const response = await fetch('https://api.nate-griffith.com/minesweeper', {
             method: 'POST',
             headers: {

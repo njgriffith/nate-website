@@ -57,9 +57,10 @@ weatherData = {
   "windGust": 14.3,
   "windSpeed": 5.9,
   "location": [
-      "Durham, Durham County, North Carolina, 27703, United States"
+    "Durham, Durham County, North Carolina, 27703, United States"
   ]
 }
+
 // element variables
 const iconLabels = document.querySelectorAll('.icon > p');
 const icons = document.querySelectorAll('.icon');
@@ -99,7 +100,7 @@ fetch(`../resources/files.json`)
     updateBackgroundImage();
   });
 
-async function getWeather(){
+async function getWeather() {
   try {
     const response = await fetch('https://api.nate-griffith.com/weather', {
       method: 'GET',
@@ -107,12 +108,12 @@ async function getWeather(){
         'Content-Type': 'application/json',
       }
     });
-  
+
     const data = await response.json();
     if (response.ok) {
       let keys = Object.keys(data['data']['values']);
       let values = Object.values(data['data']['values']);
-      for(let i=0;i<keys.length;i++){
+      for (let i = 0; i < keys.length; i++) {
         weatherData[keys[i]] = values[i];
       }
       weatherData['location'] = [data['location']['name']];
@@ -128,7 +129,7 @@ async function getWeather(){
   }
 }
 handleWeatherResponse();
-function handleWeatherResponse(){
+function handleWeatherResponse() {
   document.getElementById('temperature').innerText = `${weatherData['temperature']} \u00B0F`;
   document.getElementById('weather-label').innerText = `${weatherCodes[weatherData['weatherCode']]}`;
   document.getElementById('wind-speed').innerText = `Wind: ${handleWindDirection(weatherData['windDirection'])} ${weatherData['windSpeed']} mph`;
@@ -144,13 +145,13 @@ function handleWeatherResponse(){
   handleWeatherIcon();
 }
 
-function handleWindDirection(directionString){
+function handleWindDirection(directionString) {
   var direction = parseInt(directionString);
   var windDirections = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
   const increment = 22.5;
   var start = 348.75;
-  for (let i=0;i<16;i++){
-    if (start < direction && direction < (start + increment % 360)){
+  for (let i = 0; i < 16; i++) {
+    if (start < direction && direction < (start + increment % 360)) {
       return windDirections[i];
     }
     start = (start + increment) % 360;
@@ -158,11 +159,11 @@ function handleWindDirection(directionString){
   return 'N';
 }
 
-function handleWeatherIcon(){
+function handleWeatherIcon() {
   var iconName = weatherCodes[weatherData['weatherCode']];
   const isNight = (new Date().toTimeString().substring(0, 2) - 12) > 6;
   const codesForNight = [1000, 1100, 1101, 1102];
-  if (isNight && codesForNight.includes(weatherData['weatherCode'])){
+  if (isNight && codesForNight.includes(weatherData['weatherCode'])) {
     iconName += ' Night';
   }
   document.getElementById('weather-img').src = `/resources/weather/${iconName}.png`;
@@ -172,7 +173,7 @@ function handleWeatherIcon(){
 if (window.location.href.includes('netlify')) {
   alert('nate-griffith.com is now available!\nGo there for the latest updates')
 }
-else if (window.location.href.includes('nate-griffith.com')){
+else if (window.location.href.includes('nate-griffith.com')) {
   getWeather();
   getCommits();
   openApp('weather');
@@ -241,13 +242,13 @@ function randomizeWindows() {
       windows[i].style.left = `200px`;
       continue;
     }
-    else if (windows[i].id === 'weather'){
+    else if (windows[i].id === 'weather') {
       windows[i].style.position = 'absolute';
       windows[i].style.top = `100px`;
       windows[i].style.left = `${window.innerWidth - 600}px`;
       continue;
     }
-    else if(windows[i].id === 'changelog'){
+    else if (windows[i].id === 'changelog') {
       windows[i].style.position = 'absolute';
       windows[i].style.bottom = `200px`;
       windows[i].style.left = `400px`;
@@ -265,10 +266,11 @@ function updateWindowZIndex(frontWindow) {
   if (frontWindow === null) {
     return;
   }
-  if(!windowStack.includes(document.getElementById(frontWindow))){
+  focusedWindow = frontWindow;
+  if (!windowStack.includes(document.getElementById(frontWindow))) {
     windowStack.unshift(document.getElementById(frontWindow));
   }
-  else{
+  else {
     var indexToRemove = windowStack.indexOf(document.getElementById(frontWindow));
     windowStack.splice(indexToRemove, 1);
     windowStack.unshift(document.getElementById(frontWindow));
@@ -305,14 +307,14 @@ document.addEventListener('mousedown', (event) => {
   rightClickBox.style.top = `${event.clientY}px`;
 });
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
   if (event.key === 'Delete') {
     var appsToDelete = document.querySelectorAll('.highlighted-icon');
     appsToDelete.forEach(appToDelete => {
       recycleApp(appToDelete);
     });
     icons.forEach(icon => {
-      if (icon.style.outline === 'none'){
+      if (icon.style.outline === 'none') {
         return;
       }
       recycleApp(icon);
@@ -320,9 +322,9 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-function recycleApp(appToDelete){
+function recycleApp(appToDelete) {
   const tempName = appToDelete.querySelector('p').innerText;
-  if (tempName === 'Recycle'){
+  if (tempName === 'Recycle') {
     return;
   }
   appToDelete.style.display = 'none';
@@ -339,9 +341,9 @@ function recycleApp(appToDelete){
   recycleBody.appendChild(tempRow);
 }
 
-function recoverApp(deletedName){
+function recoverApp(deletedName) {
   icons.forEach(icon => {
-    if (icon.querySelector('p').innerText === deletedName){
+    if (icon.querySelector('p').innerText === deletedName) {
       icon.style.display = 'block';
       document.getElementById(`recycle-row-${deletedName.trim()}`).remove();
     }
@@ -493,19 +495,19 @@ head.addEventListener("mousedown", (event) => {
   updateWindowZIndex('media-player');
   isDraggingMedia = true;
   mediaPlayerShiftX = parseFloat(mediaPlayer.style.left) - event.clientX;
-  mediaPlayerShiftY = parseFloat(mediaPlayer.style.top) - event.clientY; 
+  mediaPlayerShiftY = parseFloat(mediaPlayer.style.top) - event.clientY;
 });
 
 playerCurrentTime.addEventListener("mousedown", (event) => {
   isDraggingMediaTime = true;
-  timeShift = parseFloat(playerCurrentTime.style.left) - event.clientX; 
+  timeShift = parseFloat(playerCurrentTime.style.left) - event.clientX;
 });
 
 for (let i = 0; i < titleBars.length; i++) {
   titleBars[i].addEventListener("mousedown", (event) => {
     isDragging[i] = true;
     updateWindowZIndex(windows[i].id);
-    shift = parseFloat(windows[i].style.left) - event.clientX; 
+    shift = parseFloat(windows[i].style.left) - event.clientX;
   });
 }
 
@@ -515,7 +517,7 @@ document.addEventListener("mousemove", (event) => {
     window.location.href = '/';
     return;
   }
-  if (event.clientY < 0 || event.clientX < 0 || event.clientX > window.innerWidth){
+  if (event.clientY < 0 || event.clientX < 0 || event.clientX > window.innerWidth) {
     return;
   }
   event.preventDefault();
@@ -527,21 +529,21 @@ document.addEventListener("mousemove", (event) => {
   for (let i = 0; i < isDragging.length; i++) {
     if (isDragging[i]) {
       isHighlighting = false;
-      windows[i].style.left = `${event.clientX + shift}px`; 
+      windows[i].style.left = `${event.clientX + shift}px`;
       windows[i].style.top = `${event.clientY - 5}px`;
     }
   }
-  if (isDraggingMediaTime){
+  if (isDraggingMediaTime) {
     isHighlighting = false;
-    if (event.clientX + timeShift < 0){
+    if (event.clientX + timeShift < 0) {
       return;
     }
-    else if (event.clientX + timeShift > 160){
+    else if (event.clientX + timeShift > 160) {
       return;
     }
     playerCurrentTime.style.left = `${event.clientX + timeShift}px`;
   }
-  if(isHighlighting){
+  if (isHighlighting) {
     let currentX = event.clientX;
     let currentY = event.clientY;
     let width = Math.abs(event.clientX - rightClickStartX);
@@ -555,10 +557,10 @@ document.addEventListener("mousemove", (event) => {
     icons.forEach(icon => {
       var iconLeft = icon.getBoundingClientRect().left + 40;
       var iconTop = icon.getBoundingClientRect().top + 40;
-      if ((Math.min(currentX, rightClickStartX) <= iconLeft && iconLeft <= Math.max(currentX, rightClickStartX)) && (Math.min(currentY, rightClickStartY) <= iconTop && iconTop <= Math.max(currentY, rightClickStartY))){
+      if ((Math.min(currentX, rightClickStartX) <= iconLeft && iconLeft <= Math.max(currentX, rightClickStartX)) && (Math.min(currentY, rightClickStartY) <= iconTop && iconTop <= Math.max(currentY, rightClickStartY))) {
         icon.classList.add('highlighted-icon');
       }
-      else{
+      else {
         icon.classList.remove('highlighted-icon');
       }
     });
@@ -567,7 +569,7 @@ document.addEventListener("mousemove", (event) => {
 
 // drop
 document.addEventListener("mouseup", (event) => {
-  if (audioPlayer.duration && isDraggingMediaTime){
+  if (audioPlayer.duration && isDraggingMediaTime) {
     audioPlayer.currentTime = (parseFloat(playerCurrentTime.style.left) / 160) * audioPlayer.duration;
   }
   isDraggingMedia = false;
@@ -719,7 +721,7 @@ function loadFolderContents(type) {
         itemDiv.appendChild(title);
         itemDiv.appendChild(artist);
         itemDiv.appendChild(length);
-        
+
         itemDiv.style.cursor = "pointer";
         itemDiv.addEventListener('click', () => handleMediaEvent('play', index));
 
@@ -754,23 +756,23 @@ function loadFolderContents(type) {
 
 audioPlayer.addEventListener('ended', event => {
   currentSongIndex++;
-  if (currentSongIndex === songList.length){
+  if (currentSongIndex === songList.length) {
     currentSongIndex = 0;
   }
   handleMediaEvent('play');
 });
 
 audioPlayer.addEventListener('timeupdate', (event) => {
-  if (isDraggingMediaTime){
+  if (isDraggingMediaTime) {
     return;
   }
   document.getElementById('player-current-time').style.left = `${(160 * audioPlayer.currentTime) / audioPlayer.duration}px`;
   timeElapsed = event.timeStamp;
 });
 var isMediaPaused = true;
-function handleMediaEvent(action, songIndex = currentSongIndex){
-  if (action === 'play'){
-    if (!isMediaPaused || !audioPlayer.hasAttribute('src') || songIndex != currentSongIndex){
+function handleMediaEvent(action, songIndex = currentSongIndex) {
+  if (action === 'play') {
+    if (!isMediaPaused || !audioPlayer.hasAttribute('src') || songIndex != currentSongIndex) {
       audioPlayer.src = `/resources/music/${Object.keys(songList[songIndex])}.mp3`;
     }
     isMediaPaused = false;
@@ -784,27 +786,27 @@ function handleMediaEvent(action, songIndex = currentSongIndex){
     startVisualization();
     handleLeftEar(songIndex);
   }
-  else if (action === 'pause'){
+  else if (action === 'pause') {
     isMediaPaused = true;
     audioPlayer.pause();
     stopVisualization();
   }
-  else if(action === 'prev'){
+  else if (action === 'prev') {
     isMediaPaused = false;
     currentSongIndex--;
-    if (currentSongIndex === -1){
+    if (currentSongIndex === -1) {
       currentSongIndex = songList.length - 1;
     }
     handleMediaEvent('play', currentSongIndex);
   }
-  else if(action === 'next'){
+  else if (action === 'next') {
     isMediaPaused = false;
     currentSongIndex++;
     handleMediaEvent('play', currentSongIndex % songList.length);
   }
 }
 
-function handleLeftEar(songIndex){
+function handleLeftEar(songIndex) {
   document.getElementById('player-song').innerText = Object.keys(songList[songIndex])[0];
   document.getElementById('player-artist').innerText = Object.values(songList[songIndex])[0]
 }
@@ -859,10 +861,10 @@ internetUrl.addEventListener('change', (event) => {
   const selectedValue = event.target.value;
   if (selectedValue === '') {
     const tempDiv = document.createElement('div');
-    tempDiv.style.width = '700px'; 
-    tempDiv.style.height = '475px'; 
-    tempDiv.style.backgroundImage = "url('/resources/media/backrooms.gif')"; 
-    tempDiv.style.backgroundSize = 'cover'; 
+    tempDiv.style.width = '700px';
+    tempDiv.style.height = '475px';
+    tempDiv.style.backgroundImage = "url('/resources/media/backrooms.gif')";
+    tempDiv.style.backgroundSize = 'cover';
     tempDiv.style.margin = '3em';
     document.getElementById('internet-screen').innerHTML = '';
     document.getElementById('internet-screen').appendChild(tempDiv);
@@ -1018,7 +1020,7 @@ async function signUp() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email })
       });
 
       const data = await response.json();
@@ -1037,10 +1039,10 @@ async function signUp() {
 }
 
 function startVisualization() {
-  if(document.getElementById('ms-vis') !== null){
+  if (document.getElementById('ms-vis') !== null) {
     document.getElementById('ms-vis').remove();
   }
-  
+
   const consoleDiv = document.getElementById("vid-bkgd");
   const canvas = document.createElement("canvas");
   canvas.id = 'ms-vis';
@@ -1097,24 +1099,12 @@ function startVisualization() {
     canvas.height = consoleDiv.offsetHeight;
   });
 }
-function stopVisualization(){
+function stopVisualization() {
   document.getElementById('ms-vis').remove();
 }
 
-// Reviews logic
-const reviewTable = document.getElementById('review-table');
-let sortColumn = 'reviewed';
-let sortDirection = true;
 
 window.addEventListener('beforeunload', function () {
-  const scrollableDiv = document.getElementById('scroll-div');
-  const reviews = document.getElementById('reviews');
-  if (scrollableDiv) {
-    sessionStorage.setItem('scrollPosition', scrollableDiv.scrollTop);
-  }
-  sessionStorage.setItem('savedSortColumn', sortColumn);
-  sessionStorage.setItem('savedSortDirection', sortDirection);
-
   windows.forEach(wind => {
     sessionStorage.setItem(`${wind.id}Style`, wind.style.display.toString());
   });
@@ -1122,243 +1112,23 @@ window.addEventListener('beforeunload', function () {
 });
 
 window.addEventListener('load', function () {
-  const scrollableDiv = document.getElementById('scroll-div');
-  const savedScrollPosition = sessionStorage.getItem('scrollPosition');
-  const savedSortColumn = sessionStorage.getItem('savedSortColumn');
-  const savedSortDirection = sessionStorage.getItem('savedSortDirection');
-
-  if (scrollableDiv && savedScrollPosition) {
-    setTimeout(() => {
-      scrollableDiv.scrollTop = parseInt(savedScrollPosition);
-    }, 100);
-  }
-  if (savedSortColumn) {
-    sortDirection = savedSortDirection;
-    sortAndReloadContent(savedSortColumn, null);
-  }
-  else {
-    sortAndReloadContent(sortColumn, null);
-  }
   const windows = this.document.querySelectorAll('.window');
   if (windows) {
     windows.forEach(wind => {
-      if(!wind || wind.id === 'changelog' || wind.id === 'leaderboard'){
+      if (!wind || wind.id === 'changelog' || wind.id === 'leaderboard') {
         return;
       }
       const windowStyle = sessionStorage.getItem(`${wind.id}Style`);
-      if (!windowStyle || windowStyle === null || windowStyle === ''){
+      if (!windowStyle || windowStyle === null || windowStyle === '') {
         return;
       }
       wind.style.display = windowStyle;
-      if (windowStyle === 'block') {
-        updateTaskbar(wind.id, 'add');
-        return;
-      }
     });
     if (sessionStorage.getItem('focusedWindow') !== '') {
       updateWindowZIndex(sessionStorage.getItem('focusedWindow'));
     }
   }
 });
-
-function sortData(columnName) {
-  sortColumn = columnName;
-  fetch('../resources/albums/album_data.json')
-    .then(response => response.json())
-    .then(data => {
-      var sort = columnName;
-      const entries = Object.entries(data);
-
-      if (sort === "title") {
-        entries.sort((a, b) => {
-          if (sortDirection) {
-            return a[1].title.localeCompare(b[1].title);
-          }
-          return b[1].title.localeCompare(a[1].title);
-        });
-      }
-      else if (sort === "artist") {
-        entries.sort((a, b) => {
-          if (sortDirection) {
-            return a[1].artist.localeCompare(b[1].artist);
-          }
-          return b[1].artist.localeCompare(a[1].artist);
-        });
-      }
-      else if (sort === "score") {
-        entries.sort((a, b) => {
-          if (sortDirection) {
-            if (a[1].score === 10 && b[1].score === 10) {
-              return b[1].order - a[1].order;
-            }
-            else {
-              return b[1].score - a[1].score;
-            }
-          }
-          if (a[1].score === 10 && b[1].score === 10) {
-            return a[1].order - b[1].order;
-          }
-          else {
-            return a[1].score - b[1].score;
-          }
-        });
-      }
-      else if (sort === "released") {
-        entries.sort((a, b) => {
-          if (!sortDirection) {
-            return a[1].released.localeCompare(b[1].released);
-          }
-          return b[1].released.localeCompare(a[1].released);
-        });
-      }
-      else if (sort === "reviewed") {
-        entries.sort((a, b) => {
-          if (!sortDirection) {
-            return a[1].reviewed.localeCompare(b[1].reviewed);
-          }
-          return b[1].reviewed.localeCompare(a[1].reviewed);
-        });
-      }
-      const sortedData = Object.fromEntries(entries);
-
-      for (let key in sortedData) {
-        if (sortedData.hasOwnProperty(key)) {
-          // create image
-          const coverItem = document.createElement('td');
-          coverItem.classList.add('review-data');
-          const img = document.createElement('img');
-          img.classList.add('review-img')
-          img.src = `${sortedData[key].cover}`
-          coverItem.appendChild(img);
-
-          // create title
-          const titleItem = document.createElement('td');
-          titleItem.classList.add('review-data');
-          titleItem.textContent = `${sortedData[key].title}`;
-
-          // create artist
-          const artistItem = document.createElement('td');
-          artistItem.classList.add('review-data');
-          artistItem.textContent = `${sortedData[key].artist}`;
-
-          // create score
-          const scoreItem = document.createElement('td');
-          scoreItem.classList.add('review-data');
-          scoreItem.textContent = `${sortedData[key].score}`;
-
-          // create releaseDate
-          const releaseItem = document.createElement('td');
-          releaseItem.classList.add('review-data');
-          releaseItem.textContent = `${sortedData[key].released}`;
-
-          // create reviewDate
-          const reviewItem = document.createElement('td');
-          reviewItem.classList.add('review-data');
-          reviewItem.textContent = `${sortedData[key].reviewed}`;
-
-          // append items to row, then append row to page
-          const row = document.createElement('tr');
-          row.appendChild(coverItem);
-          row.appendChild(titleItem);
-          row.appendChild(artistItem);
-          row.appendChild(scoreItem);
-          row.appendChild(releaseItem);
-          row.appendChild(reviewItem);
-          row.setAttribute("onclick", "toReview(this)");
-          row.id = `${key}`;
-
-          reviewTable.appendChild(row);
-        }
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching JSON:', error);
-    });
-};
-
-function sortAndReloadContent(columnName, element) {
-  if (element === null) {
-    const selected = document.getElementById(`${columnName}`);
-    selected.classList.add('selected-sort');
-    sortData(columnName);
-    return;
-  }
-
-  if (element.classList.contains('selected-sort')) {
-    sortDirection = !sortDirection;
-  }
-  else {
-    sortDirection = true;
-    document.querySelectorAll('th').forEach(colTitle => {
-      colTitle.classList.remove('selected-sort');
-    });
-    element.classList.add('selected-sort');
-  }
-
-  const divs = document.querySelectorAll('tbody>tr');
-  divs.forEach(div => {
-    div.remove();
-  });
-  sortData(columnName);
-}
-
-function getRandomReview() {
-  fetch('../resources/albums/album_data.json')
-    .then(response => response.json())
-    .then(data => {
-      let index = Math.trunc(Math.random() * Object.keys(data).length);
-      const keys = Object.keys(data);
-      window.location.href = `/templates/album-review.html?album=${keys[index]}`;
-    });
-}
-
-function toReview(element) {
-  window.location.href = `/templates/album-review.html?album=${element.id}`;
-}
-
-function openReviewStats() {
-  fetch('../resources/albums/album_data.json')
-    .then(response => response.json())
-    .then(data => {
-      var scores = { 10: 0, 9: 0, 8: 0 };
-      var decades = {};
-      for (let key in data) {
-        var score = parseInt(data[key]['score']);
-        var decade = data[key]['released'].substring(0, 3);
-
-        if (score in scores) {
-          scores[score]++;
-        }
-        else {
-          scores['other'] = 1;
-        }
-
-        if (decade in decades) {
-          decades[decade]++;
-        }
-        else {
-          decades[decade] = 1;
-        }
-      }
-      for (let key in scores) {
-        document.getElementById(key).innerHTML += scores[key];
-      }
-      for (let key in decades) {
-        document.getElementById(key + '0s').innerHTML += decades[key];
-      }
-      document.getElementById('review-stats').style.display = 'block';
-      updateWindowZIndex('review-stats');
-    });
-}
-function closeReviewStats() {
-  document.getElementById('review-stats').style.display = 'none';
-  document.getElementById('review-stats').querySelectorAll('div').forEach(child => {
-    if (!child.hasAttribute('id')) {
-      return;
-    }
-    child.innerHTML = child.id + ': ';
-  });
-}
 
 // ----- TEST SUITE -----
 // createList('2020s-movies')

@@ -1,9 +1,0 @@
-,
-    "nothing_lasts": {
-        "title": "Nothing Lasts... But Nothing Is Lost",
-        "artist": "Shpongle",
-        "score": 8.3,
-        "released": "2005-06-16",
-        "reviewed": "2025-01-02",
-        "cover": "https://upload.wikimedia.org/wikipedia/en/d/d8/Nothinglasts_2005.jpg"
-    }

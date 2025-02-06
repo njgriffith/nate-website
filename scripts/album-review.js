@@ -7,34 +7,39 @@ const title = getUrlParameter('album');
 const dynamicContentElement = document.getElementById('album-title');
 const cover = document.getElementById('album-cover');
 
-fetch(`/resources/albums/reviews/${title}.txt`)
-    .then(response => response.text())
-    .then(textData => {
-        document.getElementById('review').innerHTML = textData;
-        fetch('../resources/albums/album_data.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(jsonData => {
-                const artist = jsonData[`${title}`]['artist'];
-                document.title = jsonData[`${title}`]['title'];
-                cover.src = jsonData[`${title}`]['cover'];
-                dynamicContentElement.textContent = jsonData[`${title}`]['title'];
-                if (title === "TVUandN") {
-                    return;
-                }
-                if (title === "perverts"){
-                    document.getElementById('review').style.color = '#aaa';
-                    document.getElementById('review').style.backgroundColor = '#000';
-                }
-                document.getElementById('review').innerHTML += '<br>' + jsonData[`${title}`]['score'];
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-    })
-    .catch(error => console.error('Error loading text file:', error));
 
+try {
+    const response = await fetch('https://api.nate-griffith.com/review', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title })
+        
+    });
+    const data = await response.json();
+    if (response.ok) {
+        handleReviewResponse(data['review'], data['data']);
+    }
+    else {
+        console.error("error processing data");
+    }
+}
+catch (error) {
+    console.error("error connecting to backend");
+}
+function handleReviewResponse(reviewText, jsonData) {
+    document.getElementById('review').innerHTML = reviewText;
+    const artist = jsonData['artist'];
+    document.title = jsonData['title'];
+    cover.src = jsonData['cover'];
+    dynamicContentElement.textContent = jsonData['title'];
+    if (title === "TVUandN") {
+        return;
+    }
+    if (title === "perverts") {
+        document.getElementById('review').style.color = '#aaa';
+        document.getElementById('review').style.backgroundColor = '#000';
+    }
+    document.getElementById('review').innerHTML += '<br>' + jsonData['score'];
+}
