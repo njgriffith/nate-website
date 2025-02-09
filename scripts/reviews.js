@@ -185,9 +185,19 @@ window.addEventListener('load', function () {
     }
     if (savedSortColumn) {
         reviewSortDirection = savedSortDirection;
-        currentSort = savedSortColumn;
+        currentSort = '';
+        try {
+            reviewData = savedReviewData ? JSON.parse(savedReviewData) : [];
+        } 
+        catch (error) {
+            console.error("Error parsing saved review data:", error);
+            reviewData = [];
+        }
+        sortReviewData(savedSortColumn);
     }
-    fetchReviews();
+    else{
+        fetchReviews();
+    }
 });
 
 window.addEventListener('beforeunload', function () {
@@ -197,5 +207,5 @@ window.addEventListener('beforeunload', function () {
     }
     sessionStorage.setItem('savedSortColumn', currentSort);
     sessionStorage.setItem('savedSortDirection', reviewSortDirection);
-    sessionStorage.setItem('savedReviewData', reviewData);
+    sessionStorage.setItem('savedReviewData', JSON.stringify(reviewData));
 });
