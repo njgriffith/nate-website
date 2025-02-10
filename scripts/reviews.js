@@ -184,7 +184,7 @@ window.addEventListener('load', function () {
         }, 100);
     }
     if (savedSortColumn) {
-        reviewSortDirection = savedSortDirection;
+        reviewSortDirection = savedSortDirection === 'true';
         currentSort = 'reloaded';
         try {
             reviewData = savedReviewData ? JSON.parse(savedReviewData) : [];
