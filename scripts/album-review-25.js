@@ -26,9 +26,11 @@ try {
     }
 }
 catch (error) {
+    console.log(data)
     console.error("error connecting to backend");
 }
 function handleReviewResponse(reviewText, jsonData) {
+    console.log(jsonData['score'])
     document.getElementById('review').innerHTML = reviewText;
     const artist = jsonData['artist'];
     document.title = jsonData['title'];
