@@ -26,20 +26,18 @@ try {
     }
 }
 catch (error) {
-    console.log(data)
     console.error("error connecting to backend");
 }
 function handleReviewResponse(reviewText, jsonData) {
-    console.log(jsonData['score'])
     document.getElementById('review').innerHTML = reviewText;
     const artist = jsonData['artist'];
     document.title = jsonData['title'];
     cover.src = jsonData['cover'];
     dynamicContentElement.textContent = jsonData['title'];
-    if (title === "TVUandN") {
+    if (code === "TVUandN") {
         return;
     }
-    if (title === "perverts") {
+    if (code === "perverts") {
         document.getElementById('review').style.color = '#aaa';
         document.getElementById('review').style.backgroundColor = '#000';
     }
