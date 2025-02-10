@@ -911,10 +911,11 @@ window.addEventListener('load', function () {
         return;
       }
       const windowStyle = sessionStorage.getItem(`${wind.id}Style`);
-      if (!windowStyle || windowStyle === null || windowStyle === '') {
+      if (!windowStyle || windowStyle === null || windowStyle === '' || windowStyle === 'none') {
         return;
       }
       wind.style.display = windowStyle;
+      updateTaskbar(wind.id, 'add');
     });
     if (sessionStorage.getItem('focusedWindow') !== '') {
       updateWindowZIndex(sessionStorage.getItem('focusedWindow'));

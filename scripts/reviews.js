@@ -40,7 +40,7 @@ function sortReviewData(columnName) {
     if (currentSort === columnName) {
         reviewSortDirection = !reviewSortDirection;
     }
-    else {
+    else if (currentSort !== 'reloaded'){
         reviewSortDirection = false;
     }
 
@@ -185,7 +185,7 @@ window.addEventListener('load', function () {
     }
     if (savedSortColumn) {
         reviewSortDirection = savedSortDirection;
-        currentSort = '';
+        currentSort = 'reloaded';
         try {
             reviewData = savedReviewData ? JSON.parse(savedReviewData) : [];
         } 

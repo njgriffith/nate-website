@@ -647,7 +647,7 @@
         </div>
     </div>
     <!-- End minesweeper -->
-     <!-- start leaderboard -->
+    <!-- start leaderboard -->
     <div class="window library" id="leaderboard" style="display: none; width: 300px;">
         <div class="title-bar">
             <div class="title-bar-text">Leaderboard</div>
@@ -682,6 +682,22 @@
     </div>
     <!-- end leaderboard -->
 
+    <!-- start admin -->
+    <div class="window library" id="admin" style="display: none; width: 300px;">
+        <div class="title-bar">
+            <div class="title-bar-text">Admin</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize" onclick="minApp('admin')"></button>
+                <button aria-label="Maximize"></button>
+                <button onclick="closeApp('admin')" aria-label="Close" id="close-admin"></button>
+            </div>
+        </div>
+        <div class="window-body" id="admin-login-container">
+
+        </div>
+    </div>
+    <!-- end admin -->
+
     <div class="taskbar">
         <button id="start-button" class="start-button">
             <img src="/resources/msft/logo.png" style="padding-right: 1em;">
@@ -707,8 +723,8 @@
             <a class="start-link" onclick="openApp('catalog')">
                 <li><img src="/resources/msft/catalog.png"><u>C</u>atalog</li>
             </a>
-            <a class="start-link" onclick="openApp('internet')">
-                <li><img src="/resources/msft/beacon.png"><u>I</u>nternet</li>
+            <a class="start-link" onclick="openApp('admin')">
+                <li><img src="/resources/msft/admin.png"><u>A</u>dmin</li>
             </a>
             <li onclick="openApp('settings')"><img src="/resources/msft/settings.png"><u>S</u>ettings</li>
             <li onclick="sleep()"><img src="/resources/msft/computer.png"><u>S</u>leep</li>
@@ -718,5 +734,6 @@
     <script src="/scripts/reviews.js"></script>
     <script src="/scripts/head.js"></script>
     <script src="/scripts/minesweeper.js"></script>
+    <script src="/scripts/admin.js"></script>
 </body>
 </html>

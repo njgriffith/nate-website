@@ -3,7 +3,7 @@ function getUrlParameter(param) {
     return urlParams.get(param);
 }
 
-const title = getUrlParameter('album');
+const code = getUrlParameter('album');
 const dynamicContentElement = document.getElementById('album-title');
 const cover = document.getElementById('album-cover');
 
@@ -14,7 +14,7 @@ try {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title })
+        body: JSON.stringify({ code })
         
     });
     const data = await response.json();
