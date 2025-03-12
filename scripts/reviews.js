@@ -5,6 +5,19 @@ var currentSort = '';
 const reviewTable = document.getElementById('review-table');
 const tableHeads = document.querySelectorAll('.review-table-head>tr>th');
 
+const reviewSearch = document.getElementById('review-search');
+reviewSearch.addEventListener('input', (event) => {
+    const rows = reviewTable.querySelectorAll('tbody>tr');
+    const query = reviewSearch.value.toLowerCase();
+    rows.forEach(item => {
+        if (item.innerText.toLowerCase().includes(query)){
+            item.classList.remove('hidden');
+            return;
+        }
+        item.classList.add('hidden');
+    });
+});
+
 async function fetchReviews() {
     try {
         const response = await fetch('https://api.nate-griffith.com/reviews', {
