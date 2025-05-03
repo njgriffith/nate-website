@@ -1,0 +1,19 @@
+<div class="sunken-panel">
+    <table>
+        <thead>
+            <tr>
+                <th>Pantheon</th>
+                <th *ngFor="let binding of bindings">{{binding}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let key of keys; let i = index;">
+                <td>Pantheon {{i+1}}</td>
+                <td *ngFor="let item of data[key]">
+                    <img *ngIf="item" src="assets/msft/check.png">
+                    <img *ngIf="!item" src="assets/msft/x.png">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

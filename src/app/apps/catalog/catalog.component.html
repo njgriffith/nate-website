@@ -1,0 +1,13 @@
+<div style="max-width: 800px;">
+    <div class="creature-container">
+        <img [src]="imageSource">
+        <div class="creature-desc" [innerHTML]="creatureDesc"></div>
+    </div>
+    <div class="creature-page-bottom">
+        <button (click)="prev()">prev</button>
+        <p>all creature gifs
+            created by <a href="https://giphy.com/daxnorman" target="_blank">Dax Norman</a></p>
+        <button (click)="next()">next</button>
+    </div>
+</div>
+

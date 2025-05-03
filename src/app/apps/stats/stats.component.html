@@ -1,0 +1,10 @@
+<select [(ngModel)]="selectedDisplay">
+    <option>pole vault</option>
+    <option>strawberry jam</option>
+    <option>pantheons</option>
+</select>
+
+<app-pole-vault *ngIf="selectedDisplay === 'pole vault'" [data]="statsData.pole_vault"></app-pole-vault>
+<app-strawberry-jam *ngIf="selectedDisplay === 'strawberry jam'" [data]="statsData.strawberry_jam"></app-strawberry-jam>
+<app-pantheons *ngIf="selectedDisplay === 'pantheons'" [data]="statsData.pantheons"></app-pantheons>
+

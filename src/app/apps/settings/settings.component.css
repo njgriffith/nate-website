@@ -1,0 +1,11 @@
+.background-container{
+    display: flex;
+    gap: 3em;
+    flex-wrap: wrap;
+}
+.background-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

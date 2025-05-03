@@ -1,0 +1,18 @@
+.internet-banner {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+    gap: 2em;
+}
+
+select{
+    width: 80%;
+}
+
+.landing-page-container {
+    width: 700px;
+    height: 475px;
+    background-image: url('/assets/icons/backrooms.gif');
+    background-size: cover;
+    margin: 3em;
+}

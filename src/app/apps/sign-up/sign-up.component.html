@@ -1,0 +1,7 @@
+<div class="signup-container">
+    <input [placeholder]="'enter your email here'" [(ngModel)]="email">
+    <button (click)="signUp()">Sign Up</button>
+</div>
+<div class="signup-label">Sign up for email updates on new album reviews, blogs, and more</div>
+<div *ngIf="success" class="success">signup success!</div>
+<div *ngIf="success === false" class="failure">error signing up :(</div>

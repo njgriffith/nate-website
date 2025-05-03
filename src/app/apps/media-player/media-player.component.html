@@ -1,0 +1,70 @@
+<div class="media-player" cdkDrag cdkDragHandle>
+    <audio #player (timeupdate)="updateProgressBar($event)"></audio>
+    <img class="head" src="assets/head/head.bmp">
+    <div class="vid-bkgd">
+        <img src="assets/head/vid_bkgd.bmp">
+    </div>
+    <div class="media-window-controller">
+        <img src="assets/head/player_min.bmp" (click)="minApp()">
+        <img src="assets/head/player_close.bmp" (click)="closeApp()">
+    </div>
+    <div class="media-player-controller">
+        <img src="assets/head/player_prev.bmp" (click)="handleMediaEvent('prev')" class="media-control">
+        <img src="assets/head/player_pause.bmp" (click)="handleMediaEvent('pause')" class="media-control">
+        <img src="assets/head/player_play.bmp" (click)="handleMediaEvent('play')" class="media-control">
+        <img src="assets/head/player_next.bmp" (click)="handleMediaEvent('next')" class="media-control">
+    </div>
+
+    <div class="right-ear-container" [style.left]="rightOffset">
+        <img src="assets/head/right_ear.bmp" class="right-ear">
+        <img class="right-open" [src]="getRightSource()" (mouseenter)="rightHovered = true"
+            (mouseleave)="rightHovered = false" (click)="rightOpened = !rightOpened" (click)="toggleEar('r')">
+        <img src="assets/head/right_drawer_top.bmp" style="position: absolute; left: -172px; top: 0px;">
+        <img src="assets/head/right_drawer_bottom.bmp" style="position: absolute; left: -172px; top: 150px;">
+        <img src="assets/head/right_drawer_left.bmp" style="position: absolute; left: -182px; top: 0px;">
+        <div class="media-table sunken-panel">
+            <table class="interactive">
+                <thead>
+                    <tr>
+                        <th>title</th>
+                        <th>artist</th>
+                        <th>length</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let song of songs; let i = index" (click)="currentSongIndex=i"
+                        (click)="handleMediaEvent('play')" [class.row-highlight]="i===currentSongIndex">
+                        <td>{{song[0]}}</td>
+                        <td>{{song[1]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="left-ear-container" [style.left]="leftOffset">
+        <img src="assets/head/left_ear.bmp" class="left-ear">
+        <img class="left-open" [src]="getLeftSource()" (mouseenter)="leftHovered = true"
+            (mouseleave)="leftHovered = false" (click)="leftOpened = !leftOpened" (click)="toggleEar('l')">
+        <img src="assets/head/left_drawer_top.bmp" style="position: absolute; left: 84px; top: 0px;">
+        <img src="assets/head/left_drawer_bottom.bmp" style="position: absolute; left: 84px; top: 150px;">
+        <img src="assets/head/left_drawer_right.bmp" style="position: absolute; left: 250px; top: 0px;">
+        <div class="knob-drawer">
+            <img src="assets/head/drawer_bkgrnd_top.bmp">
+            <div class="player-grid-container">
+                <div class="now-playing">Now Playing</div>
+                <div class="track-details">
+                    <div>{{currentArtist}}</div>
+                    <div> - </div>
+                    <div>{{currentSong}}</div>
+                </div>
+                <div class="player-progress" #progressBar>
+                    <img src="assets/head/progressbar.bmp" class="player-duration-bar">
+                    <img src="assets/head/thumb_01_default.bmp" class="player-current-time" cdkDrag
+                        cdkDragBoundary=".player-progress" [style.left]="thumbLeft" (cdkDragStarted)="onDragStart($event)"
+                        (cdkDragEnded)="seekTrack($event)" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

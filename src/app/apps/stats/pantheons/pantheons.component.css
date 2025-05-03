@@ -1,0 +1,10 @@
+.sunken-panel{
+    margin-top: 2em;
+}
+tr{
+    font-size: 1.2em;
+}
+tbody>tr:hover{
+    color: white;
+    background: blue;
+}

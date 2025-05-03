@@ -1,0 +1,74 @@
+.sunken-panel{
+    height: 600px;
+}
+
+th{
+    font-size: 1.5em;
+}
+
+th:hover{
+    cursor: pointer;
+    background: #666;
+    color: white;
+}
+
+tbody>tr{
+    cursor: pointer;
+    font-size: 1.5em;
+}
+tbody>tr:hover{
+    color: white;
+    background: blue;
+}
+
+.table-img{
+    width: 200px;
+    height: 200px;
+}
+.table-img:hover{
+    scale: 1.05;
+    transition-duration: 0.5s;
+}
+.banner{
+    display: flex;
+    justify-content: space-between;
+    margin: 1em;
+}
+input{
+    width: 40%;
+}
+
+.review-container{
+    height: 70vh;
+    width: 65vw;
+    overflow-y: scroll;
+    background-image: url('/assets/icons/tubes.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.review-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.review-img{
+    width: 300px;
+    height: 300px;
+    margin: 2em 0;
+}
+
+.review{
+    display: flex;
+    justify-content: center;
+    margin: 0 8em;
+    font-size: 1.5em;
+}
+
+pre{
+    text-wrap: wrap;
+}

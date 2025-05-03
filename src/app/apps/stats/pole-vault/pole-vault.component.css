@@ -1,0 +1,41 @@
+.stat-header{
+    font-size: 2em;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+.jump-graph-label{
+    display: flex;
+    font-size: 1.2em;
+    margin: 1em 0;
+    gap: 1em;
+}
+
+.jump-container{
+    display: flex;
+    gap: 1em;
+}
+
+.progress-background{
+    background: #999;
+    width: 50px;
+    height: 200px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+}
+
+.progress{
+    background: #5B85AA;
+    width: 100%;
+}
+
+.goal{
+    background: #414770;
+    width: 100%;
+}
+
+.long-term-goal{
+    background: #f4442c;
+    width: 100%;
+}

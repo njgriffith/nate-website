@@ -1,0 +1,69 @@
+.sunken-panel{
+    display: flex;
+    align-items: flex-start;
+}
+
+.blog-table{
+    width: 40%;
+    font-size: 1.5em;
+}
+.blog-image{
+    width: 60%;
+}
+tbody>tr{
+    cursor: pointer;
+}
+
+tbody>tr:hover{
+    color: white;
+    background: blue;
+}
+
+.blog-container{
+    background-image: url('/assets/icons/backrooms.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 65vh;
+    width: 65vw;
+    overflow-y: scroll;
+}
+
+.blog{
+    background: #008080;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 5em auto;
+    width: 80%;
+    padding: 1em 4em;
+}
+
+.blog-title{
+    text-align: center;
+    color: white;
+}
+
+.header{
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.text{
+    font-size: 1.5em;
+}
+
+.blog-row{
+    margin: 2em 0;
+}
+
+.images{
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    overflow-x: scroll;
+}
+.images>div>img{
+    height: 300px;
+    cursor: pointer;
+}
+

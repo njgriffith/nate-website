@@ -1,0 +1,29 @@
+.signup-container {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    display: flex;
+    height: 30px;
+    width: 100%;
+}
+
+input {
+    width: 75%;
+    font-size: 1.5em;
+}
+
+button {
+    font-size: 1.2em;
+}
+
+.signup-label {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.success{
+    color: green;
+}
+
+.failure{
+    color: red;
+}

@@ -1,0 +1,40 @@
+<div class="taskbar">
+    <button class="start-button" (click)="toggleStartMenu()">
+        <img src="assets/msft/logo.png">
+        Start
+    </button>
+    <div class="taskbar-apps">
+        <div *ngFor="let app of openApps">
+            <button class="taskbar-button">
+                <img class="taskbar-img">
+                <div>{{app}}</div>
+            </button>
+        </div>
+    </div>
+    <div class="taskbar-empty-space"></div>
+    <div class="datetime">
+        {{time}}<br>{{date}}
+    </div>
+</div>
+<div id="start-menu" class="start-menu" [class.hidden]="startMenuHidden" (mouseleave)="toggleStartMenu()">
+    <div class="start-menu-banner"><strong style="color: #aaa;">&nbsp;Griffith</strong> 95</div>
+    <ul>
+        <a class="start-link" (click)="openApp('Blog')">
+            <li><img src="assets/msft/blog.png"><u>B</u>log</li>
+        </a>
+        <a class="start-link" (click)="openApp('Album Reviews')">
+            <li><img src="assets/msft/reviews.png"><u>M</u>usic Reviews</li>
+        </a>
+        <a class="start-link">
+            <li><img src="assets/msft/help.png"><u>P</u>uzzle</li>
+        </a>
+        <a class="start-link" (click)="openApp('Catalog')">
+            <li><img src="assets/msft/catalog.png"><u>C</u>atalog</li>
+        </a>
+        <a class="start-link" (click)="openApp('Admin')">
+            <li><img src="assets/msft/admin.png"><u>A</u>dmin</li>
+        </a>
+        <li (click)="openApp('Settings')"><img src="assets/msft/settings.png"><u>S</u>ettings</li>
+        <li (click)="sleep()"><img src="assets/msft/computer.png"><u>S</u>leep</li>
+    </ul>
+</div>

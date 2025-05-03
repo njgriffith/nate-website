@@ -1,0 +1,8 @@
+select{
+    margin-bottom: 1em;
+}
+
+tbody>tr:hover{
+    color: white;
+    background: blue;
+}

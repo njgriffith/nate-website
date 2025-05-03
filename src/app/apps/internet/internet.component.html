@@ -1,0 +1,14 @@
+<div class="internet-banner">
+    <div>Address:</div>
+    <select [(ngModel)]="selectedWebsite">
+        <option *ngFor="let website of websites">{{website}}</option>
+    </select>
+    <img src="assets/msft/entire_network_globe-5.png">
+</div>
+<div *ngIf="selectedWebsite === ''" class="landing-page-container"></div>
+<div *ngIf="selectedWebsite === 'https://www.notavirus.com'">
+    <app-not-a-virus></app-not-a-virus>
+</div>
+<div *ngIf="selectedWebsite === 'https://www.ebay.com'">
+    <app-ebay></app-ebay>
+</div>

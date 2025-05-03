@@ -1,0 +1,37 @@
+.stat-header{
+    font-size: 2em;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+.sj-data{
+    margin-left: 2em;
+}
+
+.difficulty-header{
+    font-size: 1.5em;
+    margin: 1em 0;
+}
+
+.subdifficulty-header{
+    margin-bottom: 1em;
+}
+
+.lobby{
+    display: flex;
+    gap: 2em;
+    margin: 2em 0;
+}
+
+.progress-background{
+    background: #999;
+    width: 100px;
+    height: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+}
+.progress{
+    background: #f4442c;
+    height: 100%;
+}

@@ -1,0 +1,40 @@
+<div *ngIf="!singleBlogView" class="sunken-panel">
+    <table class="blog-table">
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let blog of blogData" (click)="toBlog(blog.id)">
+                <td>{{blog.title}}</td>
+                <td>{{blog.id}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <img src="assets/icons/watchers.jpg" class="blog-image">
+</div>
+
+<div *ngIf="singleBlogView" class="blog-container">
+    <button (click)="singleBlogView = false">Back</button>
+    <h2 class="blog-title">{{blogId}} - {{blogTitle}}</h2>
+    <div class="blog">
+        <div *ngFor="let entry of blogContent" class="blog-row">
+            <div *ngFor="let item of entry | keyvalue">
+              <div *ngIf="item.key === 'header'" class="header">
+                {{ item.value }}
+              </div>
+              <div *ngIf="item.key === 'text'" class="text" [innerHTML]="item.value">
+                
+              </div>
+              <div *ngIf="item.key === 'images'" class="images">
+                <div *ngFor="let image of asArray(item.value)">
+                    <img [src]="image">
+                  </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    
+</div>

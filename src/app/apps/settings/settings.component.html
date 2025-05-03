@@ -1,0 +1,9 @@
+<div class="background-container">
+    <div *ngFor="let background of backgrounds">
+        <div class="background-item" (dblclick)="updateBackground(background)">
+            <img src="assets/msft/pictures-file.png">
+            {{background}}
+        </div>
+    </div>
+</div>
+

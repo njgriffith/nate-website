@@ -1,0 +1,45 @@
+<div *ngIf="!singleReviewView">
+    <div class="banner">
+        <input [placeholder]="'search...'" [(ngModel)]="search">
+        <button (click)="toRandomReview()">To random review</button>
+    </div>
+
+    <div class="sunken-panel">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cover</th>
+                    <th (click)="setSort('title')">Title</th>
+                    <th (click)="setSort('artist')">Artist</th>
+                    <th (click)="setSort('score')">Score</th>
+                    <th (click)="setSort('released')">Released</th>
+                    <th (click)="setSort('reviewed')">Reviewed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let review of filteredReviews()" (click)="toReview(review.id)">
+                    <td><img src="{{ review.cover }}" class="table-img"></td>
+                    <td>{{ review.title }}</td>
+                    <td>{{ review.artist }}</td>
+                    <td>{{ review.score }}</td>
+                    <td>{{ review.released }}</td>
+                    <td>{{ review.reviewed }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div *ngIf="singleReviewView" class="review-container">
+    <button (click)="singleReviewView = false">Back to all reviews</button>
+    <div class="review-header">
+        <div>{{selectedReview.artist}} - {{selectedReview.title}}</div>
+        <img class="review-img" src="{{selectedReview.cover}}">
+    </div>
+    
+    <div class="review">
+        <pre>
+            <div [innerHTML]="selectedReview.review"></div> 
+            <div *ngIf="selectedReview.id !== 'TVUandN'">{{ selectedReview.score }}</div>
+        </pre>
+    </div>
+</div>

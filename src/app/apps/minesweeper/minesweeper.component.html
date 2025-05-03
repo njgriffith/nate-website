@@ -1,0 +1,63 @@
+<div class="minesweeper-header">
+    <button (click)="playMinesweeper()">Play</button>
+    <select [(ngModel)]="difficulty">
+        <option selected>Choose a difficulty</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+    </select>
+    <button (click)="isLeaderboardOpen = !isLeaderboardOpen">Leaderboards</button>
+</div>
+<div class="game-hud">
+    <div>
+        <img [src]="'assets/minesweeper/' + timerDigits[0] + '.png'" draggable="false">
+        <img [src]="'assets/minesweeper/' + timerDigits[1] + '.png'" draggable="false">
+        <img [src]="'assets/minesweeper/' + timerDigits[2] + '.png'" draggable="false">
+    </div>
+    <img [src]="faceImg" (mousedown)="faceMouseDown()" (mouseleave)="faceMouseLeave()" (mouseup)="faceMouseUp()"
+        draggable="false">
+    <div>
+        <img [src]="'assets/minesweeper/' + flagDigits[0] + '.png'" draggable="false">
+        <img [src]="'assets/minesweeper/' + flagDigits[1] + '.png'" draggable="false">
+        <img [src]="'assets/minesweeper/' + flagDigits[2] + '.png'" draggable="false">
+    </div>
+</div>
+<div *ngIf="isPlaying" class="table-container">
+    <table>
+        <tbody (mousedown)="handleFaceImage('stress')" (mouseup)="handleFaceImage('smile')"
+            (mouseleave)="handleFaceImage('smile')">
+            <tr *ngFor="let item of [].constructor(rows); let i = index">
+                <td class="minesweeper-cell" *ngFor="let item of [].constructor(cols); let j = index">
+                    <img draggable="false" [src]="'assets/minesweeper/' + gameGrid[i][j].img + '.png'"
+                        (contextmenu)="toggleFlag(i, j);  $event.preventDefault()" (click)="revealCell(i, j)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="isLeaderboardOpen">
+    <div *ngFor="let leaderboard of leaderboardData; let i = index">
+        <div *ngIf="i === 0" class="difficulty-label">Easy:</div>
+        <div *ngIf="i === 1" class="difficulty-label">Medium:</div>
+        <div *ngIf="i === 2" class="difficulty-label">Hard:</div>
+        <div class="sunken-panel">
+            <table style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>rank</th>
+                        <th>username</th>
+                        <th>time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="leaderboard-row" *ngFor="let entry of leaderboardData[i]; let j = index">
+                        <td>{{j+1}}</td>
+                        <td>{{entry.username}}</td>
+                        <td>{{entry.score}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="desktop" [style.backgroundImage]="'url(' + backgroundImage + ')'">
+    <div class="desktop-icons">
+        <div *ngFor="let app of apps; let i = index">
+            <div class="icon" (dblclick)="openApp(app)" (click)="highlightApp(i)"
+                [ngClass]="{ 'highlighted': selectedIconIndex === i }">
+                <img src="/assets/icons/{{app}}.gif">
+                <p>{{app}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="apps">
+        <div *ngFor="let app of openApps">
+            <div *ngIf="app !== 'Media Player'" class="window" cdkDrag>
+                <div class="title-bar" cdkDragHandle>
+                    <div class="title-bar-text">{{app}}</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Minimize" (click)="minApp(app)"></button>
+                        <button aria-label="Maximize"></button>
+                        <button aria-label="Close" (click)="closeApp(app)"></button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <ng-container *ngComponentOutlet="appComponentMap[app]"></ng-container>
+                </div>
+            </div>
+            <div *ngIf="app === 'Media Player'">
+                <app-media-player></app-media-player>
+            </div>
+        </div>
+    </div>
+</div>

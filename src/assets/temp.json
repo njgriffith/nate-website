@@ -1,0 +1,48 @@
+[
+    [
+        {
+            "username": "b",
+            "score": 6
+        },
+        {
+            "username": "nate",
+            "score": 9
+        },
+        {
+            "username": "spiders georg",
+            "score": 33
+        },
+        {
+            "username": "Will",
+            "score": 34
+        }
+    ],
+    [
+        {
+            "username": "b",
+            "score": 114
+        },
+        {
+            "username": "nate",
+            "score": 133
+        },
+        {
+            "username": "spiders georg",
+            "score": 217
+        }
+    ],
+    [
+        {
+            "username": "b",
+            "score": 301
+        },
+        {
+            "username": "b+n",
+            "score": 717
+        },
+        {
+            "username": "Ethan",
+            "score": 1542
+        }
+    ]
+]

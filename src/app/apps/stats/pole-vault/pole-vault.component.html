@@ -1,0 +1,29 @@
+<div class="stat-header">Pole vault progress</div>
+<div class="jump-graph-label">
+    <div>Completed jumps (light blue):</div>
+    <div *ngFor="let jump of data.bests">{{displayJump(jump)}}</div>
+</div>
+<div class="jump-graph-label">
+    <div>Current goal (dark blue):</div>
+    <div>{{displayJump(data.current_goal)}}</div>
+</div>
+<div class="jump-graph-label">
+    <div>Long term goal (red):</div>
+    <div>{{displayJump(data.long_term_goal)}}</div>
+</div>
+<div class="jump-container">
+    <div *ngFor="let jump of data.bests">
+        <div class="progress-background">
+            <div class="progress" [style.height]="calculateJumpPercentage(jump)"></div>
+        </div>
+    </div>
+    <div class="progress-background">
+        <div class="goal" [style.height]="calculateJumpPercentage(data.current_goal)"></div>
+    </div>
+    <div class="progress-background">
+        <div class="long-term-goal" [style.height]="calculateJumpPercentage(data.long_term_goal)"></div>
+    </div>
+</div>
+<div class="jump-graph-label">
+    <div>Next meet: {{data.next_meet}}</div>
+</div>

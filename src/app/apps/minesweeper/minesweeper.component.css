@@ -1,0 +1,50 @@
+.minesweeper-header {
+    display: flex;
+    justify-content: space-around;
+    gap: 2em;
+    margin: 1em;
+}
+
+.game-hud {
+    display: flex;
+    justify-content: space-around;
+    margin: 2em 0;
+}
+
+.game-hud>img {
+    scale: 1.5;
+    cursor: pointer;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    margin: 3em 0;
+}
+
+.minesweeper-cell {
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.minesweeper-cell>img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.sunken-panel>table{
+    font-size: 1.3em;
+}
+
+.leaderboard-row:hover{
+    color: white;
+    background: blue;
+}
+
+.difficulty-label{
+    margin: 1em 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}

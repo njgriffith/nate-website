@@ -1,0 +1,22 @@
+.ebay-item > img{
+    width: 200px;   
+}
+.ebay-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+    margin: 2em;
+}
+.ebay-item{
+    text-align: center;
+    font-size: 1.3em;
+}
+.ebay-item:hover{
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+}
+.ebay-item > div{
+    padding: 0.2em;
+}

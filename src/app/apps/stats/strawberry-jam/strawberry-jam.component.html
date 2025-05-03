@@ -1,0 +1,66 @@
+<div class="stat-header">Strawberry Jam Progress</div>
+
+<div class="sj-data">
+    <div class="difficulty-header">Beginner</div>
+    <div class="lobby">
+        <div *ngFor="let item of data.sj_beginner; let even = even; let i = index;">
+            <div *ngIf="even">
+                <div class="subdifficulty-header">{{subDifficulties.beginner[i/2]}}: {{data.sj_beginner[i]}}/{{data.sj_beginner[i+1]}}</div>
+                <div class="progress-background">
+                    <div class="progress" [style.width]="calculatePercentage(data.sj_beginner[i], data.sj_beginner[i+1])"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="difficulty-header">Intermediate</div>
+    <div class="lobby">
+        <div *ngFor="let item of data.sj_intermediate; let even = even; let i = index;">
+            <div *ngIf="even">
+                <div class="subdifficulty-header">{{subDifficulties.intermediate[i/2]}}:  {{data.sj_intermediate[i]}}/{{data.sj_intermediate[i+1]}}</div>
+                <div class="progress-background">
+                    <div class="progress" [style.width]="calculatePercentage(data.sj_intermediate[i], data.sj_intermediate[i+1])"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="difficulty-header">Advanced</div>
+    <div class="lobby">
+        <div *ngFor="let item of data.sj_advanced; let even = even; let i = index;">
+            <div *ngIf="even">
+                <div class="subdifficulty-header">{{subDifficulties.advanced[i/2]}}: {{data.sj_advanced[i]}}/{{data.sj_advanced[i+1]}}</div>
+                <div class="progress-background">
+                    <div class="progress" [style.width]="calculatePercentage(data.sj_advanced[i], data.sj_advanced[i+1])">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="difficulty-header">Expert</div>
+    <div class="lobby">
+        <div *ngFor="let item of data.sj_expert; let even = even; let i = index;">
+            <div *ngIf="even">
+                <div class="subdifficulty-header">{{subDifficulties.expert[i/2]}}: {{data.sj_expert[i]}}/{{data.sj_expert[i+1]}}</div>
+                <div class="progress-background">
+                    <div class="progress" [style.width]="calculatePercentage(data.sj_expert[i], data.sj_expert[i+1])">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="difficulty-header">Grandmaster</div>
+    <div class="lobby">
+        <div *ngFor="let item of data.sj_grandmaster; let even = even; let i = index;">
+            <div *ngIf="even">
+                <div class="subdifficulty-header">{{subDifficulties.grandmaster[i/2]}}: {{data.sj_grandmaster[i]}}/{{data.sj_grandmaster[i+1]}}</div>
+                <div class="progress-background">
+                    <div class="progress" [style.width]="calculatePercentage(data.sj_grandmaster[i], data.sj_grandmaster[i+1])">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
