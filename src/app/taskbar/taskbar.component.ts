@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppService } from '../services/app.service';
 import { CommonModule } from '@angular/common';
+import { App } from '../models/app.model';
 
 @Component({
   selector: 'app-taskbar',
@@ -15,7 +16,8 @@ export class TaskbarComponent {
   previousState: any;
   date: string = "";
   time: string = "";
-  openApps: string[] = [];
+  apps: App[] = [];
+  taskbarApps: App[] = [];
 
   constructor(private appService: AppService) { }
 
@@ -24,13 +26,17 @@ export class TaskbarComponent {
     setInterval(() => {
       this.updateDateTime();
     }, 1000);
-    this.appService.openApps$.subscribe(apps => {
-      this.openApps = apps;
+    this.appService.apps$.subscribe(apps => {
+      this.apps = apps;
+      this.taskbarApps = this.apps.filter(app => app.isOpen || app.isMinimized);
     });
   }
 
   openApp(code: string) {
     this.appService.openApp(code);
+  }
+  maxApp(code: string) {
+    this.appService.maxApp(code);
   }
 
   toggleStartMenu() {

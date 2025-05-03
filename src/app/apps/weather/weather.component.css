@@ -1,0 +1,30 @@
+.weather-container {
+    display: flex;
+    margin: 1em;
+    font-size: 1.5em;
+    gap: 2em;
+}
+
+.primary-weather-data {
+    text-align: center;
+}
+
+.primary-weather-data>img {
+    width: 100px;
+    margin: auto;
+}
+
+.secondary-weather-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.secondary-weather-data>div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.temperature {
+    font-size: 2em;
+}

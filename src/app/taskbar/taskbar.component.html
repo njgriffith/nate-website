@@ -4,10 +4,10 @@
         Start
     </button>
     <div class="taskbar-apps">
-        <div *ngFor="let app of openApps">
+        <div *ngFor="let app of taskbarApps" class="taskbar-app" (click)="maxApp(app.name)">
             <button class="taskbar-button">
-                <img class="taskbar-img">
-                <div>{{app}}</div>
+                <img class="taskbar-img" [src]="'/assets/msft/' + app.name.toLowerCase() + '.png'">
+                <div>{{app.name}}</div>
             </button>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <li><img src="assets/msft/blog.png"><u>B</u>log</li>
         </a>
         <a class="start-link" (click)="openApp('Album Reviews')">
-            <li><img src="assets/msft/reviews.png"><u>M</u>usic Reviews</li>
+            <li><img src="assets/msft/album reviews.png"><u>A</u>lbum Reviews</li>
         </a>
         <a class="start-link">
             <li><img src="assets/msft/help.png"><u>P</u>uzzle</li>

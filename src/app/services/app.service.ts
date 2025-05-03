@@ -1,30 +1,79 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { App } from '../models/app.model';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
-  private openApps = new BehaviorSubject<string[]>([]);
+  private appList: App[] = [
+    new App('Blog', false, false, 1),
+    new App('Album Reviews', false, false, 1),
+    new App('Lists', false, false, 1),
+    new App('Solve My Puzzle', false, false, 1),
+    new App('Media Player', true, false, 1),
+    new App('Stats', false, false, 1),
+    new App('Internet', false, false, 1),
+    new App('Catalog', false, false, 1),
+    new App('Settings', false, false, 1),
+    new App('Mailing List', false, false, 1),
+    new App('Weather', false, false, 1),
+    new App('Minesweeper', false, false, 1),
+    new App('Recycle', false, false, 1)
+  ];
+  private apps = new BehaviorSubject<App[]>(this.appList);
+  private numApps: number = this.appList.length;
   private backgroundCode = new Subject<string>();
- 
-  openApps$ = this.openApps.asObservable();
+
+  apps$ = this.apps.asObservable();
   backgroundCode$ = this.backgroundCode.asObservable();
 
   openApp(code: string) {
-    const current = this.openApps.value;
-    if (!current.includes(code)) {
-      this.openApps.next([...current, code]);
-    }
+    const updatedApps = this.apps.value.map(app =>
+      app.name === code ? { ...app, isOpen: true } : app
+    );
+    this.apps.next(updatedApps);
+    this.updateZIndex(code);
   }
 
-  minApp(code: string){
+  minApp(code: string) {
+    const updatedApps = this.apps.value.map(app =>
+      app.name === code ? { ...app, isMinimized: true } : app
+    );
+    this.apps.next(updatedApps);
   }
 
-  closeApp(code: string){
-    const updated = this.openApps.value.filter(a => a !== code);
-    this.openApps.next(updated);
+  maxApp(code: string) {
+    const currentApps = this.apps.value;
+    const targetApp = currentApps.find(app => app.name === code);
+    if (!targetApp || !targetApp.isMinimized) return;
+
+    const updatedApps = currentApps.map(app =>
+      app.name === code ? { ...app, isMinimized: false } : app
+    );
+    this.apps.next(updatedApps);
+    
   }
 
-  updateBackground(background: string){
+  closeApp(code: string) {
+    const updatedApps = this.apps.value.map(app =>
+      app.name === code ? { ...app, isOpen: false } : app
+    );
+    this.apps.next(updatedApps);
+  }
+
+  updateBackground(background: string) {
     this.backgroundCode.next(background);
+  }
+
+  updateZIndex(code: string) {
+    const currentApps = [...this.apps.value];
+    const maxZ = Math.max(...currentApps.map(app => app.zIndex));
+
+    const updatedApps = currentApps.map(app => {
+      if (app.name === code) {
+        return { ...app, zIndex: maxZ + 1 };
+      }
+      return app;
+    });
+    this.apps.next(updatedApps);
   }
 }

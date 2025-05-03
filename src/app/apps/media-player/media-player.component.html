@@ -61,8 +61,8 @@
                 <div class="player-progress" #progressBar>
                     <img src="assets/head/progressbar.bmp" class="player-duration-bar">
                     <img src="assets/head/thumb_01_default.bmp" class="player-current-time" cdkDrag
-                        cdkDragBoundary=".player-progress" [style.left]="thumbLeft" (cdkDragStarted)="onDragStart($event)"
-                        (cdkDragEnded)="seekTrack($event)" />
+                        cdkDragBoundary=".player-progress" (cdkDragStarted)="onDragStart($event)"
+                        (cdkDragEnded)="seekTrack($event)" #progress>
                 </div>
             </div>
         </div>

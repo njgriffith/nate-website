@@ -1,1 +1,35 @@
-<p>weather works!</p>
+<div class="weather-container">
+    <div class="primary-weather-data">
+        <div class="temperature">{{weatherData.temperature}}°F</div>
+        <div class="weather-label">{{weatherCodes[weatherData.weatherCode]}}</div>
+        <img class="weather-img" [src]="weatherIcon">
+        <div class="wind-speed">Wind: {{weatherData.windSpeed}} mph {{windDirection}}</div>
+        <div class="wind-gust">Gusts up to: {{weatherData.windGust}} mph</div>
+    </div>
+    <div class="secondary-weather-data">
+        <div *ngIf="weatherData.location">
+            <div>Location:&nbsp;</div>
+            <div>{{weatherData.location.split(', ')[0]}}</div>
+        </div>
+        <div>
+            <div>Humidity:</div>
+            <div>{{weatherData.humidity}}%</div>
+        </div>
+        <div>
+            <div>Dewpoint:</div>
+            <div>{{weatherData.dewPoint}}°F</div>
+        </div>
+        <div>
+            <div>Pressure:</div>
+            <div>{{weatherData.pressureSurfaceLevel}} inHg</div>
+        </div>
+        <div>
+            <div>Visibility:</div>
+            <div>{{weatherData.visibility}} miles</div>
+        </div>
+        <div>
+            <div>UV Index:</div>
+            <div>{{weatherData.uvIndex}}</div>
+        </div>
+    </div>   
+</div>

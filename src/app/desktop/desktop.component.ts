@@ -1,6 +1,6 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AppService } from '../services/app.service';
 import { AlbumReviewsComponent } from '../apps/album-reviews/album-reviews.component';
 import { ListsComponent } from '../apps/lists/lists.component';
@@ -13,6 +13,9 @@ import { CatalogComponent } from '../apps/catalog/catalog.component';
 import { SignUpComponent } from '../apps/sign-up/sign-up.component';
 import { MinesweeperComponent } from '../apps/minesweeper/minesweeper.component';
 import { PuzzleComponent } from '../puzzle/puzzle.component';
+import { App } from '../models/app.model';
+import { WeatherComponent } from '../apps/weather/weather.component';
+import { RecycleComponent } from '../apps/recycle/recycle.component';
 
 @Component({
   selector: 'app-desktop',
@@ -21,35 +24,42 @@ import { PuzzleComponent } from '../puzzle/puzzle.component';
   templateUrl: './desktop.component.html',
   styleUrl: './desktop.component.css'
 })
+  // TODO: recycle
+  // extra credit: migrate all blogs, highlight sort on reviews, migrate all lists
+
 export class DesktopComponent {
-  apps: string[] = ['Blogs', 'Album Reviews', 'Lists', 'Solve My Puzzle', 'Stats', 'Media Player', 'Internet', 'Catalog', 'Settings', 'Sign Up!', 'Weather', 'Minesweeper', 'Recycle'];
-  openApps: string[] = [];
-  // TODO: puzzle, weather, recycle
-  
-  // extra credit: migrate all blogs, highlight sort on reviews, migrate all lists, media player seek
+  apps: App[] = [];
+  openApps: App[] = [];
   backgroundImage: string = 'assets/backgrounds/metropolis.png';
   selectedIconIndex: number | undefined = undefined;
+  mediaPlayer: App | undefined;
+  isDraggingBox: boolean = false;
+
+  @ViewChild('rightClickBox') rightClickBoxRef!: ElementRef;
 
   appComponentMap: Record<string, any> = {
-    'Blogs': BlogsComponent,
+    'Blog': BlogsComponent,
     'Album Reviews': AlbumReviewsComponent,
     'Lists': ListsComponent,
     'Stats': StatsComponent,
     'Settings': SettingsComponent,
     'Internet': InternetComponent,
     'Catalog': CatalogComponent,
-    'Sign Up!': SignUpComponent,
+    'Mailing List': SignUpComponent,
     'Minesweeper': MinesweeperComponent,
-    'Solve My Puzzle': PuzzleComponent
+    'Solve My Puzzle': PuzzleComponent,
+    'Weather': WeatherComponent,
+    'Recycle': RecycleComponent
   };
 
   constructor(private appService: AppService) {}
 
   ngOnInit(){
     this.appService.backgroundCode$.subscribe(code => this.updateBackground(code));
-
-    this.appService.openApps$.subscribe(apps => {
-      this.openApps = apps;
+    this.appService.apps$.subscribe(apps => {
+      this.apps = apps;
+      this.openApps = this.apps.filter(app => app.isOpen);
+      this.mediaPlayer = this.apps.find(app => app.name === 'Media Player');
     });
   }
 
@@ -60,13 +70,33 @@ export class DesktopComponent {
     this.appService.closeApp(code);
   }
   minApp(code: string){
-    
+    this.appService.minApp(code);
   }
   updateBackground(background: string){
     this.backgroundImage = `assets/backgrounds/${background}.png`;
   }
-
   highlightApp(index: number) {
     this.selectedIconIndex = index;
+  }
+  updateZIndex(code: App){
+    this.appService.updateZIndex(code.name);
+  }
+
+  trackByName(index: number, app: App) {
+    return app.name;
+  }
+
+  boxDown(event: any){
+    this.isDraggingBox = true;
+    const box = this.rightClickBoxRef.nativeElement;
+    box.style.left = `${event.clientX}px`;
+    box.style.top = `${event.clientY}px`;
+  }
+
+  dragBox(event: any){
+    if (!this.isDraggingBox || !this.rightClickBoxRef.nativeElement) return;
+    const box = this.rightClickBoxRef.nativeElement;
+    box.style.width = '100px';
+    box.style.height = '100px';
   }
 }

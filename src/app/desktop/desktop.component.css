@@ -40,6 +40,7 @@
 .icon>p {
     background: rgba(0, 0, 0, 0.6);
 }
+
 .highlighted {
     outline: 1px dotted blue;
 }
@@ -52,8 +53,18 @@ img {
     -ms-user-select: none;
 }
 
-.window{
+.window {
     position: absolute;
-    top: 200px;
-    left: 300px;
+}
+
+.hidden {
+    display: none;
+}
+
+.right-click-box {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 255, 0.4);
+    outline: 1px dotted blue;
 }

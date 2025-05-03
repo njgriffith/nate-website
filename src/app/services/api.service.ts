@@ -45,4 +45,8 @@ export class ApiService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`https://api.nate-griffith.com/minesweeper`, body, { headers });
   }
+
+  getWeather(): Observable<any> {
+    return this.http.get('https://api.nate-griffith.com/weather');
+  }
 }

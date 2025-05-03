@@ -1,1 +1,16 @@
-<p>recycle works!</p>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>app</th>
+                <th>deleted</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let app of deletedApps">
+                <td>{{app}}</td>
+                <td>timestamp</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

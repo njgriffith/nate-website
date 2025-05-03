@@ -12,18 +12,16 @@ import { AppService } from '../../services/app.service';
 })
 export class MediaPlayerComponent {
 
-  constructor(private appService: AppService){}
+  constructor(private appService: AppService) { }
 
-  isRightOpen = false;
-  isLeftOpen = false;
   drawerDistance: number = 200;
 
   rightHovered = false;
-  rightOpened = false;
+  rightOpened = true;
   leftHovered = false;
-  leftOpened = false;
-  rightOffset: string = '200px';
-  leftOffset: string = '-55px';
+  leftOpened = true;
+  rightOffset: string = '400px';
+  leftOffset: string = '-255px';
 
   songs: any = [
     ['Cult Member', 'one'],
@@ -37,8 +35,11 @@ export class MediaPlayerComponent {
   currentSong = '';
 
   @ViewChild('progressBar') progressBarRef!: ElementRef;
+  @ViewChild('progress') progressRef!: ElementRef;
   @ViewChild('player', { static: true }) playerRef!: ElementRef<HTMLAudioElement>;
   player: HTMLAudioElement | null = null;
+  progressBar: HTMLElement | null = null;
+  progress: HTMLElement | null = null;
 
   thumbLeft = '0px';
   isDragging = false;
@@ -46,36 +47,38 @@ export class MediaPlayerComponent {
 
   ngAfterViewInit() {
     this.player = this.playerRef.nativeElement;
+    this.progressBar = this.progressBarRef.nativeElement;
+    this.progress = this.progressRef.nativeElement;
   }
-  minApp(){
-
+  minApp() {
+    this.appService.minApp('Media Player');
   }
-  closeApp(){
+  closeApp() {
     this.appService.closeApp('Media Player');
   }
 
-  handleMediaEvent(event: string){
+  handleMediaEvent(event: string) {
     if (!this.player) return;
-    if (event === 'play'){
+    if (event === 'play') {
       this.player.src = `assets/music/${this.songs[this.currentSongIndex][1]}.mp3`;
       this.player.load();
       this.player.play();
       this.currentArtist = this.songs[this.currentSongIndex][0];
       this.currentSong = this.songs[this.currentSongIndex][1];
     }
-    else if (event === 'pause'){
+    else if (event === 'pause') {
       this.player.pause();
     }
-    else if (event === 'next'){
+    else if (event === 'next') {
       this.currentSongIndex++;
-      if (this.currentSongIndex === this.songs.length){
+      if (this.currentSongIndex === this.songs.length) {
         this.currentSongIndex = 0;
       }
       this.handleMediaEvent('play');
     }
-    else if (event === 'prev'){
+    else if (event === 'prev') {
       this.currentSongIndex--
-      if (this.currentSongIndex < 0){
+      if (this.currentSongIndex < 0) {
         this.currentSongIndex = this.songs.length - 1;
       }
       this.handleMediaEvent('play');
@@ -83,7 +86,7 @@ export class MediaPlayerComponent {
   }
 
   getRightSource(): string {
-    if (this.rightHovered && this.rightOpened){
+    if (this.rightHovered && this.rightOpened) {
       return 'assets/head/R_drwr_close_02_rollover.bmp';
     }
     if (this.rightHovered && !this.rightOpened) return 'assets/head/R_drwr_open_02_rollover.bmp';
@@ -98,44 +101,49 @@ export class MediaPlayerComponent {
     return 'assets/head/L_drwr_open_01_default.bmp';
   }
 
-  toggleEar(ear: string){
-    if(ear === 'l' && this.leftOpened){
+  toggleEar(ear: string) {
+    if (ear === 'l' && this.leftOpened) {
       this.leftOffset = `${parseInt(this.leftOffset) - this.drawerDistance}px`;
     }
-    else if (ear === 'l' && !this.leftOpened){
+    else if (ear === 'l' && !this.leftOpened) {
       this.leftOffset = `${parseInt(this.leftOffset) + this.drawerDistance}px`
     }
 
-    else if(ear === 'r' && this.rightOpened){
+    else if (ear === 'r' && this.rightOpened) {
       this.rightOffset = `${parseInt(this.rightOffset) + this.drawerDistance}px`;
     }
-    else if (ear === 'r' && !this.rightOpened){
+    else if (ear === 'r' && !this.rightOpened) {
       this.rightOffset = `${parseInt(this.rightOffset) - this.drawerDistance}px`
     }
   }
 
-  updateProgressBar(event: any){
-    if (!this.player) return;
+  updateProgressBar(event: any) {
+    if (!this.player || !this.progress) return;
     if (Number.isNaN(this.player.duration)) return;
+
     if (!this.isDragging && this.player.duration) {
-      this.thumbLeft = `${160 * (this.player.currentTime / this.player.duration)}px`;
+      const barRect = this.progressBarRef.nativeElement.getBoundingClientRect();
+      const barWidth = barRect.right - barRect.left;
+      let translateX = barWidth * (this.player.currentTime / this.player.duration)
+      this.progress.style.transform = `translateX(${translateX}px)`;
     }
   }
 
   onDragStart(event: any) {
     this.isDragging = true;
-    event.source._dragRef.reset();
   }
 
-  seekTrack(event: any){
-    if (!this.player) return;
-    if (this.player.duration && this.isDragging) {
-      const newRef = event.source.getFreeDragPosition().x;
-      this.player.currentTime = (newRef / 160) * this.player.duration;
-      this.isDragging = false;
+  seekTrack(event: any) {
+    if (!this.player || !this.player.duration) return;
+    const dragEl = event.source.element.nativeElement;
+    const dragRect = dragEl.getBoundingClientRect();
+    const barRect = this.progressBarRef.nativeElement.getBoundingClientRect();
 
-      event.source._dragRef.reset();
-      event.source._dragRef.setFreeDragPosition({ x: newRef, y: 0 });
-    }
+    const barStart = barRect.left;
+    const barEnd = barRect.right;
+
+    const percentage = (dragRect.left - barStart) / (barEnd - barStart);
+    this.player.currentTime = this.player.duration * percentage;
+    this.isDragging = false;
   }
 }
