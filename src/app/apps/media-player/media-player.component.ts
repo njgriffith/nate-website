@@ -41,7 +41,6 @@ export class MediaPlayerComponent {
   progressBar: HTMLElement | null = null;
   progress: HTMLElement | null = null;
 
-  thumbLeft = '0px';
   isDragging = false;
   timeShift = 0;
 
@@ -60,8 +59,10 @@ export class MediaPlayerComponent {
   handleMediaEvent(event: string) {
     if (!this.player) return;
     if (event === 'play') {
-      this.player.src = `assets/music/${this.songs[this.currentSongIndex][1]}.mp3`;
-      this.player.load();
+      if (!this.player.src.includes(`${this.songs[this.currentSongIndex][1]}`)){
+        this.player.src = `assets/music/${this.songs[this.currentSongIndex][1]}.mp3`;
+        this.player.load();
+      }
       this.player.play();
       this.currentArtist = this.songs[this.currentSongIndex][0];
       this.currentSong = this.songs[this.currentSongIndex][1];

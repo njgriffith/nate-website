@@ -60,15 +60,27 @@ export class MinesweeperComponent {
       this.cols = 16;
       this.totalBombs = 99;
     }
+    else if (this.difficulty === 'Expert') {
+      this.rows = 30;
+      this.cols = 32;
+      this.totalBombs = 198;
+    }
     else {
       alert('Choose a difficulty');
       return;
     }
     this.numFlagsLeft = this.totalBombs;
 
-    this.flagDigits[0] = `${Math.floor(this.numFlagsLeft / 100)}`;
-    this.flagDigits[1] = `${Math.floor(this.numFlagsLeft / 10)}`;
-    this.flagDigits[2] = `${this.numFlagsLeft % 10}`;
+    if (this.numFlagsLeft < 100){
+      this.flagDigits[0] = `${Math.floor(this.numFlagsLeft / 100)}`;
+      this.flagDigits[1] = `${Math.floor(this.numFlagsLeft / 10)}`;
+      this.flagDigits[2] = `${this.numFlagsLeft % 10}`;
+    }
+    else {
+      this.flagDigits[0] = `${Math.floor(this.numFlagsLeft / 100)}`;
+      this.flagDigits[1] = `${Math.floor(this.numFlagsLeft / 10) % 10}`;
+      this.flagDigits[2] = `${this.numFlagsLeft % 100 % 10}`;
+    }
 
 
     this.timerDigits = ['0', '0', '0'];
@@ -197,9 +209,17 @@ export class MinesweeperComponent {
     else {
       this.numFlagsLeft++;
     }
-    this.flagDigits[0] = '0';
-    this.flagDigits[1] = `${Math.floor(this.numFlagsLeft / 10)}`;
-    this.flagDigits[2] = `${this.numFlagsLeft % 10}`;
+    
+    if (this.numFlagsLeft < 100){
+      this.flagDigits[0] = `${Math.floor(this.numFlagsLeft / 100)}`;
+      this.flagDigits[1] = `${Math.floor(this.numFlagsLeft / 10)}`;
+      this.flagDigits[2] = `${this.numFlagsLeft % 10}`;
+    }
+    else {
+      this.flagDigits[0] = `${Math.floor(this.numFlagsLeft / 100)}`;
+      this.flagDigits[1] = `${Math.floor(this.numFlagsLeft / 10) % 10}`;
+      this.flagDigits[2] = `${this.numFlagsLeft % 100 % 10}`;
+    }
   }
 
   revealAllMines() {

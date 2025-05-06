@@ -17,6 +17,7 @@ export class AppService {
     new App('Mailing List', false, false, 1),
     new App('Weather', false, false, 1),
     new App('Minesweeper', false, false, 1),
+    new App('Admin', false, false, 1),
     new App('Recycle', false, false, 1)
   ];
   private apps = new BehaviorSubject<App[]>(this.appList);
@@ -42,6 +43,7 @@ export class AppService {
   }
 
   maxApp(code: string) {
+    this.updateZIndex(code);
     const currentApps = this.apps.value;
     const targetApp = currentApps.find(app => app.name === code);
     if (!targetApp || !targetApp.isMinimized) return;
@@ -50,7 +52,6 @@ export class AppService {
       app.name === code ? { ...app, isMinimized: false } : app
     );
     this.apps.next(updatedApps);
-    
   }
 
   closeApp(code: string) {

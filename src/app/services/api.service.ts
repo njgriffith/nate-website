@@ -49,4 +49,10 @@ export class ApiService {
   getWeather(): Observable<any> {
     return this.http.get('https://api.nate-griffith.com/weather');
   }
+
+  adminLogin(password: string): Observable<any> {
+    const body = JSON.stringify({password});
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`https://api.nate-griffith.com/admin`, body, { headers });
+  }
 }

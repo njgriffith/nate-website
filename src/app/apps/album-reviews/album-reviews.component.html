@@ -9,11 +9,11 @@
             <thead>
                 <tr>
                     <th>Cover</th>
-                    <th (click)="setSort('title')">Title</th>
-                    <th (click)="setSort('artist')">Artist</th>
-                    <th (click)="setSort('score')">Score</th>
-                    <th (click)="setSort('released')">Released</th>
-                    <th (click)="setSort('reviewed')">Reviewed</th>
+                    <th (click)="setSort('title')" [class.selected]="sortKey === 'title'">Title</th>
+                    <th (click)="setSort('artist')" [class.selected]="sortKey === 'artist'">Artist</th>
+                    <th (click)="setSort('score')" [class.selected]="sortKey === 'score'">Score</th>
+                    <th (click)="setSort('released')" [class.selected]="sortKey === 'released'">Released</th>
+                    <th (click)="setSort('reviewed')" [class.selected]="sortKey === 'reviewed'">Reviewed</th>
                 </tr>
             </thead>
             <tbody>

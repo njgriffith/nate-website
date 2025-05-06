@@ -11,12 +11,11 @@ import { Component, Input } from '@angular/core';
 export class PoleVaultComponent {
   @Input() data: any;
 
-  
-  displayJump(jump: number){
-    return `${Math.floor(jump/12)}' ${jump%12}"`;
+  displayJump(jump: number) {
+    return `${Math.floor(jump / 12)}' ${jump % 12}"`;
   }
 
-  calculateJumpPercentage(jump: number){
+  calculateJumpPercentage(jump: number) {
     return `${(jump / this.data.long_term_goal) * 100}%`;
   }
 }
