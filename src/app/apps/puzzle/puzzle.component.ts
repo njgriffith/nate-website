@@ -72,7 +72,7 @@ export class PuzzleComponent {
     this.apiService.puzzleLoad(this.username).subscribe({
       next: (response) => {
         if (response.level === 0) alert('user not found');
-        this.level = response.level;
+        this.setLevel(response.level);
       },
       error: (error) => {
         alert('username not found');
