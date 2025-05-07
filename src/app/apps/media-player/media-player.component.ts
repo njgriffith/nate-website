@@ -59,7 +59,7 @@ export class MediaPlayerComponent {
   handleMediaEvent(event: string) {
     if (!this.player) return;
     if (event === 'play') {
-      if (!this.player.src.includes(`${this.songs[this.currentSongIndex][1]}`)){
+      if (!this.player.src.includes(`${this.songs[this.currentSongIndex][1]}`)) {
         this.player.src = `assets/music/${this.songs[this.currentSongIndex][1]}.mp3`;
         this.player.load();
       }
@@ -146,5 +146,13 @@ export class MediaPlayerComponent {
     const percentage = (dragRect.left - barStart) / (barEnd - barStart);
     this.player.currentTime = this.player.duration * percentage;
     this.isDragging = false;
+  }
+
+  audioEnded() {
+    this.currentSongIndex++;
+    if (this.currentSongIndex === this.songs.length) {
+      this.currentSongIndex = 0;
+    }
+    this.handleMediaEvent('play');
   }
 }

@@ -12,17 +12,18 @@ import { CommonModule } from '@angular/common';
 })
 export class AdminComponent {
   password: string = '';
-  success = false;
+  loggedIn: boolean | null = null;
+  views: string[] = ['review admin', 'blog admin', 'list admin', 'stat admin'];
 
   constructor(private apiService: ApiService) { }
 
   login() {
     this.apiService.adminLogin(this.password).subscribe({
       next: () => {
-        this.success = true;
+        this.loggedIn = true;
       },
       error: () => {
-        this.success = false;
+        this.loggedIn = false;
       }
     });
   }

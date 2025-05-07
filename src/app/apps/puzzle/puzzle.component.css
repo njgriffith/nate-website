@@ -1,0 +1,68 @@
+.puzzle{
+    background-image: url('/assets/icons/backrooms.gif');
+    background-size: cover;
+    color: white;
+    padding: 1em;
+}
+
+.puzzle-landing{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    
+}
+
+.puzzle-greeting{
+    font-size: 2em;
+    font-weight: bold;
+    margin: 1em;
+}
+
+.load-progress{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.landing-text{
+    font-size: 1.5em;
+}
+.landing-button{
+    font-size: 1.5em;
+    padding: 0.25em 1em;
+}
+
+.level-banner{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.history{
+    font-size: 1.5em;
+}
+
+.faq{
+    background-color: white;
+    color: black;
+    box-shadow: inset #555 2px 2px 2px;
+    font-size: 1.5em;
+    padding: 1em;
+    width: 60%;
+}
+
+.faq-item{
+    margin: 1em 0;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.faq-item:hover{
+    background: black;
+    color: white;
+    transition-duration: 0.5s;
+}
+
+.faq-item>div{
+    margin: 0.5em;
+}

@@ -12,7 +12,7 @@ import { InternetComponent } from '../apps/internet/internet.component';
 import { CatalogComponent } from '../apps/catalog/catalog.component';
 import { SignUpComponent } from '../apps/sign-up/sign-up.component';
 import { MinesweeperComponent } from '../apps/minesweeper/minesweeper.component';
-import { PuzzleComponent } from '../puzzle/puzzle.component';
+import { PuzzleComponent } from '../apps/puzzle/puzzle.component';
 import { App } from '../models/app.model';
 import { WeatherComponent } from '../apps/weather/weather.component';
 import { RecycleComponent } from '../apps/recycle/recycle.component';
@@ -34,6 +34,7 @@ export class DesktopComponent {
   selectedIconIndex: number | undefined = undefined;
   mediaPlayer: App | undefined;
   isDraggingBox: boolean = false;
+  puzzleTitle: string = 'Solve My Puzzle!';
 
   @ViewChild('rightClickBox') rightClickBoxRef!: ElementRef;
 
@@ -62,6 +63,7 @@ export class DesktopComponent {
       this.openApps = this.apps.filter(app => app.isOpen);
       this.mediaPlayer = this.apps.find(app => app.name === 'Media Player');
     });
+    this.appService.puzzleTitle$.subscribe(title => this.puzzleTitle = title);
   }
 
   openApp(code: string){
@@ -99,5 +101,9 @@ export class DesktopComponent {
     const box = this.rightClickBoxRef.nativeElement;
     box.style.width = '100px';
     box.style.height = '100px';
+  }
+
+  setPuzzleTitle(title: string) {
+    this.puzzleTitle = title;
   }
 }

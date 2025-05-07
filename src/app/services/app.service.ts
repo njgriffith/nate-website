@@ -21,11 +21,12 @@ export class AppService {
     new App('Recycle', false, false, 1)
   ];
   private apps = new BehaviorSubject<App[]>(this.appList);
-  private numApps: number = this.appList.length;
   private backgroundCode = new Subject<string>();
+  private puzzleTitle = new Subject<string>();
 
   apps$ = this.apps.asObservable();
   backgroundCode$ = this.backgroundCode.asObservable();
+  puzzleTitle$ = this.puzzleTitle.asObservable();
 
   openApp(code: string) {
     const updatedApps = this.apps.value.map(app =>
@@ -76,5 +77,9 @@ export class AppService {
       return app;
     });
     this.apps.next(updatedApps);
+  }
+
+  setPuzzleTitle(title: string){
+    this.puzzleTitle.next(title);
   }
 }

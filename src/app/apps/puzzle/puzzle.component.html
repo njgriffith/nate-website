@@ -1,0 +1,43 @@
+<div class="puzzle">
+    <button *ngIf="level === 0" class="landing-button" (click)="faq=!faq">FAQ</button>
+    <div *ngIf="level === 0" class="puzzle-landing">
+        <div class="puzzle-greeting">Welcome to my puzzle!</div>
+        <div class="load-progress">
+            <div class="landing-text">load progress:</div>
+            <input class="landing-text" [placeholder]="'enter username here'" [(ngModel)]="username">
+            <button class="landing-button" (click)="loadProgress()">submit</button>
+        </div>
+        <div class="landing-text">or</div>
+        <button class="landing-button" (click)="setLevel(1)">level 1</button>
+        <div *ngIf="faq" class="faq">
+            <div class="faq-item">
+                <div>Q: how do i solve these?</div>
+                <div>A: all the clues you'll need are within the puzzle window or within that level's source code, but you may have to use some tools like google in combination with the clues to find the answer.<br> you'll definitely have to think outside of the box on some</div>
+            </div>
+            <div class="faq-item">
+                <div>Q: are the answers case sensitive?</div>
+                <div>A: no, but whitespace matters</div>
+            </div>
+            <div class="faq-item">
+                <div>Q: hey nate, if i look in the source code and find the puzzle api, then manually create a user on the last level, aren't i a genius?</div>
+                <div>A: no</div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="level > 0">
+        <div class="level-banner">
+            <button (click)="setLevel(0)" class="landing-button">back</button>
+            <input [placeholder]="'enter username here'" [(ngModel)]="username" class="landing-text">
+            <button class="landing-button" (click)="saveProgress()">save progress</button>
+        </div>
+        <ng-container *ngComponentOutlet="levelMap[level]" class="level"></ng-container>
+        <div class="level-banner">
+            <button class="landing-button" (click)="showHistory = !showHistory">history</button>
+            <input [(ngModel)]="guess" class="landing-text">
+            <button class="landing-button" (click)="guessAnswer()">guess</button>
+        </div>
+        <div *ngIf="showHistory" class="history">
+            <div *ngFor="let g of guesses">{{g}}</div>
+        </div>
+    </div>
+</div>

@@ -55,4 +55,22 @@ export class ApiService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`https://api.nate-griffith.com/admin`, body, { headers });
   }
+
+  puzzleLoad(username: string): Observable<any> {
+    const body = JSON.stringify({username});
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`https://api.nate-griffith.com/puzzle/load`, body, { headers });
+  }
+
+  puzzleSave(username: string, level: number): Observable<any> {
+    const body = JSON.stringify({username, level});
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`https://api.nate-griffith.com/puzzle/save`, body, { headers });
+  }
+
+  puzzleGuess(guess: string, level: number): Observable<any> {
+    const body = JSON.stringify({guess, level});
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`https://api.nate-griffith.com/puzzle/guess`, body, { headers });
+  }
 }

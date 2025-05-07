@@ -1,2 +1,13 @@
-<input [(ngModel)]="password">
-<button>log in</button>
+<div *ngIf="!loggedIn">
+    <input [(ngModel)]="password">
+    <button>log in</button>
+    <div class="login-fail" *ngIf="loggedIn === false">error: incorrect password</div>
+</div>
+
+<div *ngIf="loggedIn">
+    <div>Hello beautiful</div>
+    <select>
+        <option *ngFor="let view of views">{{view}}</option>
+    </select>
+</div>
+

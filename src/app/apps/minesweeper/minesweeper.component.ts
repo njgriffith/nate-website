@@ -226,7 +226,7 @@ export class MinesweeperComponent {
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.cols; c++) {
         if (this.gameGrid[r][c].mine) {
-          if (this.gameGrid[r][c].img.includes('hit')) {
+          if (!this.gameGrid[r][c].img.includes('hit')) {
             this.gameGrid[r][c].img = 'tile-mine';
           }
         }

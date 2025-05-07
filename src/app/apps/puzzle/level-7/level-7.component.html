@@ -1,0 +1,5 @@
+<div style="display: flex; gap: 2em; justify-content: center; align-items: center; margin: 2em 0;">
+    <div *ngFor="let size of sizes; let even = even; let i = index">
+        <div *ngIf="even" [style.width.px]="sizes[i]" [style.height.px]="sizes[i+1]" style="background: red"></div>
+    </div>
+</div>

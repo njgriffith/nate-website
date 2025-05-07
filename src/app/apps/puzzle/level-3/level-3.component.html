@@ -1,0 +1,12 @@
+<div style="display: flex; flex-direction: column; align-items: center; gap: 1em;">
+    <div style="font-size: 3em; margin-top: 1em;">GerIatrIC</div>
+    <div style="font-size: 1.5em">(round your answer)</div>
+    <div style="display: flex; gap: 1em; margin-bottom: 1em;">
+      <button (click)="playMedia()">Play</button>
+      <button (click)="pauseAudio()">Pause</button>
+    </div>
+  </div>
+  
+  <audio #player>
+    <source src="assets/puzzle/mike.mp3">
+  </audio>

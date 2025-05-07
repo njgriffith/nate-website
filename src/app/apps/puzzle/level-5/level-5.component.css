@@ -1,0 +1,11 @@
+.container{
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    background-color: white;
+    color: black;
+    box-shadow: inset #555 2px 2px 2px;
+    font-size: 1.5em;
+    padding: 1em;
+    margin: 2em;
+}
