@@ -28,6 +28,7 @@ export class PuzzleComponent {
   guesses: string[] = [];
   showHistory = false;
   faq = false;
+  wrong: boolean = false;
 
   levelMap: Record<number, any> = {
     1: Level1Component,
@@ -95,18 +96,19 @@ export class PuzzleComponent {
     this.apiService.puzzleGuess(this.guess, this.level).subscribe({
       next: (response) => {
         if (response.message) {
+          this.wrong = false;
           this.guess = '';
           this.guesses = [];
           this.setLevel(this.level+1);
         }
         else {
-          alert('incorrect');
+          this.wrong = true;
           this.guesses.push(this.guess);
           this.guess = '';
         }
       },
       error: (error) => {
-        alert('incorrect');
+        alert('server error, try again later');
         this.guesses.push(this.guess);
         this.guess = '';
       }

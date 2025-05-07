@@ -36,6 +36,7 @@
             <input [(ngModel)]="guess" class="landing-text">
             <button class="landing-button" (click)="guessAnswer()">guess</button>
         </div>
+        <div *ngIf="wrong" style="color: red; background: white; padding: 1em;">incorrect</div>
         <div *ngIf="showHistory" class="history">
             <div *ngFor="let g of guesses">{{g}}</div>
         </div>
