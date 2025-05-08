@@ -1,4 +1,4 @@
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDrag, DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AppService } from '../../services/app.service';
@@ -35,11 +35,10 @@ export class MediaPlayerComponent {
   currentSong = '';
 
   @ViewChild('progressBar') progressBarRef!: ElementRef;
-  @ViewChild('progress') progressRef!: ElementRef;
+  @ViewChild('progressThumb', { read: CdkDrag }) progressThumb!: CdkDrag;
   @ViewChild('player', { static: true }) playerRef!: ElementRef<HTMLAudioElement>;
   player: HTMLAudioElement | null = null;
   progressBar: HTMLElement | null = null;
-  progress: HTMLElement | null = null;
 
   isDragging = false;
   timeShift = 0;
@@ -47,7 +46,6 @@ export class MediaPlayerComponent {
   ngAfterViewInit() {
     this.player = this.playerRef.nativeElement;
     this.progressBar = this.progressBarRef.nativeElement;
-    this.progress = this.progressRef.nativeElement;
   }
   minApp() {
     this.appService.minApp('Media Player');
@@ -119,15 +117,16 @@ export class MediaPlayerComponent {
   }
 
   updateProgressBar(event: any) {
-    if (!this.player || !this.progress) return;
+    if (!this.player || !this.progressBarRef || this.isDragging) return;
     if (Number.isNaN(this.player.duration)) return;
 
-    if (!this.isDragging && this.player.duration) {
-      const barRect = this.progressBarRef.nativeElement.getBoundingClientRect();
-      const barWidth = barRect.right - barRect.left;
-      let translateX = barWidth * (this.player.currentTime / this.player.duration)
-      this.progress.style.transform = `translateX(${translateX}px)`;
-    }
+    const barRect = this.progressBarRef.nativeElement.getBoundingClientRect();
+    const barWidth = barRect.right - barRect.left;
+
+    const percentage = this.player.currentTime / this.player.duration;
+    const translateX = barWidth * percentage;
+
+    this.progressThumb.setFreeDragPosition({ x: translateX, y: 0 });
   }
 
   onDragStart(event: any) {
@@ -135,15 +134,14 @@ export class MediaPlayerComponent {
   }
 
   seekTrack(event: any) {
-    if (!this.player || !this.player.duration) return;
-    const dragEl = event.source.element.nativeElement;
-    const dragRect = dragEl.getBoundingClientRect();
+    if (!this.player || !this.player.duration || !this.progressThumb) return;
+
+    const dragPos = this.progressThumb.getFreeDragPosition();
     const barRect = this.progressBarRef.nativeElement.getBoundingClientRect();
 
-    const barStart = barRect.left;
-    const barEnd = barRect.right;
+    const barWidth = barRect.right - barRect.left;
+    const percentage = dragPos.x / barWidth;
 
-    const percentage = (dragRect.left - barStart) / (barEnd - barStart);
     this.player.currentTime = this.player.duration * percentage;
     this.isDragging = false;
   }

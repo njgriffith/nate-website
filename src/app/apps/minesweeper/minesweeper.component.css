@@ -1,3 +1,6 @@
+.minesweeper{
+    display: flex;
+}
 .minesweeper-header {
     display: flex;
     justify-content: space-around;
@@ -38,6 +41,10 @@
     font-size: 1.3em;
 }
 
+.leaderboard{
+    width: 50%;
+}
+
 .leaderboard-row:hover{
     color: white;
     background: blue;
@@ -47,4 +54,5 @@
     margin: 1em 0;
     font-size: 1.5em;
     font-weight: bold;
+    text-align: center;
 }
