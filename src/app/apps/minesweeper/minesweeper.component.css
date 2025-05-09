@@ -1,5 +1,9 @@
 .minesweeper{
+    max-height: 400px;
+    overflow-y: scroll;
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .minesweeper-header {
     display: flex;

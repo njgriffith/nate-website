@@ -1,43 +1,44 @@
 <select [(ngModel)]="selectedList" (ngModelChange)="changeType()">
-    <option *ngFor="let list of lists">{{list}}</option>
+    <option *ngFor="let list of lists">{{listToDisplayMap[list]}}</option>
 </select>
+<div class="list-container">
+    <div *ngIf="listType === 'albums'" class="sunken-panel">
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let album of listData[displayToListMap[selectedList]] let i = index;">
+                    <td>{{i+1}}</td>
+                    <td>{{album.title}}</td>
+                    <td>{{album.artist}}</td>
+                    <td>{{album.year}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<div *ngIf="listType === 'albums'" class="sunken-panel">
-    <table>
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Title</th>
-                <th>Artist</th>
-                <th>Year</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let album of listData[selectedList] let i = index;">
-                <td>{{i+1}}</td>
-                <td>{{album.title}}</td>
-                <td>{{album.artist}}</td>
-                <td>{{album.year}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div *ngIf="listType === 'movies'" class="sunken-panel">
-    <table>
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Title</th>
-                <th>Year</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let album of listData[selectedList] let i = index;">
-                <td>{{i+1}}</td>
-                <td>{{album.title}}</td>
-                <td>{{album.year}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div *ngIf="listType === 'movies'" class="sunken-panel">
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let album of listData[displayToListMap[selectedList]] let i = index;">
+                    <td>{{i+1}}</td>
+                    <td>{{album.title}}</td>
+                    <td>{{album.year}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

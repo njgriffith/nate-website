@@ -2,6 +2,11 @@ select{
     margin-bottom: 1em;
 }
 
+.list-container{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
 tbody>tr:hover{
     color: white;
     background: blue;

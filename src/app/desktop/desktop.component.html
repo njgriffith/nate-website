@@ -13,8 +13,8 @@
   <div class="apps">
     <div *ngFor="let app of apps trackBy: trackByName">
       <div class="window" cdkDrag [class.hidden]="app.isMinimized" *ngIf="app.name !== 'Media Player' && app.isOpen"
-        (cdkDragStarted)="updateZIndex(app)" [style.zIndex]="app.zIndex" [style.left]="app.left + 'px'"
-        [style.top]="app.top + 'px'">
+        (cdkDragStarted)="updateZIndex(app)" [style.zIndex]="app.zIndex" [style.left.px]="app.left"
+        [style.top.px]="app.top" cdkDragBoundary=".desktop">
         <div class="title-bar" cdkDragHandle>
           <div *ngIf="app.name !== 'Solve My Puzzle'" class="title-bar-text">{{app.name}}</div>
           <div *ngIf="app.name === 'Solve My Puzzle'" class="title-bar-text">{{puzzleTitle}}</div>

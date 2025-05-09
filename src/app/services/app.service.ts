@@ -9,14 +9,14 @@ export class AppService {
     new App('Album Reviews', false, false, 1),
     new App('Lists', false, false, 1),
     new App('Solve My Puzzle', false, false, 1),
-    new App('Media Player', true, false, 1),
+    new App('Media Player', true, true, 1),
     new App('Stats', false, false, 1),
     new App('Internet', false, false, 1),
     new App('Catalog', false, false, 1),
     new App('Settings', false, false, 1),
     new App('Mailing List', false, false, 1),
     new App('Weather', false, false, 1),
-    new App('Minesweeper', false, false, 1),
+    new App('Minesweeper', true, false, 1),
     new App('Admin', false, false, 1),
     new App('Recycle', false, false, 1)
   ];
@@ -49,7 +49,7 @@ export class AppService {
     const targetApp = currentApps.find(app => app.name === code);
     if (!targetApp || !targetApp.isMinimized) return;
 
-    const updatedApps = currentApps.map(app =>
+    let updatedApps = currentApps.map(app =>
       app.name === code ? { ...app, isMinimized: false } : app
     );
     this.apps.next(updatedApps);
@@ -79,7 +79,7 @@ export class AppService {
     this.apps.next(updatedApps);
   }
 
-  setPuzzleTitle(title: string){
+  setPuzzleTitle(title: string) {
     this.puzzleTitle.next(title);
   }
 }
