@@ -9,14 +9,14 @@ export class AppService {
     new App('Album Reviews', false, false, 1),
     new App('Lists', false, false, 1),
     new App('Solve My Puzzle', false, false, 1),
-    new App('Media Player', true, true, 1),
+    new App('Media Player', true, false, 1),
     new App('Stats', false, false, 1),
     new App('Internet', false, false, 1),
     new App('Catalog', false, false, 1),
     new App('Settings', false, false, 1),
     new App('Mailing List', false, false, 1),
     new App('Weather', false, false, 1),
-    new App('Minesweeper', true, false, 1),
+    new App('Minesweeper', false, false, 1),
     new App('Admin', false, false, 1),
     new App('Recycle', false, false, 1)
   ];
