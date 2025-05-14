@@ -65,6 +65,11 @@ export class MinesweeperComponent {
       this.cols = 32;
       this.totalBombs = 198;
     }
+    else if (this.difficulty === 'Master') {
+      this.rows = 30;
+      this.cols = 64;
+      this.totalBombs = 396;
+    }
     else {
       alert('Choose a difficulty');
       return;
