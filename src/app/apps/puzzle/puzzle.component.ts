@@ -52,7 +52,7 @@ export class PuzzleComponent {
     4: 'Babel, I would like a book please',
     5: 'Ave Caesar!',
     6: 'R G B',
-    7: '0_o',
+    7: 'Breckenridge!',
     8: 'Around the world!',
     9: 'Level 9!',
     10: '10!'
