@@ -47,15 +47,15 @@ export class PuzzleComponent {
   levelTitles: Record<number, string> = {
     0: 'Solve My Puzzle!',
     1: 'Level 1',
-    2: 'Royal Flush!',
-    3: 'MIKE!',
-    4: 'Babel, I would like a book please',
-    5: 'Ave Caesar!',
-    6: 'R G B',
-    7: 'Breckenridge!',
-    8: 'Around the world!',
-    9: 'Level 9!',
-    10: '10!'
+    2: 'Royal Flush! (Level 2)',
+    3: 'MIKE! (Level 3)',
+    4: 'Babel, I would like a book please (Level 4)',
+    5: 'Ave Caesar! (Level 5)',
+    6: 'R G B (Level 6)',
+    7: 'Breckenridge! (Level 7)',
+    8: 'Around the world! (Level 8)',
+    9: 'What\'s in the box!! (Level 9)',
+    10: 'TBD (Level 10)'
   }
 
   constructor(private apiService: ApiService, private appService: AppService) { }
