@@ -83,14 +83,19 @@ export class PuzzleComponent {
   }
 
   saveProgress() {
-    this.apiService.puzzleSave(this.username, this.level).subscribe({
-      next: (response) => {
-        alert(`saved ${this.username} at level ${this.level}`);
-      },
-      error: (error) => {
-        alert('error saving progress');
-      }
-    });
+    if (this.username.replace(/\s+/g, '') === ''){
+      alert('username cannot be empty')
+    }
+    else{
+      this.apiService.puzzleSave(this.username, this.level).subscribe({
+        next: (response) => {
+          alert(`saved ${this.username} at level ${this.level}`);
+        },
+        error: (error) => {
+          alert('error saving progress');
+        }
+      });
+    }
   }
 
   guessAnswer() {
