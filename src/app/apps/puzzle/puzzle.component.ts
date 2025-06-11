@@ -54,7 +54,7 @@ export class PuzzleComponent {
     6: 'R G B',
     7: '0_o',
     8: 'Around the world!',
-    9: '9!',
+    9: 'Level 9!',
     10: '10!'
   }
 

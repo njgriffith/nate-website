@@ -26,7 +26,7 @@
     </div>
     <div *ngIf="level > 0">
         <div class="level-banner">
-            <button (click)="setLevel(0)" class="landing-button">back</button>
+            <button (click)="setLevel(level-1)" class="landing-button">back</button>
             <input [placeholder]="'enter username here'" [(ngModel)]="username" class="landing-text">
             <button class="landing-button" (click)="saveProgress()">save progress</button>
         </div>

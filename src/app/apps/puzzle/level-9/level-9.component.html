@@ -1,1 +1,13 @@
-<p>level-9 works!</p>
+<div class="image-container">
+    <img src="/assets/puzzle/getting-meta.jpg">
+</div>
+<table>
+    <tbody>
+        <tr *ngFor="let row of grid; let i = index">
+            <td *ngFor="let item of row; let j = index">
+                <span *ngIf="item === false" class="black" (click)="flip(i, j)"></span>
+                <span *ngIf="item === true" class="white" (click)="flip(i, j)"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
