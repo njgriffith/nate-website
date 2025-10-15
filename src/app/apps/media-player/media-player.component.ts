@@ -27,7 +27,10 @@ export class MediaPlayerComponent {
     ['Cult Member', 'one'],
     ['boy2000', 'savestate'],
     ['Cult Member', 'ov_dreams'],
-    ['Zorrovian', 'event_horizon']
+    ['Zorrovian', 'event_horizon'],
+    ['boy2000', 'zero'],
+    ['Zorrovian', 'bios'],
+    ['Cult Member', 'untitled']
   ];
 
   currentSongIndex = 0;
@@ -131,6 +134,9 @@ export class MediaPlayerComponent {
 
   onDragStart(event: any) {
     this.isDragging = true;
+  }
+  updateZIndex(appCode: string){
+    this.appService.updateZIndex(appCode);
   }
 
   seekTrack(event: any) {

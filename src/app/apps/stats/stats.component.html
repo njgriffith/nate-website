@@ -1,10 +1,8 @@
 <select [(ngModel)]="selectedDisplay">
-    <option>pole vault</option>
-    <option>strawberry jam</option>
-    <option>pantheons</option>
+    <option *ngFor="let display of displays">{{display}}</option>
 </select>
 
+<app-celeste-speedrun *ngIf="selectedDisplay === 'celeste speedrun'" [data]="statsData.celeste_speedrun"></app-celeste-speedrun>
 <app-pole-vault *ngIf="selectedDisplay === 'pole vault'" [data]="statsData.pole_vault"></app-pole-vault>
 <app-strawberry-jam *ngIf="selectedDisplay === 'strawberry jam'" [data]="statsData.strawberry_jam"></app-strawberry-jam>
 <app-pantheons *ngIf="selectedDisplay === 'pantheons'" [data]="statsData.pantheons"></app-pantheons>
-

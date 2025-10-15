@@ -1,0 +1,23 @@
+.stat-header{
+    font-size: 2em;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+.graph-container{
+    padding: 1em;
+    display: flex;
+    justify-content: left;
+    gap: 1em;
+}
+
+.graph-item{
+    position: relative;
+}
+
+.point{
+    background: #2596be;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}

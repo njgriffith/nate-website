@@ -1,0 +1,7 @@
+<div class="stat-header">Celeste Any% Speedrun Progress</div>
+<div class="graph-container status-field-border" [style.height.px]="containerHeight">
+    <div *ngFor="let item of data; let i = index" class="graph-item" [style.top.px]="getYOffset(i)">
+        <div class="time-label">{{item['time']}}</div>
+        <div class="point" [attr.title]="'World Rank: ' + placementData[i]"></div>
+    </div>
+</div>

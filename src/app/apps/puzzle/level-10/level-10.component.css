@@ -1,0 +1,10 @@
+.sun{
+    display: flex;
+    gap: 1em;
+    margin: 2em 0;
+}
+.ray{
+    width: 10px;
+    background: white;
+    height: 20px;
+}

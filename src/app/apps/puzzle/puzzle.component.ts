@@ -22,7 +22,7 @@ import { AppService } from '../../services/app.service';
   styleUrl: './puzzle.component.css'
 })
 export class PuzzleComponent {
-  level: number = 0;
+  level: number = 10;
   username: string = '';
   guess: string = '';
   guesses: string[] = [];
@@ -55,7 +55,7 @@ export class PuzzleComponent {
     7: 'Breckenridge! (Level 7)',
     8: 'Around the world! (Level 8)',
     9: 'What\'s in the box!! (Level 9)',
-    10: 'TBD (Level 10)'
+    10: 'Last Level! (Level 10)'
   }
 
   constructor(private apiService: ApiService, private appService: AppService) { }

@@ -1,4 +1,4 @@
-<div class="media-player" cdkDrag cdkDragHandle>
+<div class="media-player" cdkDrag cdkDragHandle (cdkDragStarted)="updateZIndex('Media Player')">
     <audio #player (timeupdate)="updateProgressBar($event)" (ended)="handleMediaEvent('next')"></audio>
     <img class="head" src="assets/head/head.bmp">
     <div class="vid-bkgd">

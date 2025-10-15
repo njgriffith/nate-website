@@ -10,7 +10,7 @@ export class AppService {
     new App('Lists', false, false, 1),
     new App('Solve My Puzzle', false, false, 1),
     new App('Media Player', true, false, 1),
-    new App('Stats', false, false, 1),
+    new App('Stats', true, false, 1),
     new App('Internet', false, false, 1),
     new App('Catalog', false, false, 1),
     new App('Settings', false, false, 1),
@@ -72,7 +72,12 @@ export class AppService {
 
     const updatedApps = currentApps.map(app => {
       if (app.name === code) {
-        return { ...app, zIndex: maxZ + 1 };
+        if (app.name === 'Media Player') {
+          return { ...app, zIndex: maxZ + 4 };
+        }
+        else {
+          return { ...app, zIndex: maxZ + 1 }
+        };
       }
       return app;
     });
