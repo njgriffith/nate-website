@@ -8,9 +8,9 @@ export class AppService {
     new App('Blog', false, false, 1),
     new App('Album Reviews', false, false, 1),
     new App('Lists', false, false, 1),
-    new App('Solve My Puzzle', false, false, 1),
-    new App('Media Player', true, false, 1),
-    new App('Stats', true, false, 1),
+    new App('Puzzle', true, false, 1),
+    new App('Media Player', false, false, 1),
+    new App('Stats', false, false, 1),
     new App('Internet', false, false, 1),
     new App('Catalog', false, false, 1),
     new App('Settings', false, false, 1),
@@ -86,5 +86,13 @@ export class AppService {
 
   setPuzzleTitle(title: string) {
     this.puzzleTitle.next(title);
+  }
+
+  getAppNames(): string[]{
+    let appNames: string[] = [];
+    this.appList.forEach((app: App) => {
+      appNames.push(app.name);
+    });
+    return appNames;
   }
 }
