@@ -1,3 +1,40 @@
-.login-fail{
-    color: red;
+.cli-background {
+    width: 400px;
+    height: 300px;
+    background: black;
+    color: white;
+    font-size: 1.5em;
+    overflow-y: auto;
+    padding-left: 3px;
+}
+
+.current-line {
+    color: #00ff00;
+}
+
+.syntax-highlight {
+    color: #ff0;
+}
+
+.blink {
+    animation: blink 1s steps(1, end) infinite;
+    opacity: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

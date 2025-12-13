@@ -1,13 +1,27 @@
-<div *ngIf="!loggedIn">
-    <input [(ngModel)]="password">
-    <button>log in</button>
-    <div class="login-fail" *ngIf="loggedIn === false">error: incorrect password</div>
+<div #cli class="cli-background" tabindex="0" role="textbox" aria-label="admin console" (focus)="onFocus()"
+    (blur)="onBlur()" (keydown)="recordInput($event)">
+    <div *ngFor="let command of commandHistory" class="previous-command">
+        <span class="current-line">&nbsp;user&#64;nate-griffith.com>&nbsp;</span>
+        <span>{{command}}</span>
+        <!-- if command exists -->
+        <div *ngIf="availableCommands[command]">
+            <div *ngIf="availableCommands[command].includes('\n')">
+                <div *ngFor="let line of availableCommands[command].split('\n')">
+                    <div *ngIf="command === 'help'">
+                        <span class="syntax-highlight">{{line.split(' - ')[0]}}</span>
+                        <span>&nbsp;-&nbsp;{{line.split(' - ')[1]}}</span>
+                    </div>
+                    <div *ngIf="command !== 'help'">{{line}}</div>
+                </div>
+            </div>
+            <div *ngIf="!availableCommands[command].includes('\n')">{{availableCommands[command]}}</div>
+        </div>
+        <!-- else -->
+        <div *ngIf="!availableCommands[command]">
+            <div>command not found: {{command}}</div>
+        </div>
+    </div>
+    <span class="current-line">&nbsp;user&#64;nate-griffith.com>&nbsp;</span>
+    <span #cursor></span>
+    <span #blink class="hidden">_</span>
 </div>
-
-<div *ngIf="loggedIn">
-    <div>Hello beautiful</div>
-    <select>
-        <option *ngFor="let view of views">{{view}}</option>
-    </select>
-</div>
-

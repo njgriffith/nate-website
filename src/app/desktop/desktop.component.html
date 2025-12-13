@@ -16,8 +16,8 @@
         (cdkDragStarted)="updateZIndex(app)" [style.zIndex]="app.zIndex" [style.left.px]="app.left"
         [style.top.px]="app.top" cdkDragBoundary=".desktop">
         <div class="title-bar" cdkDragHandle>
-          <div *ngIf="app.name !== 'Solve My Puzzle'" class="title-bar-text">{{app.name}}</div>
-          <div *ngIf="app.name === 'Solve My Puzzle'" class="title-bar-text">{{puzzleTitle}}</div>
+          <div *ngIf="app.name !== 'Puzzle'" class="title-bar-text">{{app.name}}</div>
+          <div *ngIf="app.name === 'Puzzle'" class="title-bar-text">{{puzzleTitle}}</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize" (click)="minApp(app.name)"></button>
             <button aria-label="Maximize"></button>

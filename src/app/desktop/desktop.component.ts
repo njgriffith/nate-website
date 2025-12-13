@@ -48,7 +48,7 @@ export class DesktopComponent {
     'Catalog': CatalogComponent,
     'Mailing List': SignUpComponent,
     'Minesweeper': MinesweeperComponent,
-    'Solve My Puzzle': PuzzleComponent,
+    'Puzzle': PuzzleComponent,
     'Weather': WeatherComponent,
     'Recycle': RecycleComponent,
     'Admin': AdminComponent
