@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { App } from '../models/app.model';
+import { ApiService } from './api.service';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
+
+  constructor(private apiService: ApiService) { }
   private appList: App[] = [
     new App('Blog', false, false, 1),
     new App('Album Reviews', false, false, 1),
@@ -17,7 +20,7 @@ export class AppService {
     new App('Mailing List', false, false, 1),
     new App('Weather', false, false, 1),
     new App('Minesweeper', false, false, 1),
-    new App('Admin', false, false, 1),
+    new App('Command Line', false, false, 1),
     new App('Recycle', false, false, 1)
   ];
   private apps = new BehaviorSubject<App[]>(this.appList);
@@ -27,6 +30,49 @@ export class AppService {
   apps$ = this.apps.asObservable();
   backgroundCode$ = this.backgroundCode.asObservable();
   puzzleTitle$ = this.puzzleTitle.asObservable();
+  private sleepSubject = new BehaviorSubject<boolean>(false);
+  sleep$ = this.sleepSubject.asObservable();
+  private userSubject = new BehaviorSubject<string>('');
+  user$ = this.userSubject.asObservable();
+  private puzzleLevelSubject = new BehaviorSubject<number>(10);
+  puzzleLevel$ = this.puzzleLevelSubject.asObservable();
+
+  userStats: Record<string, any> = {
+    'puzzleLevel': null,
+    'easy': null,
+    'medium': null,
+    'hard': null,
+    'expert': null,
+    'master': null
+  };
+
+  setSleep(value: boolean) {
+    this.sleepSubject.next(value);
+  }
+
+  login(username: string) {
+    this.apiService.userLogin(username).subscribe((response) => {
+      this.setUser(username, response['user_data']);
+    });
+  }
+
+  setUser(username: string, userData: Record<string, any>) {
+    this.userSubject.next(username);
+    if (userData['puzzle'] !== null) {
+      this.puzzleLevelSubject.next(userData['puzzle']);
+    }
+
+    this.userStats['puzzleLevel'] = userData['puzzle'];
+    this.userStats['easy'] = userData['easy'];
+    this.userStats['medium'] = userData['medium'];
+    this.userStats['hard'] = userData['hard'];
+    this.userStats['expert'] = userData['expert'];
+    this.userStats['master'] = userData['master'];
+  }
+
+  setLevel(level: number) {
+    this.puzzleLevelSubject.next(level);
+  }
 
   openApp(code: string) {
     const updatedApps = this.apps.value.map(app =>

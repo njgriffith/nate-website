@@ -51,7 +51,7 @@ export class DesktopComponent {
     'Puzzle': PuzzleComponent,
     'Weather': WeatherComponent,
     'Recycle': RecycleComponent,
-    'Admin': AdminComponent
+    'Command Line': AdminComponent
   };
 
   constructor(private appService: AppService) {}

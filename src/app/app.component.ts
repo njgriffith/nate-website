@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from './services/app.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { TaskbarComponent } from "./taskbar/taskbar.component";
 import { DesktopComponent } from "./desktop/desktop.component";
@@ -13,18 +14,32 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  mobile = false;
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  mobile: boolean = false;
+  sleep: boolean = false;
+  user: string = 'guest';
+  constructor(private breakpointObserver: BreakpointObserver, private appService: AppService) { }
 
-ngOnInit() {
-  this.breakpointObserver.observe([Breakpoints.Handset])
-    .subscribe(result => {
-      if (result.matches) {
-        this.mobile = true;
-      }
-      else{
-        this.mobile = false;
-      }
+  ngOnInit() {
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        if (result.matches) {
+          this.mobile = true;
+        }
+        else {
+          this.mobile = false;
+        }
+      });
+
+    this.appService.sleep$.subscribe(flag => {
+      this.sleep = flag;
     });
-}
+
+    this.appService.user$.subscribe(username => {
+      this.user = username;
+    });
+  }
+
+  wakeUp() {
+    this.sleep = false;
+  }
 }

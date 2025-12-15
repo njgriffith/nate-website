@@ -1,6 +1,10 @@
-<div>
+<div *ngIf="!sleep">
     <app-desktop></app-desktop>
     <app-taskbar></app-taskbar>
+</div>
+
+<div *ngIf="sleep" (mousemove)="wakeUp()" (click)="wakeUp()">
+    <img src="/assets/icons/pipes.gif" class="sleep-screen">
 </div>
 
 
