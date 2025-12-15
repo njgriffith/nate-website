@@ -19,17 +19,22 @@
         </div>
         <!-- else -->
         <div *ngIf="command.includes('Enter username to login: ')">
-            <div *ngIf="user === 'guest'">
-                <div>login failed</div>
+            <div *ngIf="waiting">
+                <div>logging in...</div>
             </div>
-            <div *ngIf="user !== 'guest'">
-                <div>logged in as "{{user}}"</div>
-                <div>puzzle level: {{userStats['puzzleLevel'] || 'none'}}</div>
-                <div>minesweeper easy best: {{userStats['easy'] || 'none'}}</div>
-                <div>minesweeper medium best: {{userStats['medium'] || 'none'}}</div>
-                <div>minesweeper hard best: {{userStats['hard'] || 'none'}}</div>
-                <div>minesweeper expert best: {{userStats['expert'] || 'none'}}</div>
-                <div>minesweeper master best: {{userStats['master'] || 'none'}}</div>
+            <div *ngIf="!waiting">
+                <div *ngIf="user === 'guest'">
+                    <div>login failed</div>
+                </div>
+                <div *ngIf="user !== 'guest'">
+                    <div>logged in as "{{user}}"</div>
+                    <div>puzzle level: {{userStats['puzzleLevel'] || 'none'}}</div>
+                    <div>minesweeper easy best: {{userStats['easy'] || 'none'}}</div>
+                    <div>minesweeper medium best: {{userStats['medium'] || 'none'}}</div>
+                    <div>minesweeper hard best: {{userStats['hard'] || 'none'}}</div>
+                    <div>minesweeper expert best: {{userStats['expert'] || 'none'}}</div>
+                    <div>minesweeper master best: {{userStats['master'] || 'none'}}</div>
+                </div>
             </div>
         </div>
         <div *ngIf="!availableCommands[command] && !command.includes('Enter username to login: ')">

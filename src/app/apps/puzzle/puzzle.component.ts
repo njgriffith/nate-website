@@ -13,6 +13,7 @@ import { Level8Component } from './level-8/level-8.component';
 import { Level9Component } from './level-9/level-9.component';
 import { Level10Component } from './level-10/level-10.component';
 import { AppService } from '../../services/app.service';
+import { Level11Component } from './level-11/level-11.component';
 
 @Component({
   selector: 'app-puzzle',
@@ -41,7 +42,8 @@ export class PuzzleComponent {
     7: Level7Component,
     8: Level8Component,
     9: Level9Component,
-    10: Level10Component
+    10: Level10Component,
+    11: Level11Component
   };
 
   levelTitles: Record<number, string> = {
@@ -55,7 +57,8 @@ export class PuzzleComponent {
     7: 'Breckenridge! (Level 7)',
     8: 'Around the world! (Level 8)',
     9: 'What\'s in the box!! (Level 9)',
-    10: 'Last Level! (Level 10)'
+    10: 'Ten! (Level 10)',
+    11: 'Congrats!'
   }
 
   constructor(private apiService: ApiService, private appService: AppService) { }
@@ -72,7 +75,7 @@ export class PuzzleComponent {
   }
 
   setLevel(level: number){
-    if (level < 0 || level > 10) return;
+    if (level < 0 || level > 11) return;
     this.level = level;
     this.appService.setPuzzleTitle(this.levelTitles[level]);
   }
@@ -100,7 +103,7 @@ export class PuzzleComponent {
 
   saveProgress() {
     if (this.username.replace(/\s+/g, '') === ''){
-      alert('username cannot be empty')
+      alert('sign in to proceed');
     }
     else{
       this.apiService.puzzleSave(this.username, this.level).subscribe({
@@ -123,9 +126,6 @@ export class PuzzleComponent {
           this.guess = '';
           this.guesses = [];
           this.setLevel(this.level+1);
-          if (this.username !== 'guest') {
-            this.saveProgress();
-          }
         }
         else {
           this.guessResponse = response.message;

@@ -9,7 +9,21 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrl: './level-10.component.css'
 })
 export class Level10Component {
-  sentence: string = 'thequickbrownfoxjumpedoverthelazydog';
-  alpha: string = 'abcdefghijklmnopqrstuvwxyz';
+  @ViewChild('player1', { static: true }) player1Ref!: ElementRef<HTMLAudioElement>;
+  @ViewChild('player2', { static: true }) player2Ref!: ElementRef<HTMLAudioElement>;
+  player1: HTMLAudioElement | null = null;
+  player2: HTMLAudioElement | null = null;
+
+  ngOnInit() {
+    this.player1 = this.player1Ref.nativeElement;
+    this.player2 = this.player2Ref.nativeElement;
+  }
+
+  play(n: number) {
+    if (!this.player1 || !this.player2) return;
+
+    if (n === 1) this.player1.play();
+    else if (n === 2) this.player2.play();
+  }
 
 }
