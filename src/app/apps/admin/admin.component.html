@@ -1,7 +1,8 @@
 <div #cli class="cli-background" tabindex="0" role="textbox" aria-label="admin console" (focus)="onFocus()"
     (blur)="onBlur()" (keydown)="recordInput($event)">
-    <div *ngFor="let command of commandHistory" class="previous-command">
-        <span class="current-line">&nbsp;user&#64;nate-griffith.com>&nbsp;</span>
+    <div *ngFor="let command of commandHistory; let i = index" class="previous-command">
+        <span class="current-line" *ngIf="user === ''">&nbsp;guest&#64;nate-griffith.com>&nbsp;</span>
+        <span class="current-line" *ngIf="user !== ''">&nbsp;{{user}}&#64;nate-griffith.com>&nbsp;</span>
         <span>{{command}}</span>
         <!-- if command exists -->
         <div *ngIf="availableCommands[command]">
@@ -17,11 +18,26 @@
             <div *ngIf="!availableCommands[command].includes('\n')">{{availableCommands[command]}}</div>
         </div>
         <!-- else -->
-        <div *ngIf="!availableCommands[command]">
+        <div *ngIf="command.includes('Enter username to login: ')">
+            <div *ngIf="user === 'guest'">
+                <div>login failed</div>
+            </div>
+            <div *ngIf="user !== 'guest'">
+                <div>logged in as "{{user}}"</div>
+                <div>puzzle level: {{userStats['puzzleLevel'] || 'none'}}</div>
+                <div>minesweeper easy best: {{userStats['easy'] || 'none'}}</div>
+                <div>minesweeper medium best: {{userStats['medium'] || 'none'}}</div>
+                <div>minesweeper hard best: {{userStats['hard'] || 'none'}}</div>
+                <div>minesweeper expert best: {{userStats['expert'] || 'none'}}</div>
+                <div>minesweeper master best: {{userStats['master'] || 'none'}}</div>
+            </div>
+        </div>
+        <div *ngIf="!availableCommands[command] && !command.includes('Enter username to login: ')">
             <div>command not found: {{command}}</div>
         </div>
     </div>
-    <span class="current-line">&nbsp;user&#64;nate-griffith.com>&nbsp;</span>
+    <span class="current-line" *ngIf="user === ''">&nbsp;guest&#64;nate-griffith.com>&nbsp;</span>
+    <span class="current-line" *ngIf="user !== ''">&nbsp;{{user}}&#64;nate-griffith.com>&nbsp;</span>
     <span #cursor></span>
     <span #blink class="hidden">_</span>
 </div>

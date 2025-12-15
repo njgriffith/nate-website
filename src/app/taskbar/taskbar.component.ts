@@ -44,14 +44,7 @@ export class TaskbarComponent {
   }
 
   sleep() {
-    this.isAsleep = true;
-    const body = document.body;
-    this.previousState = body.innerHTML;
-    body.innerHTML = "";
-    body.style.background = "url('assets/icons/pipes.gif')";
-    body.style.backgroundPosition = 'center';
-    body.style.backgroundRepeat = 'no-repeat';
-    body.style.backgroundSize = 'cover';
+    this.appService.setSleep(true);
   }
 
   updateDateTime() {

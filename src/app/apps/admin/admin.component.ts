@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppService } from '../../services/app.service';
+import { sample } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +15,7 @@ import { AppService } from '../../services/app.service';
 export class AdminComponent {
   constructor(private apiService: ApiService, private appService: AppService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.appNames = this.appService.getAppNames();
     let nameString: string = '';
     this.appNames.forEach((appName: string, index: number) => {
@@ -23,19 +24,29 @@ export class AdminComponent {
       index === this.appNames.length - 1 ? nameString += appName : nameString += appName + '\n'
     });
     this.availableCommands['list-apps'] = nameString;
+
+    this.appService.user$.subscribe(username => {
+      this.user = username;
+    });
   }
 
+  user: string = 'guest';
   password: string = '';
+  userStats: Record<string, any> = {};
   loggedIn: boolean | null = null;
   commandHistory: string[] = [];
   commandIndex = 0;
   availableCommands: Record<string, string> = {
-    'status': 'System status: All systems operational.',
-    'logout': 'Logging out...',
+    'sleep': 'suspending...',
+    'clear': ' ',
+    'login': ' ',
 
-    'help': 'list-apps - list application names\n' + 
-    '<app-name> - start application\n' +
-    'close <app-name> - close application'
+    'help': 'login - log user in\n' +
+      'list-apps - list application names\n' +
+      '<app-name> - start application\n' +
+      'close <app-name> - close application\n' +
+      'clear - clear CLI\n' +
+      'sleep - sleeps computer'
   };
   appNames: string[] = [];
   @ViewChild('cursor', { static: true }) cursor!: ElementRef<HTMLSpanElement>;
@@ -47,15 +58,39 @@ export class AdminComponent {
     const el = this.cli?.nativeElement;
     const prevHeight = el ? el.scrollHeight : 0;
 
-    if (this.appNames.includes(command)){
+    if (command === 'clear') {
+      this.commandHistory = [];
+      setTimeout(() => this.scrollToBottom(), 0);
+      return;
+    }
+
+    else if (command === 'sleep') {
+      this.commandHistory.push(command);
+      this.appService.setSleep(true);
+    }
+
+    else if (command.includes('Enter username to login: ')) {
+      const username = command.replace('Enter username to login: ', '').trim();
+      this.appService.login(username);
+      this.userStats = this.appService.userStats;
+      this.commandHistory.push(command);
+      setTimeout(() => this.scrollToBottom(prevHeight), 0);
+      return;
+    }
+
+    else if (this.appNames.includes(command)) {
       this.appService.openApp(command);
     }
-    
-    else if (command.length >= 6 && command.substring(0, 6) === 'close '){
-      this.appService.closeApp(command.split(' ')[1]);
+
+    else if (command.length >= 6 && command.substring(0, 6) === 'close ') {
+      let splitCommand: string[] = command.split(' ');
+      let appName: string = '';
+      for (let i = 1; i < splitCommand.length; i++) {
+        appName += splitCommand[i] + ' ';
+      }
+      this.appService.closeApp(appName.trim());
     }
     this.commandHistory.push(command);
-
     // wait for DOM update before checking scrollHeight
     setTimeout(() => this.scrollToBottom(prevHeight), 0);
   }
@@ -75,6 +110,11 @@ export class AdminComponent {
       const text = (cur.textContent || '').trim();
       if (text.length) {
         this.processCommand(text);
+        if (text === 'login') {
+          cur.textContent = 'Enter username to login: ';
+          this.commandIndex = this.commandHistory.length;
+          return;
+        }
       }
       cur.textContent = '';
       this.commandIndex = this.commandHistory.length;
@@ -83,7 +123,7 @@ export class AdminComponent {
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
-      if (this.commandIndex > 0){
+      if (this.commandIndex > 0) {
         this.commandIndex--;
       }
       cur.textContent = this.commandHistory[this.commandIndex];
@@ -92,8 +132,12 @@ export class AdminComponent {
 
     if (event.key === 'ArrowDown') {
       event.preventDefault();
-      if (this.commandIndex < this.commandHistory.length - 1){
+      if (this.commandIndex < this.commandHistory.length - 1) {
         this.commandIndex++;
+      }
+      else {
+        cur.textContent = '';
+        return;
       }
       cur.textContent = this.commandHistory[this.commandIndex];
       return;
@@ -119,17 +163,6 @@ export class AdminComponent {
     } catch (e) {
       // ignore
     }
-  }
-
-  login() {
-    this.apiService.adminLogin(this.password).subscribe({
-      next: () => {
-        this.loggedIn = true;
-      },
-      error: () => {
-        this.loggedIn = false;
-      }
-    });
   }
 
   onFocus() {

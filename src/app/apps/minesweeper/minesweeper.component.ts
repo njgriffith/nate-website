@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-minesweeper',
@@ -12,6 +13,7 @@ import { ApiService } from '../../services/api.service';
 })
 export class MinesweeperComponent {
   // difficulty: string = 'Choose a difficulty';
+  username: string = 'guest';
   difficulty: string = 'Easy';
   isLeaderboardOpen: boolean = false;
   isPlaying: boolean = false;
@@ -29,12 +31,18 @@ export class MinesweeperComponent {
   gameOver: boolean = false;
   faceImg: string = 'assets/minesweeper/smile.png';
   leaderboardData: any = [];
+  difficululties: string[] = ['easy', 'medium', 'hard', 'expert', 'master'];
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private appService: AppService) { }
 
   ngOnInit() {
     this.apiService.getMSLeaderboard().subscribe((response) => {
       this.leaderboardData = response;
+      console.log(this.leaderboardData)
+    });
+
+    this.appService.user$.subscribe(username => {
+      this.username = username;
     });
   }
 
@@ -76,7 +84,7 @@ export class MinesweeperComponent {
     }
     this.numFlagsLeft = this.totalBombs;
 
-    if (this.numFlagsLeft < 100){
+    if (this.numFlagsLeft < 100) {
       this.flagDigits[0] = `${Math.floor(this.numFlagsLeft / 100)}`;
       this.flagDigits[1] = `${Math.floor(this.numFlagsLeft / 10)}`;
       this.flagDigits[2] = `${this.numFlagsLeft % 10}`;
@@ -214,8 +222,8 @@ export class MinesweeperComponent {
     else {
       this.numFlagsLeft++;
     }
-    
-    if (this.numFlagsLeft < 100){
+
+    if (this.numFlagsLeft < 100) {
       this.flagDigits[0] = `${Math.floor(this.numFlagsLeft / 100)}`;
       this.flagDigits[1] = `${Math.floor(this.numFlagsLeft / 10)}`;
       this.flagDigits[2] = `${this.numFlagsLeft % 10}`;
@@ -256,11 +264,22 @@ export class MinesweeperComponent {
       this.faceImg = 'assets/minesweeper/cool.png';
       clearInterval(this.timeTracker);
       this.gameOver = true;
-      var username = prompt("Congratulations! Enter your name to join the leaderboards");
-      if (username === null || username.trim().length === 0) {
-        return;
+
+      if (this.username === 'guest') {
+        let username = prompt("Congratulations! Enter your name to join the leaderboards");
+        if (username === null || username.trim().length === 0) {
+          return;
+        }
+        this.updateLeaderboard(username, this.seconds + (this.thousandSecond * 1000));
+        this.appService.login(username);
       }
-      this.updateLeaderboard(username, this.seconds + (this.thousandSecond * 1000));
+      else {
+        alert("Congratulations! Updating leaderboards...");
+        if (this.username === null || this.username.trim().length === 0) {
+          return;
+        }
+        this.updateLeaderboard(this.username, this.seconds + (this.thousandSecond * 1000));
+      }
     }
   }
 
@@ -269,7 +288,6 @@ export class MinesweeperComponent {
     if (username && username.length > 0) {
       this.apiService.updateMSLeaderboard(username, score, this.difficulty).subscribe({
         next: (response) => {
-          alert('posted to leaderboard!');
         },
         error: (error) => {
           alert('error posting to leaderboard :(');
