@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AppService } from './services/app.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { TaskbarComponent } from "./taskbar/taskbar.component";
@@ -17,6 +17,8 @@ export class AppComponent {
   mobile: boolean = false;
   sleep: boolean = false;
   user: string = 'guest';
+  magicWidth: number = 529;
+  magicHeight: number = 321;
   constructor(private breakpointObserver: BreakpointObserver, private appService: AppService) { }
 
   ngOnInit() {
@@ -41,5 +43,18 @@ export class AppComponent {
 
   wakeUp() {
     this.sleep = false;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    let width: number = (event.target as Window).innerWidth;
+    let height: number = (event.target as Window).innerHeight;
+
+    if (width === this.magicWidth && height === this.magicHeight) {
+      this.appService.updateBackground('calamity');
+    }
+    else{
+      this.appService.updateBackground('metropolis');
+    }
   }
 }

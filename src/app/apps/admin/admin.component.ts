@@ -32,6 +32,7 @@ export class AdminComponent {
 
   user: string = 'guest';
   password: string = '';
+  waiting: boolean = false;
   userStats: Record<string, any> = {};
   loggedIn: boolean | null = null;
   commandHistory: string[] = [];
@@ -71,10 +72,22 @@ export class AdminComponent {
 
     else if (command.includes('Enter username to login: ')) {
       const username = command.replace('Enter username to login: ', '').trim();
-      this.appService.login(username);
-      this.userStats = this.appService.userStats;
+      // push the command so it shows immediately, then await the login response
       this.commandHistory.push(command);
-      setTimeout(() => this.scrollToBottom(prevHeight), 0);
+      this.waiting = true;
+      // call login and wait for response
+      this.appService.login(username).subscribe({
+        next: (resp) => {
+          this.userStats = this.appService.userStats;
+          this.waiting = false;
+          setTimeout(() => this.scrollToBottom(prevHeight), 0);
+        },
+        error: () => {
+          // on error, clear waiting and still scroll
+          this.waiting = false;
+          setTimeout(() => this.scrollToBottom(prevHeight), 0);
+        }
+      });
       return;
     }
 
