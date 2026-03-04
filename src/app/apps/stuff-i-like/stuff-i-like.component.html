@@ -1,0 +1,53 @@
+<div class="window-body">
+    <select [(ngModel)]="selectedList" class="list-select">
+        <option *ngFor="let list of lists">{{list}}</option>
+    </select>
+    <input placeholder="filter search..." class="filter" [(ngModel)]="filterText">
+    <ng-container *ngIf="selectedList === 'Albums'">
+        <ng-container *ngIf="!singleReviewView">
+            <menu role="tablist" class="tablist">
+                <li *ngFor="let tierName of tierNames" role="tab" [attr.aria-selected]="selectedTier === tierName"
+                    (click)="selectedTier = tierName">{{tierName}}</li>
+            </menu>
+            <div class="window" role="tabpanel">
+                <ng-container *ngFor="let album of albumTiers[selectedTier]" class="album-container">
+                    <div *ngIf="isAlbumInFilter(album)" class="album-container" (click)="toReview(album)" [class.has-review]="album.reviewKey">
+                        <img [src]="album.coverPath" class="cover-img">
+                        <p class="album-title">{{ album.title }}</p>
+                        <p class="album-artist">{{ album.artist }}</p>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="singleReviewView">
+            <div class="review-container">
+                <button (click)="singleReviewView = false">Back to all reviews</button>
+                <div class="review-header">
+                    <div>{{selectedReview.artist}} - {{selectedReview.title}}</div>
+                    <img [src]="selectedReview.coverPath" class="cover-img">
+                </div>
+
+                <div class="review">
+                    <pre>
+                        <div [innerHTML]="selectedReview.review"></div> 
+                        <div *ngIf="selectedReview.id !== 'TVUandN'">{{ selectedReview.score }}</div>
+                    </pre>
+                </div>
+            </div>
+        </ng-container>
+
+    </ng-container>
+
+    <ng-container *ngIf="selectedList === 'Movies'">
+        <div class="sunken-panel">
+            <h2>TODO</h2>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="selectedList === 'Songs'">
+        <div class="sunken-panel">
+            <h2>TODO</h2>
+        </div>
+    </ng-container>
+</div>
