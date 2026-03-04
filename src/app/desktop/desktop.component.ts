@@ -17,6 +17,7 @@ import { App } from '../models/app.model';
 import { WeatherComponent } from '../apps/weather/weather.component';
 import { RecycleComponent } from '../apps/recycle/recycle.component';
 import { AdminComponent } from '../apps/admin/admin.component';
+import { StuffILikeComponent } from '../apps/stuff-i-like/stuff-i-like.component';
 
 @Component({
   selector: 'app-desktop',
@@ -25,7 +26,7 @@ import { AdminComponent } from '../apps/admin/admin.component';
   templateUrl: './desktop.component.html',
   styleUrl: './desktop.component.css'
 })
-  // TODO: puzzle recycle, admin, migrate all blogs, migrate all lists
+  // TODO: recycle, migrate all blogs, migrate all lists
 
 export class DesktopComponent {
   apps: App[] = [];
@@ -51,7 +52,8 @@ export class DesktopComponent {
     'Puzzle': PuzzleComponent,
     'Weather': WeatherComponent,
     'Recycle': RecycleComponent,
-    'Command Line': AdminComponent
+    'Command Line': AdminComponent,
+    'Stuff I Like': StuffILikeComponent
   };
 
   constructor(private appService: AppService) {}

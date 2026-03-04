@@ -30,6 +30,10 @@ export class ApiService {
     return this.http.get('https://api.nate-griffith.com/lists');
   }
 
+  getAlbumTiers(): Observable<any> {
+    return this.http.get('https://api.nate-griffith.com/album-tiers');
+  }
+
   signUp(email: string): Observable<any> {
     const body = JSON.stringify({email});
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

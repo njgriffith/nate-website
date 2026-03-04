@@ -1,0 +1,61 @@
+.window-body{
+    width: 1000px;
+}
+
+.tablist>li{
+    font-size: 1.2em;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+.list-select{
+    margin-bottom: 0.5em;
+    width: 20%;
+}
+
+.window{
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    width: fit-content;
+    justify-content: center;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.album-container{
+    margin: 1em;
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: 1.5em;
+    width: 150px;
+    max-height: 225px;
+}
+
+.album-container:hover{
+    overflow: visible;
+}
+
+.album-container > p{
+    line-height: 1em;
+}
+
+.cover-img{
+    width: 150px;
+}
+
+.cover-img:hover{
+    scale: 1.1;
+    transition-duration: 0.3s;
+}
+
+.filter{
+    font-size: 1.2em;
+    margin-left: 2em;
+}
+
+.has-review{
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}

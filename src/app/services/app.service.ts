@@ -13,7 +13,7 @@ export class AppService {
     new App('Album Reviews', false, false, 1),
     new App('Lists', false, false, 1),
     new App('Puzzle', false, false, 1),
-    new App('Media Player', true, false, 1),
+    new App('Media Player', false, false, 1),
     new App('Stats', false, false, 1),
     new App('Internet', false, false, 1),
     new App('Catalog', false, false, 1),
@@ -21,8 +21,9 @@ export class AppService {
     new App('Mailing List', false, false, 1),
     new App('Weather', false, false, 1),
     new App('Minesweeper', false, false, 1),
-    new App('Command Line', true, false, 1),
-    new App('Recycle', false, false, 1)
+    new App('Command Line', false, false, 1),
+    new App('Recycle', false, false, 1),
+    new App('Stuff I Like', true, false, 1)
   ];
   private apps = new BehaviorSubject<App[]>(this.appList);
   private backgroundCode = new Subject<string>();
