@@ -3,6 +3,7 @@
     left: 400px;
     top: 200px;
     --base-z-index: 1;
+    z-index: var(--base-z-index);
 }
 
 audio {

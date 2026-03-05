@@ -26,9 +26,11 @@ export class AppComponent {
       .subscribe(result => {
         if (result.matches) {
           this.mobile = true;
+          this.appService.setMobile(true);
         }
         else {
           this.mobile = false;
+          this.appService.setMobile(false);
         }
       });
 

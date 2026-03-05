@@ -1,6 +1,6 @@
 <div *ngIf="!sleep">
-    <app-desktop></app-desktop>
-    <app-taskbar></app-taskbar>
+    <app-desktop [mobile]="mobile"></app-desktop>
+    <app-taskbar *ngIf="!mobile"></app-taskbar>
 </div>
 
 <div *ngIf="sleep" (mousemove)="wakeUp()" (click)="wakeUp()">

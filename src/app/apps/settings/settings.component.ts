@@ -11,10 +11,15 @@ import { AppService } from '../../services/app.service';
 })
 export class SettingsComponent {
   backgrounds: string[] = ['cave', 'end_jungle', 'floating_island', 'metropolis', 'mushroom_kingdom', 'rainbow_road'];
+  selectedIconIndex: number | undefined = undefined;
 
   constructor(private appService: AppService){}
 
   updateBackground(background: string){
     this.appService.updateBackground(background);
+  }
+
+  highlightIcon(index: number){
+    this.selectedIconIndex = index;
   }
 }

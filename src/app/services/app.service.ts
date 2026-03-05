@@ -7,23 +7,46 @@ import { ApiService } from './api.service';
 @Injectable({ providedIn: 'root' })
 export class AppService {
 
+  private mobileSubject = new BehaviorSubject<boolean>(false);
+  mobile$ = this.mobileSubject.asObservable();
+
   constructor(private apiService: ApiService) { }
-  private appList: App[] = [
-    new App('Blog', false, false, 1),
-    new App('Stuff I Like', true, false, 1),
-    new App('Puzzle', false, false, 1),
-    new App('Media Player', true, false, 1),
-    new App('Stats', false, false, 1),
-    new App('Internet', false, false, 1),
-    new App('Catalog', false, false, 1),
-    new App('Settings', false, false, 1),
-    new App('Mailing List', false, false, 1),
-    new App('Weather', false, false, 1),
-    new App('Minesweeper', false, false, 1),
-    new App('Command Line', false, false, 1),
-    new App('Recycle', false, false, 1),
-  ];
+  private appList: App[] = this.createAppList(false);
   private apps = new BehaviorSubject<App[]>(this.appList);
+
+  private createAppList(mobile: boolean): App[] {
+    if (mobile){
+      return [
+      new App('Blog', false, false, 1, mobile),
+      new App('Stuff I Like', false, false, 1, mobile),
+      new App('Stats', false, false, 1, mobile),
+      new App('Catalog', false, false, 1, mobile),
+      new App('Settings', false, false, 1, mobile),
+      new App('Weather', false, false, 1, mobile)
+    ];
+    }
+    return [
+      new App('Blog', false, false, 1, mobile),
+      new App('Stuff I Like', true, false, 1, mobile),
+      new App('Puzzle', false, false, 1, mobile),
+      new App('Media Player',  true, false, 1, mobile),
+      new App('Stats', false, false, 1, mobile),
+      new App('Internet', false, false, 1, mobile),
+      new App('Catalog', false, false, 1, mobile),
+      new App('Settings', false, false, 1, mobile),
+      new App('Mailing List', false, false, 1, mobile),
+      new App('Weather', false, false, 1, mobile),
+      new App('Minesweeper', false, false, 1, mobile),
+      new App('Command Line', false, false, 1, mobile),
+      new App('Recycle', false, false, 1, mobile),
+    ];
+  }
+
+  setMobile(isMobile: boolean) {
+    this.mobileSubject.next(isMobile);
+    this.appList = this.createAppList(isMobile);
+    this.apps.next(this.appList);
+  }
   private backgroundCode = new Subject<string>();
   private puzzleTitle = new Subject<string>();
 

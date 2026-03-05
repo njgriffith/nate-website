@@ -1,6 +1,6 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { AppService } from '../services/app.service';
 import { StatsComponent } from '../apps/stats/stats.component';
 import { BlogsComponent } from '../apps/blogs/blogs.component';
@@ -27,6 +27,7 @@ import { StuffILikeComponent } from '../apps/stuff-i-like/stuff-i-like.component
 // TODO: recycle, migrate all blogs, migrate all lists
 
 export class DesktopComponent {
+  @Input() mobile: boolean = false;
   apps: App[] = [];
   openApps: App[] = [];
   backgroundImage: string = 'assets/backgrounds/metropolis.png';
