@@ -1,6 +1,6 @@
 import { CdkDrag, DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AppService } from '../../services/app.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private cdr: ChangeDetectorRef) { }
 
   private destroy$ = new Subject<void>();
   baseZIndex: number = 1;
@@ -57,6 +57,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       const mediaPlayerApp = apps.find(app => app.name === 'Media Player');
       if (mediaPlayerApp) {
         this.baseZIndex = mediaPlayerApp.zIndex;
+        this.cdr.detectChanges();
       }
     });
   }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'stuff-i-like',
@@ -11,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './stuff-i-like.component.css'
 })
 export class StuffILikeComponent {
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private appService: AppService) { }
 
   lists: string[] = ['Albums', 'Movies', 'Songs'];
   selectedList: string = this.lists[0];
@@ -31,6 +32,7 @@ export class StuffILikeComponent {
   filterText: string = '';
   singleReviewView: boolean = false;
   selectedReview: any = {};
+  mobile: boolean = false;
 
   ngOnInit() {
     this.apiService.getAlbumTiers().subscribe((data: any) => {
@@ -53,6 +55,9 @@ export class StuffILikeComponent {
           // console.log(entry.coverPath);
         }
       }
+    });
+    this.appService.mobile$.subscribe(isMobile => {
+      this.mobile = isMobile;
     });
   }
 

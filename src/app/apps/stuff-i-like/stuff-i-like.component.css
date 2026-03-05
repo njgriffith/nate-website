@@ -2,6 +2,16 @@
     width: 1000px;
 }
 
+.window-body-mobile{
+    width: 90vw;
+    height: 90vh;
+    overflow-y: scroll;
+}
+
+.tablist{
+    flex-wrap: wrap;
+}
+
 .tablist>li{
     font-size: 1.2em;
     padding: 0.5em 1em;
@@ -75,7 +85,7 @@
 .review{
     width: 100%;
     word-break: break-all;
-    height: 300px;
+    max-height: 300px;
     overflow-y: scroll;
 }
 

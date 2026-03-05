@@ -1,6 +1,7 @@
 <div class="background-container">
-    <div *ngFor="let background of backgrounds">
-        <div class="background-item" (dblclick)="updateBackground(background)">
+    <div *ngFor="let background of backgrounds; let i = index;">
+        <div class="background-item" (dblclick)="updateBackground(background)" (click)="highlightIcon(i)"
+        [ngClass]="{ 'highlighted': selectedIconIndex === i }">
             <img src="assets/msft/pictures-file.png">
             {{background}}
         </div>
