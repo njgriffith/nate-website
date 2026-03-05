@@ -2,8 +2,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AppService } from '../services/app.service';
-import { AlbumReviewsComponent } from '../apps/album-reviews/album-reviews.component';
-import { ListsComponent } from '../apps/lists/lists.component';
 import { StatsComponent } from '../apps/stats/stats.component';
 import { BlogsComponent } from '../apps/blogs/blogs.component';
 import { MediaPlayerComponent } from "../apps/media-player/media-player.component";
@@ -26,7 +24,7 @@ import { StuffILikeComponent } from '../apps/stuff-i-like/stuff-i-like.component
   templateUrl: './desktop.component.html',
   styleUrl: './desktop.component.css'
 })
-  // TODO: recycle, migrate all blogs, migrate all lists
+// TODO: recycle, migrate all blogs, migrate all lists
 
 export class DesktopComponent {
   apps: App[] = [];
@@ -41,8 +39,7 @@ export class DesktopComponent {
 
   appComponentMap: Record<string, any> = {
     'Blog': BlogsComponent,
-    'Album Reviews': AlbumReviewsComponent,
-    'Lists': ListsComponent,
+    'Stuff I Like': StuffILikeComponent,
     'Stats': StatsComponent,
     'Settings': SettingsComponent,
     'Internet': InternetComponent,
@@ -52,13 +49,12 @@ export class DesktopComponent {
     'Puzzle': PuzzleComponent,
     'Weather': WeatherComponent,
     'Recycle': RecycleComponent,
-    'Command Line': AdminComponent,
-    'Stuff I Like': StuffILikeComponent
+    'Command Line': AdminComponent
   };
 
-  constructor(private appService: AppService) {}
+  constructor(private appService: AppService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.appService.backgroundCode$.subscribe(code => this.updateBackground(code));
     this.appService.apps$.subscribe(apps => {
       this.apps = apps;
@@ -68,22 +64,22 @@ export class DesktopComponent {
     this.appService.puzzleTitle$.subscribe(title => this.puzzleTitle = title);
   }
 
-  openApp(code: string){
+  openApp(code: string) {
     this.appService.openApp(code);
   }
-  closeApp(code: string){
+  closeApp(code: string) {
     this.appService.closeApp(code);
   }
-  minApp(code: string){
+  minApp(code: string) {
     this.appService.minApp(code);
   }
-  updateBackground(background: string){
+  updateBackground(background: string) {
     this.backgroundImage = `assets/backgrounds/${background}.png`;
   }
   highlightApp(index: number) {
     this.selectedIconIndex = index;
   }
-  updateZIndex(code: App){
+  updateZIndex(code: App) {
     this.appService.updateZIndex(code.name);
   }
 
@@ -91,14 +87,14 @@ export class DesktopComponent {
     return app.name;
   }
 
-  boxDown(event: any){
+  boxDown(event: any) {
     this.isDraggingBox = true;
     const box = this.rightClickBoxRef.nativeElement;
     box.style.left = `${event.clientX}px`;
     box.style.top = `${event.clientY}px`;
   }
 
-  dragBox(event: any){
+  dragBox(event: any) {
     if (!this.isDraggingBox || !this.rightClickBoxRef.nativeElement) return;
     const box = this.rightClickBoxRef.nativeElement;
     box.style.width = '100px';

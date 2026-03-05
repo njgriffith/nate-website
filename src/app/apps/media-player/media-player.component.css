@@ -2,6 +2,7 @@
     position: absolute;
     left: 400px;
     top: 200px;
+    --base-z-index: 1;
 }
 
 audio {
@@ -10,7 +11,7 @@ audio {
 
 .head {
     position: absolute;
-    z-index: 3;
+    z-index: calc(var(--base-z-index) + 2);
 }
 
 .vid-bkgd {
@@ -19,19 +20,19 @@ audio {
     position: absolute;
     top: 60px;
     left: 10px;
-    z-index: 2;
+    z-index: calc(var(--base-z-index) + 1);
 }
 
 .vid-bkgd>img {
     width: 100%;
     height: 100%;
     position: absolute;
-    z-index: 1;
+    z-index: calc(var(--base-z-index) + 0);
 }
 
 .media-window-controller {
     display: flex;
-    z-index: 3;
+    z-index: calc(var(--base-z-index) + 2);
     position: absolute;
     top: 5px;
     left: 120px;
@@ -40,7 +41,7 @@ audio {
 
 .media-player-controller {
     display: flex;
-    z-index: 3;
+    z-index: calc(var(--base-z-index) + 2);
     position: absolute;
     top: 30px;
     left: 65px;
@@ -52,7 +53,7 @@ audio {
     left: 200px;
     top: 100px;
     transition-duration: 0.5s;
-    z-index: 1;
+    z-index: calc(var(--base-z-index) + 0);
 }
 
 .right-ear {
@@ -71,7 +72,7 @@ audio {
     left: -55px;
     top: 100px;
     transition-duration: 0.5s;
-    z-index: 1;
+    z-index: calc(var(--base-z-index) + 0);
 }
 
 .left-ear {

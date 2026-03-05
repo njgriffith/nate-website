@@ -24,30 +24,26 @@
             <div class="review-container">
                 <button (click)="singleReviewView = false">Back to all reviews</button>
                 <div class="review-header">
-                    <div>{{selectedReview.artist}} - {{selectedReview.title}}</div>
-                    <img [src]="selectedReview.coverPath" class="cover-img">
+                    <div class="review-title">{{selectedReview.artist}} - {{selectedReview.title}}</div>
+                    <img [src]="selectedReview.coverPath" class="review-img">
                 </div>
 
                 <div class="review">
-                    <pre>
-                        <div [innerHTML]="selectedReview.review"></div> 
-                        <div *ngIf="selectedReview.id !== 'TVUandN'">{{ selectedReview.score }}</div>
-                    </pre>
+                    <pre [innerHTML]="selectedReview.review"></pre>
                 </div>
             </div>
         </ng-container>
-
     </ng-container>
 
     <ng-container *ngIf="selectedList === 'Movies'">
         <div class="sunken-panel">
-            <h2>TODO</h2>
+            <h3>UNDER CONSTRUCTION</h3>
         </div>
     </ng-container>
 
     <ng-container *ngIf="selectedList === 'Songs'">
         <div class="sunken-panel">
-            <h2>TODO</h2>
+            <h3>UNDER CONSTRUCTION</h3>
         </div>
     </ng-container>
 </div>
