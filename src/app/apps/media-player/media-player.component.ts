@@ -1,7 +1,9 @@
 import { CdkDrag, DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { AppService } from '../../services/app.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-media-player',
@@ -10,10 +12,12 @@ import { AppService } from '../../services/app.service';
   templateUrl: './media-player.component.html',
   styleUrl: './media-player.component.css'
 })
-export class MediaPlayerComponent {
+export class MediaPlayerComponent implements OnInit, OnDestroy {
 
   constructor(private appService: AppService) { }
 
+  private destroy$ = new Subject<void>();
+  baseZIndex: number = 1;
   drawerDistance: number = 200;
 
   rightHovered = false;
@@ -46,9 +50,25 @@ export class MediaPlayerComponent {
   isDragging = false;
   timeShift = 0;
 
+  ngOnInit() {
+    this.appService.apps$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(apps => {
+      const mediaPlayerApp = apps.find(app => app.name === 'Media Player');
+      if (mediaPlayerApp) {
+        this.baseZIndex = mediaPlayerApp.zIndex;
+      }
+    });
+  }
+
   ngAfterViewInit() {
     this.player = this.playerRef.nativeElement;
     this.progressBar = this.progressBarRef.nativeElement;
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
   minApp() {
     this.appService.minApp('Media Player');
@@ -136,6 +156,7 @@ export class MediaPlayerComponent {
     this.isDragging = true;
   }
   updateZIndex(appCode: string){
+    console.log(this.baseZIndex);
     this.appService.updateZIndex(appCode);
   }
 
