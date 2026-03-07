@@ -13,10 +13,10 @@ import { AppService } from '../../services/app.service';
 })
 export class StuffILikeComponent {
   constructor(private apiService: ApiService, private appService: AppService) { }
-
   lists: string[] = ['Albums', 'Movies', 'Songs'];
-  selectedList: string = this.lists[0];
-  albumTiers: Record<string, any[]> = {
+  selectedList: string = this.lists[1];
+
+  albums: Record<string, any[]> = {
     "Royal Court": [],
     "The Best": [],
     "The Best-": [],
@@ -27,38 +27,141 @@ export class StuffILikeComponent {
     "Great": [],
     "Great-": []
   };
-  tierNames: string[] = Object.keys(this.albumTiers);
-  selectedTier: string = this.tierNames[0];
+  movies: Record<string, any[]> = {
+    "Royal Court": [],
+    "The Best": [],
+    "The Best-": [],
+    "Amazing+": [],
+    "Amazing": [],
+    "Amazing-": [],
+    "Great+": [],
+    "Great": [],
+    "Great-": []
+  };
+  songs: Record<string, any[]> = {
+    "Royal Court": [],
+    "The Best": [],
+    "The Best-": []
+  };
+
+  albumTiers: string[] = Object.keys(this.albums);
+  songTiers: string[] = Object.keys(this.songs);
+  movieTiers: string[] = Object.keys(this.movies);
+
+
+  selectedTier: string = this.albumTiers[1];
   filterText: string = '';
   singleReviewView: boolean = false;
   selectedReview: any = {};
   mobile: boolean = false;
 
   ngOnInit() {
+    this.appService.mobile$.subscribe(isMobile => {
+      this.mobile = isMobile;
+    });
     this.apiService.getAlbumTiers().subscribe((data: any) => {
       let loadedData = data['data'];
 
-      this.albumTiers['Royal Court'] = loadedData['the_best_plus'] || [];
-      this.albumTiers['The Best'] = loadedData['the_best'] || [];
-      this.albumTiers['The Best-'] = loadedData['the_best_minus'] || [];
-      this.albumTiers['Amazing+'] = loadedData['amazing_plus'] || [];
-      this.albumTiers['Amazing'] = loadedData['amazing'] || [];
-      this.albumTiers['Amazing-'] = loadedData['amazing_minus'] || [];
-      this.albumTiers['Great+'] = loadedData['great_plus'] || [];
-      this.albumTiers['Great'] = loadedData['great'] || [];
-      this.albumTiers['Great-'] = loadedData['great_minus'] || [];
+      this.albums['Royal Court'] = loadedData['the_best_plus'] || [];
+      this.albums['The Best'] = loadedData['the_best'] || [];
+      this.albums['The Best-'] = loadedData['the_best_minus'] || [];
+      this.albums['Amazing+'] = loadedData['amazing_plus'] || [];
+      this.albums['Amazing'] = loadedData['amazing'] || [];
+      this.albums['Amazing-'] = loadedData['amazing_minus'] || [];
+      this.albums['Great+'] = loadedData['great_plus'] || [];
+      this.albums['Great'] = loadedData['great'] || [];
+      this.albums['Great-'] = loadedData['great_minus'] || [];
 
-      for (let tier of this.tierNames){
-        for (let entry of this.albumTiers[tier]){
+      for (let tier of this.albumTiers){
+        for (let entry of this.albums[tier]){
           let cleanedPath = entry.artist.replaceAll(' ', '-') + '-' + entry.title.replaceAll(' ', '-');
           entry.coverPath = 'assets/album-covers/' + cleanedPath.replace(/[^a-zA-Z0-9-]/g, "") + '.jpg';
           // console.log(entry.coverPath);
         }
       }
     });
-    this.appService.mobile$.subscribe(isMobile => {
-      this.mobile = isMobile;
+
+    this.apiService.getMovieTiers().subscribe((data: any) => {
+      let loadedData = data['data'];
+
+      this.movies['Royal Court'] = loadedData['the_best_plus'] || [];
+      this.movies['The Best'] = loadedData['the_best'] || [];
+      this.movies['The Best-'] = loadedData['the_best_minus'] || [];
+      this.movies['Amazing+'] = loadedData['amazing_plus'] || [];
+      this.movies['Amazing'] = loadedData['amazing'] || [];
+      this.movies['Amazing-'] = loadedData['amazing_minus'] || [];
+      this.movies['Great+'] = loadedData['great_plus'] || [];
+      this.movies['Great'] = loadedData['great'] || [];
+      this.movies['Great-'] = loadedData['great_minus'] || [];
+
+      for (let tier of this.movieTiers){
+        for (let entry of this.movies[tier]){
+          let cleanedPath = entry.title.replaceAll(' ', '-');
+          if (cleanedPath[0] === '-') cleanedPath = cleanedPath.substring(1);
+          entry.posterPath = 'assets/movie-posters/' + cleanedPath.replace(/[^a-zA-Z0-9-]/g, "") + '.jpg';
+          console.log(entry.posterPath);
+        }
+      }
     });
+    this.songs['Royal Court'] = [
+      {
+        "title": "Long Season - Live",
+        "artist": "Fishmans"
+      },
+      {
+        "title": "I Love You Too, Death",
+        "artist": "MGMT"
+      },
+      {
+        "title": "Alvin Row",
+        "artist": "Animal Collective"
+      },
+      {
+        "title": "Bros",
+        "artist": "Panda Bear"
+      }
+    ];
+    this.songs['The Best'] = [
+      {
+        "title": "Long Season - Live",
+        "artist": "Fishmans"
+      },
+      {
+        "title": "I Love You Too, Death",
+        "artist": "MGMT"
+      },
+      {
+        "title": "Alvin Row",
+        "artist": "Animal Collective"
+      },
+      {
+        "title": "Bros",
+        "artist": "Panda Bear"
+      }
+    ];
+    this.songs['The Best-'] = [
+      {
+        "title": "Long Season - Live",
+        "artist": "Fishmans"
+      },
+      {
+        "title": "I Love You Too, Death",
+        "artist": "MGMT"
+      },
+      {
+        "title": "Alvin Row",
+        "artist": "Animal Collective"
+      },
+      {
+        "title": "Bros",
+        "artist": "Panda Bear"
+      }
+    ];
+    
+  }
+
+  updateSelectedList(){
+    this.selectedTier = this.selectedList === 'Albums' ? this.albumTiers[0] : this.selectedList === 'Movies' ? this.movieTiers[0] : this.songTiers[0];
   }
 
   toReview(album: any){

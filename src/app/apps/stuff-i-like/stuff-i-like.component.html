@@ -1,17 +1,18 @@
 <div [ngClass]="mobile ? 'window-body-mobile' : 'window-body'">
-    <select [(ngModel)]="selectedList" class="list-select">
+    <select [(ngModel)]="selectedList" class="list-select" (ngModelChange)="updateSelectedList()">
         <option *ngFor="let list of lists">{{list}}</option>
     </select>
     <input placeholder="filter search..." class="filter" [(ngModel)]="filterText">
     <ng-container *ngIf="selectedList === 'Albums'">
         <ng-container *ngIf="!singleReviewView">
             <menu role="tablist" class="tablist">
-                <li *ngFor="let tierName of tierNames" role="tab" [attr.aria-selected]="selectedTier === tierName"
+                <li *ngFor="let tierName of albumTiers" role="tab" [attr.aria-selected]="selectedTier === tierName"
                     (click)="selectedTier = tierName">{{tierName}}</li>
             </menu>
             <div class="window" role="tabpanel">
-                <ng-container *ngFor="let album of albumTiers[selectedTier]" class="album-container">
-                    <div *ngIf="isAlbumInFilter(album)" class="album-container" (click)="toReview(album)" [class.has-review]="album.reviewKey">
+                <ng-container *ngFor="let album of albums[selectedTier]" class="album-container">
+                    <div *ngIf="isAlbumInFilter(album)" class="album-container" (click)="toReview(album)"
+                        [class.has-review]="album.reviewKey">
                         <img [src]="album.coverPath" class="cover-img">
                         <p class="album-title">{{ album.title }}</p>
                         <p class="album-artist">{{ album.artist }}</p>
@@ -36,14 +37,35 @@
     </ng-container>
 
     <ng-container *ngIf="selectedList === 'Movies'">
-        <div class="sunken-panel">
-            <h3>UNDER CONSTRUCTION</h3>
+        <menu role="tablist" class="tablist">
+            <li *ngFor="let tierName of movieTiers" role="tab" [attr.aria-selected]="selectedTier === tierName"
+                (click)="selectedTier = tierName">{{tierName}}</li>
+        </menu>
+        <div class="window" role="tabpanel">
+            <ng-container *ngFor="let movie of movies[selectedTier]" class="album-container">
+                <div class="album-container">
+                    <img [src]="movie.posterPath" class="cover-img">
+                    <p class="album-title">{{ movie.title }}</p>
+                </div>
+            </ng-container>
         </div>
     </ng-container>
 
     <ng-container *ngIf="selectedList === 'Songs'">
         <div class="sunken-panel">
-            <h3>UNDER CONSTRUCTION</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Artist</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let song of songs[selectedTier]">
+
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </ng-container>
 </div>
