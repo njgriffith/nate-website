@@ -22,14 +22,16 @@ export class AppService {
       new App('Stats', false, false, 1, mobile),
       new App('Catalog', false, false, 1, mobile),
       new App('Settings', false, false, 1, mobile),
-      new App('Weather', false, false, 1, mobile)
+      new App('Weather', false, false, 1, mobile),
+      new App('Settings', false, false, 1, mobile),
+      new App('Mailing List', false, false, 1, mobile)
     ];
     }
     return [
       new App('Blog', false, false, 1, mobile),
       new App('Stuff I Like', true, false, 1, mobile),
       new App('Puzzle', false, false, 1, mobile),
-      new App('Media Player',  true, false, 1, mobile),
+      new App('Media Player',  false, false, 1, mobile),
       new App('Stats', false, false, 1, mobile),
       new App('Internet', false, false, 1, mobile),
       new App('Catalog', false, false, 1, mobile),
