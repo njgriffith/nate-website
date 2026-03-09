@@ -2,7 +2,7 @@
     <audio #player (timeupdate)="updateProgressBar($event)" (ended)="handleMediaEvent('next')"></audio>
     <img class="head" src="assets/head/head.bmp">
     <div class="vid-bkgd">
-        <img src="assets/head/vid_bkgd.bmp">
+        <img [src]="isSongPlaying ? 'assets/music/vis.gif' : 'assets/head/vid_bkgd.bmp'">
     </div>
     <div class="media-window-controller">
         <img src="assets/head/player_min.bmp" (click)="minApp()">
@@ -36,6 +36,7 @@
                         (click)="handleMediaEvent('play')" [class.row-highlight]="i===currentSongIndex">
                         <td>{{song[0]}}</td>
                         <td>{{song[1]}}</td>
+                        <td>{{song[2]}}</td>
                     </tr>
                 </tbody>
             </table>

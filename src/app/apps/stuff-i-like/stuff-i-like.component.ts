@@ -14,7 +14,7 @@ import { AppService } from '../../services/app.service';
 export class StuffILikeComponent {
   constructor(private apiService: ApiService, private appService: AppService) { }
   lists: string[] = ['Albums', 'Movies', 'Songs'];
-  selectedList: string = this.lists[1];
+  selectedList: string = this.lists[0];
 
   albums: Record<string, any[]> = {
     "Royal Court": [],
@@ -49,7 +49,7 @@ export class StuffILikeComponent {
   movieTiers: string[] = Object.keys(this.movies);
 
 
-  selectedTier: string = this.albumTiers[1];
+  selectedTier: string = this.albumTiers[0];
   filterText: string = '';
   singleReviewView: boolean = false;
   selectedReview: any = {};

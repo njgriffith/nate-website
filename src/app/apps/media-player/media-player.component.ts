@@ -24,22 +24,27 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   rightOpened = true;
   leftHovered = false;
   leftOpened = true;
-  rightOffset: string = '400px';
-  leftOffset: string = '-255px';
+  rightOffset: string = '200px';
+  leftOffset: string = '-55px';
 
-  songs: any = [
-    ['Cult Member', 'one'],
-    ['boy2000', 'savestate'],
-    ['Cult Member', 'ov_dreams'],
-    ['Zorrovian', 'event_horizon'],
-    ['boy2000', 'zero'],
-    ['Zorrovian', 'bios'],
-    ['Cult Member', 'untitled']
+  songs: [string, string, string][] = [
+    ['Cult Member', 'one', '6:38'],
+    ['boy2000', 'savestate', '2:34'],
+    ['Cult Member', 'ov_dreams', '5:09'],
+    ['Zorrovian', 'event_horizon', '2:13'],
+    ['boy2000', 'zero', '2:10'],
+    ['Zorrovian', 'bios', '5:12'],
+    ['mishoangelo', '4am', '3:47'],
+    ['Eulogy', 'logic', '3:42'],
+    ['Bakground', 'gotham_love', '4:34'],
+    ['Cult Member', 'untitled_side_a', '4:59'],
+    ['Cult Member', 'untitled_side_b', '7:18']
   ];
 
   currentSongIndex = 0;
   currentArtist = '';
   currentSong = '';
+  isSongPlaying = false;
 
   @ViewChild('progressBar') progressBarRef!: ElementRef;
   @ViewChild('progressThumb', { read: CdkDrag }) progressThumb!: CdkDrag;
@@ -60,6 +65,10 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
         this.cdr.detectChanges();
       }
     });
+    setTimeout(() => {
+      this.toggleEar('l');
+      this.toggleEar('r');
+    }, 500);
   }
 
   ngAfterViewInit() {
@@ -88,9 +97,11 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       this.player.play();
       this.currentArtist = this.songs[this.currentSongIndex][0];
       this.currentSong = this.songs[this.currentSongIndex][1];
+      this.isSongPlaying = true;
     }
     else if (event === 'pause') {
       this.player.pause();
+      this.isSongPlaying = false;
     }
     else if (event === 'next') {
       this.currentSongIndex++;
