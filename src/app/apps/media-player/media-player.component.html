@@ -2,7 +2,10 @@
     <audio #player (timeupdate)="updateProgressBar($event)" (ended)="handleMediaEvent('next')"></audio>
     <img class="head" src="assets/head/head.bmp">
     <div class="vid-bkgd">
-        <img [src]="isSongPlaying ? 'assets/music/vis.gif' : 'assets/head/vid_bkgd.bmp'">
+        <video *ngIf="isSongPlaying" autoplay loop [muted]="true" style="width: 100%; height: 100%; object-fit: cover;">
+            <source src="assets/music/ms_vis.mp4" type="video/mp4">
+        </video>
+        <img *ngIf="!isSongPlaying" src="assets/head/vid_bkgd.bmp" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     <div class="media-window-controller">
         <img src="assets/head/player_min.bmp" (click)="minApp()">
