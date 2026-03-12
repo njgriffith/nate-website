@@ -168,7 +168,6 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     this.isDragging = true;
   }
   updateZIndex(appCode: string){
-    console.log(this.baseZIndex);
     this.appService.updateZIndex(appCode);
   }
 

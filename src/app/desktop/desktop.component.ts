@@ -37,6 +37,9 @@ export class DesktopComponent {
   puzzleTitle: string = 'Solve My Puzzle!';
 
   @ViewChild('rightClickBox') rightClickBoxRef!: ElementRef;
+  box: HTMLElement | undefined = undefined;
+  rightClickStartX: number = 0;
+  rightClickStartY: number = 0
 
   appComponentMap: Record<string, any> = {
     'Blog': BlogsComponent,
@@ -65,6 +68,10 @@ export class DesktopComponent {
     this.appService.puzzleTitle$.subscribe(title => this.puzzleTitle = title);
   }
 
+  ngAfterViewInit() {
+    this.box = this.rightClickBoxRef.nativeElement;
+  }
+
   openApp(code: string) {
     this.appService.openApp(code);
   }
@@ -89,17 +96,39 @@ export class DesktopComponent {
   }
 
   boxDown(event: any) {
+    event.preventDefault();
+    if (event.target.classList[0] !== 'desktop-icons' || !this.box) return;
+    this.box.style.display = 'block';
     this.isDraggingBox = true;
-    const box = this.rightClickBoxRef.nativeElement;
-    box.style.left = `${event.clientX}px`;
-    box.style.top = `${event.clientY}px`;
+    this.box.style.left = `${event.clientX}px`;
+    this.box.style.top = `${event.clientY}px`;
+
+    this.rightClickStartX = event.clientX;
+    this.rightClickStartY = event.clientY;
+    this.box.style.left = `${event.clientX}px`;
+    this.box.style.top = `${event.clientY}px`;
+  }
+
+  boxUp() {
+    this.isDraggingBox = false;
+    if (!this.box) return;
+    this.box.style.width = '0px';
+    this.box.style.height = '0px';
+    this.box.style.display = 'none';
   }
 
   dragBox(event: any) {
-    if (!this.isDraggingBox || !this.rightClickBoxRef.nativeElement) return;
-    const box = this.rightClickBoxRef.nativeElement;
-    box.style.width = '100px';
-    box.style.height = '100px';
+    if (!this.isDraggingBox || !this.rightClickBoxRef.nativeElement || !this.box) return;
+
+    let currentX = event.clientX;
+    let currentY = event.clientY;
+    let width = Math.abs(event.clientX - this.rightClickStartX);
+    let height = Math.abs(event.clientY - this.rightClickStartY);
+
+    this.box.style.width = `${width}px`;
+    this.box.style.height = `${height}px`;
+    this.box.style.left = currentX < this.rightClickStartX ? `${currentX}px` : `${this.rightClickStartX}px`;
+    this.box.style.top = currentY < this.rightClickStartY ? `${currentY}px` : `${this.rightClickStartY}px`;
   }
 
   setPuzzleTitle(title: string) {
