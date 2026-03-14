@@ -1,0 +1,28 @@
+table, tr{
+    width: 100%;
+    font-size: 1.2em;
+}
+
+tr td{
+  padding: 10px; /* Adds 10px of padding on all sides inside each cell */
+}
+
+tbody>tr{
+    cursor: pointer;
+}
+
+tbody>tr:hover{
+    color: white;
+    background-color: blue;
+}
+
+.version-title{
+    margin: 1em 0 0 0;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.version-description{
+    margin: 1em 0;
+    font-size: 1.5em;
+}

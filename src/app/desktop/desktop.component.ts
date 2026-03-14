@@ -16,7 +16,7 @@ import { WeatherComponent } from '../apps/weather/weather.component';
 import { RecycleComponent } from '../apps/recycle/recycle.component';
 import { AdminComponent } from '../apps/admin/admin.component';
 import { StuffILikeComponent } from '../apps/stuff-i-like/stuff-i-like.component';
-
+import { ArchiveComponent } from '../apps/archive/archive.component';
 @Component({
   selector: 'app-desktop',
   standalone: true,
@@ -42,7 +42,7 @@ export class DesktopComponent {
   rightClickStartY: number = 0
 
   appComponentMap: Record<string, any> = {
-    'Blog': BlogsComponent,
+    'Archive': ArchiveComponent,
     'Stuff I Like': StuffILikeComponent,
     'Stats': StatsComponent,
     'Settings': SettingsComponent,

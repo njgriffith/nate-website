@@ -16,7 +16,7 @@ export class App{
             this.top = 0;
         } else {
             this.left = Math.floor(200 + (Math.random() * 600));
-            this.top = Math.floor((Math.random() * 500));
+            this.top = Math.floor((Math.random() * 300));
         }
     }
 }

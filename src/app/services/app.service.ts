@@ -17,7 +17,7 @@ export class AppService {
   private createAppList(mobile: boolean): App[] {
     if (mobile){
       return [
-      new App('Blog', false, false, 1, mobile),
+      new App('Archive', false, false, 1, mobile),
       new App('Media Player',  true, false, 1, mobile),
       new App('Stuff I Like', false, false, 1, mobile),
       new App('Stats', false, false, 1, mobile),
@@ -29,7 +29,7 @@ export class AppService {
     ];
     }
     return [
-      new App('Blog', false, false, 1, mobile),
+      new App('Archive', false, false, 1, mobile),
       new App('Stuff I Like', true, false, 1, mobile),
       new App('Puzzle', false, false, 1, mobile),
       new App('Media Player',  true, false, 1, mobile),

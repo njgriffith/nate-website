@@ -1,0 +1,85 @@
+html{
+    background: #111;
+    color: #ddd;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    padding: 2em;
+    width:900px;
+    height: 500px;
+    box-sizing: border-box;
+}
+.grid-title{
+    font-size: 3em;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    color: #ddd;
+}
+.grid-left{
+    border: 1px solid white;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.grid-top{
+    border: 1px solid white;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.grid-bottom{
+    border: 1px solid white;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    margin: 1em;
+}
+.grid-item img:hover{
+    opacity: 20%;
+    transition-duration: 0.8s;
+    cursor: pointer;
+    color: white;
+}
+.grid-item img {
+    flex-shrink: 0;
+    min-width: 10%;
+    min-height: 10%;
+}
+.image-overlay {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: white;
+    font-size: 5em; 
+    text-align: center;
+    font-weight: 400;
+}
+.image-overlay-readable {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: white;
+    font-size: 5em; 
+    text-align: center;
+    font-weight: 400;
+    background-color: black;
+}
