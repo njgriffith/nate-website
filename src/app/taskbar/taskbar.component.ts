@@ -35,8 +35,8 @@ export class TaskbarComponent {
   openApp(code: string) {
     this.appService.openApp(code);
   }
-  maxApp(code: string) {
-    this.appService.maxApp(code);
+  toggleApp(code: string) {
+    this.appService.toggleApp(code);
   }
 
   toggleStartMenu() {

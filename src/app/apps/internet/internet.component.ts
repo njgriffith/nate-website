@@ -12,6 +12,6 @@ import { EbayComponent } from "./ebay/ebay.component";
   styleUrl: './internet.component.css'
 })
 export class InternetComponent {
-  websites: string[] = ['', 'https://www.notavirus.com', 'https://www.ebay.com'];
-  selectedWebsite: string = '';
+  websites: string[] = ['http://www.notavirus.com', 'http://www.ebay.com'];
+  selectedWebsite: string | undefined = undefined;
 }

@@ -17,7 +17,6 @@ export class AppService {
   private createAppList(mobile: boolean): App[] {
     if (mobile){
       return [
-      new App('Archive', false, false, 1, mobile),
       new App('Media Player',  true, false, 1, mobile),
       new App('Stuff I Like', false, false, 1, mobile),
       new App('Stats', false, false, 1, mobile),
@@ -62,6 +61,9 @@ export class AppService {
   user$ = this.userSubject.asObservable();
   private puzzleLevelSubject = new BehaviorSubject<number>(0);
   puzzleLevel$ = this.puzzleLevelSubject.asObservable();
+  recycledAppsSubject = new BehaviorSubject<string[]>([]);
+  recycledApps$ = this.recycledAppsSubject.asObservable();
+
 
   userStats: Record<string, any> = {
     'puzzleLevel': null,
@@ -108,6 +110,18 @@ export class AppService {
     );
     this.apps.next(updatedApps);
     this.updateZIndex(code);
+  }
+
+  toggleApp(code: string) {
+    const currentApps = this.apps.value;
+    const targetApp = currentApps.find(app => app.name === code);
+    if (!targetApp) return;
+    if (targetApp.isMinimized) {
+      this.maxApp(code);
+    }
+    else {
+      this.minApp(code);
+    }
   }
 
   minApp(code: string) {
@@ -168,5 +182,12 @@ export class AppService {
       appNames.push(app.name);
     });
     return appNames;
+  }
+
+  recycleApps(appNames: string[]) {
+    const updatedApps = this.apps.value.map(app =>
+      appNames.includes(app.name) ? { ...app, isOpen: false } : app
+    );
+    this.apps.next(updatedApps);
   }
 }

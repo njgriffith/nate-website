@@ -1,4 +1,5 @@
-<div class="desktop" [style.backgroundImage]="'url(' + backgroundImage + ')'" (mousedown)="boxDown($event)" (mousemove)="dragBox($event)" (mouseup)="boxUp()" (contextmenu)="boxDown($event)">
+<div class="desktop" [style.backgroundImage]="'url(' + backgroundImage + ')'" (mousedown)="boxDown($event)"
+  (mousemove)="dragBox($event)" (mouseup)="boxUp()" (contextmenu)="boxDown($event)" (keypress)="handleKeyPress($event)">
   <div class="desktop-icons">
     <div *ngFor="let app of apps; let i = index">
       <div class="icon" (dblclick)="openApp(app.name)" (click)="highlightApp(i)"

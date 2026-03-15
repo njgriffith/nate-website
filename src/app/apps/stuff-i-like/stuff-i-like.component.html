@@ -11,7 +11,7 @@
             </menu>
             <div class="window" role="tabpanel">
                 <ng-container *ngFor="let album of albums[selectedTier]" class="album-container">
-                    <div *ngIf="isAlbumInFilter(album)" class="album-container" (click)="toReview(album)"
+                    <div *ngIf="isItemInFilter(album)" class="album-container" (click)="toReview(album)"
                         [class.has-review]="album.reviewKey">
                         <img [src]="album.coverPath" class="cover-img">
                         <p class="album-title">{{ album.title }}</p>
@@ -43,7 +43,7 @@
         </menu>
         <div class="window" role="tabpanel">
             <ng-container *ngFor="let movie of movies[selectedTier]" class="album-container">
-                <div class="album-container">
+                <div class="album-container" *ngIf="isItemInFilter(movie)" >
                     <img [src]="movie.posterPath" class="cover-img">
                     <p class="album-title">{{ movie.title }}</p>
                 </div>
@@ -51,21 +51,18 @@
         </div>
     </ng-container>
 
-    <ng-container *ngIf="selectedList === 'Songs'">
-        <div class="sunken-panel">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Artist</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let song of songs[selectedTier]">
-
-                    </tr>
-                </tbody>
-            </table>
+    <ng-container *ngIf="selectedList === 'Stuff On This Site'">
+        <menu role="tablist" class="tablist">
+            <li *ngFor="let tierName of stuffOnThisSiteTiers" role="tab" [attr.aria-selected]="selectedTier === tierName"
+                (click)="selectedTier = tierName">{{tierName}}</li>
+        </menu>
+        <div class="window" role="tabpanel">
+            <ng-container *ngFor="let item of stuffOnThisSite[selectedTier]" class="album-container">
+                <div class="album-container" style="cursor: pointer;" (click)="openApp(item)" *ngIf="isItemInFilter(item)" >
+                    <img [src]="'/assets/icons/' + item + '.gif'" class="cover-img">
+                    <p class="album-title">{{ item }}</p>
+                </div>
+            </ng-container>
         </div>
     </ng-container>
 </div>

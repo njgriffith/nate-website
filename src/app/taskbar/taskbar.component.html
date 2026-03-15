@@ -4,7 +4,7 @@
         Start
     </button>
     <div class="taskbar-apps">
-        <div *ngFor="let app of taskbarApps" class="taskbar-app" (click)="maxApp(app.name)">
+        <div *ngFor="let app of taskbarApps" class="taskbar-app" (click)="toggleApp(app.name)">
             <button class="taskbar-button">
                 <img class="taskbar-img" [src]="'/assets/msft/' + app.name.toLowerCase() + '.png'">
                 <div>{{app.name}}</div>
@@ -19,11 +19,11 @@
 <div id="start-menu" class="start-menu" [class.hidden]="startMenuHidden" (mouseleave)="toggleStartMenu()">
     <div class="start-menu-banner"><strong style="color: #aaa;">&nbsp;Griffith</strong> 95</div>
     <ul>
-        <a class="start-link" (click)="openApp('Blog')">
-            <li><img src="assets/msft/blog.png"><u>B</u>log</li>
+        <a class="start-link" (click)="openApp('Archive')">
+            <li><img src="assets/msft/blog.png"><u>A</u>rchive</li>
         </a>
-        <a class="start-link" (click)="openApp('Album Reviews')">
-            <li><img src="assets/msft/album reviews.png"><u>A</u>lbum Reviews</li>
+        <a class="start-link" (click)="openApp('Stuff I Like')">
+            <li><img src="assets/msft/album reviews.png"><u>S</u>tuff I Like</li>
         </a>
         <a class="start-link" class="start-link" (click)="openApp('Puzzle')">
             <li><img src="assets/msft/puzzle.png"><u>P</u>uzzle</li>

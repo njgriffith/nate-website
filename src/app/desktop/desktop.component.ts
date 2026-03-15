@@ -35,6 +35,7 @@ export class DesktopComponent {
   mediaPlayer: App | undefined;
   isDraggingBox: boolean = false;
   puzzleTitle: string = 'Solve My Puzzle!';
+  appsToRecycle: string[] = [];
 
   @ViewChild('rightClickBox') rightClickBoxRef!: ElementRef;
   box: HTMLElement | undefined = undefined;
@@ -82,10 +83,15 @@ export class DesktopComponent {
     this.appService.minApp(code);
   }
   updateBackground(background: string) {
+    if (background === 'virus') {
+      this.backgroundImage = `assets/backgrounds/${background}.gif`;
+      return;
+    }
     this.backgroundImage = `assets/backgrounds/${background}.png`;
   }
   highlightApp(index: number) {
     this.selectedIconIndex = index;
+    if (this.mobile) this.openApp(this.apps[index].name);
   }
   updateZIndex(code: App) {
     this.appService.updateZIndex(code.name);
@@ -95,8 +101,23 @@ export class DesktopComponent {
     return app.name;
   }
 
+  handleKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Delete') {
+      document.querySelectorAll('.highlighted-icon').forEach((icon: any) => {
+        icon.classList.remove('highlighted-icon');
+        icon.style.display = 'none';
+      });
+    }
+    this.appService.recycleApps(this.appsToRecycle);
+    this.appsToRecycle = [];
+  }
+
+
   boxDown(event: any) {
-    event.preventDefault();
+    if (event.button === 2) event.preventDefault();
+    document.querySelectorAll('.highlighted-icon').forEach((icon: any) => {
+      icon.classList.remove('highlighted-icon');
+    });
     if (event.target.classList[0] !== 'desktop-icons' || !this.box) return;
     this.box.style.display = 'block';
     this.isDraggingBox = true;
@@ -129,6 +150,19 @@ export class DesktopComponent {
     this.box.style.height = `${height}px`;
     this.box.style.left = currentX < this.rightClickStartX ? `${currentX}px` : `${this.rightClickStartX}px`;
     this.box.style.top = currentY < this.rightClickStartY ? `${currentY}px` : `${this.rightClickStartY}px`;
+
+    document.querySelectorAll('.icon').forEach((icon: any) => {
+      var iconLeft = icon.getBoundingClientRect().left + 40;
+      var iconTop = icon.getBoundingClientRect().top + 40;
+      if ((Math.min(currentX, this.rightClickStartX) <= iconLeft && iconLeft <= Math.max(currentX, this.rightClickStartX)) && (Math.min(currentY, this.rightClickStartY) <= iconTop && iconTop <= Math.max(currentY, this.rightClickStartY))) {
+        icon.classList.add('highlighted-icon');
+        this.appsToRecycle.push(icon.querySelector('p')!.innerText);
+      }
+      else {
+        icon.classList.remove('highlighted-icon');
+        this.appsToRecycle = this.appsToRecycle.filter(app => app !== icon.querySelector('p')!.innerText);
+      }
+    });
   }
 
   setPuzzleTitle(title: string) {

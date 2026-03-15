@@ -45,6 +45,10 @@
     outline: 1px dotted blue;
 }
 
+.highlighted-icon{
+  background: rgba(0, 40, 255, 0.4);
+}
+
 img {
     -webkit-user-drag: none;
     user-select: none;

@@ -50,7 +50,7 @@ export class PuzzleComponent {
     0: 'Solve My Puzzle!',
     1: 'Level 1',
     2: 'Royal Flush! (Level 2)',
-    3: 'MIKE! (Level 3)',
+    3: 'Curie! (Level 3)',
     4: 'Babel, I would like a book please (Level 4)',
     5: 'Ave Caesar! (Level 5)',
     6: 'R G B (Level 6)',

@@ -29,7 +29,8 @@
     flex-wrap: wrap;
     width: fit-content;
     justify-content: center;
-    height: 500px;
+    height: fit-content;
+    max-height: 500px;
     overflow-y: scroll;
 }
 

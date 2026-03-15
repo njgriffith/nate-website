@@ -80,4 +80,12 @@ export class EbayComponent {
       }
     }
   }
+
+  promptBid(promptText: string) {
+    // todo: make this a custom prompt box that looks nicer than the default
+  }
+
+  showAlert(alertText: string) {
+    // todo: make this a custom alert box that looks nicer than the default
+  }
 }

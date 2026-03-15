@@ -13,7 +13,7 @@ import { AppService } from '../../services/app.service';
 })
 export class StuffILikeComponent {
   constructor(private apiService: ApiService, private appService: AppService) { }
-  lists: string[] = ['Albums', 'Movies', 'Songs'];
+  lists: string[] = ['Albums', 'Movies', 'Stuff On This Site'];
   selectedList: string = this.lists[0];
 
   albums: Record<string, any[]> = {
@@ -44,9 +44,19 @@ export class StuffILikeComponent {
     "The Best-": []
   };
 
+  stuffOnThisSite: Record<string, any[]> = {
+    "Coolest Shit Ever I Ever Made": ['Media Player'],
+    "Labor of Love": ['Puzzle'],
+    "Really Cool": ['Archive', 'Catalog', 'Stuff I Like', 'Minesweeper'],
+    "Interesting": ['Weather', 'Stats'],
+    "Decent": ['Command Line', 'Settings', 'Internet'],
+    "Uninteresting or Broken": ['Mailing List', 'Recycle']
+  };
+
   albumTiers: string[] = Object.keys(this.albums);
   songTiers: string[] = Object.keys(this.songs);
   movieTiers: string[] = Object.keys(this.movies);
+  stuffOnThisSiteTiers: string[] = Object.keys(this.stuffOnThisSite);
 
 
   selectedTier: string = this.albumTiers[0];
@@ -99,69 +109,14 @@ export class StuffILikeComponent {
           let cleanedPath = entry.title.replaceAll(' ', '-');
           if (cleanedPath[0] === '-') cleanedPath = cleanedPath.substring(1);
           entry.posterPath = 'assets/movie-posters/' + cleanedPath.replace(/[^a-zA-Z0-9-]/g, "") + '.jpg';
-          console.log(entry.posterPath);
+          // console.log(entry.posterPath);
         }
       }
     });
-    this.songs['Royal Court'] = [
-      {
-        "title": "Long Season - Live",
-        "artist": "Fishmans"
-      },
-      {
-        "title": "I Love You Too, Death",
-        "artist": "MGMT"
-      },
-      {
-        "title": "Alvin Row",
-        "artist": "Animal Collective"
-      },
-      {
-        "title": "Bros",
-        "artist": "Panda Bear"
-      }
-    ];
-    this.songs['The Best'] = [
-      {
-        "title": "Long Season - Live",
-        "artist": "Fishmans"
-      },
-      {
-        "title": "I Love You Too, Death",
-        "artist": "MGMT"
-      },
-      {
-        "title": "Alvin Row",
-        "artist": "Animal Collective"
-      },
-      {
-        "title": "Bros",
-        "artist": "Panda Bear"
-      }
-    ];
-    this.songs['The Best-'] = [
-      {
-        "title": "Long Season - Live",
-        "artist": "Fishmans"
-      },
-      {
-        "title": "I Love You Too, Death",
-        "artist": "MGMT"
-      },
-      {
-        "title": "Alvin Row",
-        "artist": "Animal Collective"
-      },
-      {
-        "title": "Bros",
-        "artist": "Panda Bear"
-      }
-    ];
-    
   }
 
   updateSelectedList(){
-    this.selectedTier = this.selectedList === 'Albums' ? this.albumTiers[0] : this.selectedList === 'Movies' ? this.movieTiers[0] : this.songTiers[0];
+    this.selectedTier = this.selectedList === 'Albums' ? this.albumTiers[0] : this.selectedList === 'Movies' ? this.movieTiers[0] : this.stuffOnThisSiteTiers[0];
   }
 
   toReview(album: any){
@@ -177,9 +132,16 @@ export class StuffILikeComponent {
     });
   }
 
-  isAlbumInFilter(album: any): boolean {
+  isItemInFilter(item: any): boolean {
     const filter = this.filterText.toLowerCase().trim();
     if (filter === '') return true;
-    return album.title.toLowerCase().includes(filter) || album.artist.toLowerCase().includes(filter);
+    if (this.selectedList === 'Albums') return item.title.toLowerCase().includes(filter) || item.artist.toLowerCase().includes(filter);
+    else if (this.selectedList === 'Movies') return item.title.toLowerCase().includes(filter);
+    else if (this.selectedList === 'Stuff On This Site') return item.toLowerCase().includes(filter);
+    return false;
+  }
+
+  openApp(name: string) {
+    this.appService.openApp(name);
   }
 }

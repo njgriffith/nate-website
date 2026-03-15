@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from '../../../services/app.service';
 
 @Component({
   selector: 'app-not-a-virus',
@@ -8,7 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './not-a-virus.component.css'
 })
 export class NotAVirusComponent {
+  constructor(private appService: AppService) { }
   downloadVirus(){
-    document.body.style.backgroundImage = "url('/resources/media/virus.gif')";
+    this.appService.updateBackground('virus');
+  }
+  ngOnDestroy() {
+    this.appService.updateBackground('metropolis');
   }
 }

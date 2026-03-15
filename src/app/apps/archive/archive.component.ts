@@ -20,7 +20,7 @@ export class ArchiveComponent {
     'y2k': {
       component: V4Component,
       name: 'Y2K Desktop',
-      description: 'This is where I started cooking<br>From here I spent tons of time on the internet looking for cool images/gifs and thinking of ideas for more apps.<br>Also I had about 90% of the current functionality in plain html/css before rewriting in Angular'
+      description: 'This is where I started cooking<br>Despite how it looks, this is at most 5% of the current version'
     },
     'rain': {
       component: V3Component,
@@ -30,7 +30,7 @@ export class ArchiveComponent {
     'grid': {
       component: V2Component,
       name: 'Grid Layout',
-      description: 'Second Version, can you tell I just googled "grid layout css"?<br>MJ gif is peak I need to bring that back'
+      description: 'Second Version, googled "grid layout css"<br>MJ gif is peak I need to bring that back'
     },
     'v1': {
       component: V1Component,
