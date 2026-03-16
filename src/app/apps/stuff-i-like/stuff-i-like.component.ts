@@ -45,11 +45,9 @@ export class StuffILikeComponent {
   };
 
   stuffOnThisSite: Record<string, any[]> = {
-    "Coolest Shit Ever I Ever Made": ['Media Player'],
-    "Labor of Love": ['Puzzle'],
-    "Really Cool": ['Archive', 'Catalog', 'Stuff I Like', 'Minesweeper'],
-    "Interesting": ['Internet', 'Weather', 'Stats'],
-    "Decent": ['Command Line', 'Settings'],
+    "Labor of Love": ['Media Player', 'Puzzle'],
+    "Really Cool": ['Catalog', 'Archive', 'Stuff I Like', 'Internet', 'Minesweeper'],
+    "Decent": ['Weather', 'Stats', 'Command Line', 'Settings'],
     "Uninteresting or Broken": ['Mailing List', 'Recycle']
   };
 

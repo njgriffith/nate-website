@@ -5,10 +5,10 @@
         <div class="load-progress">
             <div class="landing-text">load progress:</div>
             <input class="landing-text" [placeholder]="'enter username here'" [(ngModel)]="username">
-            <button class="landing-button" (click)="loadProgress()">submit</button>
+            <button class="landing-button" (click)="loadProgress()">load</button>
         </div>
         <div class="landing-text">or</div>
-        <button class="landing-button" (click)="setLevel(1)">level 1</button>
+        <button class="landing-button" (click)="setLevel(1)">start level 1</button>
         <div *ngIf="faq" class="faq">
             <div class="faq-item">
                 <div>Q: how do i solve these?</div>
