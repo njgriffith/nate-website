@@ -3,16 +3,27 @@
     align-items: center;
     margin-bottom: 1em;
     gap: 2em;
+    font-size: 1.2em;
 }
 
 select{
     width: 80%;
+    font-size: 1.2em;
+    margin: 0.5em 0;
+}
+
+option{
+    font-size: 1em;
 }
 
 .landing-page-container {
     width: 700px;
     height: 475px;
-    background-image: url('/assets/icons/backrooms.gif');
+    background-image: url('/assets/general/backrooms.gif');
     background-size: cover;
     margin: 3em;
+}
+
+.webpage{
+    max-height: 650px;
 }

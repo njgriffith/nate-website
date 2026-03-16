@@ -40,7 +40,7 @@ export class DesktopComponent {
   @ViewChild('rightClickBox') rightClickBoxRef!: ElementRef;
   box: HTMLElement | undefined = undefined;
   rightClickStartX: number = 0;
-  rightClickStartY: number = 0
+  rightClickStartY: number = 0;
 
   appComponentMap: Record<string, any> = {
     'Archive': ArchiveComponent,

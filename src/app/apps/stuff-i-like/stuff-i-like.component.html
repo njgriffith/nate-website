@@ -59,7 +59,7 @@
         <div class="window" role="tabpanel">
             <ng-container *ngFor="let item of stuffOnThisSite[selectedTier]" class="album-container">
                 <div class="album-container" style="cursor: pointer;" (click)="openApp(item)" *ngIf="isItemInFilter(item)" >
-                    <img [src]="'/assets/icons/' + item + '.gif'" class="cover-img">
+                    <img [src]="'/assets/general/' + item + '.gif'" class="cover-img">
                     <p class="album-title">{{ item }}</p>
                 </div>
             </ng-container>

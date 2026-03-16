@@ -4,7 +4,7 @@
     <div *ngFor="let app of apps; let i = index">
       <div class="icon" (dblclick)="openApp(app.name)" (click)="highlightApp(i)"
         [ngClass]="{ 'highlighted': selectedIconIndex === i }">
-        <img src="/assets/icons/{{app.name}}.gif">
+        <img src="/assets/general/{{app.name}}.gif">
         <p>{{app.name}}</p>
       </div>
     </div>

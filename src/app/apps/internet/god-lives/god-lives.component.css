@@ -1,0 +1,29 @@
+.main-container {
+    font-family: "Pixelated MS Sans Serif";
+    color: blue;
+    font-weight: bold;
+    width: 800px;
+}
+
+.main-container>img {
+    user-select: none;
+    max-width: 300px;
+}
+
+.left{
+    margin: 0 15px 15px 0;
+    float: left;
+}
+
+.right{
+    margin: 0 0 15px 15px;
+    float: right;
+}
+
+.main-container>p{
+    margin: 1em;
+}
+
+.highlight{
+    background-color: yellow;
+}

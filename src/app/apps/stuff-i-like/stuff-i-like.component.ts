@@ -48,8 +48,8 @@ export class StuffILikeComponent {
     "Coolest Shit Ever I Ever Made": ['Media Player'],
     "Labor of Love": ['Puzzle'],
     "Really Cool": ['Archive', 'Catalog', 'Stuff I Like', 'Minesweeper'],
-    "Interesting": ['Weather', 'Stats'],
-    "Decent": ['Command Line', 'Settings', 'Internet'],
+    "Interesting": ['Internet', 'Weather', 'Stats'],
+    "Decent": ['Command Line', 'Settings'],
     "Uninteresting or Broken": ['Mailing List', 'Recycle']
   };
 

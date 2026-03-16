@@ -20,7 +20,7 @@ tbody>tr:hover{
 }
 
 .blog-container{
-    background-image: url('/assets/icons/backrooms.gif');
+    background-image: url('/assets/general/backrooms.gif');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
