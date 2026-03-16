@@ -126,61 +126,6 @@ a {
   text-decoration: none;
 }
 
-.start-menu {
-  position: absolute;
-  bottom: 40px;
-  left: 5px;
-  width: 400px;
-  background-color: #c0c0c0;
-  border: 2px solid #000;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  display: grid;
-  grid-template-columns: [start] 20% 80%;
-
-}
-
-.start-menu-banner {
-  writing-mode: vertical-rl;
-  transform: scale(-1);
-  font-size: 4em;
-  z-index: 1;
-  padding-bottom: 1em;
-  background: #808080;
-  align-items: center;
-  justify-content: center;
-  color: #ddd;
-}
-
-.start-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 5px;
-}
-
-.start-menu li {
-  font-size: 2em;
-  padding: 20px;
-  background-color: #a0a0a0;
-  cursor: pointer;
-}
-
-li>img {
-  padding-right: 1em;
-}
-
-.start-menu li:hover {
-  background-color: blue;
-  color: white;
-}
-
-.start-link {
-  color: black;
-}
-
-.hidden {
-  display: none;
-}
-
 #changelog {
   width: 30%;
   height: 30%;
