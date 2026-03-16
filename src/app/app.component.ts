@@ -17,11 +17,15 @@ export class AppComponent {
   mobile: boolean = false;
   sleep: boolean = false;
   user: string = 'guest';
+  windowWidth: number | undefined = undefined;
+  windowHeight: number | undefined = undefined;
   magicWidth: number = 529;
   magicHeight: number = 321;
   constructor(private breakpointObserver: BreakpointObserver, private appService: AppService) { }
 
   ngOnInit() {
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
     this.breakpointObserver.observe([Breakpoints.Handset])
       .subscribe(result => {
         if (result.matches) {
@@ -49,10 +53,10 @@ export class AppComponent {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
-    let width: number = (event.target as Window).innerWidth;
-    let height: number = (event.target as Window).innerHeight;
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
 
-    if (width === this.magicWidth && height === this.magicHeight) {
+    if (this.windowWidth === this.magicWidth && this.windowHeight === this.magicHeight) {
       this.appService.updateBackground('calamity');
     }
     else{

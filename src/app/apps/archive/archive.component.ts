@@ -31,17 +31,17 @@ export class ArchiveComponent {
     'rain': {
       component: V3Component,
       name: 'Cool Rain Effect',
-      description: 'Third Version, dope rain effect<br>Lots of changes to other pages if I ever get around to making the archive artifacts fully functional'
+      description: 'Third Version, dope rain effect<br>Started work on the puzzle'
     },
     'grid': {
       component: V2Component,
       name: 'Grid Layout',
-      description: 'Second Version, googled "grid layout css"<br>MJ gif is peak I need to bring that back'
+      description: 'Second Version, googled "grid layout css"<br>MJ gif is peak I need to bring that back<br>Leaderboard was kinda like the "Stats" page in the current version'
     },
     'v1': {
       component: V1Component,
       name: '1.0',
-      description: 'First Version, was prob just testing deployment tbh, there\'s like nothing here. I do miss the dougie gif.'
+      description: 'First Version, was prob just testing deployment tbh, there\'s like nothing here. I do miss the dougie gif.<br>I really didn\t even know what to put on the site yet'
     }
   };
   versionNames = Object.keys(this.versions);

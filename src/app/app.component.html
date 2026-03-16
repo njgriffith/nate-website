@@ -1,5 +1,5 @@
 <div *ngIf="!sleep">
-    <app-desktop [mobile]="mobile"></app-desktop>
+    <app-desktop [mobile]="mobile" [width]="windowWidth" [height]="windowHeight"></app-desktop>
     <app-taskbar *ngIf="!mobile"></app-taskbar>
 </div>
 

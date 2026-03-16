@@ -27,6 +27,8 @@ import { ArchiveComponent } from '../apps/archive/archive.component';
 // TODO: recycle, migrate all blogs, migrate all lists
 
 export class DesktopComponent {
+  @Input() width: number | undefined = undefined;
+  @Input() height: number | undefined = undefined;
   @Input() mobile: boolean = false;
   apps: App[] = [];
   openApps: App[] = [];
