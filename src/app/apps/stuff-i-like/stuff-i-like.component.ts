@@ -120,12 +120,11 @@ export class StuffILikeComponent {
   toReview(album: any){
     if (!album.reviewKey) return;
     this.apiService.getReview(album.reviewKey).subscribe((response) => {
-      const data = response;
       this.selectedReview.id = album.reviewKey;
-      this.selectedReview.artist = data['data']['artist'];
-      this.selectedReview.title = data['data']['title'];
+      this.selectedReview.artist = album.artist;
+      this.selectedReview.title = album.title; 
       this.selectedReview.coverPath = album.coverPath;
-      this.selectedReview.review= data['review'];
+      this.selectedReview.review= response.review;
       this.singleReviewView = true;
     });
   }
