@@ -1,9 +1,8 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { AppService } from '../services/app.service';
 import { StatsComponent } from '../apps/stats/stats.component';
-import { BlogsComponent } from '../apps/blogs/blogs.component';
 import { MediaPlayerComponent } from "../apps/media-player/media-player.component";
 import { SettingsComponent } from '../apps/settings/settings.component';
 import { InternetComponent } from '../apps/internet/internet.component';
@@ -69,6 +68,9 @@ export class DesktopComponent {
       this.mediaPlayer = this.apps.find(app => app.name === 'Media Player');
     });
     this.appService.puzzleTitle$.subscribe(title => this.puzzleTitle = title);
+    this.appService.recycledApps$.subscribe((recycledApps: any[]) => {
+      this.appsToRecycle = recycledApps.map(app => app.name);
+    });
   }
 
   ngAfterViewInit() {
@@ -103,17 +105,17 @@ export class DesktopComponent {
     return app.name;
   }
 
-  handleKeyPress(event: KeyboardEvent) {
-    if (event.key === 'Delete') {
-      document.querySelectorAll('.highlighted-icon').forEach((icon: any) => {
-        icon.classList.remove('highlighted-icon');
-        icon.style.display = 'none';
-      });
-    }
-    this.appService.recycleApps(this.appsToRecycle);
-    this.appsToRecycle = [];
+  @HostListener('document:keydown', ['$event'])
+  handleKeyPress(event: any) {
+    if (event.key !== 'Delete') return;
+    const appsToRecycle: string[] = [];
+    document.querySelectorAll('.highlighted-icon').forEach((icon: any) => {
+      icon.classList.remove('highlighted-icon');
+      const appName: string | undefined = icon.querySelector('p')?.innerText;
+      if (appName) appsToRecycle.push(appName);
+    });
+    this.appService.recycleApps(appsToRecycle);
   }
-
 
   boxDown(event: any) {
     if (event.button === 2) event.preventDefault();
@@ -154,15 +156,14 @@ export class DesktopComponent {
     this.box.style.top = currentY < this.rightClickStartY ? `${currentY}px` : `${this.rightClickStartY}px`;
 
     document.querySelectorAll('.icon').forEach((icon: any) => {
+      if (icon.querySelector('p').innerText === 'Recycle') return;
       var iconLeft = icon.getBoundingClientRect().left + 40;
       var iconTop = icon.getBoundingClientRect().top + 40;
       if ((Math.min(currentX, this.rightClickStartX) <= iconLeft && iconLeft <= Math.max(currentX, this.rightClickStartX)) && (Math.min(currentY, this.rightClickStartY) <= iconTop && iconTop <= Math.max(currentY, this.rightClickStartY))) {
         icon.classList.add('highlighted-icon');
-        this.appsToRecycle.push(icon.querySelector('p')!.innerText);
       }
       else {
         icon.classList.remove('highlighted-icon');
-        this.appsToRecycle = this.appsToRecycle.filter(app => app !== icon.querySelector('p')!.innerText);
       }
     });
   }

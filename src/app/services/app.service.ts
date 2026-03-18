@@ -61,7 +61,7 @@ export class AppService {
   user$ = this.userSubject.asObservable();
   private puzzleLevelSubject = new BehaviorSubject<number>(0);
   puzzleLevel$ = this.puzzleLevelSubject.asObservable();
-  recycledAppsSubject = new BehaviorSubject<string[]>([]);
+  recycledAppsSubject = new BehaviorSubject<any[]>([]);
   recycledApps$ = this.recycledAppsSubject.asObservable();
 
 
@@ -185,9 +185,19 @@ export class AppService {
   }
 
   recycleApps(appNames: string[]) {
-    const updatedApps = this.apps.value.map(app =>
-      appNames.includes(app.name) ? { ...app, isOpen: false } : app
-    );
-    this.apps.next(updatedApps);
+    const currentRecycled = this.recycledAppsSubject.value;
+    appNames.forEach((app: string) => {
+      currentRecycled.push({
+        name: app,
+        timestamp: new Date().toISOString()
+      });
+    });
+    this.recycledAppsSubject.next(currentRecycled);
+  }
+
+  restoreApp(appName: string){
+    let currentRecycled: any[] = this.recycledAppsSubject.value;
+    currentRecycled = currentRecycled.filter(app => app.name !== appName);
+    this.recycledAppsSubject.next(currentRecycled);
   }
 }

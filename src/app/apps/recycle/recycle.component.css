@@ -2,3 +2,7 @@ tbody>tr:hover{
     color: white;
     background: blue;
 }
+
+tbody>tr{
+    cursor: pointer;
+}

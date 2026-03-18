@@ -1,16 +1,19 @@
-<div>
+<div *ngIf="recycledApps && recycledApps.length > 0">
     <table>
         <thead>
             <tr>
-                <th>app</th>
-                <th>deleted</th>
+                <th>Name</th>
+                <th>Timestamp</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let app of deletedApps">
-                <td>{{app}}</td>
-                <td>timestamp</td>
+            <tr *ngFor="let app of recycledApps" (click)="restoreApp(app.name)">
+                <td>{{app.name}}</td>
+                <td>{{app.timestamp}}</td>
             </tr>
         </tbody>
     </table>
+</div>
+<div *ngIf="!recycledApps || recycledApps.length === 0">
+    <div style="margin: auto; text-align: center; font-size: 1.2em; padding: 1em;">Recycle is empty</div>
 </div>

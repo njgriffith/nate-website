@@ -8,26 +8,14 @@ import { Observable } from 'rxjs';
 export class ApiService {
   constructor(private http: HttpClient) { }
 
-  getAllReviews(): Observable<any> {
-    return this.http.get(`https://api.nate-griffith.com/reviews`);
-  }
-
   getReview(code: string): Observable<any> {
     const body = JSON.stringify({code});
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`https://api.nate-griffith.com/review`, body, { headers });
   }
 
-  getBlogs(): Observable<any> {
-    return this.http.get('https://api.nate-griffith.com/blogs');
-  }
-
   getStats(): Observable<any> {
     return this.http.get('https://api.nate-griffith.com/stats');
-  }
-
-  getLists(): Observable<any> {
-    return this.http.get('https://api.nate-griffith.com/lists');
   }
 
   getAlbumTiers(): Observable<any> {

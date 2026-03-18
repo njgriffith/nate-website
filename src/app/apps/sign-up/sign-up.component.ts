@@ -21,11 +21,9 @@ export class SignUpComponent {
       this.apiService.signUp(this.email).subscribe({
         next: (response) => {
           this.success = true;
-          console.log('Signed up successfully:', response);
         },
         error: (error) => {
           this.success = false;
-          console.error(error);
         }
       });
     }
