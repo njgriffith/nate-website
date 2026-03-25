@@ -114,6 +114,8 @@ export class DesktopComponent {
       const appName: string | undefined = icon.querySelector('p')?.innerText;
       if (appName) appsToRecycle.push(appName);
     });
+    let highlightedApp: string | undefined = document.querySelector('.highlighted')?.querySelector('p')?.innerText;
+    if (highlightedApp && highlightedApp !== 'Recycle') appsToRecycle.push(highlightedApp);
     this.appService.recycleApps(appsToRecycle);
   }
 

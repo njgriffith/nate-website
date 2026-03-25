@@ -3,7 +3,7 @@
   <div class="desktop-icons">
     <div *ngFor="let app of apps; let i = index">
       <div class="icon" (dblclick)="openApp(app.name)" (click)="highlightApp(i)"
-        [ngClass]="{ 'highlighted': selectedIconIndex === i }" [class.hidden]="appsToRecycle.includes(app.name)">
+        [ngClass]="{ 'highlighted': selectedIconIndex === i }" [style.visibility]="appsToRecycle.includes(app.name) ? 'hidden' : 'visible'">
         <img src="/assets/general/{{app.name}}.gif">
         <p>{{app.name}}</p>
       </div>
