@@ -1,0 +1,65 @@
+<div class="shape-display-container">
+    <div class="display-controls-container">
+        <div class="controls-title">Control Panel</div>
+        <div class="display-controls">
+            <div class="control">
+                <label>Select Shape</label>
+                <select [(ngModel)]="selectedShape" (ngModelChange)="updateShapeSelection()">
+                    <option *ngFor="let option of shapeOptions">{{option}}</option>
+                </select>
+            </div>
+            <div class="control">
+                <label>Rotation Speed</label>
+                <div class="sunken-panel">
+                    <div class="field-row">
+                        <div>
+                            <input type="range" min="5" max="120" value="10" [(ngModel)]="this.rpm"
+                                (ngModelChange)="updateRPM()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="control">
+                <label>Invert Rotation</label>
+                <button (click)="dTheta = dTheta * -1" style="font-size: 1.5em;">Invert</button>
+            </div>
+            <div class="control">
+                <label>Shape Color</label>
+                <input [(ngModel)]="shapeColor" [value]="shapeColor" class="input-large">
+            </div>
+            <div class="control">
+                <label>Rotation Axis</label>
+                <select [(ngModel)]="rotationAxis">
+                    <option *ngFor="let axis of axes">{{axis}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="controls-title">Shape Store</div>
+        <canvas #canvas></canvas>
+        <div class="controls-title">Price $ {{shape.price}}</div>
+    </div>
+
+    <div class="shape-editor">
+        <div class="controls-title">Shape Editor</div>
+        <div class="display-controls">
+            <div class="control">
+                <label>Vertices</label>
+                <div *ngFor="let v of vertices" class="vertex-data">
+                    <input [value]="v.x" [(ngModel)]="v.x">
+                    <input [value]="v.y" [(ngModel)]="v.y">
+                    <input [value]="v.z" [(ngModel)]="v.z">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+rotation direction
+color
+distance
+ -->

@@ -1,13 +1,3 @@
-.window-body{
-    width: 1000px;
-}
-
-.window-body-mobile{
-    width: 90vw;
-    height: 90vh;
-    overflow-y: scroll;
-}
-
 .tablist{
     flex-wrap: wrap;
 }

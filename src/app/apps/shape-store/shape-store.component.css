@@ -1,0 +1,69 @@
+.shape-display-container{
+    display: flex;
+    align-items: flex-start;
+    background-color: #000;
+    color: #0f0;
+}
+
+.display-controls-container, .shape-editor{
+    flex: 2;
+    height: fit-content;
+    max-height: 60vh;
+    overflow-y: scroll;
+}
+
+.display-controls{
+    font-size: 1.5em;
+    margin: 2em;
+}
+
+label{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.display-controls > select{
+    width: 100%;
+    padding: 0.5em 1em;
+    /* font-size: 1.5em; */
+}
+
+.control{
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+}
+
+canvas {
+  flex: 5;
+  min-width: 0;
+  height: 100%;
+  display: block;
+}
+
+.controls-title{
+    margin: 1em auto;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.field-row{
+    margin: 1em;
+    font-size: 1.5em;
+}
+
+.vertex-data{
+    display: flex;
+    gap: 0.5em;
+}
+
+.vertex-data input {
+    flex: 2;
+    min-width: 0;
+}
+
+.input-large{
+    padding: 5px 10px;
+    font-size: 1.2em;
+}

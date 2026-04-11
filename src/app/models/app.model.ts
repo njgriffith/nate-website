@@ -6,17 +6,19 @@ export class App{
     left: number;
     top: number;
 
-    constructor(name: string, open: boolean, minimized: boolean, zIndex: number, mobile: boolean = false){
+    constructor(name: string, open: boolean, minimized: boolean, zIndex: number){
         this.name = name;
         this.isOpen = open;
         this.isMinimized = minimized;
         this.zIndex = zIndex;
-        if (mobile) {
+        let windowWidth: number = window.innerWidth;
+        let windowHeight: number = window.innerHeight;
+        if (windowHeight >= windowWidth) {
             this.left = 0;
             this.top = 0;
         } else {
-            this.left = Math.floor(200 + (Math.random() * 600));
-            this.top = Math.floor((Math.random() * 300));
+            this.left = Math.floor(Math.random() * windowWidth * 0.3);
+            this.top = Math.floor(Math.random() * windowHeight * 0.2);
         }
     }
 }

@@ -1,4 +1,4 @@
-<div [ngClass]="mobile ? 'window-body-mobile' : 'window-body'">
+<div>
     <select [(ngModel)]="selectedList" class="list-select" (ngModelChange)="updateSelectedList()">
         <option *ngFor="let list of lists">{{list}}</option>
     </select>

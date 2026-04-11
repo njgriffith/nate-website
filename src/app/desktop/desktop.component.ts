@@ -16,6 +16,7 @@ import { RecycleComponent } from '../apps/recycle/recycle.component';
 import { AdminComponent } from '../apps/admin/admin.component';
 import { StuffILikeComponent } from '../apps/stuff-i-like/stuff-i-like.component';
 import { ArchiveComponent } from '../apps/archive/archive.component';
+import { ShapeStoreComponent } from '../apps/shape-store/shape-store.component';
 @Component({
   selector: 'app-desktop',
   standalone: true,
@@ -55,7 +56,8 @@ export class DesktopComponent {
     'Puzzle': PuzzleComponent,
     'Weather': WeatherComponent,
     'Recycle': RecycleComponent,
-    'Command Line': AdminComponent
+    'Command Line': AdminComponent,
+    'Shape Store': ShapeStoreComponent
   };
 
   constructor(private appService: AppService) { }

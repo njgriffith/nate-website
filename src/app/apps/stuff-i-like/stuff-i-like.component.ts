@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppService } from '../../services/app.service';
+import { App } from '../../models/app.model';
 
 @Component({
   selector: 'stuff-i-like',
@@ -46,7 +47,7 @@ export class StuffILikeComponent {
 
   stuffOnThisSite: Record<string, any[]> = {
     "Labor of Love": ['Media Player', 'Puzzle'],
-    "Really Cool": ['Catalog', 'Archive', 'Stuff I Like', 'Internet', 'Minesweeper'],
+    "Really Cool": ['Shape Store', 'Catalog', 'Archive', 'Stuff I Like', 'Internet', 'Minesweeper'],
     "Decent": ['Weather', 'Stats', 'Command Line', 'Settings'],
     "Uninteresting or Broken": ['Mailing List', 'Recycle']
   };
@@ -56,7 +57,7 @@ export class StuffILikeComponent {
   movieTiers: string[] = Object.keys(this.movies);
   stuffOnThisSiteTiers: string[] = Object.keys(this.stuffOnThisSite);
 
-
+  me: App | undefined = undefined;
   selectedTier: string = this.albumTiers[0];
   filterText: string = '';
   singleReviewView: boolean = false;
@@ -64,6 +65,9 @@ export class StuffILikeComponent {
   mobile: boolean = false;
 
   ngOnInit() {
+    this.appService.apps$.subscribe((apps: App[]) => {
+      this.me = apps.find(app => app.name === 'Stuff I Like');
+    });
     this.appService.mobile$.subscribe(isMobile => {
       this.mobile = isMobile;
     });

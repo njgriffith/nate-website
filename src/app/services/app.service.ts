@@ -11,42 +11,26 @@ export class AppService {
   mobile$ = this.mobileSubject.asObservable();
 
   constructor(private apiService: ApiService) { }
-  private appList: App[] = this.createAppList(false);
+  private appList: App[] = [
+    new App('Archive', false, false, 1),
+    new App('Stuff I Like', false, false, 1),
+    new App('Puzzle', false, false, 1),
+    new App('Media Player', true, false, 1),
+    new App('Stats', false, false, 1),
+    new App('Internet', false, false, 1),
+    new App('Catalog', false, false, 1),
+    new App('Settings', false, false, 1),
+    new App('Mailing List', false, false, 1),
+    new App('Weather', false, false, 1),
+    new App('Minesweeper', false, false, 1),
+    new App('Command Line', false, false, 1),
+    new App('Recycle', false, false, 1),
+    new App('Shape Store', true, false, 1),
+  ];
+
   private apps = new BehaviorSubject<App[]>(this.appList);
-
-  private createAppList(mobile: boolean): App[] {
-    if (mobile){
-      return [
-      new App('Media Player',  true, false, 1, mobile),
-      new App('Stuff I Like', false, false, 1, mobile),
-      new App('Stats', false, false, 1, mobile),
-      new App('Catalog', false, false, 1, mobile),
-      new App('Settings', false, false, 1, mobile),
-      new App('Weather', false, false, 1, mobile),
-      new App('Settings', false, false, 1, mobile),
-      new App('Mailing List', false, false, 1, mobile)
-    ];
-    }
-    return [
-      new App('Archive', false, false, 1, mobile),
-      new App('Stuff I Like', true, false, 1, mobile),
-      new App('Puzzle', false, false, 1, mobile),
-      new App('Media Player', true, false, 1, mobile),
-      new App('Stats', false, false, 1, mobile),
-      new App('Internet', false, false, 1, mobile),
-      new App('Catalog', false, false, 1, mobile),
-      new App('Settings', false, false, 1, mobile),
-      new App('Mailing List', false, false, 1, mobile),
-      new App('Weather', false, false, 1, mobile),
-      new App('Minesweeper', false, false, 1, mobile),
-      new App('Command Line', false, false, 1, mobile),
-      new App('Recycle', false, false, 1, mobile),
-    ];
-  }
-
   setMobile(isMobile: boolean) {
     this.mobileSubject.next(isMobile);
-    this.appList = this.createAppList(isMobile);
     this.apps.next(this.appList);
   }
   private backgroundCode = new Subject<string>();
@@ -176,7 +160,7 @@ export class AppService {
     this.puzzleTitle.next(title);
   }
 
-  getAppNames(): string[]{
+  getAppNames(): string[] {
     let appNames: string[] = [];
     this.appList.forEach((app: App) => {
       appNames.push(app.name);
@@ -195,7 +179,7 @@ export class AppService {
     this.recycledAppsSubject.next(currentRecycled);
   }
 
-  restoreApp(appName: string){
+  restoreApp(appName: string) {
     let currentRecycled: any[] = this.recycledAppsSubject.value;
     currentRecycled = currentRecycled.filter(app => app.name !== appName);
     this.recycledAppsSubject.next(currentRecycled);
