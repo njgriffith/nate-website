@@ -8,7 +8,7 @@
 .display-controls-container, .shape-editor{
     flex: 2;
     height: fit-content;
-    max-height: 60vh;
+    max-height: 40vh;
     overflow-y: scroll;
 }
 
@@ -25,7 +25,11 @@ label{
 .display-controls > select{
     width: 100%;
     padding: 0.5em 1em;
-    /* font-size: 1.5em; */
+    font-size: 2em;
+}
+
+option {
+    font-size: 2em;
 }
 
 .control{
@@ -51,6 +55,12 @@ canvas {
 .field-row{
     margin: 1em;
     font-size: 1.5em;
+}
+
+.vertex-data-label{
+    display: flex;
+    gap: 0.5em;
+    justify-content: space-around;
 }
 
 .vertex-data{

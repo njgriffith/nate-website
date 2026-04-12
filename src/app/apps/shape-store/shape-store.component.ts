@@ -25,13 +25,14 @@ export class ShapeStoreComponent implements AfterViewInit, OnDestroy {
   cameraDistance: number = 1;
   animationFrameId: number | null = null;
 
-  selectedShape: ShapeTypes = ShapeTypes.HEX_LOG;
-  shapeOptions: ShapeTypes[] = [ShapeTypes.CUBE, ShapeTypes.PYRAMID, ShapeTypes.HEX_LOG];
+  selectedShape: ShapeTypes = ShapeTypes.TORUS;
+  shapeOptions: ShapeTypes[] = Object.keys(ShapeTypes).filter((v): v is string => isNaN(Number(v))).map((v) => ShapeTypes[v as keyof typeof ShapeTypes]);
   shapeColor: string = "#0f0";
 
   shape!: Shape;
   vertices: Vertex[] = [];
   faces: number[][] = [];
+  shapePrice: number = 0;
 
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   canvasElement!: HTMLCanvasElement;
@@ -45,12 +46,16 @@ export class ShapeStoreComponent implements AfterViewInit, OnDestroy {
     this.shape = new Shape(this.selectedShape);
     this.vertices = this.shape.vertices;
     this.faces = this.shape.faces;
+    this.cameraDistance = this.shape.cameraDistance;
+    this.shapePrice = this.shape.price;
+  }
+
+  updateShapeColor(){
+    // todo maybe
   }
 
   ngOnInit() {
-    this.shape = new Shape(this.selectedShape);
-    this.vertices = this.shape.vertices;
-    this.faces = this.shape.faces;
+    this.updateShapeSelection();
   }
 
   ngAfterViewInit() {
@@ -82,7 +87,7 @@ export class ShapeStoreComponent implements AfterViewInit, OnDestroy {
   frame() {
     this.clear();
     // this.vertices.forEach((v: Vertex) => {
-    //   this.drawVertex(this.convertCoords(this.project3D(this.rotateXZ(v, this.angle))));
+    //   this.drawVertex(this.convertCoords(this.project3D(this.rotate(v, this.angle))));
     // });
     this.faces.forEach((face: number[]) => {
       for (let i = 0; i < face.length; i++) {
@@ -141,11 +146,14 @@ export class ShapeStoreComponent implements AfterViewInit, OnDestroy {
         z: v.y * s - v.z * c + this.cameraDistance
       }
     }
-    return {
-      x: v.x * c - v.y * s,
-      y: v.x * s + v.y * c,
-      z: v.z + this.cameraDistance
+    else if (this.rotationAxis === 'xy') {
+      return {
+        x: v.x * c - v.y * s,
+        y: v.x * s + v.y * c,
+        z: v.z + this.cameraDistance
+      }
     }
+    return {x: v.x, y: v.y, z: v.z + this.cameraDistance}
   }
 
   ngOnDestroy() {

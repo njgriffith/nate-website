@@ -13,7 +13,7 @@
                 <div class="sunken-panel">
                     <div class="field-row">
                         <div>
-                            <input type="range" min="5" max="120" value="10" [(ngModel)]="this.rpm"
+                            <input type="range" min="1" max="120" value="10" [(ngModel)]="this.rpm"
                                 (ngModelChange)="updateRPM()">
                         </div>
                     </div>
@@ -25,7 +25,7 @@
             </div>
             <div class="control">
                 <label>Shape Color</label>
-                <input [(ngModel)]="shapeColor" [value]="shapeColor" class="input-large">
+                <input [(ngModel)]="shapeColor" [value]="shapeColor" class="input-large" (ngModelChange)="updateShapeColor()">
             </div>
             <div class="control">
                 <label>Rotation Axis</label>
@@ -38,7 +38,7 @@
     <div>
         <div class="controls-title">Shape Store</div>
         <canvas #canvas></canvas>
-        <div class="controls-title">Price $ {{shape.price}}</div>
+        <div class="controls-title">Price $ {{shapePrice}}</div>
     </div>
 
     <div class="shape-editor">
@@ -46,6 +46,11 @@
         <div class="display-controls">
             <div class="control">
                 <label>Vertices</label>
+                <div class="vertex-data-label">
+                    <div>x</div>
+                    <div>y</div>
+                    <div>z</div>
+                </div>
                 <div *ngFor="let v of vertices" class="vertex-data">
                     <input [value]="v.x" [(ngModel)]="v.x">
                     <input [value]="v.y" [(ngModel)]="v.y">
@@ -55,11 +60,3 @@
         </div>
     </div>
 </div>
-
-
-
-<!--
-rotation direction
-color
-distance
- -->

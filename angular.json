@@ -43,7 +43,13 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/app/services/app.service.ts",
+                  "with": "src/app/services/prod-app.service.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,

@@ -15,7 +15,7 @@ export class AppService {
     new App('Archive', false, false, 1),
     new App('Stuff I Like', false, false, 1),
     new App('Puzzle', false, false, 1),
-    new App('Media Player', false, false, 1),
+    new App('Media Player', true, false, 1),
     new App('Stats', false, false, 1),
     new App('Internet', false, false, 1),
     new App('Catalog', false, false, 1),
