@@ -42,9 +42,9 @@ export class AppComponent {
       this.sleep = flag;
     });
 
-    this.appService.user$.subscribe(username => {
-      this.user = username;
-    });
+    // this.appService.user$.subscribe(username => {
+    //   this.user = username;
+    // });
   }
 
   wakeUp() {

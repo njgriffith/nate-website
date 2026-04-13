@@ -23,9 +23,11 @@ export class ShapeStoreComponent implements AfterViewInit, OnDestroy {
   axes: string[] = ['xz', 'yz', 'xy'];
   rotationAxis: string = this.axes[0];
   cameraDistance: number = 1;
+  isFlinging: boolean = false;
+  dz: number = 0.2;
   animationFrameId: number | null = null;
 
-  selectedShape: ShapeTypes = ShapeTypes.TORUS;
+  selectedShape: ShapeTypes = ShapeTypes.CUBE;
   shapeOptions: ShapeTypes[] = Object.keys(ShapeTypes).filter((v): v is string => isNaN(Number(v))).map((v) => ShapeTypes[v as keyof typeof ShapeTypes]);
   shapeColor: string = "#0f0";
 
@@ -52,6 +54,10 @@ export class ShapeStoreComponent implements AfterViewInit, OnDestroy {
 
   updateShapeColor(){
     // todo maybe
+  }
+
+  fling(){
+    this.isFlinging = true;
   }
 
   ngOnInit() {
@@ -99,6 +105,18 @@ export class ShapeStoreComponent implements AfterViewInit, OnDestroy {
         );
       }
     });
+    if (this.isFlinging && this.cameraDistance < 20){
+      this.cameraDistance += this.dz;
+      if (this.cameraDistance < this.shape.cameraDistance){
+        this.cameraDistance = this.shape.cameraDistance;
+        this.dz *= -1;
+        this.isFlinging = false;
+      }
+    }
+    else if(this.isFlinging && this.cameraDistance >= 20){
+      this.dz *= -1;
+      this.cameraDistance += this.dz;
+    }
   }
 
   drawLine(v1: Vertex, v2: Vertex) {

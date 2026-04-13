@@ -33,12 +33,16 @@
                     <option *ngFor="let axis of axes">{{axis}}</option>
                 </select>
             </div>
+            <div class="control">
+                <label>Fling</label>
+                <button (click)="fling()">Fling</button>
+            </div>
         </div>
     </div>
     <div>
         <div class="controls-title">Shape Store</div>
         <canvas #canvas></canvas>
-        <div class="controls-title">Price $ {{shapePrice}}</div>
+        <div class="controls-title">Price: {{shapePrice}} NG$</div>
     </div>
 
     <div class="shape-editor">

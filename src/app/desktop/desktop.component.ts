@@ -7,7 +7,6 @@ import { MediaPlayerComponent } from "../apps/media-player/media-player.componen
 import { SettingsComponent } from '../apps/settings/settings.component';
 import { InternetComponent } from '../apps/internet/internet.component';
 import { CatalogComponent } from '../apps/catalog/catalog.component';
-import { SignUpComponent } from '../apps/sign-up/sign-up.component';
 import { MinesweeperComponent } from '../apps/minesweeper/minesweeper.component';
 import { PuzzleComponent } from '../apps/puzzle/puzzle.component';
 import { App } from '../models/app.model';
@@ -17,6 +16,7 @@ import { AdminComponent } from '../apps/admin/admin.component';
 import { StuffILikeComponent } from '../apps/stuff-i-like/stuff-i-like.component';
 import { ArchiveComponent } from '../apps/archive/archive.component';
 import { ShapeStoreComponent } from '../apps/shape-store/shape-store.component';
+import { MineNateCoinComponent } from '../apps/mine-nate-coin/mine-nate-coin.component';
 @Component({
   selector: 'app-desktop',
   standalone: true,
@@ -51,13 +51,13 @@ export class DesktopComponent {
     'Settings': SettingsComponent,
     'Internet': InternetComponent,
     'Catalog': CatalogComponent,
-    'Mailing List': SignUpComponent,
     'Minesweeper': MinesweeperComponent,
     'Puzzle': PuzzleComponent,
     'Weather': WeatherComponent,
     'Recycle': RecycleComponent,
     'Command Line': AdminComponent,
-    'Shape Store': ShapeStoreComponent
+    'Shape Store': ShapeStoreComponent,
+    'Mine Nate Coin': MineNateCoinComponent
   };
 
   constructor(private appService: AppService) { }

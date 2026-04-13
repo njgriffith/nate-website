@@ -12,8 +12,9 @@ import { Level7Component } from './level-7/level-7.component';
 import { Level8Component } from './level-8/level-8.component';
 import { Level9Component } from './level-9/level-9.component';
 import { Level10Component } from './level-10/level-10.component';
-import { AppService } from '../../services/app.service';
 import { Level11Component } from './level-11/level-11.component';
+import { UserService } from '../../services/user.service';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-puzzle',
@@ -23,8 +24,10 @@ import { Level11Component } from './level-11/level-11.component';
   styleUrl: './puzzle.component.css'
 })
 export class PuzzleComponent {
-  level: number = 1;
+  level: number = 0;
   username: string = '';
+  password: string = '';
+  isLoggedIn: boolean = false;
   guess: string = '';
   guesses: string[] = [];
   showHistory = false;
@@ -61,16 +64,14 @@ export class PuzzleComponent {
     11: 'Congrats!'
   }
 
-  constructor(private apiService: ApiService, private appService: AppService) { }
+  constructor(private apiService: ApiService, private userService: UserService, private appService: AppService) { }
 
   ngOnInit() {
-    this.appService.puzzleLevel$.subscribe(level => {
-      this.level = level;
-      this.setLevel(level);
-    });
-
-    this.appService.user$.subscribe(username => {
-      this.username = username;
+    this.userService.user$.subscribe((user) => {
+      this.username = user.username !== 'guest' ? user.username : '';
+      this.password = user.password;
+      this.setLevel(user.puzzleLevel);
+      this.isLoggedIn = user.isLoggedIn;
     });
   }
 
@@ -81,41 +82,25 @@ export class PuzzleComponent {
   }
 
   loadProgress() {
-    let blackListedUsernames: string[] = ['nate', 'admin', 'guest', ''];
-    if (this.username.toLowerCase() in blackListedUsernames) {
-      alert('nice try dumbass');
-      return;
-    }
-    this.apiService.puzzleLoad(this.username).subscribe({
-      next: (response) => {
-        if (response.level === 0) {
-          alert('user not found');
-          return;
-        }
-        this.setLevel(response.level);
-        this.appService.login(this.username);
+    this.userService.login(this.username, this.password).subscribe({
+      next: (user: any) => {
+        this.setLevel(user['user_data']['puzzle_level']);
+        this.isLoggedIn = true;
       },
-      error: (error) => {
-        alert('username not found');
+      error: () => {
+        alert('Unknown username password combination');
+        this.isLoggedIn = false;
       }
     });
   }
 
   saveProgress() {
-    if (this.username.replace(/\s+/g, '') === ''){
+    if (!this.isLoggedIn) {
       alert('sign in to proceed');
+      return;
     }
-    else{
-      this.apiService.puzzleSave(this.username, this.level).subscribe({
-        next: (response) => {
-          alert(`saved ${this.username} at level ${this.level}`);
-        },
-        error: (error) => {
-          alert('error saving progress');
-        }
-      });
-      this.appService.login(this.username);
-    }
+    this.userService.user.puzzleLevel = this.level;
+    this.userService.updateUserBackend();
   }
 
   guessAnswer() {
@@ -126,6 +111,10 @@ export class PuzzleComponent {
           this.guess = '';
           this.guesses = [];
           this.setLevel(this.level+1);
+          if (this.userService.user.isLoggedIn){
+            this.userService.user.puzzleLevel = this.level;
+            this.userService.updateUserBackend();
+          }
         }
         else {
           this.guessResponse = response.message;

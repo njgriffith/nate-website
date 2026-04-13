@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { App } from '../models/app.model';
-import { ApiService } from './api.service';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
@@ -10,9 +9,11 @@ export class AppService {
   private mobileSubject = new BehaviorSubject<boolean>(false);
   mobile$ = this.mobileSubject.asObservable();
 
-  constructor(private apiService: ApiService) { }
+  constructor(private userService: UserService) { }
   private appList: App[] = [
     new App('Archive', false, false, 1),
+    new App('Shape Store', false, false, 1),
+    new App('Mine Nate Coin', false, false, 1),
     new App('Stuff I Like', false, false, 1),
     new App('Puzzle', false, false, 1),
     new App('Media Player', false, false, 1),
@@ -20,12 +21,10 @@ export class AppService {
     new App('Internet', false, false, 1),
     new App('Catalog', false, false, 1),
     new App('Settings', false, false, 1),
-    new App('Mailing List', false, false, 1),
     new App('Weather', false, false, 1),
     new App('Minesweeper', false, false, 1),
-    new App('Command Line', false, false, 1),
-    new App('Recycle', false, false, 1),
-    new App('Shape Store', true, false, 1),
+    new App('Command Line', true, false, 1),
+    new App('Recycle', false, false, 1)
   ];
 
   private apps = new BehaviorSubject<App[]>(this.appList);
@@ -41,51 +40,17 @@ export class AppService {
   puzzleTitle$ = this.puzzleTitle.asObservable();
   private sleepSubject = new BehaviorSubject<boolean>(false);
   sleep$ = this.sleepSubject.asObservable();
-  private userSubject = new BehaviorSubject<string>('');
-  user$ = this.userSubject.asObservable();
-  private puzzleLevelSubject = new BehaviorSubject<number>(0);
-  puzzleLevel$ = this.puzzleLevelSubject.asObservable();
   recycledAppsSubject = new BehaviorSubject<any[]>([]);
   recycledApps$ = this.recycledAppsSubject.asObservable();
 
+  user$ = this.userService.user$;
 
-  userStats: Record<string, any> = {
-    'puzzleLevel': null,
-    'easy': null,
-    'medium': null,
-    'hard': null,
-    'expert': null,
-    'master': null
-  };
+  get user() {
+    return this.userService.user;
+  }
 
   setSleep(value: boolean) {
     this.sleepSubject.next(value);
-  }
-
-  login(username: string) {
-    return this.apiService.userLogin(username).pipe(
-      tap((response: any) => {
-        this.setUser(username, response['user_data']);
-      })
-    );
-  }
-
-  setUser(username: string, userData: Record<string, any>) {
-    this.userSubject.next(username);
-    if (userData['puzzle'] !== null) {
-      this.puzzleLevelSubject.next(userData['puzzle']);
-    }
-
-    this.userStats['puzzleLevel'] = userData['puzzle'];
-    this.userStats['easy'] = userData['easy'];
-    this.userStats['medium'] = userData['medium'];
-    this.userStats['hard'] = userData['hard'];
-    this.userStats['expert'] = userData['expert'];
-    this.userStats['master'] = userData['master'];
-  }
-
-  setLevel(level: number) {
-    this.puzzleLevelSubject.next(level);
   }
 
   openApp(code: string) {

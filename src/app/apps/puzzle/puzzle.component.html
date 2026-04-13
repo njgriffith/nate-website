@@ -4,7 +4,10 @@
         <div class="puzzle-greeting">Welcome to my puzzle!</div>
         <div class="load-progress">
             <div class="landing-text">load progress:</div>
-            <input class="landing-text" [placeholder]="'enter username here'" [(ngModel)]="username">
+            <div class="login-container">
+                <input class="landing-text" [placeholder]="'enter username here'" [(ngModel)]="username">
+                <input class="landing-text" [placeholder]="'enter password here'" [(ngModel)]="password" type="password">
+            </div>
             <button class="landing-button" (click)="loadProgress()">load</button>
         </div>
         <div class="landing-text">or</div>

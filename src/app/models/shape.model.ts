@@ -58,20 +58,24 @@ export class Shape {
             ];
         }
         else if (type === ShapeTypes.HEX_LOG) {
-            this.vertices = [
-                { x: 0.25, y: 0.25, z: 0.5 },
-                { x: -0.25, y: 0.25, z: 0.5 },
-                { x: -0.4, y: 0, z: 0.5 },
-                { x: -0.25, y: -0.25, z: 0.5 },
-                { x: 0.25, y: -0.25, z: 0.5 },
-                { x: 0.4, y: 0, z: 0.5 },
+            const hexRadius: number = 0.4;
+            const hexHalf: number = hexRadius / 2;
+            const hexHeight: number = hexRadius * Math.sqrt(3) / 2;
 
-                { x: 0.25, y: 0.25, z: -0.5 },
-                { x: -0.25, y: 0.25, z: -0.5 },
-                { x: -0.4, y: 0, z: -0.5 },
-                { x: -0.25, y: -0.25, z: -0.5 },
-                { x: 0.25, y: -0.25, z: -0.5 },
-                { x: 0.4, y: 0, z: -0.5 },
+            this.vertices = [
+                { x: hexHalf, y: hexHeight, z: 0.5 },
+                { x: -hexHalf, y: hexHeight, z: 0.5 },
+                { x: -hexRadius, y: 0, z: 0.5 },
+                { x: -hexHalf, y: -hexHeight, z: 0.5 },
+                { x: hexHalf, y: -hexHeight, z: 0.5 },
+                { x: hexRadius, y: 0, z: 0.5 },
+
+                { x: hexHalf, y: hexHeight, z: -0.5 },
+                { x: -hexHalf, y: hexHeight, z: -0.5 },
+                { x: -hexRadius, y: 0, z: -0.5 },
+                { x: -hexHalf, y: -hexHeight, z: -0.5 },
+                { x: hexHalf, y: -hexHeight, z: -0.5 },
+                { x: hexRadius, y: 0, z: -0.5 },
             ];
             this.faces = [
                 [0, 1, 2, 3, 4, 5, 0],

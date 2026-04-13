@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-import { AppService } from '../../services/app.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-minesweeper',
@@ -12,10 +12,12 @@ import { AppService } from '../../services/app.service';
   styleUrl: './minesweeper.component.css'
 })
 export class MinesweeperComponent {
-  // difficulty: string = 'Choose a difficulty';
-  username: string = 'guest';
+  username: string = '';
+  password: string = '';
+  isLoggedIn: boolean = false;
   difficulty: string = 'Easy';
   isLeaderboardOpen: boolean = false;
+  isPromptForLoginOpen: boolean = false;
   isPlaying: boolean = false;
   seconds: number = 0;
   thousandSecond: number = 0;
@@ -33,21 +35,23 @@ export class MinesweeperComponent {
   leaderboardData: any = [];
   difficululties: string[] = ['easy', 'medium', 'hard', 'expert', 'master'];
 
-  constructor(private apiService: ApiService, private appService: AppService) { }
+  constructor(private apiService: ApiService, private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.user$.subscribe((user) => {
+      this.username = user.username !== 'guest' ? user.username : '';
+      this.password = user.password;
+      this.isLoggedIn = user.isLoggedIn;
+    });
+  }
+
+  getLeaderboardDataBackend() {
     this.apiService.getMSLeaderboard().subscribe((response) => {
       this.leaderboardData = response;
-      console.log(this.leaderboardData)
-    });
-
-    this.appService.user$.subscribe(username => {
-      this.username = username;
     });
   }
 
   playMinesweeper() {
-    if (this.timeTracker) clearInterval(this.timeTracker);
     this.seconds = 0;
     this.thousandSecond = 0;
     this.hasPlacedYet = false;
@@ -97,26 +101,7 @@ export class MinesweeperComponent {
 
 
     this.timerDigits = ['0', '0', '0'];
-    this.timeTracker = setInterval(() => {
-      this.seconds++;
-      if (this.seconds === 1000) {
-        this.thousandSecond++;
-        this.seconds = 0;
-        this.timerDigits = ['0', '0', '0'];
-      }
-      if (this.seconds < 10) {
-        this.timerDigits[2] = `${this.seconds}`;
-      }
-      else if (this.seconds < 100) {
-        this.timerDigits[1] = `${Math.floor(this.seconds / 10)}`;
-        this.timerDigits[2] = `${this.seconds % 10}`;
-      }
-      else {
-        this.timerDigits[0] = `${Math.floor(this.seconds / 100)}`;
-        this.timerDigits[1] = `${Math.floor(this.seconds / 10) % 10}`;
-        this.timerDigits[2] = `${this.seconds % 100 % 10}`;
-      }
-    }, 1000);
+
     this.createGrid();
     this.placeBombs();
     this.isPlaying = true;
@@ -177,6 +162,29 @@ export class MinesweeperComponent {
       this.revealCell(row, col);
       return;
     }
+    if (!this.hasPlacedYet) {
+      this.timeTracker = setInterval(() => {
+        this.seconds++;
+        if (this.seconds === 1000) {
+          this.thousandSecond++;
+          this.seconds = 0;
+          this.timerDigits = ['0', '0', '0'];
+        }
+        if (this.seconds < 10) {
+          this.timerDigits[2] = `${this.seconds}`;
+        }
+        else if (this.seconds < 100) {
+          this.timerDigits[1] = `${Math.floor(this.seconds / 10)}`;
+          this.timerDigits[2] = `${this.seconds % 10}`;
+        }
+        else {
+          this.timerDigits[0] = `${Math.floor(this.seconds / 100)}`;
+          this.timerDigits[1] = `${Math.floor(this.seconds / 10) % 10}`;
+          this.timerDigits[2] = `${this.seconds % 100 % 10}`;
+        }
+      }, 1000);
+    }
+
     if (cell.mine) {
       cell.img = 'tile-mine-hit';
       this.gameOver = true;
@@ -264,35 +272,27 @@ export class MinesweeperComponent {
       this.faceImg = 'assets/minesweeper/cool.png';
       clearInterval(this.timeTracker);
       this.gameOver = true;
-
-      if (this.username === 'guest') {
-        let username = prompt("Congratulations! Enter your name to join the leaderboards");
-        if (username === null || username.trim().length === 0) {
-          return;
-        }
-        this.updateLeaderboard(username, this.seconds + (this.thousandSecond * 1000));
-        this.appService.login(username);
+      let score: number = this.seconds + (this.thousandSecond * 1000);
+      if (!this.isLoggedIn) {
+        // prompt user to log in
       }
       else {
-        alert("Congratulations! Updating leaderboards...");
-        if (this.username === null || this.username.trim().length === 0) {
-          return;
-        }
-        this.updateLeaderboard(this.username, this.seconds + (this.thousandSecond * 1000));
+        this.updateLeaderboard(score);
       }
     }
   }
 
-  updateLeaderboard(username: string, score: number) {
-    this.apiService.updateMSLeaderboard(username, score, this.difficulty);
-    if (username && username.length > 0) {
-      this.apiService.updateMSLeaderboard(username, score, this.difficulty).subscribe({
-        next: (response) => {
-        },
-        error: (error) => {
-          alert('error posting to leaderboard :(');
-        }
-      });
+  updateLeaderboard(score: number) {
+    alert(`Congratulations ${this.username}! Updating leaderboards...`);
+    this.apiService.updateMSLeaderboard(this.username, this.password, score, this.difficulty).subscribe((response: any) => {
+      console.log('MS response: ', response);
+    });
+  }
+
+  toggleLeaderboard() {
+    this.isLeaderboardOpen = !this.isLeaderboardOpen;
+    if (this.isLeaderboardOpen) {
+      this.getLeaderboardDataBackend();
     }
   }
 

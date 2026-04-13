@@ -1,9 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppService } from '../../services/app.service';
-import { sample } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -13,7 +12,7 @@ import { sample } from 'rxjs';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
-  constructor(private apiService: ApiService, private appService: AppService) { }
+  constructor(private userService: UserService, private appService: AppService) { }
 
   ngOnInit() {
     this.appNames = this.appService.getAppNames();
@@ -25,9 +24,9 @@ export class AdminComponent {
     });
     this.availableCommands['list-apps'] = nameString;
 
-    this.appService.user$.subscribe(username => {
-      this.user = username;
-    });
+    // this.appService.user$.subscribe(username => {
+    //   this.user = username;
+    // });
   }
 
   user: string = 'guest';
@@ -70,26 +69,26 @@ export class AdminComponent {
       this.appService.setSleep(true);
     }
 
-    else if (command.includes('Enter username to login: ')) {
-      const username = command.replace('Enter username to login: ', '').trim();
-      // push the command so it shows immediately, then await the login response
-      this.commandHistory.push(command);
-      this.waiting = true;
-      // call login and wait for response
-      this.appService.login(username).subscribe({
-        next: (resp) => {
-          this.userStats = this.appService.userStats;
-          this.waiting = false;
-          setTimeout(() => this.scrollToBottom(prevHeight), 0);
-        },
-        error: () => {
-          // on error, clear waiting and still scroll
-          this.waiting = false;
-          setTimeout(() => this.scrollToBottom(prevHeight), 0);
-        }
-      });
-      return;
-    }
+    // else if (command.includes('Enter username to login: ')) {
+    //   const username = command.replace('Enter username to login: ', '').trim();
+    //   // push the command so it shows immediately, then await the login response
+    //   this.commandHistory.push(command);
+    //   this.waiting = true;
+    //   // call login and wait for response
+    //   this.userService.login(username).subscribe({
+    //     next: (resp) => {
+    //       this.userStats = this.appService.userStats;
+    //       this.waiting = false;
+    //       setTimeout(() => this.scrollToBottom(prevHeight), 0);
+    //     },
+    //     error: () => {
+    //       // on error, clear waiting and still scroll
+    //       this.waiting = false;
+    //       setTimeout(() => this.scrollToBottom(prevHeight), 0);
+    //     }
+    //   });
+    //   return;
+    // }
 
     else if (this.appNames.includes(command)) {
       this.appService.openApp(command);

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getReview(code: string): Observable<any> {
-    const body = JSON.stringify({code});
+    const body = JSON.stringify({ code });
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`https://api.nate-griffith.com/review`, body, { headers });
   }
@@ -26,18 +27,12 @@ export class ApiService {
     return this.http.get('https://api.nate-griffith.com/movie-tiers');
   }
 
-  signUp(email: string): Observable<any> {
-    const body = JSON.stringify({email});
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/signup`, body, { headers });
-  }
-
   getMSLeaderboard(): Observable<any> {
     return this.http.get('https://api.nate-griffith.com/minesweeper');
   }
 
-  updateMSLeaderboard(username: string, score: number, difficulty: string): Observable<any> {
-    const body = JSON.stringify({username, score, difficulty});
+  updateMSLeaderboard(username: string, password: string, score: number, difficulty: string): Observable<any> {
+    const body = JSON.stringify({ username, password, score, difficulty });
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`https://api.nate-griffith.com/minesweeper`, body, { headers });
   }
@@ -46,27 +41,41 @@ export class ApiService {
     return this.http.get('https://api.nate-griffith.com/weather');
   }
 
-  userLogin(username: string): Observable<any> {
-    const body = JSON.stringify({username});
+  puzzleGuess(guess: string, level: number): Observable<any> {
+    const body = JSON.stringify({ guess, level });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`https://api.nate-griffith.com/puzzle/guess`, body, { headers });
+  }
+
+  loginUser(username: string, password: string): Observable<any> {
+    const body = JSON.stringify({ username, password });
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`https://api.nate-griffith.com/login`, body, { headers });
   }
 
-  puzzleLoad(username: string): Observable<any> {
-    const body = JSON.stringify({username});
+  createUser(username: string, password: string): Observable<any> {
+    const body = JSON.stringify({ username, password });
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/puzzle/load`, body, { headers });
+    return this.http.post(`https://api.nate-griffith.com/create-user`, body, { headers });
   }
 
-  puzzleSave(username: string, level: number): Observable<any> {
-    const body = JSON.stringify({username, level});
+  updateUser(user: User): Observable<any> {
+    const body = JSON.stringify(
+      {
+        username: user.username, 
+        password: user.password, 
+        puzzle_level: user.puzzleLevel, 
+        balance: user.balance, 
+        shaped_owned: user.shapesOwned,
+        mining_tools: user.miningTools, 
+        easy: user.easy, 
+        medium: user.medium, 
+        hard: user.hard,
+        expert: user.expert, 
+        master: user.master
+      }
+    );
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/puzzle/save`, body, { headers });
-  }
-
-  puzzleGuess(guess: string, level: number): Observable<any> {
-    const body = JSON.stringify({guess, level});
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/puzzle/guess`, body, { headers });
+    return this.http.post(`https://api.nate-griffith.com/update-user`, body, { headers });
   }
 }

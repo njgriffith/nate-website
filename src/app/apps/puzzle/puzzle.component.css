@@ -1,48 +1,58 @@
-.puzzle{
+.puzzle {
     background-image: url('/assets/general/backrooms.gif');
     background-size: cover;
     color: white;
     padding: 1em;
 }
 
-.puzzle-landing{
+.puzzle-landing {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
-    
+
 }
 
-.puzzle-greeting{
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    justify-content: center;
+}
+
+.puzzle-greeting {
     font-size: 2em;
     font-weight: bold;
     margin: 1em;
 }
 
-.load-progress{
+.load-progress {
     display: flex;
     align-items: center;
     gap: 1em;
 }
-.landing-text{
+
+.landing-text {
     font-size: 1.5em;
 }
-.landing-button{
+
+.landing-button {
     font-size: 1.5em;
     padding: 0.25em 1em;
 }
 
-.level-banner{
+.level-banner {
     display: flex;
     justify-content: center;
     gap: 1em;
 }
 
-.history{
+.history {
     font-size: 1.5em;
 }
 
-.faq{
+.faq {
     background-color: white;
     color: black;
     box-shadow: inset #555 2px 2px 2px;
@@ -51,23 +61,23 @@
     width: 60%;
 }
 
-.faq-item{
+.faq-item {
     margin: 1em 0;
     border: 3px solid black;
     border-radius: 10px;
 }
 
-.faq-item:hover{
+.faq-item:hover {
     background: black;
     color: white;
     transition-duration: 0.5s;
 }
 
-.faq-item>div{
+.faq-item>div {
     margin: 0.5em;
 }
 
-.wrong{
+.wrong {
     color: red;
     background: white;
     padding: 1em;
