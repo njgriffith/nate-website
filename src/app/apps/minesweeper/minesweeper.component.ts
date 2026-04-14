@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { UserService } from '../../services/user.service';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-minesweeper',
@@ -17,7 +18,6 @@ export class MinesweeperComponent {
   isLoggedIn: boolean = false;
   difficulty: string = 'Easy';
   isLeaderboardOpen: boolean = false;
-  isPromptForLoginOpen: boolean = false;
   isPlaying: boolean = false;
   seconds: number = 0;
   thousandSecond: number = 0;
@@ -35,7 +35,7 @@ export class MinesweeperComponent {
   leaderboardData: any = [];
   difficululties: string[] = ['easy', 'medium', 'hard', 'expert', 'master'];
 
-  constructor(private apiService: ApiService, private userService: UserService) { }
+  constructor(private apiService: ApiService, private userService: UserService, private appService: AppService) { }
 
   ngOnInit() {
     this.userService.user$.subscribe((user) => {
@@ -274,18 +274,17 @@ export class MinesweeperComponent {
       this.gameOver = true;
       let score: number = this.seconds + (this.thousandSecond * 1000);
       if (!this.isLoggedIn) {
-        // prompt user to log in
+        this.appService.openApp('Login');
+        return;
       }
-      else {
-        this.updateLeaderboard(score);
-      }
+      this.updateLeaderboard(score);
     }
   }
 
   updateLeaderboard(score: number) {
     alert(`Congratulations ${this.username}! Updating leaderboards...`);
     this.apiService.updateMSLeaderboard(this.username, this.password, score, this.difficulty).subscribe((response: any) => {
-      console.log('MS response: ', response);
+      console.log(response)
     });
   }
 

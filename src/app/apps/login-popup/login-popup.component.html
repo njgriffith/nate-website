@@ -1,0 +1,12 @@
+<div class="container">
+    <label>Username</label>
+    <input type="text" [(ngModel)]="username">
+    <label>Password</label>
+    <input type="password" [(ngModel)]="password">
+</div>
+<div class="container">
+    <button (click)="login()">Login</button>
+    <div>OR</div>
+    <button (click)="createUser()">Sign Up</button>
+</div>
+<div>{{ resultMessage }}</div>

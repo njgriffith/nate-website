@@ -9,7 +9,7 @@ export class AppService {
   private mobileSubject = new BehaviorSubject<boolean>(false);
   mobile$ = this.mobileSubject.asObservable();
 
-  constructor(private userService: UserService) { }
+  constructor() { }
   private appList: App[] = [
     new App('Archive', false, false, 1),
     new App('Shape Store', false, false, 1),
@@ -23,34 +23,49 @@ export class AppService {
     new App('Settings', false, false, 1),
     new App('Weather', false, false, 1),
     new App('Minesweeper', false, false, 1),
-    new App('Command Line', true, false, 1),
+    new App('Command Line', false, false, 1),
+    new App('Login', true, false, 1),
     new App('Recycle', false, false, 1)
   ];
 
-  private apps = new BehaviorSubject<App[]>(this.appList);
-  setMobile(isMobile: boolean) {
-    this.mobileSubject.next(isMobile);
-    this.apps.next(this.appList);
-  }
-  private backgroundCode = new Subject<string>();
-  private puzzleTitle = new Subject<string>();
+  levelTitles: Record<number, string> = {
+    0: 'Solve My Puzzle!',
+    1: 'Level 1',
+    2: 'Royal Flush! (Level 2)',
+    3: 'Curie! (Level 3)',
+    4: 'Babel, I would like a book please (Level 4)',
+    5: 'Ave Caesar! (Level 5)',
+    6: 'R G B (Level 6)',
+    7: 'Breckenridge! (Level 7)',
+    8: 'Around the world! (Level 8)',
+    9: 'What\'s in the box!! (Level 9)',
+    10: 'Ten! (Level 10)',
+    11: 'Congrats!'
+  };
 
+  private apps = new BehaviorSubject<App[]>(this.appList);
   apps$ = this.apps.asObservable();
+  private backgroundCode = new Subject<string>();
   backgroundCode$ = this.backgroundCode.asObservable();
-  puzzleTitle$ = this.puzzleTitle.asObservable();
   private sleepSubject = new BehaviorSubject<boolean>(false);
   sleep$ = this.sleepSubject.asObservable();
   recycledAppsSubject = new BehaviorSubject<any[]>([]);
   recycledApps$ = this.recycledAppsSubject.asObservable();
 
-  user$ = this.userService.user$;
-
-  get user() {
-    return this.userService.user;
+  setMobile(isMobile: boolean) {
+    this.mobileSubject.next(isMobile);
+    this.apps.next(this.appList);
   }
 
   setSleep(value: boolean) {
     this.sleepSubject.next(value);
+  }
+
+  setAppTopLeft(code: string, left: number, top: number) {
+    const updatedApps = this.apps.value.map(app =>
+      app.name === code ? { ...app, left: left, top: top } : app
+    );
+    this.apps.next(updatedApps);
   }
 
   openApp(code: string) {
@@ -119,10 +134,6 @@ export class AppService {
       return app;
     });
     this.apps.next(updatedApps);
-  }
-
-  setPuzzleTitle(title: string) {
-    this.puzzleTitle.next(title);
   }
 
   getAppNames(): string[] {

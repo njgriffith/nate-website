@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { ApiService } from './api.service';
+import { AppService } from './prod-app.service';
 
 export interface User {
     isLoggedIn: boolean;
@@ -20,9 +21,6 @@ export interface User {
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    private passwordSubject = new BehaviorSubject<string>('');
-    password$ = this.passwordSubject.asObservable();
-
     user: User = {
         isLoggedIn: false,
         username: '',
@@ -40,49 +38,51 @@ export class UserService {
     private userSubject = new BehaviorSubject<User>(this.user);
     user$ = this.userSubject.asObservable();
 
-    constructor(private apiService: ApiService) { }
+    constructor(private apiService: ApiService, private appService: AppService) { }
 
     login(username: string, password: string) {
-        if (password !== undefined) {
-            this.passwordSubject.next(password);
-        }
         return this.apiService.loginUser(username, password).pipe(
             tap((response: any) => {
-                this.setUser(username, response?.user_data ?? {});
+                this.setUser(username, password, response?.user_data ?? {});
             })
         );
     }
 
-    setUser(username: string, userData: Record<string, any>) {
+    setUser(username: string, password: string, userData: Record<string, any>) {
         this.user.isLoggedIn = true;
         this.user.username = username;
-        this.user.password = this.passwordSubject.value;
-        this.user.puzzleLevel = userData['puzzle'] ?? 0;
-        this.user.easy = userData['easy'] ?? undefined;
-        this.user.medium = userData['medium'] ?? undefined;
-        this.user.hard = userData['hard'] ?? undefined;
-        this.user.expert = userData['expert'] ?? undefined;
-        this.user.master = userData['master'] ?? undefined;
+        this.user.password = password;
+        this.user.puzzleLevel = userData['puzzle_level'] ?? 0;
+        this.user.easy = userData['ms_easy_best'] ?? undefined;
+        this.user.medium = userData['ms_medium_best'] ?? undefined;
+        this.user.hard = userData['ms_hard_best'] ?? undefined;
+        this.user.expert = userData['ms_expert_best'] ?? undefined;
+        this.user.master = userData['ms_master_best'] ?? undefined;
         this.user.balance = userData['balance'] ?? 0;
         this.user.shapesOwned = userData['shapes_owned'] ?? [];
         this.user.miningTools = userData['mining_tools'] ?? [];
 
         this.userSubject.next(this.user);
+        this.appService.setPuzzleTitle(this.appService.levelTitles[this.user.puzzleLevel]);
     }
 
-    updateUserBackend() {
+    refreshUser() {
+        this.userSubject.next(this.user);
+    }
+
+    updateUserBackend(): boolean {
         this.apiService.updateUser(this.user).subscribe({
             next: () => {
-                alert('user updated successfully');
                 this.userSubject.next(this.user);
+                return true;
             },
             error: () => {
-                console.log('error updating user');
+                return false;
             }
         });
+        return false;
     }
-
-    setPassword(password: string) {
-        this.passwordSubject.next(password);
+    createUser(username: string, password: string) {
+        return this.apiService.createUser(username, password).pipe();
     }
 }

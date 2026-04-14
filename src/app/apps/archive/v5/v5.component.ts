@@ -90,7 +90,6 @@ export class V5Component {
 
   dragBox(event: any) {
     if (!this.isDraggingBox || !this.rightClickBoxRef.nativeElement || !this.box) return;
-    console.log('drag')
     let currentX = event.clientX;
     let currentY = event.clientY;
     let width = Math.abs(event.clientX - this.rightClickStartX);

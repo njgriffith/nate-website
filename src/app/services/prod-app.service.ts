@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { App } from '../models/app.model';
-import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
@@ -9,7 +8,7 @@ export class AppService {
   private mobileSubject = new BehaviorSubject<boolean>(false);
   mobile$ = this.mobileSubject.asObservable();
 
-  constructor(private userService: UserService) { }
+  constructor() { }
   private appList: App[] = [
     new App('Archive', false, false, 1),
     new App('Shape Store', true, false, 1),
@@ -24,8 +23,24 @@ export class AppService {
     new App('Weather', false, false, 1),
     new App('Minesweeper', false, false, 1),
     new App('Command Line', false, false, 1),
+    new App('Login', true, false, 1),
     new App('Recycle', false, false, 1)
   ];
+
+  levelTitles: Record<number, string> = {
+    0: 'Solve My Puzzle!',
+    1: 'Level 1',
+    2: 'Royal Flush! (Level 2)',
+    3: 'Curie! (Level 3)',
+    4: 'Babel, I would like a book please (Level 4)',
+    5: 'Ave Caesar! (Level 5)',
+    6: 'R G B (Level 6)',
+    7: 'Breckenridge! (Level 7)',
+    8: 'Around the world! (Level 8)',
+    9: 'What\'s in the box!! (Level 9)',
+    10: 'Ten! (Level 10)',
+    11: 'Congrats!'
+  };
 
   private apps = new BehaviorSubject<App[]>(this.appList);
   setMobile(isMobile: boolean) {
@@ -42,13 +57,6 @@ export class AppService {
   sleep$ = this.sleepSubject.asObservable();
   recycledAppsSubject = new BehaviorSubject<any[]>([]);
   recycledApps$ = this.recycledAppsSubject.asObservable();
-
-  user$ = this.userService.user$;
-  puzzleLevel$ = this.userService.puzzleLevel$;
-
-  get user() {
-    return this.userService.user;
-  }
 
   setSleep(value: boolean) {
     this.sleepSubject.next(value);

@@ -1,48 +1,52 @@
-<div #cli class="cli-background" tabindex="0" role="textbox" aria-label="admin console" (focus)="onFocus()"
-    (blur)="onBlur()" (keydown)="recordInput($event)">
-    <div *ngFor="let command of commandHistory; let i = index" class="previous-command">
-        <span class="current-line" *ngIf="user === ''">&nbsp;guest&#64;nate-griffith.com>&nbsp;</span>
-        <span class="current-line" *ngIf="user !== ''">&nbsp;{{user}}&#64;nate-griffith.com>&nbsp;</span>
-        <span>{{command}}</span>
-        <!-- if command exists -->
-        <div *ngIf="availableCommands[command]">
-            <div *ngIf="availableCommands[command].includes('\n')">
-                <div *ngFor="let line of availableCommands[command].split('\n')">
-                    <div *ngIf="command === 'help'">
-                        <span class="syntax-highlight">{{line.split(' - ')[0]}}</span>
-                        <span>&nbsp;-&nbsp;{{line.split(' - ')[1]}}</span>
-                    </div>
-                    <div *ngIf="command !== 'help'">{{line}}</div>
-                </div>
+<div #cli class="cli-background" tabindex="0" role="textbox" aria-label="admin console"
+  (focus)="onFocus()" (blur)="onBlur()" (keydown)="recordInput($event)">
+
+  <div *ngFor="let entry of commandHistoryDisplay" class="previous-command">
+
+    <!-- Prompt inputs don't get a prompt prefix — they're answers, not commands -->
+    <ng-container *ngIf="!entry.isPromptInput">
+      <span class="current-line">
+        &nbsp;{{ user || 'guest' }}&#64;nate-griffith.com&nbsp;>&nbsp;
+      </span>
+      <span>{{ entry.text }}</span>
+
+      <!-- Response for known commands -->
+      <ng-container *ngIf="commandMap[entry.text] as cmd">
+        <ng-container *ngIf="cmd.response">
+          <div *ngIf="cmd.response.includes('\n'); else singleLine">
+            <div *ngFor="let line of cmd.response.split('\n')">
+              <ng-container *ngIf="entry.text === 'help'; else plainLine">
+                <span class="syntax-highlight">{{ line.split(' - ')[0] }}</span>
+                <span>&nbsp;-&nbsp;{{ line.split(' - ')[1] }}</span>
+              </ng-container>
+              <ng-template #plainLine>{{ line }}</ng-template>
             </div>
-            <div *ngIf="!availableCommands[command].includes('\n')">{{availableCommands[command]}}</div>
-        </div>
-        <!-- else -->
-        <div *ngIf="command.includes('Enter username to login: ')">
-            <div *ngIf="waiting">
-                <div>logging in...</div>
-            </div>
-            <div *ngIf="!waiting">
-                <div *ngIf="user === 'guest'">
-                    <div>login failed</div>
-                </div>
-                <div *ngIf="user !== 'guest'">
-                    <div>logged in as "{{user}}"</div>
-                    <div>puzzle level: {{userStats['puzzleLevel'] || 'none'}}</div>
-                    <div>minesweeper easy best: {{userStats['easy'] || 'none'}}</div>
-                    <div>minesweeper medium best: {{userStats['medium'] || 'none'}}</div>
-                    <div>minesweeper hard best: {{userStats['hard'] || 'none'}}</div>
-                    <div>minesweeper expert best: {{userStats['expert'] || 'none'}}</div>
-                    <div>minesweeper master best: {{userStats['master'] || 'none'}}</div>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="!availableCommands[command] && !command.includes('Enter username to login: ')">
-            <div>command not found: {{command}}</div>
-        </div>
-    </div>
-    <span class="current-line" *ngIf="user === ''">&nbsp;guest&#64;nate-griffith.com>&nbsp;</span>
-    <span class="current-line" *ngIf="user !== ''">&nbsp;{{user}}&#64;nate-griffith.com>&nbsp;</span>
-    <span #cursor></span>
-    <span #blink class="hidden">_</span>
+          </div>
+          <ng-template #singleLine>
+            <div>{{ cmd.response }}</div>
+          </ng-template>
+        </ng-container>
+      </ng-container>
+
+      <!-- Unknown command -->
+      <div *ngIf="!commandMap[entry.text]">
+        command not found: {{ entry.text }}
+      </div>
+    </ng-container>
+
+    <!-- Prompt inputs: just show the text, no prefix -->
+    <ng-container *ngIf="entry.isPromptInput">
+      <span>{{ entry.text }}</span>
+    </ng-container>
+
+  </div>
+
+  <!-- Active input line -->
+  <span class="current-line">
+    &nbsp;{{ user || 'guest' }}&#64;nate-griffith.com&nbsp;>&nbsp;
+  </span>
+  <span *ngIf="isPromptingUser">{{ currentPrompt }}</span>
+  <span #cursor></span>
+  <span #blink class="hidden">_</span>
+
 </div>

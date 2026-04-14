@@ -17,6 +17,8 @@ import { StuffILikeComponent } from '../apps/stuff-i-like/stuff-i-like.component
 import { ArchiveComponent } from '../apps/archive/archive.component';
 import { ShapeStoreComponent } from '../apps/shape-store/shape-store.component';
 import { MineNateCoinComponent } from '../apps/mine-nate-coin/mine-nate-coin.component';
+import { User, UserService } from '../services/user.service';
+import { LoginPopupComponent } from '../apps/login-popup/login-popup.component';
 @Component({
   selector: 'app-desktop',
   standalone: true,
@@ -57,10 +59,11 @@ export class DesktopComponent {
     'Recycle': RecycleComponent,
     'Command Line': AdminComponent,
     'Shape Store': ShapeStoreComponent,
-    'Mine Nate Coin': MineNateCoinComponent
+    'Mine Nate Coin': MineNateCoinComponent,
+    'Login': LoginPopupComponent
   };
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private userService: UserService) { }
 
   ngOnInit() {
     this.appService.backgroundCode$.subscribe(code => this.updateBackground(code));
@@ -69,9 +72,11 @@ export class DesktopComponent {
       this.openApps = this.apps.filter(app => app.isOpen);
       this.mediaPlayer = this.apps.find(app => app.name === 'Media Player');
     });
-    this.appService.puzzleTitle$.subscribe(title => this.puzzleTitle = title);
     this.appService.recycledApps$.subscribe((recycledApps: any[]) => {
       this.appsToRecycle = recycledApps.map(app => app.name);
+    });
+    this.userService.user$.subscribe((user: User) => {
+      this.puzzleTitle = this.appService.levelTitles[user.puzzleLevel];
     });
   }
 
