@@ -62,6 +62,13 @@ export class AppService {
     this.sleepSubject.next(value);
   }
 
+  setAppTopLeft(code: string, left: number, top: number) {
+    const updatedApps = this.apps.value.map(app =>
+      app.name === code ? { ...app, left: left, top: top } : app
+    );
+    this.apps.next(updatedApps);
+  }
+
   openApp(code: string) {
     const updatedApps = this.apps.value.map(app =>
       app.name === code ? { ...app, isOpen: true } : app
