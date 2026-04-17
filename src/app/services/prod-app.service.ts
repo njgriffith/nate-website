@@ -11,7 +11,7 @@ export class AppService {
   constructor() { }
   private appList: App[] = [
     new App('Archive', false, false, 1),
-    new App('Shape Store', true, false, 1),
+    new App('Shape Store', false, false, 1),
     new App('Mine Nate Coin', false, false, 1),
     new App('Stuff I Like', false, false, 1),
     new App('Puzzle', false, false, 1),

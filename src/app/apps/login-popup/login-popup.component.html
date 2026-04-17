@@ -1,4 +1,4 @@
-<div class="login">
+<div class="login" *ngIf="!isLoggedIn;">
     <div class="container">
         <label>Username</label>
         <input type="text" [(ngModel)]="username">
@@ -11,4 +11,7 @@
         <button (click)="createUser()">Sign Up</button>
     </div>
     <div style="display: flex; justify-content: center; font-size: 2em;">{{ resultMessage }}</div>
+</div>
+<div *ngIf="isLoggedIn;" class="login">
+    <label>Welcome, {{ username }}!</label>
 </div>

@@ -31,8 +31,8 @@
                 <div class="mine" *ngIf="i === 0">
                     <div *ngFor="let row of mine.grid" class="mining-row">
                         <div *ngFor="let cell of row" class="mine-cell" [class.mined]="cell.isMined"
-                            [class.detecting]="cell.isRevealed && !cell.hasPlayer && !cell.hasCoin"
-                            [class.coin]="cell.hasCoin && cell.isRevealed" [class.player]="cell.hasPlayer"></div>
+                            [class.detecting]="!cell.isMined && cell.isRevealed && !cell.hasPlayer && !cell.hasCoin"
+                            [class.coin]="cell.hasCoin && cell.isRevealed" [class.player]="cell.hasPlayer" [class.mined-detecting]="cell.isRevealed && cell.isMined && !cell.hasPlayer"></div>
                     </div>
                 </div>
                 <!-- employee mine(s) -->

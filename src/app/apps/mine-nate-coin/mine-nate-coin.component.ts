@@ -480,11 +480,17 @@ export class MineNateCoinComponent implements OnDestroy {
   }
 
   upgradeOreDetector() {
+    if (this.balance < this.oreDetectorCosts[this.oreDetector]) {
+      return;
+    }
     this.oreDetector++;
     this.revealSurroundingCells();
   }
 
   unlockEmployee(index: number) {
+    if (this.balance < this.employeeCosts[0]) {
+      return;
+    }
     this.employees[index] = 1;
     this.balance -= this.employeeCosts[0];
     this.userService.user.miningTools['employees'][index] = 1;

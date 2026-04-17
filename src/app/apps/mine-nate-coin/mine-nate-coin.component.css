@@ -48,6 +48,10 @@
     background: blue;
 }
 
+.mined-detecting {
+    background: darkblue;
+}
+
 .hud-container {
     display: flex;
     justify-content: space-between;
