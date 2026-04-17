@@ -1,6 +1,4 @@
 .minesweeper{
-    max-height: 400px;
-    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,18 +25,38 @@
     display: flex;
     justify-content: center;
     margin: 3em 0;
+    width: 100%;
+    border: 1px solid red;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
-.minesweeper-cell {
+.table-container > div {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.ms-row{
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid red;
+    box-sizing: border-box;
+}
+
+.ms-cell {
     cursor: pointer;
     padding: 0;
     margin: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
-.minesweeper-cell>img {
+.ms-cell>img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 .sunken-panel>table{
