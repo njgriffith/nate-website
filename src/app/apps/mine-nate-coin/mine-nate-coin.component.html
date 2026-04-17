@@ -1,1 +1,74 @@
-<p>mine-nate-coin works!</p>
+<div class="mine-nate-coin">
+    <div *ngIf="!isLoggedIn" class="login-button">
+        <button (click)="login($event)">Log In</button>
+    </div>
+
+    <ng-container *ngIf="isLoggedIn">
+        <div class="hud-container">
+            <div>
+                <div>User: {{username}}</div>
+                <div>Total Balance: {{balance}}</div>
+                <div>Coins Mined: {{coinsMined}}</div>
+                <div>Mine Level: {{mines[0].level}}</div>
+                <div>Fuel Remaining: {{fuelLevel}}</div>
+                <button (click)="updateUserBalance()">Deposit Coins</button>
+            </div>
+            <div>
+                <div style="text-align: center;">Legend</div>
+                <div class="legend-entry"
+                    [class.black-background]="item['class'] === 'player' || item['class'] === 'coin'"
+                    *ngFor="let item of legend">
+                    <div>{{item['label']}}</div>
+                    <div> - </div>
+                    <div class="legend-icon {{item['class']}}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container" (keydown)="handleKeyPress($event)" tabindex="0" (keypress)="handleKeyPress($event)">
+            <ng-container *ngFor="let mine of mines; let i = index">
+                <!-- user mine -->
+                <div class="mine" *ngIf="i === 0">
+                    <div *ngFor="let row of mine.grid" class="mining-row">
+                        <div *ngFor="let cell of row" class="mine-cell" [class.mined]="cell.isMined"
+                            [class.detecting]="cell.isRevealed && !cell.hasPlayer && !cell.hasCoin"
+                            [class.coin]="cell.hasCoin && cell.isRevealed" [class.player]="cell.hasPlayer"></div>
+                    </div>
+                </div>
+                <!-- employee mine(s) -->
+                <button *ngIf="employeeStates[i-1] !== undefined" [disabled]="employeeStates[i-1].fuel > 0" style="width: fit-content" (click)="refuelEmployee(i-1)">Refuel</button>
+                <div class="mine" *ngIf="i > 0">
+                    <div *ngFor="let row of mine.grid" class="mining-row">
+                        <div *ngFor="let cell of row" class="mine-cell" [class.mined]="cell.isMined"
+                            [class.coin]="cell.hasCoin" [class.player]="cell.hasPlayer"></div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <button *ngIf="!showUpgradeMenu" (click)="showUpgradeMenu = !showUpgradeMenu">Show Upgrade Menu</button>
+            <button *ngIf="showUpgradeMenu" (click)="showUpgradeMenu = !showUpgradeMenu">Hide Upgrade Menu</button>
+        </div>
+
+        <div class="hud-bottom-container" *ngIf="showUpgradeMenu">
+            <div *ngFor="let employee of employees; let i = index">
+                <div class="upgrade-container">
+                    <div>(lvl {{employee}}) Employee {{i+1}}:&nbsp;</div>
+                    <button *ngIf="employee > 0" [disabled]="employee === 5"
+                        (click)="upgradeEmployee(i)">Upgrade</button>
+                    <button *ngIf="employee === 0" [disabled]="i > 0 && !employees[i-1]"
+                        (click)="unlockEmployee(i)">Unlock</button>
+                    <div *ngIf="employee < 5">Cost: {{employeeCosts[employee]}} NG$</div>
+                    <div *ngIf="employee === 5">Max Level</div>
+                </div>
+            </div>
+            <hr>
+            <div class="upgrade-container">
+                <div>Ore detector level: {{oreDetector}}</div>
+                <button [disabled]="oreDetector === 5" (click)="upgradeOreDetector()">Upgrade</button>
+                <div *ngIf="oreDetector < 5">Cost: {{oreDetectorCosts[oreDetector]}} NG$</div>
+                <div *ngIf="oreDetector === 5">Max Level</div>
+            </div>
+        </div>
+    </ng-container>
+</div>

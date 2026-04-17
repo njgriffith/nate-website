@@ -62,20 +62,32 @@ export class ApiService {
   updateUser(user: User): Observable<any> {
     const body = JSON.stringify(
       {
-        username: user.username, 
-        password: user.password, 
-        puzzle_level: user.puzzleLevel, 
-        balance: user.balance, 
+        username: user.username,
+        password: user.password,
+        puzzle_level: user.puzzleLevel,
+        balance: user.balance,
         shaped_owned: user.shapesOwned,
-        mining_tools: user.miningTools, 
-        easy: user.easy, 
-        medium: user.medium, 
+        mining_tools: user.miningTools,
+        easy: user.easy,
+        medium: user.medium,
         hard: user.hard,
-        expert: user.expert, 
+        expert: user.expert,
         master: user.master
       }
     );
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`https://api.nate-griffith.com/update-user`, body, { headers });
+  }
+
+  purchaseShape(user: User, shape: string, price: number) {
+    const body = JSON.stringify(
+      {
+        username: user.username,
+        shape: shape,
+        price: price
+      }
+    );
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(`https://api.nate-griffith.com/purchase-shape`, body, { headers });
   }
 }

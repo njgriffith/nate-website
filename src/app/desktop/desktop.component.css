@@ -45,8 +45,8 @@
     outline: 1px dotted blue;
 }
 
-.highlighted-icon{
-  background: rgba(0, 40, 255, 0.4);
+.highlighted-icon {
+    background: rgba(0, 40, 255, 0.4);
 }
 
 img {
@@ -59,6 +59,18 @@ img {
 
 .window {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    max-height: 60%;
+    overflow: hidden;
+}
+
+.window-body {
+    flex: 1;
+    overflow: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .hidden {
@@ -71,4 +83,9 @@ img {
     left: 0px;
     background: rgba(0, 0, 255, 0.4);
     outline: 1px dotted blue;
+}
+
+.app {
+    height: 100vh;
+    width: 100vw;
 }

@@ -23,13 +23,11 @@ img {
 }
 
 .creature-page-bottom{
+    position: sticky;
+    bottom: 2%;
     display: flex;
     justify-content: center;
     gap: 2em;
     align-items: center;
     margin: 2em 0;
-}
-
-button{
-    height: 50%;
 }

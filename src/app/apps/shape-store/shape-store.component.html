@@ -39,10 +39,18 @@
             </div>
         </div>
     </div>
-    <div>
-        <div class="controls-title">Shape Store</div>
+    <div class="center-container">
+        <div class="controls-title">{{selectedShape}}<span *ngIf="isLoggedIn && shapesOwned.includes(selectedShape)">:&nbsp;OWNED</span></div>
         <canvas #canvas></canvas>
         <div class="controls-title">Price: {{shapePrice}} NG$</div>
+        <div class="purchase-response">{{purchaseResponse}}</div>
+        <ng-container *ngIf="isLoggedIn">
+            <div class="controls-title">Balance: {{balance}} NG$</div>
+            <button *ngIf="!shapesOwned.includes(selectedShape)" class="purchase-button" (click)="purchaseShape($event)">Purchase</button>
+        </ng-container>
+        <ng-container *ngIf="!isLoggedIn">
+            <button class="purchase-button" (click)="purchaseShape($event)">Purchase</button>
+        </ng-container>
     </div>
 
     <div class="shape-editor">

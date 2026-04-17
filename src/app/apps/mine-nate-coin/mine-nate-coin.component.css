@@ -1,0 +1,103 @@
+.mine-nate-coin {
+    background-image: url('/assets/general/ice-cubes.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.login-button {
+    padding: 10em 20em;
+    display: flex;
+    justify-content: center;
+}
+
+.login-button>button {
+    font-size: 1.5em;
+    padding: 0.5em 1.5em;
+}
+
+.mine {
+    background: black;
+    height: 100%;
+    margin: 2em 0;
+}
+
+.mining-row {
+    display: flex;
+    justify-content: center;
+}
+
+.mine-cell {
+    width: 10px;
+    height: 10px;
+    background: #555;
+}
+
+.mined {
+    background: #222;
+}
+
+.coin {
+    background: gold;
+}
+
+.player {
+    background: white;
+}
+
+.detecting {
+    background: blue;
+}
+
+.hud-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.hud-container>div {
+    background: #ccc;
+    font-weight: bold;
+    font-size: 1.5em;
+    padding: 0.5em;
+}
+
+.bottom-spacing {
+    height: 4.5em;
+}
+
+.legend-entry {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.legend-icon {
+    width: 10px;
+    height: 10px;
+}
+
+.black-background {
+    background: black;
+    color: white;
+    font-weight: bold;
+}
+
+.hud-bottom-container {
+    background: #ccc;
+    padding: 1em 0;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.upgrade-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.focused{
+    border: 5px solid white;
+}
+
+.unfocused{
+    border: 5px solid transparent;
+}

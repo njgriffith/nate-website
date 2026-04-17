@@ -1,7 +1,23 @@
+.login{
+    background-image: url('/assets/general/volleyball.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 10em;
+    /* color: white; */
+    font-weight: bold;
+    font-size: 1em;
+}
+
+label{
+    font-size: 2em;
+    /* background: white; */
+}
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
+    /* margin: 1em; */
     margin: 1em;
 }

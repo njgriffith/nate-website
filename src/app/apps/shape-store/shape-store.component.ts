@@ -2,6 +2,8 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@ang
 import { FormsModule } from '@angular/forms';
 import { Shape, ShapeTypes, Vertex } from '../../models/shape.model';
 import { CommonModule } from '@angular/common';
+import { User, UserService } from '../../services/user.service';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-shape-store',
@@ -28,17 +30,25 @@ export class ShapeStoreComponent implements AfterViewInit, OnDestroy {
   animationFrameId: number | null = null;
 
   selectedShape: ShapeTypes = ShapeTypes.CUBE;
-  shapeOptions: ShapeTypes[] = Object.keys(ShapeTypes).filter((v): v is string => isNaN(Number(v))).map((v) => ShapeTypes[v as keyof typeof ShapeTypes]);
+  shapeOptions: ShapeTypes[] = [ShapeTypes.CUBE, ShapeTypes.PYRAMID, ShapeTypes.HEX_LOG, ShapeTypes.SPHERE, ShapeTypes.WHEEL, ShapeTypes.TORUS];
   shapeColor: string = "#0f0";
 
   shape!: Shape;
   vertices: Vertex[] = [];
   faces: number[][] = [];
   shapePrice: number = 0;
+  purchaseResponse: string = '';
 
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   canvasElement!: HTMLCanvasElement;
   ctx!: CanvasRenderingContext2D;
+
+  username: string = '';
+  balance: number = 0;
+  isLoggedIn: boolean = false;
+  shapesOwned: string[] = [];
+
+  constructor(private userService: UserService, private appService: AppService){}
 
   updateRPM() {
     this.dTheta = (this.rpm / 60) * Math.PI;
@@ -60,7 +70,39 @@ export class ShapeStoreComponent implements AfterViewInit, OnDestroy {
     this.isFlinging = true;
   }
 
+  purchaseShape(event: any){
+    if (!this.isLoggedIn){
+      this.appService.setAppTopLeft('Login', event.clientX, event.clientY);
+      this.appService.openApp('Login');
+    }
+    if (this.isLoggedIn && !this.shapesOwned.includes(this.selectedShape)){
+      if (this.balance < this.shapePrice){
+        this.purchaseResponse = 'Insufficient balance, better head to the mines...';
+        return;
+      }
+      let s: string = this.selectedShape;
+      this.userService.purchaseShape(s, this.shapePrice).subscribe((response: any) => {
+        if (response.success) {
+          this.userService.user.balance -= this.shapePrice;
+          this.userService.refreshUser();
+          this.purchaseResponse = `User ${this.username} has purchased ${s}` + '\n' + 'Thank you for your business';
+        }
+        else{
+          this.purchaseResponse = `Failed to purchase shape`;
+        }
+      });
+    }
+  }
+
   ngOnInit() {
+    this.userService.user$.subscribe((user: User) => {
+      if (user) {
+        this.username = user.username;
+        this.isLoggedIn = user.isLoggedIn;
+        this.shapesOwned = user.shapesOwned;
+        this.balance = user.balance;
+      }
+    });
     this.updateShapeSelection();
   }
 

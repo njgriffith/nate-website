@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { App } from '../models/app.model';
-import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
@@ -14,7 +13,7 @@ export class AppService {
     new App('Archive', false, false, 1),
     new App('Shape Store', false, false, 1),
     new App('Mine Nate Coin', false, false, 1),
-    new App('Stuff I Like', false, false, 1),
+    new App('Stuff I Like', true, false, 1),
     new App('Puzzle', false, false, 1),
     new App('Media Player', false, false, 1),
     new App('Stats', false, false, 1),
@@ -24,7 +23,7 @@ export class AppService {
     new App('Weather', false, false, 1),
     new App('Minesweeper', false, false, 1),
     new App('Command Line', false, false, 1),
-    new App('Login', true, false, 1),
+    new App('Login', false, false, 1),
     new App('Recycle', false, false, 1)
   ];
 

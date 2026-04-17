@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { ApiService } from './api.service';
 import { AppService } from './prod-app.service';
@@ -16,7 +16,7 @@ export interface User {
     master: number | undefined;
     balance: number;
     shapesOwned: string[];
-    miningTools: string[];
+    miningTools: Record<string, any>;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -33,7 +33,7 @@ export class UserService {
         master: undefined,
         balance: 0,
         shapesOwned: [],
-        miningTools: []
+        miningTools: { "employees": [0, 0, 0, 0, 0], "ore_detector": 0 }
     };
     private userSubject = new BehaviorSubject<User>(this.user);
     user$ = this.userSubject.asObservable();
@@ -60,7 +60,7 @@ export class UserService {
         this.user.master = userData['ms_master_best'] ?? undefined;
         this.user.balance = userData['balance'] ?? 0;
         this.user.shapesOwned = userData['shapes_owned'] ?? [];
-        this.user.miningTools = userData['mining_tools'] ?? [];
+        this.user.miningTools = userData['mining_tools'] ?? { "employees": [0, 0, 0, 0, 0], "ore_detector": 0 };
 
         this.userSubject.next(this.user);
         this.appService.setPuzzleTitle(this.appService.levelTitles[this.user.puzzleLevel]);
@@ -70,19 +70,16 @@ export class UserService {
         this.userSubject.next(this.user);
     }
 
-    updateUserBackend(): boolean {
-        this.apiService.updateUser(this.user).subscribe({
-            next: () => {
-                this.userSubject.next(this.user);
-                return true;
-            },
-            error: () => {
-                return false;
-            }
-        });
-        return false;
+    updateUserBackend(): Observable<any> {
+        return this.apiService.updateUser(this.user).pipe(
+            tap(() => this.userSubject.next(this.user))
+        );
     }
     createUser(username: string, password: string) {
         return this.apiService.createUser(username, password).pipe();
+    }
+
+    purchaseShape(shape: string, price: number){
+        return this.apiService.purchaseShape(this.user, shape, price);
     }
 }

@@ -47,9 +47,9 @@ export class StuffILikeComponent {
 
   stuffOnThisSite: Record<string, any[]> = {
     "Labor of Love": ['Media Player', 'Puzzle'],
-    "Really Cool": ['Shape Store', 'Catalog', 'Archive', 'Stuff I Like', 'Internet', 'Minesweeper'],
+    "Really Cool": ['Shape Store', 'Mine Nate Coin' ,'Catalog', 'Archive', 'Stuff I Like', 'Internet', 'Minesweeper'],
     "Decent": ['Weather', 'Stats', 'Command Line', 'Settings'],
-    "Uninteresting or Broken": ['Mailing List', 'Recycle']
+    "Uninteresting": ['Login', 'Recycle']
   };
 
   albumTiers: string[] = Object.keys(this.albums);
