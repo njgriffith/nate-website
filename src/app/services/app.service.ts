@@ -17,11 +17,11 @@ export class AppService {
     new App('Puzzle', false, false, 1),
     new App('Media Player', false, false, 1),
     new App('Stats', false, false, 1),
-    new App('Internet', false, false, 1),
+    new App('Internet', true, false, 1),
     new App('Catalog', false, false, 1),
     new App('Settings', false, false, 1),
     new App('Weather', false, false, 1),
-    new App('Minesweeper', true, false, 1),
+    new App('Minesweeper', false, false, 1),
     new App('Command Line', false, false, 1),
     new App('Login', false, false, 1),
     new App('Recycle', false, false, 1)

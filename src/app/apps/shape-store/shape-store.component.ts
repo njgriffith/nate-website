@@ -29,7 +29,7 @@ export class ShapeStoreComponent implements AfterViewInit, OnDestroy {
   dz: number = 0.2;
   animationFrameId: number | null = null;
 
-  selectedShape: ShapeTypes = ShapeTypes.CUBE;
+  selectedShape: ShapeTypes = ShapeTypes.SPHERE;
   shapeOptions: ShapeTypes[] = [ShapeTypes.CUBE, ShapeTypes.PYRAMID, ShapeTypes.HEX_LOG, ShapeTypes.SPHERE, ShapeTypes.WHEEL, ShapeTypes.TORUS];
   shapeColor: string = "#0f0";
 

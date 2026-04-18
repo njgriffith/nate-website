@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { AppService } from '../services/app.service';
-import { CommonModule } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { App } from '../models/app.model';
 
 @Component({
   selector: 'app-taskbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgFor],
   templateUrl: './taskbar.component.html',
   styleUrl: './taskbar.component.css'
 })

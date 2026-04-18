@@ -7,6 +7,7 @@
 </div>
 <div *ngIf="!selectedWebsite" class="landing-page-container"></div>
 <div *ngIf="selectedWebsite" class="sunken-panel webpage">
-    <ng-container [ngComponentOutlet]="websites[selectedWebsite]"></ng-container>
+    <ng-container *ngIf="!websites[selectedWebsite].iframe" [ngComponentOutlet]="websites[selectedWebsite].siteComponent"></ng-container>
+    <ng-container *ngIf="websites[selectedWebsite].iframe" [ngComponentOutlet]="websites[selectedWebsite].siteComponent" [ngComponentOutletInputs]="{url: selectedWebsite}"></ng-container>
 </div>
 

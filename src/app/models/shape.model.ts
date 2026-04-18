@@ -112,6 +112,7 @@ export class Shape {
                 }
                 this.faces.push(temp);
             }
+            console.log(this.faces)
             this.cameraDistance = 2;
         }
         else if (type === ShapeTypes.WHEEL) {

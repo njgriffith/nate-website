@@ -1,5 +1,5 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CommonModule } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { AppService } from '../services/app.service';
 import { StatsComponent } from '../apps/stats/stats.component';
@@ -22,7 +22,7 @@ import { LoginPopupComponent } from '../apps/login-popup/login-popup.component';
 @Component({
   selector: 'app-desktop',
   standalone: true,
-  imports: [CommonModule, DragDropModule, MediaPlayerComponent],
+  imports: [NgFor, NgIf, NgClass, DragDropModule, MediaPlayerComponent],
   templateUrl: './desktop.component.html',
   styleUrl: './desktop.component.css'
 })
