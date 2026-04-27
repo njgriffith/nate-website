@@ -21,6 +21,7 @@ export class AppComponent {
   windowHeight: number | undefined = undefined;
   magicWidth: number = 529;
   magicHeight: number = 321;
+  username: string = '';
   constructor(private breakpointObserver: BreakpointObserver, private appService: AppService) { }
 
   ngOnInit() {
@@ -41,10 +42,6 @@ export class AppComponent {
     this.appService.sleep$.subscribe(flag => {
       this.sleep = flag;
     });
-
-    // this.appService.user$.subscribe(username => {
-    //   this.user = username;
-    // });
   }
 
   wakeUp() {
@@ -59,7 +56,7 @@ export class AppComponent {
     if (this.windowWidth === this.magicWidth && this.windowHeight === this.magicHeight) {
       this.appService.updateBackground('calamity');
     }
-    else{
+    else {
       this.appService.updateBackground('metropolis');
     }
   }

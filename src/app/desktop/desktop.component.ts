@@ -1,5 +1,5 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { AppService } from '../services/app.service';
 import { StatsComponent } from '../apps/stats/stats.component';
@@ -12,17 +12,18 @@ import { PuzzleComponent } from '../apps/puzzle/puzzle.component';
 import { App } from '../models/app.model';
 import { WeatherComponent } from '../apps/weather/weather.component';
 import { RecycleComponent } from '../apps/recycle/recycle.component';
-import { AdminComponent } from '../apps/admin/admin.component';
 import { StuffILikeComponent } from '../apps/stuff-i-like/stuff-i-like.component';
 import { ArchiveComponent } from '../apps/archive/archive.component';
 import { ShapeStoreComponent } from '../apps/shape-store/shape-store.component';
 import { MineNateCoinComponent } from '../apps/mine-nate-coin/mine-nate-coin.component';
 import { User, UserService } from '../services/user.service';
 import { LoginPopupComponent } from '../apps/login-popup/login-popup.component';
+import { CommandLine } from '../apps/command-line/command-line.component';
+import { AdminComponent } from '../apps/admin/admin.component';
 @Component({
   selector: 'app-desktop',
   standalone: true,
-  imports: [NgFor, NgIf, NgClass, DragDropModule, MediaPlayerComponent],
+  imports: [CommonModule, DragDropModule, MediaPlayerComponent],
   templateUrl: './desktop.component.html',
   styleUrl: './desktop.component.css'
 })
@@ -46,6 +47,9 @@ export class DesktopComponent {
   rightClickStartX: number = 0;
   rightClickStartY: number = 0;
 
+  isLoggedIn: boolean = false;
+  username: string = '';
+
   appComponentMap: Record<string, any> = {
     'Archive': ArchiveComponent,
     'Stuff I Like': StuffILikeComponent,
@@ -57,10 +61,11 @@ export class DesktopComponent {
     'Puzzle': PuzzleComponent,
     'Weather': WeatherComponent,
     'Recycle': RecycleComponent,
-    'Command Line': AdminComponent,
+    'Command Line': CommandLine,
     'Shape Store': ShapeStoreComponent,
     'Mine Nate Coin': MineNateCoinComponent,
-    'Login': LoginPopupComponent
+    'Login': LoginPopupComponent,
+    'Admin': AdminComponent
   };
 
   constructor(private appService: AppService, private userService: UserService) { }
@@ -77,6 +82,8 @@ export class DesktopComponent {
     });
     this.userService.user$.subscribe((user: User) => {
       this.puzzleTitle = this.appService.levelTitles[user.puzzleLevel];
+      this.isLoggedIn = user.isLoggedIn;
+      this.username = user.username;
     });
   }
 

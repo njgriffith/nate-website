@@ -1,52 +1,43 @@
-<div #cli class="cli-background" tabindex="0" role="textbox" aria-label="admin console"
-  (focus)="onFocus()" (blur)="onBlur()" (keydown)="recordInput($event)">
+<ng-container *ngIf="!isAdmin">
+    <p>Access denied</p>
+</ng-container>
 
-  <div *ngFor="let entry of commandHistoryDisplay" class="previous-command">
-
-    <!-- Prompt inputs don't get a prompt prefix — they're answers, not commands -->
-    <ng-container *ngIf="!entry.isPromptInput">
-      <span class="current-line">
-        &nbsp;{{ user || 'guest' }}&#64;nate-griffith.com&nbsp;>&nbsp;
-      </span>
-      <span>{{ entry.text }}</span>
-
-      <!-- Response for known commands -->
-      <ng-container *ngIf="commandMap[entry.text] as cmd">
-        <ng-container *ngIf="cmd.response">
-          <div *ngIf="cmd.response.includes('\n'); else singleLine">
-            <div *ngFor="let line of cmd.response.split('\n')">
-              <ng-container *ngIf="entry.text === 'help'; else plainLine">
-                <span class="syntax-highlight">{{ line.split(' - ')[0] }}</span>
-                <span>&nbsp;-&nbsp;{{ line.split(' - ')[1] }}</span>
-              </ng-container>
-              <ng-template #plainLine>{{ line }}</ng-template>
+<div *ngIf="isAdmin" class="admin-container">
+    <div class="form-row">
+        <div class=form-item>
+            <label>Tool</label>
+            <select [(ngModel)]="selectedTool">
+                <option *ngFor="let tool of tools">{{tool}}</option>
+            </select>
+        </div>
+    </div>
+    <ng-container *ngIf="selectedTool === 'Tier Inserter'">
+        <div class="form-row">
+            <div class=form-item>
+                <label>Type</label>
+                <select [(ngModel)]="selectedType">
+                    <option *ngFor="let type of types">{{type}}</option>
+                </select>
             </div>
-          </div>
-          <ng-template #singleLine>
-            <div>{{ cmd.response }}</div>
-          </ng-template>
-        </ng-container>
-      </ng-container>
-
-      <!-- Unknown command -->
-      <div *ngIf="!commandMap[entry.text]">
-        command not found: {{ entry.text }}
-      </div>
+            <div class="form-item">
+                <label>Tier</label>
+                <select [(ngModel)]="selectedTier">
+                    <option *ngFor="let tier of tiers">{{tier}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-item">
+                <label>Artist</label>
+                <input [(ngModel)]="artist">
+            </div>
+            <div class="form-item">
+                <label>Title</label>
+                <input [(ngModel)]="title">
+            </div>
+        </div>
+        <div class="form-row">
+            <button (click)="postEntryToBackend()">Submit</button>
+        </div>
     </ng-container>
-
-    <!-- Prompt inputs: just show the text, no prefix -->
-    <ng-container *ngIf="entry.isPromptInput">
-      <span>{{ entry.text }}</span>
-    </ng-container>
-
-  </div>
-
-  <!-- Active input line -->
-  <span class="current-line">
-    &nbsp;{{ user || 'guest' }}&#64;nate-griffith.com&nbsp;>&nbsp;
-  </span>
-  <span *ngIf="isPromptingUser">{{ currentPrompt }}</span>
-  <span #cursor></span>
-  <span #blink class="hidden">_</span>
-
 </div>

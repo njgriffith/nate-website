@@ -24,7 +24,8 @@ export class AppService {
     new App('Minesweeper', false, false, 1),
     new App('Command Line', false, false, 1),
     new App('Login', true, false, 1),
-    new App('Recycle', false, false, 1)
+    new App('Recycle', false, false, 1),
+    new App('Admin', false, false, 1)
   ];
 
   levelTitles: Record<number, string> = {

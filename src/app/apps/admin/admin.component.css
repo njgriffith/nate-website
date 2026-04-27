@@ -1,40 +1,19 @@
-.cli-background {
-    width: 400px;
-    height: 300px;
-    background: black;
-    color: white;
-    font-size: 1.5em;
-    overflow-y: auto;
-    padding-left: 3px;
+.admin-container{
+    display: flex;
+    flex-direction: column;
+}
+.form-row{
+    width: 100%;
+    display: flex;
 }
 
-.current-line {
-    color: #00ff00;
+.form-item{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.syntax-highlight {
-    color: #ff0;
-}
-
-.blink {
-    animation: blink 1s steps(1, end) infinite;
-    opacity: 1;
-}
-
-.hidden {
-    display: none;
-}
-
-@keyframes blink {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
+label{
+    font-size: 1.2em;
+    font-weight: bold;
 }

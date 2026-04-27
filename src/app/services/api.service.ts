@@ -8,55 +8,66 @@ import { User } from './user.service';
 })
 export class ApiService {
   constructor(private http: HttpClient) { }
+  apiPrefix: string = 'https://api.nate-griffith.com';
+  apiPrefixLocal: string = 'http://localhost:5000';
+  useLocalApi = false;
+  baseUrl = this.useLocalApi ? this.apiPrefixLocal : this.apiPrefix;
+  private readonly headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   getReview(code: string): Observable<any> {
     const body = JSON.stringify({ code });
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/review`, body, { headers });
+    return this.http.post(`${this.baseUrl}/review`, body, { headers: this.headers });
   }
 
   getStats(): Observable<any> {
-    return this.http.get('https://api.nate-griffith.com/stats');
+    return this.http.get(`${this.baseUrl}/stats`);
   }
 
   getAlbumTiers(): Observable<any> {
-    return this.http.get('https://api.nate-griffith.com/album-tiers');
+    return this.http.get(`${this.baseUrl}/album-tiers`);
+  }
+
+  postToTier(data: Record<string, string>): Observable<any> {
+    const body = JSON.stringify(
+      {
+        type: data['type'],
+        tier: data['tier'],
+        title: data['title'],
+        artist: data['artist']
+      });
+    return this.http.post(`${this.baseUrl}/tiers`, body, { headers: this.headers });
   }
 
   getMovieTiers(): Observable<any> {
-    return this.http.get('https://api.nate-griffith.com/movie-tiers');
+    return this.http.get(`${this.baseUrl}/movie-tiers`);
   }
 
   getMSLeaderboard(): Observable<any> {
-    return this.http.get('https://api.nate-griffith.com/minesweeper');
+    return this.http.get(`${this.baseUrl}/minesweeper`);
   }
 
   updateMSLeaderboard(username: string, password: string, score: number, difficulty: string): Observable<any> {
     const body = JSON.stringify({ username, password, score, difficulty });
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/minesweeper`, body, { headers });
+    return this.http.post(`${this.baseUrl}/minesweeper`, body, { headers: this.headers });
   }
 
   getWeather(): Observable<any> {
-    return this.http.get('https://api.nate-griffith.com/weather');
+    return this.http.get(`${this.baseUrl}/weather`);
   }
 
   puzzleGuess(guess: string, level: number): Observable<any> {
     const body = JSON.stringify({ guess, level });
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/puzzle/guess`, body, { headers });
+    return this.http.post(`${this.baseUrl}/puzzle/guess`, body, { headers: this.headers });
   }
 
   loginUser(username: string, password: string): Observable<any> {
     const body = JSON.stringify({ username, password });
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/login`, body, { headers });
+    return this.http.post(`${this.baseUrl}/login`, body, { headers: this.headers });
   }
 
   createUser(username: string, password: string): Observable<any> {
     const body = JSON.stringify({ username, password });
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/create-user`, body, { headers });
+    return this.http.post(`${this.baseUrl}/create-user`, body, { headers: this.headers });
   }
 
   updateUser(user: User): Observable<any> {
@@ -75,8 +86,7 @@ export class ApiService {
         master: user.master
       }
     );
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/update-user`, body, { headers });
+    return this.http.post(`${this.baseUrl}/update-user`, body, { headers: this.headers });
   }
 
   purchaseShape(user: User, shape: string, price: number) {
@@ -87,7 +97,6 @@ export class ApiService {
         price: price
       }
     );
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`https://api.nate-griffith.com/purchase-shape`, body, { headers });
+    return this.http.post(`${this.baseUrl}/purchase-shape`, body, { headers: this.headers });
   }
 }

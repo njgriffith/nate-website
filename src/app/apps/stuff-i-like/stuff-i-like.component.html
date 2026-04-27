@@ -2,7 +2,14 @@
     <select [(ngModel)]="selectedList" class="list-select" (ngModelChange)="updateSelectedList()">
         <option *ngFor="let list of lists">{{list}}</option>
     </select>
+    <ng-container *ngIf="isAdmin">
+        <button (click)="toggleEditView()">Toggle Edit View</button>
+    </ng-container>
     <input placeholder="filter search..." class="filter" [(ngModel)]="filterText">
+    <ng-container *ngIf="isAdmin && shiftedItems.length > 0">
+        <button (click)="saveTierChanges()">Save changes</button>
+        <div style="margin: 1em; font-weight: bold; font-size: 1.2em;">Successful updates: <span>{{updateSuccessCount}}</span>/<span>{{shiftedItems.length}}</span></div>
+    </ng-container>
     <ng-container *ngIf="selectedList === 'Albums'">
         <ng-container *ngIf="!singleReviewView">
             <menu role="tablist" class="tablist">
@@ -10,12 +17,16 @@
                     (click)="selectedTier = tierName">{{tierName}}</li>
             </menu>
             <div class="window" role="tabpanel">
-                <ng-container *ngFor="let album of albums[selectedTier]" class="album-container">
+                <ng-container *ngFor="let album of albums[selectedTier]; let i = index" class="album-container">
                     <div *ngIf="isItemInFilter(album)" class="album-container" (click)="toReview(album)"
                         [class.has-review]="album.reviewKey">
                         <img [src]="album.coverPath" class="cover-img">
                         <p class="album-title">{{ album.title }}</p>
                         <p class="album-artist">{{ album.artist }}</p>
+                        <ng-container *ngIf="editView">
+                            <button (click)="changeItemTier(album, i, -1)">+</button>
+                            <button (click)="changeItemTier(album, i, 1)">-</button>
+                        </ng-container>
                     </div>
                 </ng-container>
             </div>
@@ -42,10 +53,14 @@
                 (click)="selectedTier = tierName">{{tierName}}</li>
         </menu>
         <div class="window" role="tabpanel">
-            <ng-container *ngFor="let movie of movies[selectedTier]" class="album-container">
-                <div class="album-container" *ngIf="isItemInFilter(movie)" >
+            <ng-container *ngFor="let movie of movies[selectedTier]; let i=index;" class="album-container">
+                <div class="album-container" *ngIf="isItemInFilter(movie)">
                     <img [src]="movie.posterPath" class="cover-img">
                     <p class="album-title">{{ movie.title }}</p>
+                    <ng-container *ngIf="editView">
+                        <button (click)="changeItemTier(movie, i, -1)">+</button>
+                        <button (click)="changeItemTier(movie, i, 1)">-</button>
+                    </ng-container>
                 </div>
             </ng-container>
         </div>
@@ -53,12 +68,13 @@
 
     <ng-container *ngIf="selectedList === 'Stuff On This Site'">
         <menu role="tablist" class="tablist">
-            <li *ngFor="let tierName of stuffOnThisSiteTiers" role="tab" [attr.aria-selected]="selectedTier === tierName"
-                (click)="selectedTier = tierName">{{tierName}}</li>
+            <li *ngFor="let tierName of stuffOnThisSiteTiers" role="tab"
+                [attr.aria-selected]="selectedTier === tierName" (click)="selectedTier = tierName">{{tierName}}</li>
         </menu>
         <div class="window" role="tabpanel">
             <ng-container *ngFor="let item of stuffOnThisSite[selectedTier]" class="album-container">
-                <div class="album-container" style="cursor: pointer;" (click)="openApp(item)" *ngIf="isItemInFilter(item)" >
+                <div class="album-container" style="cursor: pointer;" (click)="openApp(item)"
+                    *ngIf="isItemInFilter(item)">
                     <img [src]="'/assets/general/' + item + '.gif'" class="cover-img">
                     <p class="album-title">{{ item }}</p>
                 </div>

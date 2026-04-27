@@ -26,19 +26,7 @@
                 <img [src]="'assets/minesweeper/' + flagDigits[2] + '.png'" draggable="false">
             </div>
         </div>
-        <!-- <div *ngIf="isPlaying" class="table-container">
-            <table>
-                <tbody (mousedown)="handleFaceImage('stress')" (mouseup)="handleFaceImage('smile')"
-                    (mouseleave)="handleFaceImage('smile')">
-                    <tr *ngFor="let item of [].constructor(rows); let i = index">
-                        <td class="minesweeper-cell" *ngFor="let item of [].constructor(cols); let j = index">
-                            <img draggable="false" [src]="'assets/minesweeper/' + gameGrid[i][j].img + '.png'"
-                                (contextmenu)="toggleFlag(i, j);  $event.preventDefault()" (click)="revealCell(i, j)">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> -->
+
         <div *ngIf="isPlaying" class="table-container">
             <div (mousedown)="handleFaceImage('stress')" (mouseup)="handleFaceImage('smile')"
                 (mouseleave)="handleFaceImage('smile')">
