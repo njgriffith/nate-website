@@ -27,7 +27,6 @@ import { AdminComponent } from '../apps/admin/admin.component';
   templateUrl: './desktop.component.html',
   styleUrl: './desktop.component.css'
 })
-// TODO: recycle, migrate all blogs, migrate all lists
 
 export class DesktopComponent {
   @Input() width: number | undefined = undefined;

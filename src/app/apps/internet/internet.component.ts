@@ -36,10 +36,6 @@ export class InternetComponent {
     'https://ethanshealey.com': {
       siteComponent: WillComponent,
       iframe: true
-    },
-    'https://mikefriends.org': {
-      siteComponent: WillComponent,
-      iframe: true
     }
   }
   urls: string[] = Object.keys(this.websites);
