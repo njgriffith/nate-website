@@ -15,7 +15,7 @@ export class AdminComponent {
   isAdmin: boolean = false;
   types: string[] = ['Album', 'Movie'];
   selectedType: string = this.types[0];
-  tools: string[] = ['Tier Inserter'];
+  tools: string[] = ['Tier Inserter', 'Update Passwords'];
   selectedTool: string = this.tools[0];
   title: string = '';
   artist: string = '';
@@ -24,6 +24,9 @@ export class AdminComponent {
 
   backendSuccess: boolean = false;
   backendMessage: string = '';
+
+  users: User[] = [];
+  selectedUser: User | undefined = undefined;
 
   constructor(private userService: UserService, private apiService: ApiService){}
 
@@ -50,4 +53,6 @@ export class AdminComponent {
       console.log(response);
     });
   }
+
+
 }

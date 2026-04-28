@@ -10,6 +10,7 @@ export class AppService {
 
   constructor() { }
   private appList: App[] = [
+    new App('Admin', false, false, 1),
     new App('Archive', false, false, 1),
     new App('Shape Store', false, false, 1),
     new App('Mine Nate Coin', false, false, 1),
@@ -24,8 +25,7 @@ export class AppService {
     new App('Minesweeper', false, false, 1),
     new App('Command Line', false, false, 1),
     new App('Login', true, false, 1),
-    new App('Recycle', false, false, 1),
-    new App('Admin', false, false, 1)
+    new App('Recycle', false, false, 1)
   ];
 
   levelTitles: Record<number, string> = {

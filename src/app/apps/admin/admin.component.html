@@ -40,4 +40,33 @@
             <button (click)="postEntryToBackend()">Submit</button>
         </div>
     </ng-container>
+    <ng-container *ngIf="selectedTool === 'Update Passwords'">
+        <div class="form-row">
+            <div class=form-item>
+                <label>Users</label>
+                <select [(ngModel)]="selectedUser">
+                    <option *ngFor="let user of users">{{user.username}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-item">
+                <label>Username</label>
+                <input [value]="selectedUser?.username">
+            </div>
+            <div class="form-item">
+                <label>Old Password</label>
+                <input [value]="selectedUser?.password">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-item">
+                <label>New Password</label>
+                <input [(ngModel)]="title">
+            </div>
+        </div>
+        <div class="form-row">
+            <button (click)="postEntryToBackend()">Submit</button>
+        </div>
+    </ng-container>
 </div>
