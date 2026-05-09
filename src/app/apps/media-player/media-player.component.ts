@@ -121,18 +121,18 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
 
   getRightSource(): string {
     if (this.rightHovered && this.rightOpened) {
-      return 'assets/head/R_drwr_close_02_rollover.bmp';
+      return 'assets/head/R_drwr_close_02_rollover.webp';
     }
-    if (this.rightHovered && !this.rightOpened) return 'assets/head/R_drwr_open_02_rollover.bmp';
-    if (!this.rightHovered && this.rightOpened) return 'assets/head/R_drwr_close_01_default.bmp';
-    return 'assets/head/R_drwr_open_01_default.bmp';
+    if (this.rightHovered && !this.rightOpened) return 'assets/head/R_drwr_open_02_rollover.webp';
+    if (!this.rightHovered && this.rightOpened) return 'assets/head/R_drwr_close_01_default.webp';
+    return 'assets/head/R_drwr_open_01_default.webp';
   }
 
   getLeftSource(): string {
-    if (this.leftHovered && this.leftOpened) return 'assets/head/L_drwr_close_02_rollover.bmp';
-    if (this.leftHovered && !this.leftOpened) return 'assets/head/L_drwr_open_02_rollover.bmp';
-    if (!this.leftHovered && this.leftOpened) return 'assets/head/L_drwr_close_01_default.bmp';
-    return 'assets/head/L_drwr_open_01_default.bmp';
+    if (this.leftHovered && this.leftOpened) return 'assets/head/L_drwr_close_02_rollover.webp';
+    if (this.leftHovered && !this.leftOpened) return 'assets/head/L_drwr_open_02_rollover.webp';
+    if (!this.leftHovered && this.leftOpened) return 'assets/head/L_drwr_close_01_default.webp';
+    return 'assets/head/L_drwr_open_01_default.webp';
   }
 
   toggleEar(ear: string) {
