@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { ApiService } from './api.service';
 import { AppService } from './prod-app.service';
+import { user } from '../../environments/environment.development';
 
 export interface User {
     isLoggedIn: boolean;
@@ -21,20 +22,7 @@ export interface User {
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    user: User = {
-        isLoggedIn: false,
-        username: '',
-        password: '',
-        puzzleLevel: 0,
-        easy: undefined,
-        medium: undefined,
-        hard: undefined,
-        expert: undefined,
-        master: undefined,
-        balance: 0,
-        shapesOwned: [],
-        miningTools: { "employees": [0, 0, 0, 0, 0], "ore_detector": 0 }
-    };
+    user: User = user;
     private userSubject = new BehaviorSubject<User>(this.user);
     user$ = this.userSubject.asObservable();
 

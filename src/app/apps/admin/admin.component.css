@@ -17,3 +17,17 @@ label{
     font-size: 1.2em;
     font-weight: bold;
 }
+
+.backend-message{
+    font-weight: bold;
+    margin: 1em;
+    font-size: 1.2em;
+}
+
+.success{
+    color: green;
+}
+
+.error{
+    color: red;
+}

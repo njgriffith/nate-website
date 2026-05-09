@@ -39,6 +39,9 @@
         <div class="form-row">
             <button (click)="postEntryToBackend()">Submit</button>
         </div>
+        <div *ngIf="backendMessage" class="backend-message" [class.success]="backendSuccess" [class.error]="!backendSuccess">
+            {{backendMessage}}
+        </div>
     </ng-container>
     <ng-container *ngIf="selectedTool === 'Update Passwords'">
         <div class="form-row">
@@ -67,6 +70,6 @@
         </div>
         <div class="form-row">
             <button (click)="postEntryToBackend()">Submit</button>
-        </div>
+        </div>dsadsa
     </ng-container>
 </div>

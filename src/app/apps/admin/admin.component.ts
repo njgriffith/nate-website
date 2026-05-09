@@ -37,8 +37,6 @@ export class AdminComponent {
   }
 
   postEntryToBackend(){
-    console.log(this.title === '');
-    console.log(this.selectedType === 'Album' && this.artist === '');
     if (this.title === '' || (this.selectedType === 'Album' && this.artist === '')){
       return;
     }
@@ -49,10 +47,15 @@ export class AdminComponent {
       artist: this.artist
     };
 
-    this.apiService.postToTier(body).subscribe((response: any) => {
-      console.log(response);
+    this.apiService.postToTier(body).subscribe({
+      next: (response: any) => {
+        this.backendMessage = response.response;
+        this.backendSuccess = true;
+      },
+      error: (error: any) => {
+        this.backendMessage = error?.error.error ?? 'An error occurred';
+        this.backendSuccess = false;
+      }
     });
   }
-
-
 }
