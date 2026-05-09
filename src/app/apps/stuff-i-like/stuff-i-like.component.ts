@@ -92,7 +92,7 @@ export class StuffILikeComponent {
       for (let tier of this.albumTiers) {
         for (let entry of this.albums[tier]) {
           let cleanedPath = entry.artist.replaceAll(' ', '-') + '-' + entry.title.replaceAll(' ', '-');
-          entry.coverPath = 'assets/album-covers/' + cleanedPath.replace(/[^a-zA-Z0-9-]/g, "") + '.jpg';
+          entry.coverPath = cleanedPath.replace(/[^a-zA-Z0-9-]/g, "") + '.jpg';
           // console.log(entry.coverPath);
         }
       }
@@ -210,7 +210,7 @@ export class StuffILikeComponent {
           item.tier = "the_best_plus";
         }
         else{
-          item.tier = item.tier.toLowerCase().replaceAll(" ", "_");
+          item.tier = item.tier.toLowerCase().replaceAll(" ", "_").replaceAll("-", "_minus").replaceAll("+", "_plus");
         }
         return this.apiService.postToTier({
           type: item.type,
@@ -227,5 +227,8 @@ export class StuffILikeComponent {
         console.error('failed to update', response);
       }
     });
+  }
+  getCoverUrl(query: string){
+    return `https://nate-griffith.com/covers/${query}`;
   }
 }

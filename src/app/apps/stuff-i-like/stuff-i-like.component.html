@@ -20,7 +20,7 @@
                 <ng-container *ngFor="let album of albums[selectedTier]; let i = index" class="album-container">
                     <div *ngIf="isItemInFilter(album)" class="album-container" (click)="toReview(album)"
                         [class.has-review]="album.reviewKey">
-                        <img [src]="album.coverPath" class="cover-img">
+                        <img [src]="getCoverUrl(album.coverPath)" class="cover-img">
                         <p class="album-title">{{ album.title }}</p>
                         <p class="album-artist">{{ album.artist }}</p>
                         <ng-container *ngIf="editView">

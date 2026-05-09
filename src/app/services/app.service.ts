@@ -14,7 +14,7 @@ export class AppService {
     new App('Archive', false, false, 1),
     new App('Shape Store', false, false, 1),
     new App('Mine Nate Coin', false, false, 1),
-    new App('Stuff I Like', false, false, 1),
+    new App('Stuff I Like', true, false, 1),
     new App('Puzzle', false, false, 1),
     new App('Media Player', false, false, 1),
     new App('Stats', false, false, 1),
