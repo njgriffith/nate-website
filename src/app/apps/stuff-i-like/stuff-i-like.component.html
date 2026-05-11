@@ -37,7 +37,7 @@
                 <button (click)="singleReviewView = false">Back to all reviews</button>
                 <div class="review-header">
                     <div class="review-title">{{selectedReview.artist}} - {{selectedReview.title}}</div>
-                    <img [src]="selectedReview.coverPath" class="review-img">
+                    <img [src]="getCoverUrl(selectedReview.coverPath)" class="review-img">
                 </div>
 
                 <div class="review">
