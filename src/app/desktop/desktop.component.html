@@ -27,7 +27,12 @@
           </div>
         </div>
         <div class="window-body">
-          <ng-container *ngComponentOutlet="appComponentMap[app.name]"></ng-container>
+          <ng-container *ngIf="loadedAppComponentMap[app.name]; else loading">
+            <ng-container *ngComponentOutlet="loadedAppComponentMap[app.name]"></ng-container>
+          </ng-container>
+          <ng-template #loading>
+            <div class="loading-placeholder">Loading...</div>
+          </ng-template>
         </div>
       </div>
     </div>

@@ -51,6 +51,8 @@ export class AdminComponent {
       next: (response: any) => {
         this.backendMessage = response.response;
         this.backendSuccess = true;
+        this.title = '';
+        this.artist = '';
       },
       error: (error: any) => {
         this.backendMessage = error?.error.error ?? 'An error occurred';

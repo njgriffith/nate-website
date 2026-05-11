@@ -7,18 +7,12 @@ import { MediaPlayerComponent } from "../apps/media-player/media-player.componen
 import { SettingsComponent } from '../apps/settings/settings.component';
 import { InternetComponent } from '../apps/internet/internet.component';
 import { CatalogComponent } from '../apps/catalog/catalog.component';
-import { MinesweeperComponent } from '../apps/minesweeper/minesweeper.component';
-import { PuzzleComponent } from '../apps/puzzle/puzzle.component';
 import { App } from '../models/app.model';
 import { WeatherComponent } from '../apps/weather/weather.component';
 import { RecycleComponent } from '../apps/recycle/recycle.component';
-import { StuffILikeComponent } from '../apps/stuff-i-like/stuff-i-like.component';
 import { ArchiveComponent } from '../apps/archive/archive.component';
-import { ShapeStoreComponent } from '../apps/shape-store/shape-store.component';
-import { MineNateCoinComponent } from '../apps/mine-nate-coin/mine-nate-coin.component';
 import { User, UserService } from '../services/user.service';
 import { LoginPopupComponent } from '../apps/login-popup/login-popup.component';
-import { CommandLine } from '../apps/command-line/command-line.component';
 import { AdminComponent } from '../apps/admin/admin.component';
 @Component({
   selector: 'app-desktop',
@@ -51,23 +45,30 @@ export class DesktopComponent {
 
   appComponentMap: Record<string, any> = {
     'Archive': ArchiveComponent,
-    'Stuff I Like': StuffILikeComponent,
     'Stats': StatsComponent,
     'Settings': SettingsComponent,
     'Internet': InternetComponent,
     'Catalog': CatalogComponent,
-    'Minesweeper': MinesweeperComponent,
-    'Puzzle': PuzzleComponent,
     'Weather': WeatherComponent,
     'Recycle': RecycleComponent,
-    'Command Line': CommandLine,
-    'Shape Store': ShapeStoreComponent,
-    'Mine Nate Coin': MineNateCoinComponent,
     'Login': LoginPopupComponent,
     'Admin': AdminComponent
   };
 
-  constructor(private appService: AppService, private userService: UserService) { }
+  loadedAppComponentMap: Record<string, any> = {};
+
+  lazyComponentLoaders: Record<string, () => Promise<any>> = {
+    'Mine Nate Coin': () => import('../apps/mine-nate-coin/mine-nate-coin.component').then(m => m.MineNateCoinComponent),
+    'Minesweeper': () => import('../apps/minesweeper/minesweeper.component').then(m => m.MinesweeperComponent),
+    'Shape Store': () => import('../apps/shape-store/shape-store.component').then(m => m.ShapeStoreComponent),
+    'Stuff I Like': () => import('../apps/stuff-i-like/stuff-i-like.component').then(m => m.StuffILikeComponent),
+    'Puzzle': () => import('../apps/puzzle/puzzle.component').then(m => m.PuzzleComponent),
+    'Command Line': () => import('../apps/command-line/command-line.component').then(m => m.CommandLine)
+  };
+
+  constructor(private appService: AppService, private userService: UserService) {
+    this.loadedAppComponentMap = { ...this.appComponentMap };
+  }
 
   ngOnInit() {
     this.appService.backgroundCode$.subscribe(code => this.updateBackground(code));
@@ -90,9 +91,14 @@ export class DesktopComponent {
     this.box = this.rightClickBoxRef.nativeElement;
   }
 
-  openApp(code: string) {
+  async openApp(code: string) {
+    if (this.lazyComponentLoaders[code] && !this.loadedAppComponentMap[code]) {
+      const component = await this.lazyComponentLoaders[code]();
+      this.loadedAppComponentMap[code] = component;
+    }
     this.appService.openApp(code);
   }
+
   closeApp(code: string) {
     this.appService.closeApp(code);
   }

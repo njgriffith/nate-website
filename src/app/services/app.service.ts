@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { App } from '../models/app.model';
+import { appList } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AppService {
@@ -9,24 +10,7 @@ export class AppService {
   mobile$ = this.mobileSubject.asObservable();
 
   constructor() { }
-  private appList: App[] = [
-    new App('Admin', true, false, 1),
-    new App('Archive', false, false, 1),
-    new App('Shape Store', false, false, 1),
-    new App('Mine Nate Coin', false, false, 1),
-    new App('Stuff I Like', true, false, 1),
-    new App('Puzzle', false, false, 1),
-    new App('Media Player', false, false, 1),
-    new App('Stats', false, false, 1),
-    new App('Internet', false, false, 1),
-    new App('Catalog', false, false, 1),
-    new App('Settings', false, false, 1),
-    new App('Weather', false, false, 1),
-    new App('Minesweeper', false, false, 1),
-    new App('Command Line', false, false, 1),
-    new App('Login', false, false, 1),
-    new App('Recycle', false, false, 1)
-  ];
+  private appList: App[] = appList;
 
   levelTitles: Record<number, string> = {
     0: 'Solve My Puzzle!',
@@ -51,6 +35,8 @@ export class AppService {
   sleep$ = this.sleepSubject.asObservable();
   recycledAppsSubject = new BehaviorSubject<any[]>([]);
   recycledApps$ = this.recycledAppsSubject.asObservable();
+  private puzzleTitle = new Subject<string>();
+  puzzleTitle$ = this.puzzleTitle.asObservable();
 
   setMobile(isMobile: boolean) {
     this.mobileSubject.next(isMobile);
@@ -159,5 +145,8 @@ export class AppService {
     let currentRecycled: any[] = this.recycledAppsSubject.value;
     currentRecycled = currentRecycled.filter(app => app.name !== appName);
     this.recycledAppsSubject.next(currentRecycled);
+  }
+  setPuzzleTitle(title: string) {
+    this.puzzleTitle.next(title);
   }
 }

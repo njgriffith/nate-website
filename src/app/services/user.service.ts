@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ApiService } from './api.service';
-import { AppService } from './prod-app.service';
+import { AppService } from './app.service';
 import { user } from '../../environments/environment';
 
 export interface User {
