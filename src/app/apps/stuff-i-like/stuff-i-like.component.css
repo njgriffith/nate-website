@@ -18,8 +18,9 @@
     gap: 1em;
     flex-wrap: wrap;
     justify-content: center;
-    /* max-height: 800px; */
-    overflow-y: scroll;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .album-container{
@@ -79,4 +80,33 @@
 
 .review pre {
     white-space: pre-wrap;
+}
+
+.album-tiers-container{
+    display: flex;
+    height: 50vh;
+    overflow: hidden;
+}
+
+
+.recent-changes-container{
+    flex: 1;
+    overflow-y: auto;
+    
+}
+
+.album-list{
+    flex: 5;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.best{
+    color: blue;
+}
+
+.royal{
+    font-weight: bold;
+    color: blue;
 }

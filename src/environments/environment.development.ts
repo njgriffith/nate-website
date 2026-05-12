@@ -17,7 +17,7 @@ export var user: User = {
 };
 
 export var appList: App[] = [
-    new App('Admin', true, false, 1),
+    new App('Admin', false, false, 1),
     new App('Archive', false, false, 1),
     new App('Shape Store', false, false, 1),
     new App('Mine Nate Coin', false, false, 1),

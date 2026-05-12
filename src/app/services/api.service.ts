@@ -99,4 +99,8 @@ export class ApiService {
     );
     return this.http.post(`${this.baseUrl}/purchase-shape`, body, { headers: this.headers });
   }
+
+  getTierUpdates(){
+    return this.http.get(`${this.baseUrl}/recent-updates`);
+  }
 }

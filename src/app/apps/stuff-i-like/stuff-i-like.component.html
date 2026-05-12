@@ -5,32 +5,49 @@
     <ng-container *ngIf="isAdmin">
         <button (click)="toggleEditView()">Toggle Edit View</button>
     </ng-container>
+    <button (click)="showRecentChanges = !showRecentChanges">Toggle Recent Changes</button>
     <input placeholder="filter search..." class="filter" [(ngModel)]="filterText">
     <ng-container *ngIf="isAdmin && shiftedItems.length > 0">
         <button (click)="saveTierChanges()">Save changes</button>
-        <div style="margin: 1em; font-weight: bold; font-size: 1.2em;">Successful updates: <span>{{updateSuccessCount}}</span>/<span>{{shiftedItems.length}}</span></div>
+        <div style="margin: 1em; font-weight: bold; font-size: 1.2em;">Successful updates:
+            <span>{{updateSuccessCount}}</span>/<span>{{shiftedItems.length}}</span>
+        </div>
     </ng-container>
+
     <ng-container *ngIf="selectedList === 'Albums'">
-        <ng-container *ngIf="!singleReviewView">
-            <menu role="tablist" class="tablist">
-                <li *ngFor="let tierName of albumTiers" role="tab" [attr.aria-selected]="selectedTier === tierName"
-                    (click)="selectedTier = tierName">{{tierName}}</li>
-            </menu>
-            <div class="window" role="tabpanel">
-                <ng-container *ngFor="let album of albums[selectedTier]; let i = index" class="album-container">
-                    <div *ngIf="isItemInFilter(album)" class="album-container" (click)="toReview(album)"
-                        [class.has-review]="album.reviewKey">
-                        <img [src]="getCoverUrl(album.coverPath)" class="cover-img">
-                        <p class="album-title">{{ album.title }}</p>
-                        <p class="album-artist">{{ album.artist }}</p>
-                        <ng-container *ngIf="editView">
-                            <button (click)="changeItemTier(album, i, -1)">+</button>
-                            <button (click)="changeItemTier(album, i, 1)">-</button>
-                        </ng-container>
-                    </div>
+        <div *ngIf="!singleReviewView" class="album-tiers-container">
+            <div *ngIf="showRecentChanges" class="recent-changes-container">
+                <div style="font-size: 2em; font-weight: bold;">Recent Changes:</div>
+                <hr>
+                <ng-container *ngFor="let recent of recentAlbums">
+                    <p style="font-size: 2em;;"><span style="font-weight: bold;">{{recent.artist}}</span> - {{recent.title}}
+                        <br>Tier: <span [class.royal]="recent.tier === 'Royal Court'" [class.best]="recent.tier.includes('Best')">{{recent.tier}}</span>
+                    </p>
+                    <hr>
                 </ng-container>
             </div>
-        </ng-container>
+
+            <div class="album-list">
+                <menu role="tablist" class="tablist">
+                    <li *ngFor="let tierName of albumTiers" role="tab" [attr.aria-selected]="selectedTier === tierName"
+                        (click)="selectedTier = tierName">{{tierName}}</li>
+                </menu>
+                <div class="window" role="tabpanel">
+                    <ng-container *ngFor="let album of albums[selectedTier]; let i = index" class="album-container">
+                        <div *ngIf="isItemInFilter(album)" class="album-container" (click)="toReview(album)"
+                            [class.has-review]="album.reviewKey">
+                            <img [src]="getCoverUrl(album.coverPath)" class="cover-img">
+                            <p class="album-title">{{ album.title }}</p>
+                            <p class="album-artist">{{ album.artist }}</p>
+                            <ng-container *ngIf="editView">
+                                <button (click)="changeItemTier(album, i, -1)">+</button>
+                                <button (click)="changeItemTier(album, i, 1)">-</button>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
 
         <ng-container *ngIf="singleReviewView">
             <div class="review-container">

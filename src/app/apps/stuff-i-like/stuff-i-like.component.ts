@@ -20,6 +20,18 @@ export class StuffILikeComponent {
   lists: string[] = ['Albums', 'Movies', 'Stuff On This Site'];
   selectedList: string = this.lists[0];
 
+  tierKeyMapping: Record<string, string> = {
+    "the_best_plus": "Royal Court",
+    "the_best": "The Best",
+    "the_best_minus": "The Best Minus",
+    "amazing_plus": "Amazing Plus",
+    "amazing": "Amazing",
+    "amazing_minus": "Amazing Minus",
+    "great_plus": "Great Plus",
+    "great": "Great",
+    "great_minus": "Great Minus"
+  };
+
   albums: Record<string, any[]> = {
     "Royal Court": [],
     "The Best": [],
@@ -67,14 +79,14 @@ export class StuffILikeComponent {
   filterText: string = '';
   singleReviewView: boolean = false;
   selectedReview: any = {};
-  mobile: boolean = false;
+
+  showRecentChanges: boolean = true;
+  recentAlbums: { title: string, artist: string, tier: string}[] = [];
+  recentMovies: { title: string, tier: string}[] = [];
 
   ngOnInit() {
     this.userService.user$.subscribe((user: User) => {
       this.isAdmin = user.isLoggedIn && user.username === 'nate';
-    });
-    this.appService.mobile$.subscribe(isMobile => {
-      this.mobile = isMobile;
     });
     this.apiService.getAlbumTiers().subscribe((data: any) => {
       let loadedData = data['data'];
@@ -119,6 +131,13 @@ export class StuffILikeComponent {
           // console.log(entry.posterPath);
         }
       }
+    });
+    this.apiService.getTierUpdates().subscribe((data: any) => {
+      console.log(data)
+      data['albums'].forEach((album: {title: string, artist: string, tier: string}) => {
+        album.tier = this.tierKeyMapping[album.tier];
+        this.recentAlbums.push(album);
+      });
     });
   }
 
