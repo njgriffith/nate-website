@@ -55,20 +55,26 @@
     text-decoration: underline;
 }
 
+.review-container{
+    max-width: 1000px;
+}
+
 .review-header{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1em;
+    font-size: 2em;
+}
+
+.font-change-container{
+    display: flex;
     gap: 1em;
+    margin-top: 1em;
 }
 
-.review-header{
-    font-size: 1.8em;
-}
-
-.review-img{
-    width: 250px;
+.font-change-container>button{
+    font-size: 1em;
 }
 
 .review{

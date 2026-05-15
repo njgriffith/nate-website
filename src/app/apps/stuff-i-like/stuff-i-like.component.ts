@@ -79,6 +79,7 @@ export class StuffILikeComponent {
   filterText: string = '';
   singleReviewView: boolean = false;
   selectedReview: any = {};
+  reviewFontSize: number = 12;
 
   showRecentChanges: boolean = true;
   recentAlbums: { title: string, artist: string, tier: string}[] = [];

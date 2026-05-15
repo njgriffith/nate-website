@@ -20,8 +20,10 @@
                 <div style="font-size: 2em; font-weight: bold;">Recent Changes:</div>
                 <hr>
                 <ng-container *ngFor="let recent of recentAlbums">
-                    <p style="font-size: 2em;;"><span style="font-weight: bold;">{{recent.artist}}</span> - {{recent.title}}
-                        <br>Tier: <span [class.royal]="recent.tier === 'Royal Court'" [class.best]="recent.tier.includes('Best')">{{recent.tier}}</span>
+                    <p style="font-size: 2em;;"><span style="font-weight: bold;">{{recent.artist}}</span> -
+                        {{recent.title}}
+                        <br>Tier: <span [class.royal]="recent.tier === 'Royal Court'"
+                            [class.best]="recent.tier.includes('Best')">{{recent.tier}}</span>
                     </p>
                     <hr>
                 </ng-container>
@@ -55,10 +57,13 @@
                 <div class="review-header">
                     <div class="review-title">{{selectedReview.artist}} - {{selectedReview.title}}</div>
                     <img [src]="getCoverUrl(selectedReview.coverPath)" class="review-img">
+                    <div class="font-change-container">
+                        <button (click)="reviewFontSize = reviewFontSize - 1">-</button>
+                        <button (click)="reviewFontSize = reviewFontSize + 1">+</button>
+                    </div>
                 </div>
-
                 <div class="review">
-                    <pre [innerHTML]="selectedReview.review"></pre>
+                    <pre [innerHTML]="selectedReview.review" [style.fontSize.px]="reviewFontSize"></pre>
                 </div>
             </div>
         </ng-container>
@@ -91,7 +96,7 @@
         <div class="window" role="tabpanel">
             <ng-container *ngFor="let item of stuffOnThisSite[selectedTier]" class="album-container">
                 <div class="album-container" style="cursor: pointer;" (click)="openApp(item)"
-                    *ngIf="isItemInFilter(item)">
+                    *ngIf="item && isItemInFilter(item)">
                     <img [src]="'/assets/general/' + item + '.gif'" class="cover-img">
                     <p class="album-title">{{ item }}</p>
                 </div>
