@@ -3,7 +3,7 @@ import { User } from "../app/services/user.service";
 
 export var user: User = {
     isLoggedIn: true,
-    username: 'nate',
+    username: 'dsads',
     password: '',
     puzzleLevel: 0,
     easy: undefined,

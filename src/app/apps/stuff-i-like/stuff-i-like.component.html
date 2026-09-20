@@ -5,7 +5,7 @@
     <ng-container *ngIf="isAdmin">
         <button (click)="toggleEditView()">Toggle Edit View</button>
     </ng-container>
-    <button (click)="showRecentChanges = !showRecentChanges">Toggle Recent Changes</button>
+    <button *ngIf="!singleReviewView" (click)="showRecentChanges = !showRecentChanges">Toggle Recent Changes</button>
     <input placeholder="filter search..." class="filter" [(ngModel)]="filterText">
     <ng-container *ngIf="isAdmin && shiftedItems.length > 0">
         <button (click)="saveTierChanges()">Save changes</button>
@@ -52,20 +52,7 @@
         </div>
 
         <ng-container *ngIf="singleReviewView">
-            <div class="review-container">
-                <button (click)="singleReviewView = false">Back to all reviews</button>
-                <div class="review-header">
-                    <div class="review-title">{{selectedReview.artist}} - {{selectedReview.title}}</div>
-                    <img [src]="getCoverUrl(selectedReview.coverPath)" class="review-img">
-                    <div class="font-change-container">
-                        <button (click)="reviewFontSize = reviewFontSize - 1">-</button>
-                        <button (click)="reviewFontSize = reviewFontSize + 1">+</button>
-                    </div>
-                </div>
-                <div class="review">
-                    <pre [innerHTML]="selectedReview.review" [style.fontSize.px]="reviewFontSize"></pre>
-                </div>
-            </div>
+            <app-item-review [reviewItem]="selectedReview" (back)="singleReviewView = false"></app-item-review>
         </ng-container>
     </ng-container>
 

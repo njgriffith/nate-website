@@ -55,39 +55,6 @@
     text-decoration: underline;
 }
 
-.review-container{
-    max-width: 1000px;
-}
-
-.review-header{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1em;
-    font-size: 2em;
-}
-
-.font-change-container{
-    display: flex;
-    gap: 1em;
-    margin-top: 1em;
-}
-
-.font-change-container>button{
-    font-size: 1em;
-}
-
-.review{
-    width: 100%;
-    word-break: break-all;
-    max-height: 300px;
-    overflow-y: scroll;
-}
-
-.review pre {
-    white-space: pre-wrap;
-}
-
 .album-tiers-container{
     display: flex;
     height: 50vh;

@@ -1,0 +1,23 @@
+<div class="review-container">
+    <button (click)="goBack()">Back to all reviews</button>
+    <div class="review-header">
+        <div class="review-title">{{reviewItem.artist}} - {{reviewItem.title}}</div>
+        <img [src]="coverUrl" class="review-img">
+        <div *ngIf="this.moodBoardImages.length > 0">
+            <button (click)="showMoodBoard = !showMoodBoard">Toggle Mood Board</button>
+        </div>
+        <div *ngIf="this.moodBoardImages.length > 0 && showMoodBoard" class="mood-board-container">
+            <ng-container *ngFor="let imageSrc of moodBoardMapper[reviewItem.id]">
+                <img [src]="'/assets/mood/' + reviewItem.id + '/' + imageSrc + '.jpg'">
+            </ng-container>
+        </div>
+        <div class="font-change-container">
+            <button (click)="reviewFontSize = reviewFontSize - 1">-</button>
+            <button (click)="reviewFontSize = reviewFontSize + 1">+</button>
+        </div>
+    </div>
+
+    <div class="review">
+        <pre [innerHTML]="reviewItem.review" [style.fontSize.px]="reviewFontSize"></pre>
+    </div>
+</div>

@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { AppService } from '../../services/app.service';
 import { User, UserService } from '../../services/user.service';
 import { concatMap, from } from 'rxjs';
+import { ItemReviewComponent } from './item-review/item-review.component';
 
 @Component({
   selector: 'stuff-i-like',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ItemReviewComponent],
   templateUrl: './stuff-i-like.component.html',
   styleUrl: './stuff-i-like.component.css'
 })
@@ -78,12 +79,12 @@ export class StuffILikeComponent {
   selectedTier: string = this.albumTiers[0];
   filterText: string = '';
   singleReviewView: boolean = false;
-  selectedReview: any = {};
+  selectedReview: { id: string, artist: string, title: string, coverPath: string, review: string } = { id: '', artist: '', title: '', coverPath: '', review: '' };
   reviewFontSize: number = 12;
 
-  showRecentChanges: boolean = true;
-  recentAlbums: { title: string, artist: string, tier: string}[] = [];
-  recentMovies: { title: string, tier: string}[] = [];
+  showRecentChanges: boolean = false;
+  recentAlbums: { title: string, artist: string, tier: string }[] = [];
+  recentMovies: { title: string, tier: string }[] = [];
 
   ngOnInit() {
     this.userService.user$.subscribe((user: User) => {
@@ -106,7 +107,7 @@ export class StuffILikeComponent {
         for (let entry of this.albums[tier]) {
           let cleanedPath = entry.artist.replaceAll(' ', '-') + '-' + entry.title.replaceAll(' ', '-');
           entry.coverPath = cleanedPath.replace(/[^a-zA-Z0-9-]/g, "") + '.jpg';
-          // console.log(entry.coverPath);
+          console.log(entry.coverPath);
         }
       }
     });
@@ -134,12 +135,18 @@ export class StuffILikeComponent {
       }
     });
     this.apiService.getTierUpdates().subscribe((data: any) => {
-      console.log(data)
-      data['albums'].forEach((album: {title: string, artist: string, tier: string}) => {
+      data['albums'].forEach((album: { title: string, artist: string, tier: string }) => {
         album.tier = this.tierKeyMapping[album.tier];
         this.recentAlbums.push(album);
       });
     });
+
+    this.toReview({
+      "artist": "anco",
+      "reviewKey": "skinny_fists",
+      "title": "Blood Visions",
+      "coverPath": "Godspeed-You-Black-Emperor-Lift-Yr-Skinny-Fists-Like-Antennas-to-Heaven.jpg"
+    })
   }
 
   toggleEditView() {
@@ -152,6 +159,7 @@ export class StuffILikeComponent {
   }
 
   toReview(album: any) {
+    console.log(album)
     if (!album.reviewKey || this.editView) return;
     this.apiService.getReview(album.reviewKey).subscribe((response) => {
       this.selectedReview.id = album.reviewKey;
@@ -226,10 +234,10 @@ export class StuffILikeComponent {
     this.updateSuccessCount = 0;
     from(this.shiftedItems).pipe(
       concatMap((item: any) => {
-        if (item.tier === "Royal Court"){
+        if (item.tier === "Royal Court") {
           item.tier = "the_best_plus";
         }
-        else{
+        else {
           item.tier = item.tier.toLowerCase().replaceAll(" ", "_").replaceAll("-", "_minus").replaceAll("+", "_plus");
         }
         return this.apiService.postToTier({
@@ -240,15 +248,15 @@ export class StuffILikeComponent {
         });
       })
     ).subscribe((response: any) => {
-      if (response.response){
+      if (response.response) {
         this.updateSuccessCount++;
       }
-      else{
+      else {
         console.error('failed to update', response);
       }
     });
   }
-  getCoverUrl(query: string){
+  getCoverUrl(query: string) {
     return `https://nate-griffith.com/covers/${query}`;
   }
 }
