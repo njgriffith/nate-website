@@ -98,7 +98,27 @@ export class ItemReviewComponent {
       'fire',
       'clouds',
       'ali',
-      ''
+      'mary',
+      'soldier',
+      'mother'
+    ],
+    'to_be_kind': [
+      'wastes',
+      'fire',
+      'dust',
+      'occult',
+      'preist',
+      'sacrafice',
+      'comet'
+    ],
+    'TPAB': [
+      'davis',
+      'selma',
+      'water',
+      'collins',
+      '3k',
+      'nwa',
+      'gaye'
     ]
   };
 

@@ -140,13 +140,6 @@ export class StuffILikeComponent {
         this.recentAlbums.push(album);
       });
     });
-
-    this.toReview({
-      "artist": "anco",
-      "reviewKey": "skinny_fists",
-      "title": "Blood Visions",
-      "coverPath": "Godspeed-You-Black-Emperor-Lift-Yr-Skinny-Fists-Like-Antennas-to-Heaven.jpg"
-    })
   }
 
   toggleEditView() {
