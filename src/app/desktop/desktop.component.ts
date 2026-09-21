@@ -14,7 +14,6 @@ import { ArchiveComponent } from '../apps/archive/archive.component';
 import { User, UserService } from '../services/user.service';
 import { LoginPopupComponent } from '../apps/login-popup/login-popup.component';
 import { AdminComponent } from '../apps/admin/admin.component';
-import { StuffILikeComponent } from '../apps/stuff-i-like/stuff-i-like.component';
 @Component({
   selector: 'app-desktop',
   standalone: true,
@@ -53,8 +52,7 @@ export class DesktopComponent {
     'Weather': WeatherComponent,
     'Recycle': RecycleComponent,
     'Login': LoginPopupComponent,
-    'Admin': AdminComponent,
-    'Stuff I Like': StuffILikeComponent
+    'Admin': AdminComponent
   };
 
   loadedAppComponentMap: Record<string, any> = {};
@@ -63,7 +61,7 @@ export class DesktopComponent {
     'Mine Nate Coin': () => import('../apps/mine-nate-coin/mine-nate-coin.component').then(m => m.MineNateCoinComponent),
     'Minesweeper': () => import('../apps/minesweeper/minesweeper.component').then(m => m.MinesweeperComponent),
     'Shape Store': () => import('../apps/shape-store/shape-store.component').then(m => m.ShapeStoreComponent),
-    // 'Stuff I Like': () => import('../apps/stuff-i-like/stuff-i-like.component').then(m => m.StuffILikeComponent),
+    'Stuff I Like': () => import('../apps/stuff-i-like/stuff-i-like.component').then(m => m.StuffILikeComponent),
     'Puzzle': () => import('../apps/puzzle/puzzle.component').then(m => m.PuzzleComponent),
     'Command Line': () => import('../apps/command-line/command-line.component').then(m => m.CommandLine)
   };

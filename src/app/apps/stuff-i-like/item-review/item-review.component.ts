@@ -19,7 +19,7 @@ export class ItemReviewComponent {
 
   reviewFontSize: number = 12;
   coverUrl: string = '';
-  showMoodBoard: boolean = true;
+  showMoodBoard: boolean = false;
   moodBoardImages: string[] = [];
 
   moodBoardMapper: Record<string, string[]> = {
